@@ -1,4 +1,7 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
+
 const fs = require('fs');
 const Database = require('better-sqlite3');
 
@@ -35,42 +38,89 @@ function saveToDatabase(db, url, m3u8Url, tracks, referer, error = null) {
   return info.lastInsertRowid;
 }
 
-// ========== FUNGSI UTAMA EKSTRAKSI ==========
-/**
- * Ekstrak link m3u8 dari halaman JWPlayer
- * @param {string} pageUrl - URL halaman video
- * @param {string} referer - Header Referer
- * @returns {Promise<{encrypted: string, tracks: any}>}
- */
+// ========== EKSTRAKSI DENGAN STEALTH ==========
 async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
+  // Launch dengan argumen tambahan untuk menghindari deteksi
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-blink-features=AutomationControlled',
+      '--disable-features=IsolateOrigins,site-per-process',
+      '--disable-web-security',
+      '--disable-features=BlockInsecurePrivateNetworkRequests'
+    ],
     executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome'
   });
   const page = await browser.newPage();
 
-  // Nonaktifkan deteksi DevTools
+  // ====== 1. Matikan deteksi DevTools ======
   await page.evaluateOnNewDocument(() => {
+    // Nonaktifkan devtools-detector
     window.devtoolsDetector = {
       launch: () => {},
-      addListener: () => {}
+      addListener: () => {},
+      isOpen: false
     };
+    // Cegah reload
+    const originalReload = window.location.reload;
+    window.location.reload = function() {
+      console.log('[Puppeteer] Reload dicegah');
+      // Tidak melakukan apa-apa
+    };
+    // Cegah alert
+    window.alert = function() {};
+    // Hapus event listener yang mungkin sudah terpasang
+    window.addEventListener('beforeunload', (e) => {
+      e.stopImmediatePropagation();
+    }, true);
+    // Timpa navigasi
+    window.location.replace = function() {};
+    window.location.assign = function() {};
   });
 
-  // Set header Referer
+  // ====== 2. Blokir request ke script devtools ======
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const url = req.url();
+    if (url.includes('devtools-detector') || url.includes('/static/js/app.js')) {
+      // Jangan blokir app.js, kita butuh getPlaylist
+      if (url.includes('devtools-detector')) {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    } else {
+      req.continue();
+    }
+  });
+
+  // ====== 3. Set Referer ======
   await page.setExtraHTTPHeaders({ Referer: referer });
 
-  // Buka halaman
-  await page.goto(pageUrl, { waitUntil: 'networkidle2', timeout: 60000 });
+  // ====== 4. Navigasi ======
+  let response;
+  try {
+    response = await page.goto(pageUrl, {
+      waitUntil: 'domcontentloaded',
+      timeout: 120000
+    });
+  } catch (e) {
+    // Jika timeout, coba dengan networkidle0
+    response = await page.goto(pageUrl, {
+      waitUntil: 'networkidle0',
+      timeout: 120000
+    });
+  }
 
-  // Tunggu fungsi getPlaylist tersedia
+  // ====== 5. Tunggu getPlaylist ======
   await page.waitForFunction(
     () => typeof window.getPlaylist === 'function',
-    { timeout: 30000 }
+    { timeout: 60000, polling: 500 }
   );
 
-  // Ekstrak parameter ID dari skrip
+  // ====== 6. Ekstrak parameter ID ======
   const param = await page.evaluate(() => {
     const scripts = document.querySelectorAll('script');
     for (let script of scripts) {
@@ -86,7 +136,7 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     throw new Error('Parameter getPlaylist tidak ditemukan.');
   }
 
-  // Panggil getPlaylist
+  // ====== 7. Panggil getPlaylist ======
   const result = await page.evaluate(async (id) => {
     const decode = await window.getPlaylist(id);
     return {
@@ -99,9 +149,8 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
   return result;
 }
 
-// ========== FUNGSI UTAMA ==========
+// ========== FUNGSI MAIN (sama seperti sebelumnya) ==========
 async function main() {
-  // Baca argumen
   const args = process.argv.slice(2);
   let url = null;
   let referer = DEFAULT_REFERER;
@@ -118,7 +167,6 @@ async function main() {
     }
   }
 
-  // Jika ada INPUT_URLS dari environment (dari workflow_dispatch)
   if (process.env.INPUT_URLS) {
     const urls = process.env.INPUT_URLS.split(',').map(s => s.trim()).filter(Boolean);
     if (urls.length > 0) {
@@ -127,7 +175,6 @@ async function main() {
     }
   }
 
-  // Baca dari file urls.txt jika ada
   if (fs.existsSync('urls.txt')) {
     const urls = fs.readFileSync('urls.txt', 'utf8')
       .split('\n')
@@ -139,13 +186,12 @@ async function main() {
     }
   }
 
-  // Jika ada URL dari argumen
   if (url) {
     await processSingleUrl(url, referer);
     return;
   }
 
-  console.error('Tidak ada URL yang diberikan. Gunakan --url, file urls.txt, atau input workflow.');
+  console.error('Tidak ada URL yang diberikan.');
   process.exit(1);
 }
 
@@ -166,7 +212,6 @@ async function processSingleUrl(url, referer) {
     console.error(`❌ Gagal: ${error}`);
   }
 
-  // Simpan ke database
   const id = saveToDatabase(
     db,
     url,
@@ -177,7 +222,6 @@ async function processSingleUrl(url, referer) {
   );
   console.log(`💾 Disimpan ke database (ID: ${id})`);
 
-  // Simpan ke JSON (append)
   let allData = [];
   if (fs.existsSync(JSON_PATH)) {
     try {
@@ -199,7 +243,6 @@ async function processSingleUrl(url, referer) {
   fs.writeFileSync(JSON_PATH, JSON.stringify(allData, null, 2), 'utf8');
   console.log(`💾 Disimpan ke ${JSON_PATH}`);
 
-  // Simpan ke file .m3u8 (append)
   if (result && result.encrypted) {
     fs.appendFileSync(M3U8_PATH, result.encrypted + '\n', 'utf8');
     console.log(`💾 Ditambahkan ke ${M3U8_PATH}`);
@@ -262,7 +305,6 @@ async function processMultipleUrls(urls, referer) {
   db.close();
 }
 
-// ========== JALANKAN ==========
 main().catch(err => {
   console.error('Error:', err);
   process.exit(1);
