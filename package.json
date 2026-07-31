@@ -1,0 +1,13 @@
+{
+  "name": "m3u8-extractor",
+  "version": "1.0.0",
+  "description": "Ekstrak link m3u8 dari JWPlayer dengan referer, simpan ke SQLite, JSON, dan M3U8",
+  "main": "extract.js",
+  "scripts": {
+    "start": "node extract.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.2.2",
+    "puppeteer": "^21.0.0"
+  }
+}
