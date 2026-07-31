@@ -12,7 +12,6 @@ on:
         required: false
         default: 'https://9tsu.vip/'
   schedule:
-    # Jalankan setiap hari jam 00:00 UTC
     - cron: '0 0 * * *'
 
 jobs:
@@ -28,12 +27,14 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
-        run: npm install
+        # Jika package-lock.json tidak ada, npm install akan menghasilkan lock file
+        # Tapi kita sudah menyertakannya, jadi ini akan menggunakan lock file
+        run: npm ci
 
-      # Puppeteer membutuhkan Chrome, sudah tersedia di runner, tapi kita pasang jika perlu
-      - name: Install Chrome (jika belum ada)
+      - name: Install Chrome (jika diperlukan)
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
@@ -57,7 +58,6 @@ jobs:
             playlist.db
 
       - name: Commit changes to repository (opsional)
-        # Commit hanya jika ada perubahan (tidak untuk artifact)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
