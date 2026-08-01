@@ -40,7 +40,6 @@ function saveToDatabase(db, url, m3u8Url, tracks, referer, error = null) {
 
 // ========== EKSTRAKSI DENGAN STEALTH ==========
 async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
-  // Launch dengan argumen tambahan untuk menghindari deteksi
   const browser = await puppeteer.launch({
     headless: true,
     args: [
@@ -48,10 +47,9 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
       '--disable-setuid-sandbox',
       '--disable-blink-features=AutomationControlled',
       '--disable-features=IsolateOrigins,site-per-process',
-      '--disable-web-security',
-      '--disable-features=BlockInsecurePrivateNetworkRequests'
+      '--disable-web-security'
     ],
-    executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome'
+    executablePath: process.env.CHROME_PATH || undefined
   });
   const page = await browser.newPage();
 
@@ -67,11 +65,10 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     const originalReload = window.location.reload;
     window.location.reload = function() {
       console.log('[Puppeteer] Reload dicegah');
-      // Tidak melakukan apa-apa
     };
     // Cegah alert
     window.alert = function() {};
-    // Hapus event listener yang mungkin sudah terpasang
+    // Hapus event listener sebelum unload
     window.addEventListener('beforeunload', (e) => {
       e.stopImmediatePropagation();
     }, true);
@@ -80,47 +77,22 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     window.location.assign = function() {};
   });
 
-  // ====== 2. Blokir request ke script devtools ======
-  await page.setRequestInterception(true);
-  page.on('request', (req) => {
-    const url = req.url();
-    if (url.includes('devtools-detector') || url.includes('/static/js/app.js')) {
-      // Jangan blokir app.js, kita butuh getPlaylist
-      if (url.includes('devtools-detector')) {
-        req.abort();
-      } else {
-        req.continue();
-      }
-    } else {
-      req.continue();
-    }
-  });
-
-  // ====== 3. Set Referer ======
+  // ====== 2. Set Referer ======
   await page.setExtraHTTPHeaders({ Referer: referer });
 
-  // ====== 4. Navigasi ======
-  let response;
-  try {
-    response = await page.goto(pageUrl, {
-      waitUntil: 'domcontentloaded',
-      timeout: 120000
-    });
-  } catch (e) {
-    // Jika timeout, coba dengan networkidle0
-    response = await page.goto(pageUrl, {
-      waitUntil: 'networkidle0',
-      timeout: 120000
-    });
-  }
+  // ====== 3. Navigasi ======
+  await page.goto(pageUrl, {
+    waitUntil: 'domcontentloaded',
+    timeout: 120000
+  });
 
-  // ====== 5. Tunggu getPlaylist ======
+  // ====== 4. Tunggu getPlaylist ======
   await page.waitForFunction(
     () => typeof window.getPlaylist === 'function',
     { timeout: 60000, polling: 500 }
   );
 
-  // ====== 6. Ekstrak parameter ID ======
+  // ====== 5. Ekstrak parameter ID ======
   const param = await page.evaluate(() => {
     const scripts = document.querySelectorAll('script');
     for (let script of scripts) {
@@ -136,7 +108,7 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     throw new Error('Parameter getPlaylist tidak ditemukan.');
   }
 
-  // ====== 7. Panggil getPlaylist ======
+  // ====== 6. Panggil getPlaylist ======
   const result = await page.evaluate(async (id) => {
     const decode = await window.getPlaylist(id);
     return {
@@ -149,7 +121,7 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
   return result;
 }
 
-// ========== FUNGSI MAIN (sama seperti sebelumnya) ==========
+// ========== FUNGSI MAIN ==========
 async function main() {
   const args = process.argv.slice(2);
   let url = null;
