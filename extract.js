@@ -2,8 +2,6 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
-const https = require('https');
-const http = require('http');
 
 // ========== KONFIGURASI ==========
 const DEFAULT_REFERER = 'https://9tsu.vip/';
@@ -86,76 +84,48 @@ function saveToDatabase(db, url, videoId, m3u8Url, tracks, referer, error = null
   }
 }
 
-// ========== FUNGSI FETCH HTML DENGAN REFERER ==========
-function fetchHtmlWithReferer(url, referer) {
-  return new Promise((resolve, reject) => {
-    log(`Mengambil HTML dari: ${url}`, 'network');
-    log(`Menggunakan referer: ${referer}`, 'network');
-    
-    const parsedUrl = new URL(url);
-    const isHttps = parsedUrl.protocol === 'https:';
-    const client = isHttps ? https : http;
-    
-    const options = {
-      hostname: parsedUrl.hostname,
-      port: parsedUrl.port || (isHttps ? 443 : 80),
-      path: parsedUrl.pathname + parsedUrl.search,
+// ========== FUNGSI FETCH HTML DENGAN REFERER (pakai fetch bawaan) ==========
+async function fetchHtmlWithReferer(url, referer) {
+  log(`Mengambil HTML dari: ${url}`, 'network');
+  log(`Menggunakan referer: ${referer}`, 'network');
+  
+  try {
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Referer': referer,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1'
+        'Accept-Encoding': 'identity'  // Force plain text
       }
-    };
-    
-    log(`Request options:`, 'debug', options);
-    
-    const req = client.request(options, (res) => {
-      log(`Response status: ${res.statusCode} ${res.statusMessage}`, 'network');
-      
-      let data = [];
-      let totalLength = 0;
-      
-      res.on('data', (chunk) => {
-        data.push(chunk);
-        totalLength += chunk.length;
-        log(`Menerima chunk: ${chunk.length} bytes (total: ${totalLength})`, 'debug');
-      });
-      
-      res.on('end', () => {
-        const buffer = Buffer.concat(data);
-        const html = buffer.toString('utf8');
-        log(`HTML berhasil diambil: ${html.length} bytes`, 'success', { size: html.length });
-        
-        // Simpan HTML untuk debug
-        if (DEBUG) {
-          const debugPath = path.join(__dirname, 'debug-original.html');
-          fs.writeFileSync(debugPath, html);
-          log(`HTML asli disimpan ke: ${debugPath}`, 'debug');
-        }
-        
-        resolve(html);
-      });
     });
     
-    req.on('error', (err) => {
-      log(`Gagal fetch HTML: ${err.message}`, 'error');
-      reject(err);
-    });
+    log(`Response status: ${response.status} ${response.statusText}`, 'network');
     
-    req.on('timeout', () => {
-      log('Request timeout', 'error');
-      req.destroy();
-      reject(new Error('Request timeout'));
-    });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     
-    req.setTimeout(30000);
-    req.end();
-  });
+    // Dapatkan buffer untuk inspeksi
+    const buffer = await response.arrayBuffer();
+    const html = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
+    
+    log(`HTML berhasil diambil: ${html.length} bytes`, 'success', { size: html.length });
+    
+    // Simpan HTML untuk debug
+    if (DEBUG) {
+      const debugPath = path.join(__dirname, 'debug-original.html');
+      fs.writeFileSync(debugPath, html);
+      log(`HTML asli disimpan ke: ${debugPath}`, 'debug');
+    }
+    
+    return html;
+    
+  } catch (err) {
+    log(`Gagal fetch HTML: ${err.message}`, 'error');
+    throw err;
+  }
 }
 
 // ========== EKSTRAK VIDEO ID DARI HTML ==========
@@ -182,8 +152,8 @@ function extractVideoIdFromHtml(html) {
   log('Video ID tidak ditemukan di HTML', 'warn');
   
   // Debug: tampilkan sample HTML
-  if (DEBUG) {
-    const sample = html.substring(0, 2000);
+  if (DEBUG && html.length > 0) {
+    const sample = html.substring(0, 500);
     log('Sample HTML:', 'debug', { sample });
   }
   
@@ -218,7 +188,6 @@ function createMiniHtml(videoId, originalHtml) {
     const srcMatch = originalHtml.match(srcRegex);
     if (srcMatch) {
       log(`App.js ditemukan di: ${srcMatch[1]}`, 'debug');
-      // Kita akan menggunakan pendekatan lain: langsung panggil dari halaman mini
     }
   }
   
@@ -540,7 +509,7 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     
     // ====== Tunggu ekstraksi selesai ======
     log('Menunggu proses ekstraksi selesai...', 'info');
-    const waitResult = await page.waitForFunction(
+    await page.waitForFunction(
       () => window.done === true,
       { timeout: 120000, polling: 500 }
     );
