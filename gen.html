@@ -1,11 +1,115 @@
-<html>
- <head>
-   <script src="/Daur-ulangLink/app.js?v=8899"></script>
- </head>
- <body>
-  <script>
-   
-  </script>
- </body>
-  
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Stream Player</title>
+    <style>
+        body { font-family: monospace, sans-serif; background: #121212; color: #e0e0e0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+        h2 { color: #4caf50; margin-top: 0; }
+        .info { background: #2a2a2a; padding: 10px; border-left: 4px solid #4caf50; margin-bottom: 15px; word-break: break-all; }
+        a { color: #64b5f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        pre { background: #000; padding: 12px; border-radius: 4px; overflow-x: auto; color: #00ff66; font-size: 13px; }
+        .error { color: #ff5252; border-color: #ff5252; }
+    </style>
+
+    <!-- 1. SCRIPT PENCEGAT / INTERCEPTOR (Harus ditaruh sebelum app.js) -->
+    <script>
+        const TARGET_HOST = 'https://dremoxa.site';
+        window.capturedXHash = null;
+
+        const originalFetch = window.fetch;
+        window.fetch = async function(...args) {
+            let [resource, config] = args;
+
+            if (typeof resource === 'string' && resource.includes('/ajax/')) {
+                // Tangkap x-hash jika di-generate oleh app.js
+                if (config && config.headers) {
+                    let hash = config.headers['x-hash'] || (config.headers instanceof Headers ? config.headers.get('x-hash') : null);
+                    if (hash) window.capturedXHash = hash;
+                }
+
+                // Belokkan path relative (/ajax/...) ke https://dremoxa.site/ajax/...
+                if (resource.startsWith('/')) {
+                    args[0] = TARGET_HOST + resource;
+                } else if (!resource.startsWith('http')) {
+                    args[0] = TARGET_HOST + '/' + resource;
+                }
+
+                console.log('🔄 Request AJAX dibelokkan ke:', args[0]);
+            }
+
+            return originalFetch.apply(this, args);
+        };
+    </script>
+
+    <!-- 2. MEMUAT FILE JS TERENKRIPSI -->
+    <script src="/Daur-ulangLink/app.js?v=8899"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Playlist Result</h2>
+    <div id="status" class="info">Memeriksa parameter ID...</div>
+    <div id="result"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const statusEl = document.getElementById('status');
+        const resultEl = document.getElementById('result');
+
+        // Cek dukungan Web Crypto API
+        if (!window.crypto || !window.crypto.subtle) {
+            statusEl.className = "info error";
+            statusEl.innerText = 'Browser Anda terlalu lama/tidak mendukung Web Crypto API!';
+            return;
+        }
+
+        // Ambil parameter 'id' dari URL (Contoh: page.html?id=360b4e53bf8a2bbbf3af800180010bd8)
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('id');
+
+        if (!videoId) {
+            statusEl.className = "info error";
+            statusEl.innerHTML = '<strong>Error:</strong> Parameter <code>?id=</code> tidak ditemukan di URL.<br><small>Contoh cara panggil: <code>' + window.location.pathname + '?id=360b4e53bf8a2bbbf3af800180010bd8</code></small>';
+            return;
+        }
+
+        try {
+            statusEl.innerText = `Memuat playlist untuk ID: ${videoId}...`;
+
+            // Cek apakah fungsi getPlaylist dari app.js sudah siap
+            if (typeof window.getPlaylist !== 'function') {
+                throw new Error('Fungsi window.getPlaylist tidak ditemukan. Pastikan app.js berhasil dimuat.');
+            }
+
+            // Eksekusi fungsi dekripsi dari app.js
+            const decode = await window.getPlaylist(videoId);
+            
+            console.log('Data Decode:', decode);
+
+            statusEl.innerText = `Berhasil mengambil playlist!`;
+
+            // Tampilkan URL Stream/File dan JSON lengkapnya
+            resultEl.innerHTML = `
+                <div class="info">
+                    <strong>Stream Link (HLS):</strong><br>
+                    <a href="${decode.encrypted}" target="_blank" rel="noopener">${decode.encrypted}</a>
+                </div>
+                <p><strong>Raw Object Output:</strong></p>
+                <pre>${JSON.stringify(decode, null, 2)}</pre>
+            `;
+
+        </div> catch (err) {
+            console.error(err);
+            statusEl.className = "info error";
+            statusEl.innerText = 'Gagal memuat playlist: ' + err.message;
+        }
+    });
+</script>
+
+</body>
 </html>
