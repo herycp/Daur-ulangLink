@@ -47,6 +47,39 @@
         <div id="player"></div>
     </div>
     <script>
+        const originalFetch = window.fetch;
+
+window.fetch = async function(...args) {
+    const [resource, config] = args;
+
+    // Filter hanya untuk request ke target URL
+    if (typeof resource === 'string' && resource.includes('/xxxx/ajax/xxxxx')) {
+        
+        console.log("🔴 [FETCH] Request terdeteksi ke:", resource);
+
+        if (config && config.headers) {
+            // Header di fetch bisa berupa objek 'Headers' bawaan browser atau object biasa
+            if (config.headers instanceof Headers) {
+                const extractedHeaders = {};
+                config.headers.forEach((value, key) => {
+                    extractedHeaders[key] = value;
+                });
+                console.log("🟢 [FETCH] Header yang disadap:", extractedHeaders);
+            } else {
+                console.log("🟢 [FETCH] Header yang disadap:", config.headers);
+            }
+        }
+        
+        // (Opsional) Cek juga body/payload yang dikirim
+        if (config && config.body) {
+            console.log("🟡 [FETCH] Body/Payload:", config.body);
+        }
+    }
+
+    // Biarkan request berjalan normal
+    return originalFetch.apply(this, args);
+};
+
     (async function() {
         if (!window.crypto || !window.crypto.subtle) {
             alert('Your browser is too old! Please update it to watch the video.');
