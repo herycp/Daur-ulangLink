@@ -15,7 +15,7 @@
         .error { color: #ff5252; border-color: #ff5252; }
     </style>
 
-    <!-- 1. SCRIPT PENCEGAT / INTERCEPTOR (Harus ditaruh sebelum app.js) -->
+    <!-- 1. PENCEGAT FETCH (HARUS DI ATAS app.js) -->
     <script>
         const TARGET_HOST = 'https://dremoxa.site';
         window.capturedXHash = null;
@@ -25,13 +25,13 @@
             let [resource, config] = args;
 
             if (typeof resource === 'string' && resource.includes('/ajax/')) {
-                // Tangkap x-hash jika di-generate oleh app.js
+                // Tangkap x-hash jika ada
                 if (config && config.headers) {
                     let hash = config.headers['x-hash'] || (config.headers instanceof Headers ? config.headers.get('x-hash') : null);
                     if (hash) window.capturedXHash = hash;
                 }
 
-                // Belokkan path relative (/ajax/...) ke https://dremoxa.site/ajax/...
+                // Belokkan URL relative ke target host
                 if (resource.startsWith('/')) {
                     args[0] = TARGET_HOST + resource;
                 } else if (!resource.startsWith('http')) {
@@ -45,7 +45,7 @@
         };
     </script>
 
-    <!-- 2. MEMUAT FILE JS TERENKRIPSI -->
+    <!-- 2. FILE JS TERENKRIPSI -->
     <script src="/Daur-ulangLink/app.js?v=8899"></script>
 </head>
 <body>
@@ -61,39 +61,37 @@
         const statusEl = document.getElementById('status');
         const resultEl = document.getElementById('result');
 
-        // Cek dukungan Web Crypto API
+        // Cek Web Crypto API
         if (!window.crypto || !window.crypto.subtle) {
             statusEl.className = "info error";
-            statusEl.innerText = 'Browser Anda terlalu lama/tidak mendukung Web Crypto API!';
+            statusEl.innerText = 'Browser Anda tidak mendukung Web Crypto API!';
             return;
         }
 
-        // Ambil parameter 'id' dari URL (Contoh: page.html?id=360b4e53bf8a2bbbf3af800180010bd8)
+        // Ambil ID dari URL query string (misal: ?id=xxxx)
         const urlParams = new URLSearchParams(window.location.search);
         const videoId = urlParams.get('id');
 
         if (!videoId) {
             statusEl.className = "info error";
-            statusEl.innerHTML = '<strong>Error:</strong> Parameter <code>?id=</code> tidak ditemukan di URL.<br><small>Contoh cara panggil: <code>' + window.location.pathname + '?id=360b4e53bf8a2bbbf3af800180010bd8</code></small>';
+            statusEl.innerHTML = '<strong>Error:</strong> Parameter <code>?id=</code> tidak ditemukan di URL.<br><small>Contoh akses: <code>' + window.location.pathname + '?id=d02b55d7...</code></small>';
             return;
         }
 
         try {
             statusEl.innerText = `Memuat playlist untuk ID: ${videoId}...`;
 
-            // Cek apakah fungsi getPlaylist dari app.js sudah siap
             if (typeof window.getPlaylist !== 'function') {
-                throw new Error('Fungsi window.getPlaylist tidak ditemukan. Pastikan app.js berhasil dimuat.');
+                throw new Error('Fungsi window.getPlaylist tidak ditemukan. Pastikan app.js dimuat dengan benar.');
             }
 
-            // Eksekusi fungsi dekripsi dari app.js
+            // Panggil fungsi getPlaylist dari app.js
             const decode = await window.getPlaylist(videoId);
-            
             console.log('Data Decode:', decode);
 
-            statusEl.innerText = `Berhasil mengambil playlist!`;
+            statusEl.innerText = 'Berhasil mengambil playlist!';
 
-            // Tampilkan URL Stream/File dan JSON lengkapnya
+            // Render hasil ke HTML
             resultEl.innerHTML = `
                 <div class="info">
                     <strong>Stream Link (HLS):</strong><br>
@@ -103,7 +101,7 @@
                 <pre>${JSON.stringify(decode, null, 2)}</pre>
             `;
 
-        catch (err) {
+        } catch (err) {
             console.error(err);
             statusEl.className = "info error";
             statusEl.innerText = 'Gagal memuat playlist: ' + err.message;
