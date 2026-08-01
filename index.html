@@ -53,7 +53,7 @@ window.fetch = async function(...args) {
     const [resource, config] = args;
 
     // Filter hanya untuk request ke target URL
-    if (typeof resource === 'string' && resource.includes('/xxxx/ajax/xxxxx')) {
+    if (typeof resource === 'string' && resource.includes('/ajax/getSources')) {
         
         console.log("🔴 [FETCH] Request terdeteksi ke:", resource);
 
