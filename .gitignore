@@ -1,6 +1,0 @@
-node_modules/
-*.db
-output.json
-output.m3u8
-playlist.db
-package-lock.json  # Hapus baris ini jika ingin commit lockfile
