@@ -2,6 +2,9 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
+const https = require('https');
+const http = require('http');
+const zlib = require('zlib');
 
 // ========== KONFIGURASI ==========
 const DEFAULT_REFERER = 'https://9tsu.vip/';
@@ -10,7 +13,7 @@ const JSON_PATH = process.env.JSON_PATH || 'output.json';
 const M3U8_PATH = process.env.M3U8_PATH || 'output.m3u8';
 const DEBUG = process.env.DEBUG === 'true' || true;
 
-// ========== LOGGING FUNGSI ==========
+// ========== LOGGING ==========
 function log(message, level = 'info', data = null) {
   const timestamp = new Date().toISOString();
   const prefix = {
@@ -34,17 +37,10 @@ function log(message, level = 'info', data = null) {
   }
 }
 
-function logStep(step, total, message) {
-  log(`[${step}/${total}] ${message}`, 'step');
-}
-
 // ========== FUNGSI DATABASE ==========
 function initDatabase(dbPath) {
   try {
-    log('Membuka koneksi database...', 'database');
     const db = new Database(dbPath);
-    
-    log('Membuat tabel playlist...', 'database');
     db.exec(`
       CREATE TABLE IF NOT EXISTS playlist (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,8 +55,7 @@ function initDatabase(dbPath) {
       CREATE INDEX IF NOT EXISTS idx_url ON playlist(url);
       CREATE INDEX IF NOT EXISTS idx_video_id ON playlist(video_id);
     `);
-    
-    log(`Database siap: ${dbPath}`, 'success', { path: dbPath });
+    log(`Database siap: ${dbPath}`, 'success');
     return db;
   } catch (err) {
     log(`Gagal inisialisasi database: ${err.message}`, 'error');
@@ -70,7 +65,6 @@ function initDatabase(dbPath) {
 
 function saveToDatabase(db, url, videoId, m3u8Url, tracks, referer, error = null) {
   try {
-    log('Menyimpan ke database...', 'database');
     const stmt = db.prepare(`
       INSERT INTO playlist (url, video_id, m3u8_url, tracks, referer, error)
       VALUES (?, ?, ?, ?, ?, ?)
@@ -84,83 +78,219 @@ function saveToDatabase(db, url, videoId, m3u8Url, tracks, referer, error = null
   }
 }
 
-// ========== FUNGSI FETCH HTML DENGAN REFERER (pakai fetch bawaan) ==========
-async function fetchHtmlWithReferer(url, referer) {
-  log(`Mengambil HTML dari: ${url}`, 'network');
-  log(`Menggunakan referer: ${referer}`, 'network');
-  
-  try {
-    const response = await fetch(url, {
+// ========== FUNGSI FETCH HTML DENGAN HANDLE COMPRESSION ==========
+function fetchHtmlWithReferer(url, referer) {
+  return new Promise((resolve, reject) => {
+    log(`Mengambil HTML dari: ${url}`, 'network');
+    log(`Menggunakan referer: ${referer}`, 'network');
+    
+    const parsedUrl = new URL(url);
+    const isHttps = parsedUrl.protocol === 'https:';
+    const client = isHttps ? https : http;
+    
+    const options = {
+      hostname: parsedUrl.hostname,
+      port: parsedUrl.port || (isHttps ? 443 : 80),
+      path: parsedUrl.pathname + parsedUrl.search,
       method: 'GET',
       headers: {
         'Referer': referer,
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Accept-Encoding': 'identity'  // Force plain text
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
       }
+    };
+    
+    const req = client.request(options, (res) => {
+      log(`Response status: ${res.statusCode} ${res.statusMessage}`, 'network');
+      log(`Content-Encoding: ${res.headers['content-encoding'] || 'none'}`, 'debug');
+      
+      let chunks = [];
+      let totalLength = 0;
+      
+      res.on('data', (chunk) => {
+        chunks.push(chunk);
+        totalLength += chunk.length;
+      });
+      
+      res.on('end', () => {
+        const buffer = Buffer.concat(chunks);
+        log(`Raw data diterima: ${buffer.length} bytes`, 'debug');
+        
+        // Handle decompression
+        const contentEncoding = res.headers['content-encoding'];
+        let decompressStream;
+        
+        if (contentEncoding === 'gzip') {
+          log('Mendekompresi gzip...', 'debug');
+          decompressStream = zlib.createGunzip();
+        } else if (contentEncoding === 'deflate') {
+          log('Mendekompresi deflate...', 'debug');
+          decompressStream = zlib.createInflate();
+        } else if (contentEncoding === 'br') {
+          log('Mendekompresi brotli...', 'debug');
+          try {
+            decompressStream = zlib.createBrotliDecompress();
+          } catch (err) {
+            log(`Brotli tidak didukung: ${err.message}`, 'warn');
+            // Fallback: coba sebagai string biasa
+            try {
+              const html = buffer.toString('utf8');
+              log(`HTML berhasil diambil (tanpa decompress): ${html.length} bytes`, 'success');
+              resolve(html);
+              return;
+            } catch (e) {
+              reject(new Error(`Gagal decode HTML: ${e.message}`));
+              return;
+            }
+          }
+        } else {
+          // Tidak ada compression
+          try {
+            const html = buffer.toString('utf8');
+            log(`HTML berhasil diambil: ${html.length} bytes`, 'success', { size: html.length });
+            resolve(html);
+            return;
+          } catch (err) {
+            reject(new Error(`Gagal decode HTML: ${err.message}`));
+            return;
+          }
+        }
+        
+        // Proses decompression
+        const decompress = zlib.createUnzip();
+        let decompressedChunks = [];
+        
+        decompressStream.on('data', (chunk) => {
+          decompressedChunks.push(chunk);
+        });
+        
+        decompressStream.on('end', () => {
+          const decompressed = Buffer.concat(decompressedChunks);
+          try {
+            const html = decompressed.toString('utf8');
+            log(`HTML berhasil didekompresi: ${html.length} bytes`, 'success', { 
+              original: buffer.length,
+              decompressed: html.length
+            });
+            
+            // Simpan HTML untuk debug
+            if (DEBUG) {
+              const debugPath = path.join(__dirname, 'debug-original.html');
+              fs.writeFileSync(debugPath, html);
+              log(`HTML asli disimpan ke: ${debugPath}`, 'debug');
+            }
+            
+            resolve(html);
+          } catch (err) {
+            reject(new Error(`Gagal decode HTML setelah decompress: ${err.message}`));
+          }
+        });
+        
+        decompressStream.on('error', (err) => {
+          log(`Gagal decompress: ${err.message}`, 'error');
+          // Fallback: coba sebagai string biasa
+          try {
+            const html = buffer.toString('utf8');
+            log(`Fallback: HTML sebagai string: ${html.length} bytes`, 'warn');
+            resolve(html);
+          } catch (e) {
+            reject(new Error(`Gagal decode HTML: ${e.message}`));
+          }
+        });
+        
+        decompressStream.write(buffer);
+        decompressStream.end();
+      });
     });
     
-    log(`Response status: ${response.status} ${response.statusText}`, 'network');
+    req.on('error', (err) => {
+      log(`Gagal fetch HTML: ${err.message}`, 'error');
+      reject(err);
+    });
     
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
+    req.setTimeout(30000, () => {
+      log('Request timeout', 'error');
+      req.destroy();
+      reject(new Error('Request timeout'));
+    });
     
-    // Dapatkan buffer untuk inspeksi
-    const buffer = await response.arrayBuffer();
-    const html = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
-    
-    log(`HTML berhasil diambil: ${html.length} bytes`, 'success', { size: html.length });
-    
-    // Simpan HTML untuk debug
-    if (DEBUG) {
-      const debugPath = path.join(__dirname, 'debug-original.html');
-      fs.writeFileSync(debugPath, html);
-      log(`HTML asli disimpan ke: ${debugPath}`, 'debug');
-    }
-    
-    return html;
-    
-  } catch (err) {
-    log(`Gagal fetch HTML: ${err.message}`, 'error');
-    throw err;
-  }
+    req.end();
+  });
 }
 
-// ========== EKSTRAK VIDEO ID DARI HTML ==========
+// ========== EKSTRAK VIDEO ID DARI HTML (PERBAIKAN) ==========
 function extractVideoIdFromHtml(html) {
   log('Mencari video ID di HTML...', 'debug');
   
-  // Pattern: window.getPlaylist('ID')
+  // Pattern untuk mencari video ID
   const patterns = [
-    /window\.getPlaylist\s*\(\s*['"]([^'"]+)['"]\s*\)/,
-    /getPlaylist\s*\(\s*['"]([^'"]+)['"]\s*\)/,
-    /video_id\s*=\s*['"]([^'"]+)['"]/,
+    // Pattern utama: window.getPlaylist(`ID`)
+    /window\.getPlaylist\s*\(\s*`([^`]+)`\s*\)/,
+    // Pattern dengan single quote
+    /window\.getPlaylist\s*\(\s*'([^']+)'\s*\)/,
+    // Pattern dengan double quote
+    /window\.getPlaylist\s*\(\s*"([^"]+)"\s*\)/,
+    // Pattern tanpa window
+    /getPlaylist\s*\(\s*`([^`]+)`\s*\)/,
+    /getPlaylist\s*\(\s*'([^']+)'\s*\)/,
+    /getPlaylist\s*\(\s*"([^"]+)"\s*\)/,
+    // Pattern untuk video_id variable
+    /video_id\s*=\s*['"`]([^'"`]+)['"`]/,
+    /var\s+videoId\s*=\s*['"`]([^'"`]+)['"`]/,
+    // Pattern untuk data attribute
     /data-video-id\s*=\s*['"]([^'"]+)['"]/,
-    /id\s*:\s*['"]([a-f0-9]{32})['"]/
+    // Pattern untuk ID 32 karakter hex
+    /['"`]([a-f0-9]{32})['"`]/
   ];
+  
+  let foundId = null;
   
   for (const pattern of patterns) {
     const match = html.match(pattern);
-    if (match) {
-      log(`Video ID ditemukan: ${match[1]}`, 'success', { pattern: pattern.toString(), id: match[1] });
-      return match[1];
+    if (match && match[1]) {
+      // Validasi ID (harus 32 karakter hex)
+      const id = match[1].trim();
+      if (/^[a-f0-9]{32}$/.test(id)) {
+        foundId = id;
+        log(`Video ID ditemukan: ${foundId}`, 'success', { 
+          pattern: pattern.toString(),
+          id: foundId 
+        });
+        break;
+      }
     }
   }
   
-  log('Video ID tidak ditemukan di HTML', 'warn');
-  
-  // Debug: tampilkan sample HTML
-  if (DEBUG && html.length > 0) {
-    const sample = html.substring(0, 500);
-    log('Sample HTML:', 'debug', { sample });
+  if (!foundId) {
+    log('Video ID tidak ditemukan di HTML', 'warn');
+    
+    // Debug: tampilkan bagian HTML yang mengandung getPlaylist
+    if (DEBUG) {
+      const getPlaylistIndex = html.indexOf('getPlaylist');
+      if (getPlaylistIndex > -1) {
+        const snippet = html.substring(
+          Math.max(0, getPlaylistIndex - 100),
+          Math.min(html.length, getPlaylistIndex + 200)
+        );
+        log('Snippet sekitar getPlaylist:', 'debug', { snippet });
+      } else {
+        log('Tidak ada "getPlaylist" di HTML', 'warn');
+        // Tampilkan 2000 karakter pertama HTML
+        log('Sample HTML (2000 chars):', 'debug', { 
+          sample: html.substring(0, 2000) 
+        });
+      }
+    }
   }
   
-  return null;
+  return foundId;
 }
 
-// ========== BUAT HTML MINI UNTUK EKSTRAKSI ==========
+// ========== BUAT HTML MINI ==========
 function createMiniHtml(videoId, originalHtml) {
   log('Membuat HTML mini untuk ekstraksi...', 'html');
   log(`Video ID: ${videoId}`, 'info');
@@ -172,18 +302,20 @@ function createMiniHtml(videoId, originalHtml) {
   
   while ((match = scriptRegex.exec(originalHtml)) !== null) {
     const scriptContent = match[1];
-    if (scriptContent && scriptContent.includes('function') && scriptContent.includes('getPlaylist')) {
+    if (scriptContent && (
+      scriptContent.includes('getPlaylist') || 
+      scriptContent.includes('window.getPlaylist')
+    )) {
       getPlaylistScript = scriptContent;
       log('Fungsi getPlaylist ditemukan di script', 'success');
       break;
     }
   }
   
-  // Coba cari di script yang di-load dari external
+  // Coba cari script yang di-load dari external
   if (!getPlaylistScript) {
-    log('Fungsi getPlaylist tidak ditemukan di inline script, cek external...', 'warn');
+    log('Fungsi getPlaylist tidak ditemukan di inline script, coba external...', 'warn');
     
-    // Cari script src yang mengandung app.js
     const srcRegex = /<script[^>]*src=["']([^"']*app\.js[^"']*)["'][^>]*>/i;
     const srcMatch = originalHtml.match(srcRegex);
     if (srcMatch) {
@@ -198,10 +330,7 @@ function createMiniHtml(videoId, originalHtml) {
 <head>
     <meta charset="UTF-8">
     <title>M3U8 Extractor - Mini</title>
-    <!-- Load JWPlayer -->
     <script src="//cdn.jwplayer.com/libraries/aVr2lJgW.js"></script>
-    <!-- Load HLS.js untuk decoding -->
-    <script src="//cdn.jsdelivr.net/npm/hls.js@0.14.17/dist/hls.min.js"></script>
     <script>
         // ============================================================
         // DEBUG LOGGING
@@ -225,12 +354,17 @@ function createMiniHtml(videoId, originalHtml) {
         window.tracks = null;
         window.error = null;
         window.done = false;
-        window.getPlaylistCalled = false;
         
         // ============================================================
         // FUNGSI getPlaylist (dari halaman asli)
         // ============================================================
-        ${getPlaylistScript || 'window.getPlaylist = async function(id) { logDebug("getPlaylist dipanggil dengan ID: " + id); return { encrypted: null, tracks: null }; };'}
+        ${getPlaylistScript || `
+        // Fallback: implementasi sederhana
+        window.getPlaylist = async function(id) {
+            logDebug('getPlaylist dipanggil dengan ID: ' + id);
+            return { encrypted: null, tracks: null };
+        };
+        `}
         
         // ============================================================
         // FUNGSI UTAMA EKSTRAKSI
@@ -239,7 +373,6 @@ function createMiniHtml(videoId, originalHtml) {
             try {
                 logDebug('Memulai ekstraksi playlist untuk ID: ' + window.videoId);
                 
-                // Cek apakah getPlaylist tersedia
                 if (typeof window.getPlaylist !== 'function') {
                     const error = 'window.getPlaylist tidak tersedia!';
                     logDebug(error);
@@ -249,7 +382,6 @@ function createMiniHtml(videoId, originalHtml) {
                 }
                 
                 logDebug('Memanggil window.getPlaylist...');
-                window.getPlaylistCalled = true;
                 const result = await window.getPlaylist(window.videoId);
                 logDebug('Hasil getPlaylist:', result);
                 
@@ -257,9 +389,6 @@ function createMiniHtml(videoId, originalHtml) {
                     window.m3u8Url = result.encrypted;
                     window.tracks = result.tracks || null;
                     logDebug('M3U8 URL ditemukan: ' + window.m3u8Url);
-                    if (window.tracks) {
-                        logDebug('Tracks ditemukan: ' + JSON.stringify(window.tracks));
-                    }
                     window.done = true;
                     window.error = null;
                 } else {
@@ -277,7 +406,7 @@ function createMiniHtml(videoId, originalHtml) {
         }
         
         // ============================================================
-        // TUNGGU JWPLAYER LOAD
+        // TUNGGU KOMPONEN
         // ============================================================
         function waitForJWPlayer() {
             return new Promise((resolve) => {
@@ -293,7 +422,7 @@ function createMiniHtml(videoId, originalHtml) {
                             logDebug('JWPlayer tersedia setelah ' + attempts + ' percobaan');
                             clearInterval(check);
                             resolve();
-                        } else if (attempts > 100) {
+                        } else if (attempts > 200) {
                             logDebug('Timeout menunggu JWPlayer');
                             clearInterval(check);
                             resolve();
@@ -303,9 +432,6 @@ function createMiniHtml(videoId, originalHtml) {
             });
         }
         
-        // ============================================================
-        // TUNGGU getPlaylist
-        // ============================================================
         function waitForGetPlaylist() {
             return new Promise((resolve) => {
                 logDebug('Menunggu window.getPlaylist...');
@@ -320,7 +446,7 @@ function createMiniHtml(videoId, originalHtml) {
                             logDebug('window.getPlaylist tersedia setelah ' + attempts + ' percobaan');
                             clearInterval(check);
                             resolve();
-                        } else if (attempts > 100) {
+                        } else if (attempts > 200) {
                             logDebug('Timeout menunggu window.getPlaylist');
                             clearInterval(check);
                             resolve();
@@ -348,7 +474,6 @@ function createMiniHtml(videoId, originalHtml) {
             logDebug('Error: ' + window.error);
             logDebug('M3U8 URL: ' + window.m3u8Url);
             
-            // Tampilkan hasil di elemen status
             const statusEl = document.getElementById('status');
             if (statusEl) {
                 if (window.m3u8Url) {
@@ -362,7 +487,6 @@ function createMiniHtml(videoId, originalHtml) {
                 }
             }
             
-            // Tampilkan debug logs
             const logsEl = document.getElementById('logs');
             if (logsEl) {
                 logsEl.innerHTML = DEBUG_LOGS.map(log => 
@@ -372,34 +496,12 @@ function createMiniHtml(videoId, originalHtml) {
         })();
     </script>
     <style>
-        body {
-            font-family: monospace;
-            padding: 20px;
-            background: #1a1a2e;
-            color: #eee;
-            margin: 0;
-        }
-        #status {
-            padding: 20px;
-            background: #16213e;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-size: 14px;
-            word-break: break-all;
-        }
-        #logs {
-            padding: 20px;
-            background: #0f3460;
-            border-radius: 8px;
-            max-height: 400px;
-            overflow-y: auto;
-            font-size: 12px;
-            line-height: 1.8;
-        }
+        body { font-family: monospace; padding: 20px; background: #1a1a2e; color: #eee; margin: 0; }
+        #status { padding: 20px; background: #16213e; border-radius: 8px; margin: 20px 0; font-size: 14px; word-break: break-all; }
+        #logs { padding: 20px; background: #0f3460; border-radius: 8px; max-height: 400px; overflow-y: auto; font-size: 12px; line-height: 1.8; }
         .success { color: #4ade80; }
         .error { color: #f87171; }
         .info { color: #60a5fa; }
-        .warning { color: #fbbf24; }
         h3 { color: #a78bfa; }
     </style>
 </head>
@@ -446,14 +548,12 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     logStep(3, 6, 'Membuat HTML mini...');
     const miniHtml = createMiniHtml(videoId, html);
     
-    // Simpan HTML mini ke file
     htmlPath = path.join(__dirname, 'mini-player.html');
     fs.writeFileSync(htmlPath, miniHtml);
     log(`HTML mini disimpan: ${htmlPath}`, 'debug');
     
     // ====== STEP 4: Launch browser ======
     logStep(4, 6, 'Meluncurkan browser...');
-    log('Menggunakan Playwright dengan Chromium...', 'browser');
     browser = await chromium.launch({
       headless: true,
       args: [
@@ -461,35 +561,28 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
         '--disable-setuid-sandbox',
         '--disable-gpu',
         '--disable-dev-shm-usage',
-        '--disable-web-security',
-        '--disable-features=IsolateOrigins,site-per-process'
+        '--disable-web-security'
       ]
     });
     log('Browser berhasil diluncurkan', 'success');
     
-    // ====== STEP 5: Create context dan page ======
+    // ====== STEP 5: Create context ======
     logStep(5, 6, 'Membuat context dan page...');
     context = await browser.newContext({
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      extraHTTPHeaders: {
-        'Referer': referer
-      },
+      extraHTTPHeaders: { 'Referer': referer },
       viewport: { width: 1280, height: 720 }
     });
-    log('Context berhasil dibuat', 'success');
     
     page = await context.newPage();
-    log('Page berhasil dibuat', 'success');
     
-    // Capture console logs dari page
+    // Capture console logs
     page.on('console', (msg) => {
       const text = msg.text();
       if (text.includes('[DEBUG]')) {
         log(text.replace('[DEBUG]', '').trim(), 'debug');
       } else if (text.includes('error') || text.includes('Error')) {
         log(text, 'error');
-      } else {
-        log(text, 'debug');
       }
     });
     
@@ -497,17 +590,15 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
       log(`Page error: ${error.message}`, 'error');
     });
     
-    // ====== STEP 6: Navigate ke HTML mini ======
+    // ====== STEP 6: Navigate ======
     logStep(6, 6, 'Menavigasi ke HTML mini...');
-    log(`File: ${htmlPath}`, 'debug');
-    
     await page.goto(`file://${htmlPath}`, {
       waitUntil: 'domcontentloaded',
       timeout: 30000
     });
     log('HTML mini berhasil dimuat', 'success');
     
-    // ====== Tunggu ekstraksi selesai ======
+    // ====== Tunggu ekstraksi ======
     log('Menunggu proses ekstraksi selesai...', 'info');
     await page.waitForFunction(
       () => window.done === true,
@@ -515,20 +606,15 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     );
     
     // ====== Ambil hasil ======
-    log('Mengambil hasil ekstraksi...', 'debug');
     const result = await page.evaluate(() => {
       return {
         encrypted: window.m3u8Url || null,
         tracks: window.tracks || null,
         error: window.error || null,
-        done: window.done || false,
-        logs: window.DEBUG_LOGS || []
+        done: window.done || false
       };
     });
     
-    log('Hasil ekstraksi:', 'debug', result);
-    
-    // ====== Cek error ======
     if (result.error) {
       throw new Error(`Ekstraksi error: ${result.error}`);
     }
@@ -541,11 +627,9 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
     log(`✅ EKSTRAKSI BERHASIL dalam ${duration} detik`, 'success');
     log(`📹 M3U8 URL: ${result.encrypted}`, 'success');
     
-    // ====== Cleanup ======
     await browser.close();
     if (htmlPath && fs.existsSync(htmlPath)) {
       fs.unlinkSync(htmlPath);
-      log('HTML mini dihapus', 'debug');
     }
     
     return result;
@@ -553,27 +637,17 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
   } catch (err) {
     log(`❌ EKSTRAKSI GAGAL: ${err.message}`, 'error');
     
-    // ====== Debug: screenshot ======
     if (page) {
       try {
-        const screenshotPath = path.join(__dirname, 'error-screenshot.png');
-        await page.screenshot({ path: screenshotPath, fullPage: true });
-        log(`Screenshot disimpan: ${screenshotPath}`, 'debug');
-      } catch (screenshotErr) {
-        log(`Gagal mengambil screenshot: ${screenshotErr.message}`, 'warn');
-      }
-    }
-    
-    // ====== Debug: HTML page ======
-    if (page) {
+        await page.screenshot({ path: 'error-screenshot.png', fullPage: true });
+        log('Screenshot disimpan: error-screenshot.png', 'debug');
+      } catch (e) {}
+      
       try {
         const content = await page.content();
-        const htmlDebugPath = path.join(__dirname, 'error-page.html');
-        fs.writeFileSync(htmlDebugPath, content);
-        log(`HTML page disimpan: ${htmlDebugPath}`, 'debug');
-      } catch (htmlErr) {
-        log(`Gagal mengambil HTML: ${htmlErr.message}`, 'warn');
-      }
+        fs.writeFileSync('error-page.html', content);
+        log('HTML page disimpan: error-page.html', 'debug');
+      } catch (e) {}
     }
     
     if (browser) {
@@ -583,18 +657,20 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
   }
 }
 
-// ========== FUNGSI MAIN ==========
+function logStep(step, total, message) {
+  log(`[${step}/${total}] ${message}`, 'step');
+}
+
+// ========== MAIN ==========
 async function main() {
   log('================================================', 'info');
   log('🎬 M3U8 EXTRACTOR v3.0', 'info');
   log('================================================', 'info');
-  log(`Debug mode: ${DEBUG}`, 'debug');
   
   const args = process.argv.slice(2);
   let url = null;
   let referer = DEFAULT_REFERER;
 
-  // Parse arguments
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--url' && i + 1 < args.length) {
       url = args[i + 1];
@@ -607,59 +683,48 @@ async function main() {
     }
   }
 
-  // Check environment variables
   if (process.env.INPUT_URLS) {
     const urls = process.env.INPUT_URLS.split(',').map(s => s.trim()).filter(Boolean);
     if (urls.length > 0) {
-      log(`Ditemukan ${urls.length} URL dari INPUT_URLS`, 'info');
       await processMultipleUrls(urls, referer);
       return;
     }
   }
 
-  // Check urls.txt file
   if (fs.existsSync('urls.txt')) {
     const urls = fs.readFileSync('urls.txt', 'utf8')
       .split('\n')
       .map(s => s.trim())
       .filter(Boolean);
     if (urls.length > 0) {
-      log(`Ditemukan ${urls.length} URL dari urls.txt`, 'info');
       await processMultipleUrls(urls, referer);
       return;
     }
   }
 
-  // Single URL from argument
   if (url) {
-    log(`Memproses single URL dari argumen`, 'info');
     await processSingleUrl(url, referer);
     return;
   }
 
   log('Tidak ada URL yang diberikan.', 'error');
-  log('Gunakan: --url <URL> atau buat file urls.txt', 'info');
   process.exit(1);
 }
 
 async function processSingleUrl(url, referer) {
-  log(`\n📌 Processing: ${url}`, 'info');
   const db = initDatabase(DB_PATH);
   let result = null;
   let error = null;
 
   try {
     result = await extractM3U8(url, referer);
-    log(`Link ditemukan: ${result.encrypted}`, 'success');
   } catch (err) {
     error = err.message;
-    log(`Gagal: ${error}`, 'error');
   }
 
-  // Ekstrak video ID dari URL
   const videoId = url.match(/embed\/([^?]+)/)?.[1] || null;
-
-  const id = saveToDatabase(
+  
+  saveToDatabase(
     db,
     url,
     videoId,
@@ -669,17 +734,14 @@ async function processSingleUrl(url, referer) {
     error
   );
 
-  // Save to JSON
   let allData = [];
   if (fs.existsSync(JSON_PATH)) {
     try {
       allData = JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
-    } catch (e) {
-      allData = [];
-    }
+    } catch (e) {}
   }
-  const entry = {
-    id,
+  
+  allData.push({
     url,
     video_id: videoId,
     m3u8_url: result ? result.encrypted : null,
@@ -687,53 +749,41 @@ async function processSingleUrl(url, referer) {
     referer,
     error,
     created_at: new Date().toISOString()
-  };
-  allData.push(entry);
+  });
+  
   fs.writeFileSync(JSON_PATH, JSON.stringify(allData, null, 2), 'utf8');
-  log(`Disimpan ke ${JSON_PATH}`, 'success');
 
   if (result && result.encrypted) {
     fs.appendFileSync(M3U8_PATH, result.encrypted + '\n', 'utf8');
-    log(`Ditambahkan ke ${M3U8_PATH}`, 'success');
   }
 
   db.close();
-  log(`✅ Selesai: ${url}\n`, 'success');
 }
 
 async function processMultipleUrls(urls, referer) {
-  log(`\n📋 Memproses ${urls.length} URL...`, 'info');
   const db = initDatabase(DB_PATH);
   let allData = [];
+  
   if (fs.existsSync(JSON_PATH)) {
     try {
       allData = JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
-    } catch (e) {
-      allData = [];
-    }
+    } catch (e) {}
   }
 
-  let successCount = 0;
-  let failCount = 0;
-
-  for (let i = 0; i < urls.length; i++) {
-    const url = urls[i];
-    log(`\n[${i + 1}/${urls.length}] Processing: ${url}`, 'info');
+  for (const url of urls) {
+    log(`\n📌 Processing: ${url}`, 'info');
     let result = null;
     let error = null;
     
     try {
       result = await extractM3U8(url, referer);
-      log(`✅ ${result.encrypted}`, 'success');
-      successCount++;
     } catch (err) {
       error = err.message;
-      log(`❌ ${error}`, 'error');
-      failCount++;
     }
 
     const videoId = url.match(/embed\/([^?]+)/)?.[1] || null;
-    const id = saveToDatabase(
+    
+    saveToDatabase(
       db,
       url,
       videoId,
@@ -743,8 +793,7 @@ async function processMultipleUrls(urls, referer) {
       error
     );
 
-    const entry = {
-      id,
+    allData.push({
       url,
       video_id: videoId,
       m3u8_url: result ? result.encrypted : null,
@@ -752,20 +801,17 @@ async function processMultipleUrls(urls, referer) {
       referer,
       error,
       created_at: new Date().toISOString()
-    };
-    allData.push(entry);
+    });
+    
     if (result && result.encrypted) {
       fs.appendFileSync(M3U8_PATH, result.encrypted + '\n', 'utf8');
     }
   }
 
   fs.writeFileSync(JSON_PATH, JSON.stringify(allData, null, 2), 'utf8');
-  log(`\n✅ Selesai! Sukses: ${successCount}, Gagal: ${failCount}`, 'success');
-  log(`Data disimpan di ${JSON_PATH} dan ${DB_PATH}`, 'info');
   db.close();
 }
 
-// ========== RUN ==========
 main().catch(err => {
   log(`💥 Fatal error: ${err.message}`, 'error');
   console.error(err.stack);
