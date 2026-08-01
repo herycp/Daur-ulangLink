@@ -1,6 +1,9 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
+const path = require('path');
 const Database = require('better-sqlite3');
+const https = require('https');
+const http = require('http');
 
 // ========== KONFIGURASI ==========
 const DEFAULT_REFERER = 'https://9tsu.vip/';
@@ -9,33 +12,46 @@ const JSON_PATH = process.env.JSON_PATH || 'output.json';
 const M3U8_PATH = process.env.M3U8_PATH || 'output.m3u8';
 const DEBUG = process.env.DEBUG === 'true' || true;
 
-// ========== LOGGING ==========
-function log(message, level = 'info') {
+// ========== LOGGING FUNGSI ==========
+function log(message, level = 'info', data = null) {
   const timestamp = new Date().toISOString();
   const prefix = {
     info: 'ℹ️',
     success: '✅',
     error: '❌',
     warn: '⚠️',
-    debug: '🔍'
+    debug: '🔍',
+    step: '📌',
+    network: '🌐',
+    database: '🗄️',
+    browser: '🖥️',
+    html: '📄'
   }[level] || 'ℹ️';
-  console.log(`[${timestamp}] ${prefix} ${message}`);
+  
+  const logMessage = `[${timestamp}] ${prefix} ${message}`;
+  console.log(logMessage);
+  
+  if (data && DEBUG) {
+    console.log(`  └─ Data: ${JSON.stringify(data, null, 2)}`);
+  }
 }
 
-function debugLog(message) {
-  if (DEBUG) {
-    log(message, 'debug');
-  }
+function logStep(step, total, message) {
+  log(`[${step}/${total}] ${message}`, 'step');
 }
 
 // ========== FUNGSI DATABASE ==========
 function initDatabase(dbPath) {
   try {
+    log('Membuka koneksi database...', 'database');
     const db = new Database(dbPath);
+    
+    log('Membuat tabel playlist...', 'database');
     db.exec(`
       CREATE TABLE IF NOT EXISTS playlist (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         url TEXT NOT NULL,
+        video_id TEXT,
         m3u8_url TEXT,
         tracks TEXT,
         referer TEXT,
@@ -43,256 +59,554 @@ function initDatabase(dbPath) {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
       CREATE INDEX IF NOT EXISTS idx_url ON playlist(url);
+      CREATE INDEX IF NOT EXISTS idx_video_id ON playlist(video_id);
     `);
-    log(`Database initialized: ${dbPath}`, 'success');
+    
+    log(`Database siap: ${dbPath}`, 'success', { path: dbPath });
     return db;
   } catch (err) {
-    log(`Failed to initialize database: ${err.message}`, 'error');
+    log(`Gagal inisialisasi database: ${err.message}`, 'error');
     throw err;
   }
 }
 
-function saveToDatabase(db, url, m3u8Url, tracks, referer, error = null) {
+function saveToDatabase(db, url, videoId, m3u8Url, tracks, referer, error = null) {
   try {
+    log('Menyimpan ke database...', 'database');
     const stmt = db.prepare(`
-      INSERT INTO playlist (url, m3u8_url, tracks, referer, error)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO playlist (url, video_id, m3u8_url, tracks, referer, error)
+      VALUES (?, ?, ?, ?, ?, ?)
     `);
-    const info = stmt.run(url, m3u8Url, JSON.stringify(tracks), referer, error);
-    log(`Saved to database (ID: ${info.lastInsertRowid})`, 'success');
+    const info = stmt.run(url, videoId, m3u8Url, JSON.stringify(tracks), referer, error);
+    log(`Data tersimpan (ID: ${info.lastInsertRowid})`, 'success');
     return info.lastInsertRowid;
   } catch (err) {
-    log(`Failed to save to database: ${err.message}`, 'error');
+    log(`Gagal menyimpan ke database: ${err.message}`, 'error');
     throw err;
   }
+}
+
+// ========== FUNGSI FETCH HTML DENGAN REFERER ==========
+function fetchHtmlWithReferer(url, referer) {
+  return new Promise((resolve, reject) => {
+    log(`Mengambil HTML dari: ${url}`, 'network');
+    log(`Menggunakan referer: ${referer}`, 'network');
+    
+    const parsedUrl = new URL(url);
+    const isHttps = parsedUrl.protocol === 'https:';
+    const client = isHttps ? https : http;
+    
+    const options = {
+      hostname: parsedUrl.hostname,
+      port: parsedUrl.port || (isHttps ? 443 : 80),
+      path: parsedUrl.pathname + parsedUrl.search,
+      method: 'GET',
+      headers: {
+        'Referer': referer,
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
+      }
+    };
+    
+    log(`Request options:`, 'debug', options);
+    
+    const req = client.request(options, (res) => {
+      log(`Response status: ${res.statusCode} ${res.statusMessage}`, 'network');
+      
+      let data = [];
+      let totalLength = 0;
+      
+      res.on('data', (chunk) => {
+        data.push(chunk);
+        totalLength += chunk.length;
+        log(`Menerima chunk: ${chunk.length} bytes (total: ${totalLength})`, 'debug');
+      });
+      
+      res.on('end', () => {
+        const buffer = Buffer.concat(data);
+        const html = buffer.toString('utf8');
+        log(`HTML berhasil diambil: ${html.length} bytes`, 'success', { size: html.length });
+        
+        // Simpan HTML untuk debug
+        if (DEBUG) {
+          const debugPath = path.join(__dirname, 'debug-original.html');
+          fs.writeFileSync(debugPath, html);
+          log(`HTML asli disimpan ke: ${debugPath}`, 'debug');
+        }
+        
+        resolve(html);
+      });
+    });
+    
+    req.on('error', (err) => {
+      log(`Gagal fetch HTML: ${err.message}`, 'error');
+      reject(err);
+    });
+    
+    req.on('timeout', () => {
+      log('Request timeout', 'error');
+      req.destroy();
+      reject(new Error('Request timeout'));
+    });
+    
+    req.setTimeout(30000);
+    req.end();
+  });
+}
+
+// ========== EKSTRAK VIDEO ID DARI HTML ==========
+function extractVideoIdFromHtml(html) {
+  log('Mencari video ID di HTML...', 'debug');
+  
+  // Pattern: window.getPlaylist('ID')
+  const patterns = [
+    /window\.getPlaylist\s*\(\s*['"]([^'"]+)['"]\s*\)/,
+    /getPlaylist\s*\(\s*['"]([^'"]+)['"]\s*\)/,
+    /video_id\s*=\s*['"]([^'"]+)['"]/,
+    /data-video-id\s*=\s*['"]([^'"]+)['"]/,
+    /id\s*:\s*['"]([a-f0-9]{32})['"]/
+  ];
+  
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) {
+      log(`Video ID ditemukan: ${match[1]}`, 'success', { pattern: pattern.toString(), id: match[1] });
+      return match[1];
+    }
+  }
+  
+  log('Video ID tidak ditemukan di HTML', 'warn');
+  
+  // Debug: tampilkan sample HTML
+  if (DEBUG) {
+    const sample = html.substring(0, 2000);
+    log('Sample HTML:', 'debug', { sample });
+  }
+  
+  return null;
+}
+
+// ========== BUAT HTML MINI UNTUK EKSTRAKSI ==========
+function createMiniHtml(videoId, originalHtml) {
+  log('Membuat HTML mini untuk ekstraksi...', 'html');
+  log(`Video ID: ${videoId}`, 'info');
+  
+  // Cari script yang mengandung getPlaylist
+  const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+  let getPlaylistScript = null;
+  let match;
+  
+  while ((match = scriptRegex.exec(originalHtml)) !== null) {
+    const scriptContent = match[1];
+    if (scriptContent && scriptContent.includes('function') && scriptContent.includes('getPlaylist')) {
+      getPlaylistScript = scriptContent;
+      log('Fungsi getPlaylist ditemukan di script', 'success');
+      break;
+    }
+  }
+  
+  // Coba cari di script yang di-load dari external
+  if (!getPlaylistScript) {
+    log('Fungsi getPlaylist tidak ditemukan di inline script, cek external...', 'warn');
+    
+    // Cari script src yang mengandung app.js
+    const srcRegex = /<script[^>]*src=["']([^"']*app\.js[^"']*)["'][^>]*>/i;
+    const srcMatch = originalHtml.match(srcRegex);
+    if (srcMatch) {
+      log(`App.js ditemukan di: ${srcMatch[1]}`, 'debug');
+      // Kita akan menggunakan pendekatan lain: langsung panggil dari halaman mini
+    }
+  }
+  
+  // Buat HTML mini
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>M3U8 Extractor - Mini</title>
+    <!-- Load JWPlayer -->
+    <script src="//cdn.jwplayer.com/libraries/aVr2lJgW.js"></script>
+    <!-- Load HLS.js untuk decoding -->
+    <script src="//cdn.jsdelivr.net/npm/hls.js@0.14.17/dist/hls.min.js"></script>
+    <script>
+        // ============================================================
+        // DEBUG LOGGING
+        // ============================================================
+        const DEBUG_LOGS = [];
+        function logDebug(message, data) {
+            const entry = { 
+                time: new Date().toISOString(), 
+                message: message, 
+                data: data || null 
+            };
+            DEBUG_LOGS.push(entry);
+            console.log('[DEBUG]', message, data || '');
+        }
+        
+        // ============================================================
+        // VARIABEL GLOBAL
+        // ============================================================
+        window.videoId = '${videoId}';
+        window.m3u8Url = null;
+        window.tracks = null;
+        window.error = null;
+        window.done = false;
+        window.getPlaylistCalled = false;
+        
+        // ============================================================
+        // FUNGSI getPlaylist (dari halaman asli)
+        // ============================================================
+        ${getPlaylistScript || 'window.getPlaylist = async function(id) { logDebug("getPlaylist dipanggil dengan ID: " + id); return { encrypted: null, tracks: null }; };'}
+        
+        // ============================================================
+        // FUNGSI UTAMA EKSTRAKSI
+        // ============================================================
+        async function extractPlaylist() {
+            try {
+                logDebug('Memulai ekstraksi playlist untuk ID: ' + window.videoId);
+                
+                // Cek apakah getPlaylist tersedia
+                if (typeof window.getPlaylist !== 'function') {
+                    const error = 'window.getPlaylist tidak tersedia!';
+                    logDebug(error);
+                    window.error = error;
+                    window.done = true;
+                    return;
+                }
+                
+                logDebug('Memanggil window.getPlaylist...');
+                window.getPlaylistCalled = true;
+                const result = await window.getPlaylist(window.videoId);
+                logDebug('Hasil getPlaylist:', result);
+                
+                if (result && result.encrypted) {
+                    window.m3u8Url = result.encrypted;
+                    window.tracks = result.tracks || null;
+                    logDebug('M3U8 URL ditemukan: ' + window.m3u8Url);
+                    if (window.tracks) {
+                        logDebug('Tracks ditemukan: ' + JSON.stringify(window.tracks));
+                    }
+                    window.done = true;
+                    window.error = null;
+                } else {
+                    const error = 'Tidak ada encrypted URL di result';
+                    logDebug(error);
+                    window.error = error;
+                    window.done = true;
+                }
+            } catch (err) {
+                logDebug('Error dalam extractPlaylist: ' + err.message);
+                window.error = err.message;
+                window.done = true;
+                console.error(err);
+            }
+        }
+        
+        // ============================================================
+        // TUNGGU JWPLAYER LOAD
+        // ============================================================
+        function waitForJWPlayer() {
+            return new Promise((resolve) => {
+                logDebug('Menunggu JWPlayer...');
+                if (typeof jwplayer !== 'undefined') {
+                    logDebug('JWPlayer sudah tersedia');
+                    resolve();
+                } else {
+                    let attempts = 0;
+                    const check = setInterval(() => {
+                        attempts++;
+                        if (typeof jwplayer !== 'undefined') {
+                            logDebug('JWPlayer tersedia setelah ' + attempts + ' percobaan');
+                            clearInterval(check);
+                            resolve();
+                        } else if (attempts > 100) {
+                            logDebug('Timeout menunggu JWPlayer');
+                            clearInterval(check);
+                            resolve();
+                        }
+                    }, 100);
+                }
+            });
+        }
+        
+        // ============================================================
+        // TUNGGU getPlaylist
+        // ============================================================
+        function waitForGetPlaylist() {
+            return new Promise((resolve) => {
+                logDebug('Menunggu window.getPlaylist...');
+                if (typeof window.getPlaylist === 'function') {
+                    logDebug('window.getPlaylist sudah tersedia');
+                    resolve();
+                } else {
+                    let attempts = 0;
+                    const check = setInterval(() => {
+                        attempts++;
+                        if (typeof window.getPlaylist === 'function') {
+                            logDebug('window.getPlaylist tersedia setelah ' + attempts + ' percobaan');
+                            clearInterval(check);
+                            resolve();
+                        } else if (attempts > 100) {
+                            logDebug('Timeout menunggu window.getPlaylist');
+                            clearInterval(check);
+                            resolve();
+                        }
+                    }, 100);
+                }
+            });
+        }
+        
+        // ============================================================
+        // MAIN
+        // ============================================================
+        (async function() {
+            logDebug('=== STARTING EXTRACTION ===');
+            logDebug('Video ID: ' + window.videoId);
+            
+            await waitForJWPlayer();
+            await waitForGetPlaylist();
+            
+            logDebug('Semua komponen siap, memulai ekstraksi...');
+            await extractPlaylist();
+            
+            logDebug('=== EXTRACTION COMPLETE ===');
+            logDebug('Done: ' + window.done);
+            logDebug('Error: ' + window.error);
+            logDebug('M3U8 URL: ' + window.m3u8Url);
+            
+            // Tampilkan hasil di elemen status
+            const statusEl = document.getElementById('status');
+            if (statusEl) {
+                if (window.m3u8Url) {
+                    statusEl.innerHTML = '✅ M3U8 ditemukan: <br><small>' + window.m3u8Url + '</small>';
+                    statusEl.style.color = 'green';
+                } else if (window.error) {
+                    statusEl.innerHTML = '❌ Error: ' + window.error;
+                    statusEl.style.color = 'red';
+                } else {
+                    statusEl.innerHTML = '⏳ Proses selesai, cek hasil...';
+                }
+            }
+            
+            // Tampilkan debug logs
+            const logsEl = document.getElementById('logs');
+            if (logsEl) {
+                logsEl.innerHTML = DEBUG_LOGS.map(log => 
+                    '<div>[' + log.time + '] ' + log.message + (log.data ? ' ' + JSON.stringify(log.data) : '')
+                ).join('<br>');
+            }
+        })();
+    </script>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #eee;
+            margin: 0;
+        }
+        #status {
+            padding: 20px;
+            background: #16213e;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        #logs {
+            padding: 20px;
+            background: #0f3460;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .info { color: #60a5fa; }
+        .warning { color: #fbbf24; }
+        h3 { color: #a78bfa; }
+    </style>
+</head>
+<body>
+    <h1>🎬 M3U8 Extractor</h1>
+    <div id="status">⏳ Loading...</div>
+    <div id="player" style="display:none;"></div>
+    <h3>📋 Debug Logs</h3>
+    <div id="logs">Menunggu log...</div>
+</body>
+</html>
+  `;
+  
+  log(`HTML mini berhasil dibuat: ${html.length} bytes`, 'success');
+  return html;
 }
 
 // ========== EKSTRAKSI DENGAN PLAYWRIGHT ==========
 async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
-  log(`Starting extraction for: ${pageUrl}`, 'info');
-  log(`Using referer: ${referer}`, 'debug');
+  const startTime = Date.now();
+  log('================================================', 'info');
+  log(`🚀 MULAI EKSTRAKSI: ${pageUrl}`, 'info');
+  log('================================================', 'info');
   
   let browser = null;
   let context = null;
   let page = null;
+  let htmlPath = null;
 
   try {
-    // ====== 1. Launch browser ======
-    log('Launching Chromium browser...', 'debug');
+    // ====== STEP 1: Fetch HTML asli ======
+    logStep(1, 6, 'Mengambil HTML asli dengan referer...');
+    const html = await fetchHtmlWithReferer(pageUrl, referer);
+    
+    // ====== STEP 2: Ekstrak video ID ======
+    logStep(2, 6, 'Mengekstrak video ID...');
+    const videoId = extractVideoIdFromHtml(html);
+    if (!videoId) {
+      throw new Error('Video ID tidak ditemukan di HTML');
+    }
+    log(`Video ID: ${videoId}`, 'success');
+    
+    // ====== STEP 3: Buat HTML mini ======
+    logStep(3, 6, 'Membuat HTML mini...');
+    const miniHtml = createMiniHtml(videoId, html);
+    
+    // Simpan HTML mini ke file
+    htmlPath = path.join(__dirname, 'mini-player.html');
+    fs.writeFileSync(htmlPath, miniHtml);
+    log(`HTML mini disimpan: ${htmlPath}`, 'debug');
+    
+    // ====== STEP 4: Launch browser ======
+    logStep(4, 6, 'Meluncurkan browser...');
+    log('Menggunakan Playwright dengan Chromium...', 'browser');
     browser = await chromium.launch({
       headless: true,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
-        '--disable-blink-features=AutomationControlled',
-        '--disable-features=IsolateOrigins,site-per-process',
-        '--disable-web-security',
-        '--disable-features=BlockInsecurePrivateNetworkRequests',
         '--disable-gpu',
-        '--disable-dev-shm-usage'
+        '--disable-dev-shm-usage',
+        '--disable-web-security',
+        '--disable-features=IsolateOrigins,site-per-process'
       ]
     });
-    log('Browser launched successfully', 'success');
-
-    // ====== 2. Create context with custom user agent ======
-    log('Creating browser context...', 'debug');
+    log('Browser berhasil diluncurkan', 'success');
+    
+    // ====== STEP 5: Create context dan page ======
+    logStep(5, 6, 'Membuat context dan page...');
     context = await browser.newContext({
       userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       extraHTTPHeaders: {
         'Referer': referer
       },
-      viewport: { width: 1920, height: 1080 }
+      viewport: { width: 1280, height: 720 }
     });
-    log('Browser context created', 'success');
-
-    // ====== 3. Create page ======
-    page = await context.newPage();
-    log('New page created', 'debug');
-
-    // ====== 4. Add anti-devtools script ======
-    log('Injecting anti-devtools bypass...', 'debug');
-    await page.addInitScript(() => {
-      // Nonaktifkan devtools-detector
-      window.devtoolsDetector = {
-        launch: () => {},
-        addListener: () => {},
-        isOpen: false
-      };
-      
-      // Cegah reload
-      const originalReload = window.location.reload;
-      window.location.reload = function() {
-        console.log('[Playwright] Reload prevented');
-      };
-      
-      // Cegah alert
-      window.alert = function() {};
-      
-      // Hapus event listener
-      window.addEventListener('beforeunload', (e) => {
-        e.stopImmediatePropagation();
-      }, true);
-      
-      // Timpa navigasi
-      window.location.replace = function() {};
-      window.location.assign = function() {};
-      
-      // Override console.log untuk debugging
-      const originalConsole = console.log;
-      console.log = function(...args) {
-        if (args[0] && typeof args[0] === 'string') {
-          // Filter pesan tertentu
-          if (!args[0].includes('devtools')) {
-            originalConsole.apply(console, args);
-          }
-        } else {
-          originalConsole.apply(console, args);
-        }
-      };
-    });
-    log('Anti-devtools bypass injected', 'success');
-
-    // ====== 5. Navigate to page ======
-    log(`Navigating to: ${pageUrl}`, 'info');
-    log('Waiting for domcontentloaded (timeout: 120s)...', 'debug');
+    log('Context berhasil dibuat', 'success');
     
-    let response = null;
-    try {
-      response = await page.goto(pageUrl, {
-        waitUntil: 'domcontentloaded',
-        timeout: 120000
-      });
-      log(`Page loaded with status: ${response ? response.status() : 'unknown'}`, 'success');
-    } catch (err) {
-      log(`Navigation error: ${err.message}`, 'error');
-      
-      // Coba alternatif dengan networkidle
-      log('Trying alternative navigation with networkidle...', 'warn');
-      response = await page.goto(pageUrl, {
-        waitUntil: 'networkidle',
-        timeout: 120000
-      });
-      log(`Page loaded with status: ${response ? response.status() : 'unknown'}`, 'success');
-    }
-
-    if (response && response.status() !== 200) {
-      log(`Page returned non-200 status: ${response.status()}`, 'warn');
-    }
-
-    // ====== 6. Log page title ======
-    try {
-      const title = await page.title();
-      log(`Page title: "${title}"`, 'debug');
-    } catch (err) {
-      log(`Could not get page title: ${err.message}`, 'warn');
-    }
-
-    // ====== 7. Check for getPlaylist function ======
-    log('Waiting for window.getPlaylist function...', 'debug');
-    try {
-      await page.waitForFunction(
-        () => typeof window.getPlaylist === 'function',
-        { timeout: 60000, polling: 500 }
-      );
-      log('window.getPlaylist found!', 'success');
-    } catch (err) {
-      log(`getPlaylist function not found: ${err.message}`, 'error');
-      
-      // Debug: log semua script
-      const scripts = await page.evaluate(() => {
-        return Array.from(document.querySelectorAll('script')).map(s => s.src || 'inline');
-      });
-      log(`Scripts found: ${scripts.join(', ')}`, 'debug');
-      
-      throw new Error('window.getPlaylist function not available');
-    }
-
-    // ====== 8. Extract parameter ID ======
-    log('Extracting parameter ID...', 'debug');
-    const param = await page.evaluate(() => {
-      const scripts = document.querySelectorAll('script');
-      for (let script of scripts) {
-        const text = script.textContent;
-        if (text && text.includes('getPlaylist')) {
-          const match = text.match(/window\.getPlaylist\s*\(\s*['"]([^'"]+)['"]\s*\)/);
-          if (match) {
-            return match[1];
-          }
-        }
+    page = await context.newPage();
+    log('Page berhasil dibuat', 'success');
+    
+    // Capture console logs dari page
+    page.on('console', (msg) => {
+      const text = msg.text();
+      if (text.includes('[DEBUG]')) {
+        log(text.replace('[DEBUG]', '').trim(), 'debug');
+      } else if (text.includes('error') || text.includes('Error')) {
+        log(text, 'error');
+      } else {
+        log(text, 'debug');
       }
-      return null;
     });
-
-    if (!param) {
-      log('Parameter ID not found in scripts', 'error');
-      
-      // Debug: log semua script content
-      const allScripts = await page.evaluate(() => {
-        return Array.from(document.querySelectorAll('script')).map(s => s.textContent);
-      });
-      log(`All scripts content (first 100 chars each):`, 'debug');
-      allScripts.forEach((script, index) => {
-        if (script && script.includes('getPlaylist')) {
-          log(`Script ${index}: ${script.substring(0, 200)}...`, 'debug');
-        }
-      });
-      
-      throw new Error('Parameter ID not found');
+    
+    page.on('pageerror', (error) => {
+      log(`Page error: ${error.message}`, 'error');
+    });
+    
+    // ====== STEP 6: Navigate ke HTML mini ======
+    logStep(6, 6, 'Menavigasi ke HTML mini...');
+    log(`File: ${htmlPath}`, 'debug');
+    
+    await page.goto(`file://${htmlPath}`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 30000
+    });
+    log('HTML mini berhasil dimuat', 'success');
+    
+    // ====== Tunggu ekstraksi selesai ======
+    log('Menunggu proses ekstraksi selesai...', 'info');
+    const waitResult = await page.waitForFunction(
+      () => window.done === true,
+      { timeout: 120000, polling: 500 }
+    );
+    
+    // ====== Ambil hasil ======
+    log('Mengambil hasil ekstraksi...', 'debug');
+    const result = await page.evaluate(() => {
+      return {
+        encrypted: window.m3u8Url || null,
+        tracks: window.tracks || null,
+        error: window.error || null,
+        done: window.done || false,
+        logs: window.DEBUG_LOGS || []
+      };
+    });
+    
+    log('Hasil ekstraksi:', 'debug', result);
+    
+    // ====== Cek error ======
+    if (result.error) {
+      throw new Error(`Ekstraksi error: ${result.error}`);
     }
-    log(`Parameter ID: ${param}`, 'info');
-
-    // ====== 9. Call getPlaylist ======
-    log('Calling window.getPlaylist...', 'info');
-    let result = null;
-    try {
-      result = await page.evaluate(async (id) => {
-        console.log(`Calling getPlaylist with ID: ${id}`);
-        const decode = await window.getPlaylist(id);
-        console.log('getPlaylist result:', decode);
-        return {
-          encrypted: decode.encrypted,
-          tracks: decode.tracks
-        };
-      }, param);
-      log('getPlaylist called successfully', 'success');
-    } catch (err) {
-      log(`Error calling getPlaylist: ${err.message}`, 'error');
-      throw err;
+    
+    if (!result.encrypted) {
+      throw new Error('Tidak ada encrypted URL ditemukan');
     }
-
-    if (!result || !result.encrypted) {
-      log('No encrypted URL found in result', 'error');
-      log(`Result: ${JSON.stringify(result)}`, 'debug');
-      throw new Error('No encrypted URL found');
-    }
-
-    log(`Encrypted URL found: ${result.encrypted}`, 'success');
-    if (result.tracks) {
-      log(`Tracks found: ${JSON.stringify(result.tracks)}`, 'debug');
-    }
-
-    // ====== 10. Close browser ======
+    
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    log(`✅ EKSTRAKSI BERHASIL dalam ${duration} detik`, 'success');
+    log(`📹 M3U8 URL: ${result.encrypted}`, 'success');
+    
+    // ====== Cleanup ======
     await browser.close();
-    log('Browser closed', 'debug');
-
+    if (htmlPath && fs.existsSync(htmlPath)) {
+      fs.unlinkSync(htmlPath);
+      log('HTML mini dihapus', 'debug');
+    }
+    
     return result;
-
+    
   } catch (err) {
-    log(`Extraction failed: ${err.message}`, 'error');
+    log(`❌ EKSTRAKSI GAGAL: ${err.message}`, 'error');
+    
+    // ====== Debug: screenshot ======
     if (page) {
       try {
-        // Screenshot untuk debug
-        await page.screenshot({ path: 'error-screenshot.png', fullPage: true });
-        log('Error screenshot saved: error-screenshot.png', 'debug');
-        
-        // Log HTML untuk debug
-        const html = await page.content();
-        fs.writeFileSync('error-page.html', html);
-        log('Error HTML saved: error-page.html', 'debug');
+        const screenshotPath = path.join(__dirname, 'error-screenshot.png');
+        await page.screenshot({ path: screenshotPath, fullPage: true });
+        log(`Screenshot disimpan: ${screenshotPath}`, 'debug');
       } catch (screenshotErr) {
-        log(`Could not capture debug info: ${screenshotErr.message}`, 'warn');
+        log(`Gagal mengambil screenshot: ${screenshotErr.message}`, 'warn');
       }
     }
+    
+    // ====== Debug: HTML page ======
+    if (page) {
+      try {
+        const content = await page.content();
+        const htmlDebugPath = path.join(__dirname, 'error-page.html');
+        fs.writeFileSync(htmlDebugPath, content);
+        log(`HTML page disimpan: ${htmlDebugPath}`, 'debug');
+      } catch (htmlErr) {
+        log(`Gagal mengambil HTML: ${htmlErr.message}`, 'warn');
+      }
+    }
+    
     if (browser) {
       await browser.close();
     }
@@ -302,13 +616,16 @@ async function extractM3U8(pageUrl, referer = DEFAULT_REFERER) {
 
 // ========== FUNGSI MAIN ==========
 async function main() {
-  log('=== M3U8 Extractor Started ===', 'info');
+  log('================================================', 'info');
+  log('🎬 M3U8 EXTRACTOR v3.0', 'info');
+  log('================================================', 'info');
   log(`Debug mode: ${DEBUG}`, 'debug');
   
   const args = process.argv.slice(2);
   let url = null;
   let referer = DEFAULT_REFERER;
 
+  // Parse arguments
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--url' && i + 1 < args.length) {
       url = args[i + 1];
@@ -325,7 +642,7 @@ async function main() {
   if (process.env.INPUT_URLS) {
     const urls = process.env.INPUT_URLS.split(',').map(s => s.trim()).filter(Boolean);
     if (urls.length > 0) {
-      log(`Found ${urls.length} URLs from INPUT_URLS`, 'info');
+      log(`Ditemukan ${urls.length} URL dari INPUT_URLS`, 'info');
       await processMultipleUrls(urls, referer);
       return;
     }
@@ -338,7 +655,7 @@ async function main() {
       .map(s => s.trim())
       .filter(Boolean);
     if (urls.length > 0) {
-      log(`Found ${urls.length} URLs from urls.txt`, 'info');
+      log(`Ditemukan ${urls.length} URL dari urls.txt`, 'info');
       await processMultipleUrls(urls, referer);
       return;
     }
@@ -346,35 +663,37 @@ async function main() {
 
   // Single URL from argument
   if (url) {
-    log(`Processing single URL from argument`, 'info');
+    log(`Memproses single URL dari argumen`, 'info');
     await processSingleUrl(url, referer);
     return;
   }
 
-  log('No URLs provided. Use --url, urls.txt, or INPUT_URLS environment variable', 'error');
+  log('Tidak ada URL yang diberikan.', 'error');
+  log('Gunakan: --url <URL> atau buat file urls.txt', 'info');
   process.exit(1);
 }
 
 async function processSingleUrl(url, referer) {
-  log(`\n=== Processing: ${url} ===`, 'info');
+  log(`\n📌 Processing: ${url}`, 'info');
   const db = initDatabase(DB_PATH);
   let result = null;
   let error = null;
 
   try {
     result = await extractM3U8(url, referer);
-    log(`Link found: ${result.encrypted}`, 'success');
-    if (result.tracks) {
-      log(`Tracks: ${JSON.stringify(result.tracks)}`, 'debug');
-    }
+    log(`Link ditemukan: ${result.encrypted}`, 'success');
   } catch (err) {
     error = err.message;
-    log(`Failed: ${error}`, 'error');
+    log(`Gagal: ${error}`, 'error');
   }
+
+  // Ekstrak video ID dari URL
+  const videoId = url.match(/embed\/([^?]+)/)?.[1] || null;
 
   const id = saveToDatabase(
     db,
     url,
+    videoId,
     result ? result.encrypted : null,
     result ? result.tracks : null,
     referer,
@@ -393,6 +712,7 @@ async function processSingleUrl(url, referer) {
   const entry = {
     id,
     url,
+    video_id: videoId,
     m3u8_url: result ? result.encrypted : null,
     tracks: result ? result.tracks : null,
     referer,
@@ -401,19 +721,19 @@ async function processSingleUrl(url, referer) {
   };
   allData.push(entry);
   fs.writeFileSync(JSON_PATH, JSON.stringify(allData, null, 2), 'utf8');
-  log(`Saved to ${JSON_PATH}`, 'success');
+  log(`Disimpan ke ${JSON_PATH}`, 'success');
 
   if (result && result.encrypted) {
     fs.appendFileSync(M3U8_PATH, result.encrypted + '\n', 'utf8');
-    log(`Added to ${M3U8_PATH}`, 'success');
+    log(`Ditambahkan ke ${M3U8_PATH}`, 'success');
   }
 
   db.close();
-  log(`=== Finished: ${url} ===\n`, 'info');
+  log(`✅ Selesai: ${url}\n`, 'success');
 }
 
 async function processMultipleUrls(urls, referer) {
-  log(`\n=== Processing ${urls.length} URLs ===`, 'info');
+  log(`\n📋 Memproses ${urls.length} URL...`, 'info');
   const db = initDatabase(DB_PATH);
   let allData = [];
   if (fs.existsSync(JSON_PATH)) {
@@ -424,6 +744,9 @@ async function processMultipleUrls(urls, referer) {
     }
   }
 
+  let successCount = 0;
+  let failCount = 0;
+
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i];
     log(`\n[${i + 1}/${urls.length}] Processing: ${url}`, 'info');
@@ -433,14 +756,18 @@ async function processMultipleUrls(urls, referer) {
     try {
       result = await extractM3U8(url, referer);
       log(`✅ ${result.encrypted}`, 'success');
+      successCount++;
     } catch (err) {
       error = err.message;
       log(`❌ ${error}`, 'error');
+      failCount++;
     }
 
+    const videoId = url.match(/embed\/([^?]+)/)?.[1] || null;
     const id = saveToDatabase(
       db,
       url,
+      videoId,
       result ? result.encrypted : null,
       result ? result.tracks : null,
       referer,
@@ -450,6 +777,7 @@ async function processMultipleUrls(urls, referer) {
     const entry = {
       id,
       url,
+      video_id: videoId,
       m3u8_url: result ? result.encrypted : null,
       tracks: result ? result.tracks : null,
       referer,
@@ -463,13 +791,14 @@ async function processMultipleUrls(urls, referer) {
   }
 
   fs.writeFileSync(JSON_PATH, JSON.stringify(allData, null, 2), 'utf8');
-  log(`\n✅ All done. Data saved to ${JSON_PATH} and ${DB_PATH}`, 'success');
+  log(`\n✅ Selesai! Sukses: ${successCount}, Gagal: ${failCount}`, 'success');
+  log(`Data disimpan di ${JSON_PATH} dan ${DB_PATH}`, 'info');
   db.close();
 }
 
 // ========== RUN ==========
 main().catch(err => {
-  log(`Fatal error: ${err.message}`, 'error');
+  log(`💥 Fatal error: ${err.message}`, 'error');
   console.error(err.stack);
   process.exit(1);
 });
