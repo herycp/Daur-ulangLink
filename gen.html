@@ -103,7 +103,7 @@
                 <pre>${JSON.stringify(decode, null, 2)}</pre>
             `;
 
-        </div> catch (err) {
+        catch (err) {
             console.error(err);
             statusEl.className = "info error";
             statusEl.innerText = 'Gagal memuat playlist: ' + err.message;
