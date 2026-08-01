@@ -27,17 +27,12 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
-        # Jika package-lock.json tidak ada, npm install akan menghasilkan lock file
-        # Tapi kita sudah menyertakannya, jadi ini akan menggunakan lock file
         run: npm ci
 
-      - name: Install Chrome (jika diperlukan)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
 
       - name: Run extraction
         env:
@@ -46,6 +41,7 @@ jobs:
           DB_PATH: playlist.db
           JSON_PATH: output.json
           M3U8_PATH: output.m3u8
+          DEBUG: true
         run: node extract.js
 
       - name: Upload artifacts
@@ -56,8 +52,10 @@ jobs:
             output.m3u8
             output.json
             playlist.db
+            error-*.png
+            error-*.html
 
-      - name: Commit changes to repository (opsional)
+      - name: Commit changes (optional)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
