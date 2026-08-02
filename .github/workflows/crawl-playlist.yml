@@ -1,0 +1,38 @@
+name: Automated M3U8 Batch Crawler
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  
+  workflow_dispatch:
+    inputs:
+      manual_ids:
+        description: 'Masukkan Full Embed URL / ID (pisahkan koma jika > 1, atau kosongkan untuk pakai database.json)'
+        required: false
+        default: ''
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Crawler Engine
+        run: node scraper.js "${{ github.event.inputs.manual_ids }}"
+
+      - name: Commit and Push Results
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add output.json playlist.m3u package-lock.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update stream playlist database [skip ci]" && git push)
