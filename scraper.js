@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
 
-// Aktifkan Stealth Plugin untuk menyamarkan Puppeteer sebagai Browser Manusia biasa
 puppeteer.use(StealthPlugin());
 
 const TARGET_HOST = 'https://pulvexa.space';
@@ -48,7 +47,7 @@ function normalizeInputItem(item) {
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`🧪 [STEALTH DEBUG MODE] Input Manual Diterima`);
+        console.log(`🧪 [ANTI-DEVTOOLS BYPASS] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
@@ -73,7 +72,7 @@ function normalizeInputItem(item) {
     let m3uContent = '#EXTM3U\n\n';
 
     try {
-        console.log('🚀 Membuka Browser dengan Mode Stealth...');
+        console.log('🚀 Membuka Browser Puppeteer (Stealth Mode)...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -97,29 +96,52 @@ function normalizeInputItem(item) {
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // 1. INJEKSI ANTI-ANTI-DEVTOOLS (Lakukan sebelum dokumen dimuat)
+            // ⚡ 1. INJEKSI PENETRALISASI ANTI-DEVTOOLS BERDASARKAN GAMBAR
             await page.evaluateOnNewDocument(() => {
-                // Sembunyikan flag webdriver
-                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                // A. Lumpuhkan location.reload() agar tidak bisa merefresh halaman secara berulang
+                try {
+                    const noopReload = () => console.log('🛡️ [BYPASS] location.reload() berhasil dicegat & diblokir!');
+                    Object.defineProperty(window.location, 'reload', {
+                        value: noopReload,
+                        writable: false,
+                        configurable: true
+                    });
+                } catch (e) {
+                    window.location.reload = () => console.log('🛡️ [BYPASS] location.reload() berhasil dicegat!');
+                }
 
-                // Netralkan jebakan `debugger` loop
-                const noop = () => {};
-                window.console.clear = noop;
-
-                // Hijack Function constructor untuk melumpuhkan evaluasi `debugger;`
-                const NativeFunction = window.Function;
-                window.Function = function (...args) {
-                    if (args.length > 0 && typeof args[args.length - 1] === 'string') {
-                        if (args[args.length - 1].includes('debugger')) {
-                            return noop;
+                // B. Buat mock object devtoolsDetector palsu
+                const fakeDetector = {
+                    launch: function() {
+                        console.log('🛡️ [BYPASS] devtoolsDetector.launch() dipanggil (Dummy)');
+                    },
+                    addListener: function(callback) {
+                        console.log('🛡️ [BYPASS] devtoolsDetector.addListener() dipanggil');
+                        // Kirimkan status isOpen = false agar tidak pernah memicu reload
+                        if (typeof callback === 'function') {
+                            try { callback(false); } catch(err) {}
                         }
-                    }
-                    return NativeFunction(...args);
+                    },
+                    removeListener: function() {},
+                    stop: function() {},
+                    isUnlocked: true,
+                    isOpen: false
                 };
-                window.Function.prototype = NativeFunction.prototype;
+
+                // C. Kunci window.devtoolsDetector agar skrip halaman tidak bisa menimpa/memeriksanya
+                try {
+                    Object.defineProperty(window, 'devtoolsDetector', {
+                        get: () => fakeDetector,
+                        set: () => {
+                            console.log('🛡️ [BYPASS] Mencegah halaman menimpa devtoolsDetector');
+                        },
+                        configurable: false
+                    });
+                } catch (e) {
+                    window.devtoolsDetector = fakeDetector;
+                }
             });
 
-            // Set referer resmi
             await page.setExtraHTTPHeaders({
                 'Accept-Language': 'en-US,en;q=0.9,id;q=0.8',
                 'Referer': TARGET_HOST + '/'
@@ -127,7 +149,7 @@ function normalizeInputItem(item) {
 
             let extractedUrl = null;
 
-            // 2. PASSIVE RESPONSE LISTENING (Tanpa setRequestInterception agar tidak terdeteksi)
+            // 2. CEGAT URL STREAMING (.M3U8)
             page.on('response', (response) => {
                 const url = response.url();
                 const status = response.status();
@@ -138,7 +160,7 @@ function normalizeInputItem(item) {
                 }
 
                 if (url.includes('.m3u8') || url.includes('/hls/')) {
-                    console.log(`\n  🎯 >>> [M3U8 TERDETEKSI] <<<`);
+                    console.log(`\n  🎯 >>> [M3U8 TERDETEKSI SUKSES] <<<`);
                     console.log(`  🔗 ${url}\n`);
                     extractedUrl = url;
                 }
@@ -153,21 +175,10 @@ function normalizeInputItem(item) {
 
                 console.log(`📄 Main HTTP Status: ${response ? response.status() : 'N/A'}`);
                 
-                // Beri jeda sejenak untuk membiarkan skrip player memanggil M3U8
+                // Beri waktu bagi player untuk memanggil M3U8 setelah bypass
                 await delay(3000);
 
-                // Simulasi klik acak di tengah area player jika video butuh pemicu autoplay
-                if (!extractedUrl) {
-                    console.log(`🖱️ Mencoba trigger interaksi klik pada player...`);
-                    try {
-                        await page.mouse.click(640, 360);
-                        await delay(2000);
-                    } catch (e) {
-                        // Abaikan jika gagal klik
-                    }
-                }
-
-                // Cek variabel JWPlayer di DOM Utama jika belum ter-intercept
+                // Cadangan: Ambil dari instance JWPlayer jika belum ter-intercept
                 if (!extractedUrl) {
                     extractedUrl = await page.evaluate(() => {
                         if (window.jwplayer && typeof window.jwplayer === 'function') {
@@ -185,7 +196,6 @@ function normalizeInputItem(item) {
                 console.error(`💥 Error Navigasi: ${err.message}`);
             }
 
-            // Output Hasil
             if (extractedUrl) {
                 console.log(`✅ [BERHASIL] ID: ${item.id} -> ${extractedUrl}`);
                 results.push({
