@@ -1,16 +1,13 @@
 {
-  "name": "m3u8-extractor",
-  "version": "2.0.0",
-  "description": "Ekstrak link m3u8 dengan Playwright + anti-devtools",
-  "main": "extract.js",
-  "engines": {
-    "node": ">=20"
-  },
+  "name": "m3u8-puppeteer-crawler",
+  "version": "1.0.0",
+  "description": "Automated M3U8 Stream Crawler with Puppeteer for Local and GitHub Actions",
+  "main": "scraper.js",
   "scripts": {
-    "start": "node extract.js"
+    "start": "node scraper.js",
+    "test": "node scraper.js \"https://pulvexa.space/embed/ZReJmz7rUX?token=5dfbc9b04e576fc6ad1dbe1daf7a\""
   },
   "dependencies": {
-    "better-sqlite3": "^9.2.2",
-    "playwright": "^1.40.0"
+    "puppeteer": "^22.10.0"
   }
 }
