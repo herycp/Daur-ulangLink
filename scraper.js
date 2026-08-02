@@ -45,7 +45,7 @@ function normalizeInputItem(item) {
 async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
     if (!m3u8Url) return false;
 
-    console.log(`\n⚡ [REALTIME TEST] Menguji fetch langsung ke URL M3U8:\n   👉 ${m3u8Url}`);
+    console.log(`\n⚡ [REALTIME TEST] Menguji fetch ke: ${m3u8Url}`);
 
     try {
         const result = await page.evaluate(async (targetUrl, ref) => {
@@ -65,13 +65,13 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
             }
         }, m3u8Url, refererUrl);
 
-        console.log(`   📊 Result -> Status: ${result.status} | ExtM3u: ${result.hasExtM3u} | Snippet: "${result.preview}"`);
+        console.log(`   📊 Status: ${result.status} | ExtM3u: ${result.hasExtM3u} | Snippet: "${result.preview}"`);
 
         if (result.status === 200 && result.hasExtM3u) {
             console.log(`   ✅ [VALID] M3U8 Asli & Aktif!`);
             return true;
         } else {
-            console.log(`   ❌ [INVALID] Ditolak (HTTP ${result.status} / No #EXTM3U)`);
+            console.log(`   ❌ [INVALID] Ditolak (HTTP ${result.status} / Tanpa #EXTM3U)`);
             return false;
         }
     } catch (err) {
@@ -86,12 +86,12 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`⚡ [REALTIME LOGGING MODE] Input Manual Diterima`);
+        console.log(`⚡ [NO-RELOAD + REALTIME LOG] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
     } else {
-        console.log('\n📄 Reading database.json...');
+        console.log('\n📄 Membaca database.json...');
         if (!fs.existsSync('database.json')) {
             console.error('❌ File database.json tidak ditemukan!');
             process.exit(1);
@@ -111,7 +111,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
     let m3uContent = '#EXTM3U\n\n';
 
     try {
-        console.log('🚀 Launching Puppeteer...');
+        console.log('🚀 Membuka Puppeteer...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -128,30 +128,75 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
         for (let i = 0; i < targetList.length; i++) {
             const item = targetList[i];
             console.log(`\n==================================================`);
-            console.log(`🔍 [${i + 1}/${targetList.length}] PROCESSING: ${item.embedUrl}`);
+            console.log(`🔍 [${i + 1}/${targetList.length}] MEMPROSES: ${item.embedUrl}`);
             console.log(`==================================================`);
 
             const page = await browser.newPage();
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
+            let initialNavCompleted = false;
             const interceptedCandidates = [];
 
-            // 1. REALTIME LOG: BROWSER CONSOLE
+            // 🛡️ 1. PENCEGATAN JARINGAN (TOLAK NAVIGASI REFRESH/RELOAD DARI JARINGAN)
+            await page.setRequestInterception(true);
+
+            page.on('request', req => {
+                const isMainFrameNav = req.isNavigationRequest() && req.frame() === page.mainFrame();
+
+                // Jika halaman awal sudah terbuka dan skrip mencoba merefresh halaman -> BENDUNG/ABORT!
+                if (initialNavCompleted && isMainFrameNav) {
+                    console.log(`  🛡️ [BYPASS JARINGAN] Memblokir percobaan reload ke: ${req.url()}`);
+                    return req.abort();
+                }
+
+                req.continue();
+            });
+
+            // 🛡️ 2. INJEKSI ANTI-DEVTOOLS & ANTI-RELOAD TOTAL DI TINGKAT DOM / PROTOTYPE
+            await page.evaluateOnNewDocument(() => {
+                // A. Netralkan 'debugger' timing detection
+                const nativeFunction = window.Function;
+                window.Function = function (...args) {
+                    if (args.length > 0 && typeof args[args.length - 1] === 'string' && args[args.length - 1].includes('debugger')) {
+                        return function () {};
+                    }
+                    return nativeFunction.apply(this, args);
+                };
+                window.Function.prototype = nativeFunction.prototype;
+
+                // B. Override Location Prototype (Kunci reload, replace, assign di semua frame)
+                try {
+                    Location.prototype.reload = function() { console.log('🛡️ [BYPASS DOM] Location.prototype.reload diblokir'); };
+                    Location.prototype.replace = function() { console.log('🛡️ [BYPASS DOM] Location.prototype.replace diblokir'); };
+                    Location.prototype.assign = function() { console.log('🛡️ [BYPASS DOM] Location.prototype.assign diblokir'); };
+                } catch(e) {}
+
+                // C. Palsukan devtoolsDetector
+                const fakeDetector = {
+                    launch: () => {},
+                    addListener: (cb) => { if (typeof cb === 'function') cb(false); },
+                    removeListener: () => {},
+                    stop: () => {},
+                    isOpen: false,
+                    isUnlocked: true
+                };
+                window.devtoolsDetector = fakeDetector;
+                try {
+                    Object.defineProperty(window, 'devtoolsDetector', {
+                        get: () => fakeDetector,
+                        set: () => {},
+                        configurable: false
+                    });
+                } catch (e) {}
+            });
+
+            // LOG CONSOLE BROWSER REALTIME
             page.on('console', msg => {
                 console.log(`  🖥️ [BROWSER ${msg.type().toUpperCase()}] ${msg.text()}`);
             });
 
-            // 2. REALTIME LOG: OUTGOING REQUESTS
-            page.on('request', req => {
-                const type = req.resourceType();
-                // Tampilkan request dokumen/script/xhr/fetch
-                if (['document', 'script', 'xhr', 'fetch', 'media'].includes(type)) {
-                    console.log(`  ➡️ [REQ] [${req.method()}] [${type}] ${req.url()}`);
-                }
-            });
-
-            // 3. REALTIME LOG: INCOMING RESPONSES & BODY PARSING (XHR/M3U8)
+            // LOG RESPONS REALTIME & DETEKSI M3U8
             page.on('response', async res => {
                 const url = res.url();
                 const status = res.status();
@@ -161,44 +206,19 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                     console.log(`  ⬅️ [RES ${status}] [${type}] ${url}`);
                 }
 
-                // Deteksi kandidat Stream langsung detik itu juga
                 if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
                     console.log(`     🎯 [STREAM DETECTED]: ${url}`);
                     interceptedCandidates.push(url);
                 }
 
-                // Jika ada API/XHR, cetak isi payloadnya secara realtime
                 if ((type === 'xhr' || type === 'fetch') && !url.endsWith('.js') && !url.endsWith('.css')) {
                     try {
                         const text = await res.text();
                         if (text && text.length > 0) {
-                            console.log(`     📦 [XHR PAYLOAD PREVIEW]: ${text.substring(0, 150).replace(/\r?\n|\r/g, ' ')}`);
+                            console.log(`     📦 [XHR PAYLOAD]: ${text.substring(0, 150).replace(/\r?\n|\r/g, ' ')}`);
                         }
                     } catch (e) {}
                 }
-            });
-
-            // 4. REALTIME LOG: FAILED REQUESTS
-            page.on('requestfailed', req => {
-                const type = req.resourceType();
-                if (['document', 'script', 'xhr', 'fetch', 'media'].includes(type)) {
-                    console.log(`  💥 [FAIL] [${req.failure() ? req.failure().errorText : 'UNKNOWN'}] ${req.url()}`);
-                }
-            });
-
-            // Anti-DevTools & Anti-Reload Injection
-            await page.evaluateOnNewDocument(() => {
-                window.devtoolsDetector = {
-                    launch: () => {},
-                    addListener: (cb) => { if (typeof cb === 'function') cb(false); },
-                    removeListener: () => {},
-                    stop: () => {},
-                    isOpen: false
-                };
-                try {
-                    window.location.reload = () => console.log('🛡️ [BYPASS] location.reload() blocked');
-                    window.location.replace = () => console.log('🛡️ [BYPASS] location.replace() blocked');
-                } catch (e) {}
             });
 
             await page.setExtraHTTPHeaders({
@@ -209,11 +229,13 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
             let validM3u8Url = null;
 
             try {
-                console.log(`⏳ Navigating to URL...`);
+                console.log(`⏳ Membuka halaman target...`);
                 await page.goto(item.embedUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+                initialNavCompleted = true; // Kunci jaringan aktif! Reload otomatis setelah ini akan diblokir.
+                
                 await delay(2000);
 
-                // Cek kandidat yang sudah terkumpul sejauh ini
+                // Cek kandidat awal
                 for (const url of interceptedCandidates) {
                     if (await checkValidM3u8Content(page, url, item.embedUrl)) {
                         validM3u8Url = url;
@@ -221,9 +243,9 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                     }
                 }
 
-                // Jika belum dapat, picu play
+                // Jika belum dapat, pemicu play
                 if (!validM3u8Url) {
-                    console.log(`\n⚡ Triggering PLAY interaction...`);
+                    console.log(`\n⚡ Memicu interaksi Play pada player...`);
 
                     await page.evaluate(() => {
                         try {
@@ -240,11 +262,11 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                     });
 
                     try {
-                        console.log(`  🖱️ Clicking center of screen (640, 360)...`);
+                        console.log(`  🖱️ Mengklik titik tengah player (640, 360)...`);
                         await page.mouse.click(640, 360);
                     } catch (e) {}
 
-                    console.log(`⏳ Waiting for network stream responses (10 seconds)...`);
+                    console.log(`⏳ Menunggu respons stream baru (10 detik)...`);
                     const startWait = Date.now();
                     while (!validM3u8Url && (Date.now() - startWait) < 10000) {
                         await delay(1000);
@@ -262,7 +284,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
             }
 
             if (validM3u8Url) {
-                console.log(`\n🎉 [SUCCESS] Found Valid M3U8: ${validM3u8Url}`);
+                console.log(`\n🎉 [SUKSES] M3U8 Valid Ditemukan: ${validM3u8Url}`);
                 results.push({
                     id: item.id,
                     title: item.title,
@@ -277,7 +299,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                 m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
                 m3uContent += `${validM3u8Url}\n\n`;
             } else {
-                console.log(`\n❌ [FAILED] No valid M3U8 found for ${item.id}`);
+                console.log(`\n❌ [GAGAL] M3U8 valid tidak ditemukan untuk ${item.id}`);
             }
 
             await page.close();
@@ -287,7 +309,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
         fs.writeFileSync('output.json', JSON.stringify(results, null, 2));
         fs.writeFileSync('playlist.m3u', m3uContent);
         console.log(`\n==================================================`);
-        console.log(`🏁 Done! Output written to output.json & playlist.m3u`);
+        console.log(`🏁 Selesai! Hasil disimpan di output.json & playlist.m3u`);
         console.log(`==================================================\n`);
 
     } catch (error) {
