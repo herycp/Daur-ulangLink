@@ -41,11 +41,11 @@ function normalizeInputItem(item) {
     }
 }
 
-// 🔍 VALIDASI KETAT DENGAN CEK HTTP STATUS 200 & HASIL EXTM3U ASLI
+// 🔍 VALIDASI KETAT STREAM M3U8 DENGAN LOGGING MENDALAM
 async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
     if (!m3u8Url) return false;
 
-    console.log(`    🔍 [TEST STREAM] Memeriksa: ${m3u8Url}`);
+    console.log(`\n    🔍 [DIAGNOSTIC TEST] Menguji Kandidat: ${m3u8Url}`);
 
     try {
         const result = await page.evaluate(async (targetUrl, ref) => {
@@ -61,25 +61,28 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                 return {
                     status: res.status,
                     ok: res.ok,
+                    snippet: text.substring(0, 150).replace(/\n/g, ' '),
                     hasExtM3u: text.includes('#EXTM3U')
                 };
             } catch (err) {
-                return { status: 0, ok: false, error: err.message, hasExtM3u: false };
+                return { status: 0, ok: false, error: err.message, hasExtM3u: false, snippet: '' };
             }
         }, m3u8Url, refererUrl);
 
-        console.log(`    📊 [HTTP STATUS]: ${result.status} | Has #EXTM3U: ${result.hasExtM3u}`);
+        console.log(`    📊 Status: ${result.status} | Has #EXTM3U: ${result.hasExtM3u}`);
+        if (result.snippet) {
+            console.log(`    📄 Snippet Isi (150 char): "${result.snippet}"`);
+        }
 
-        // STRICT VALIDATION: Wajib HTTP 200 OK dan Mengandung #EXTM3U
         if (result.status === 200 && result.hasExtM3u) {
-            console.log(`    ✅ [ASLI & VALID] Stream terverifikasi aktif!`);
+            console.log(`    ✅ [VALIDATION SUCCESS] M3U8 Valid & Aktif!`);
             return true;
         } else {
-            console.log(`    ❌ [PALSU/EXPIRED] Server merespons HTTP ${result.status} (Bukan 200 OK / Tanpa #EXTM3U).`);
-            return false; // TIDAK ADA FALLBACK PALSU KELUAR DI SINI
+            console.log(`    ❌ [VALIDATION FAILED] Ditolak (HTTP Status ${result.status} / Tidak ada #EXTM3U).`);
+            return false;
         }
     } catch (err) {
-        console.log(`    ❌ [ERROR FETCH]: ${err.message}`);
+        console.log(`    ❌ [VALIDATION ERROR]: ${err.message}`);
         return false;
     }
 }
@@ -90,7 +93,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`🧪 [STRICT CHECKING] Input Manual Diterima`);
+        console.log(`🧪 [DEEP DEBUG MODE] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
@@ -115,7 +118,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
     let m3uContent = '#EXTM3U\n\n';
 
     try {
-        console.log('🚀 Membuka Browser Puppeteer...');
+        console.log('🚀 Membuka Browser Puppeteer (Verbose Debug)...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -131,15 +134,28 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
 
         for (let i = 0; i < targetList.length; i++) {
             const item = targetList[i];
-            console.log(`\n--------------------------------------------------`);
-            console.log(`🔍 [${i + 1}/${targetList.length}] MEMPROSES: ${item.embedUrl}`);
-            console.log(`--------------------------------------------------`);
+            console.log(`\n==================================================`);
+            console.log(`🔍 [${i + 1}/${targetList.length}] MEMPROSES TARGET: ${item.embedUrl}`);
+            console.log(`==================================================`);
 
             const page = await browser.newPage();
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // Bypass Anti-DevTools
+            // LOG CONSOLE BROWSER
+            page.on('console', msg => {
+                const text = msg.text();
+                if (text.includes('BYPASS') || msg.type() === 'error') {
+                    console.log(`  🖥️ [BROWSER CONSOLE ${msg.type().toUpperCase()}] ${text}`);
+                }
+            });
+
+            // LOG REQUEST GAGAL / CANCELED
+            page.on('requestfailed', req => {
+                console.log(`  ⚠️ [REQUEST FAILED] (${req.failure() ? req.failure().errorText : 'failed'}) -> ${req.url()}`);
+            });
+
+            // BYPASS ANTI-DEVTOOLS & ANTI-RELOAD
             await page.evaluateOnNewDocument(() => {
                 const fakeDetector = {
                     launch: () => {},
@@ -150,8 +166,8 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                 };
                 window.devtoolsDetector = fakeDetector;
                 try {
-                    window.location.reload = () => {};
-                    window.location.replace = () => {};
+                    window.location.reload = () => console.log('🛡️ [BYPASS] location.reload() diblokir');
+                    window.location.replace = () => console.log('🛡️ [BYPASS] location.replace() diblokir');
                 } catch (e) {}
             });
 
@@ -162,20 +178,69 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
 
             let validM3u8Url = null;
             const interceptedCandidates = [];
+            const allLoggedRequests = [];
 
-            page.on('response', (response) => {
+            // 🌐 PENCATAT RESPONS JARINGAN SUPER DETAIL
+            page.on('response', async (response) => {
                 const url = response.url();
-                if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
+                const status = response.status();
+                const req = response.request();
+                const resType = req.resourceType();
+                const headers = response.headers();
+                const contentType = headers['content-type'] || '';
+
+                allLoggedRequests.push({ url, status, type: resType });
+
+                // Catat jika ada potensi file M3U8 / Playlist / API Stream
+                const isStreamCandidate = url.includes('.m3u8') || 
+                                          url.includes('/playlist/') || 
+                                          url.includes('/hls/') || 
+                                          contentType.includes('mpegurl');
+
+                const isApiCandidate = url.includes('ajax') || 
+                                       url.includes('source') || 
+                                       url.includes('get') || 
+                                       contentType.includes('json');
+
+                if (isStreamCandidate) {
+                    console.log(`  🌐 [KANDIDAT STREAM] (${status}) [${resType}] -> ${url}`);
                     interceptedCandidates.push(url);
+                } else if (isApiCandidate && resType !== 'image' && resType !== 'stylesheet') {
+                    console.log(`  📡 [API/XHR CALL] (${status}) [${resType}] -> ${url}`);
+                    try {
+                        const bodyText = await response.text();
+                        console.log(`     📦 [API BODY PREVIEW]: ${bodyText.substring(0, 200)}`);
+                    } catch (e) {}
                 }
             });
 
             try {
-                console.log(`⏳ Mengunjungi ${item.embedUrl}...`);
-                await page.goto(item.embedUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-                await delay(3000);
+                console.log(`⏳ Navigasi ke ${item.embedUrl}...`);
+                const navRes = await page.goto(item.embedUrl, { waitUntil: 'networkidle2', timeout: 30000 });
+                console.log(`📄 Main Document HTTP Status: ${navRes ? navRes.status() : 'N/A'}`);
 
-                // Cek kandidat awal
+                await delay(2000);
+
+                // Cek Frame / Iframe
+                const frames = page.frames();
+                console.log(`🖼️ Detected Frames Total: ${frames.length}`);
+                frames.forEach((f, idx) => {
+                    if (idx > 0) console.log(`   └─ Frame [${idx}]: ${f.url()}`);
+                });
+
+                // Cek Status Video Player DOM awal
+                const videoDomInfo = await page.evaluate(() => {
+                    const vids = Array.from(document.querySelectorAll('video'));
+                    return vids.map(v => ({
+                        src: v.src,
+                        currentSrc: v.currentSrc,
+                        paused: v.paused,
+                        readyState: v.readyState
+                    }));
+                });
+                console.log(`📹 [DOM Video Elements Status]:`, JSON.stringify(videoDomInfo));
+
+                // 1. Cek Kandidat Awal
                 for (const url of interceptedCandidates) {
                     if (await checkValidM3u8Content(page, url, item.embedUrl)) {
                         validM3u8Url = url;
@@ -183,29 +248,50 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                     }
                 }
 
-                // Jika belum dapat, pemicu play
+                // 2. Jika belum dapat, jalankan pemicu Play
                 if (!validM3u8Url) {
-                    console.log(`⚡ Memicu aksi PLAY pada player...`);
+                    console.log(`\n⚡ Stream M3U8 belum ditemukan. Memicu interaksi Play pada player...`);
 
                     await page.evaluate(() => {
+                        console.log('⚡ [EVAL] Mencoba trigger play via JavaScript API...');
                         try {
                             if (window.jwplayer && typeof window.jwplayer === 'function') {
                                 const p = window.jwplayer('player') || window.jwplayer();
-                                if (p && typeof p.play === 'function') p.play();
+                                if (p && typeof p.play === 'function') {
+                                    p.play();
+                                    console.log('⚡ [EVAL] jwplayer().play() dipanggil.');
+                                }
                             }
                         } catch (e) {}
 
                         try {
-                            const videos = document.querySelectorAll('video');
-                            videos.forEach(v => v.play().catch(() => {}));
+                            const vids = document.querySelectorAll('video');
+                            vids.forEach(v => v.play().catch(err => console.log('err video play:', err.message)));
                         } catch (e) {}
                     });
 
+                    // Klik fisik pusat layar
                     try {
+                        console.log(`  🖱️ Mengklik koordinat tengah player (640, 360)...`);
                         await page.mouse.click(640, 360);
                     } catch (e) {}
 
-                    console.log(`⏳ Menunggu dan memvalidasi respons stream baru...`);
+                    await delay(1000);
+
+                    // Klik selector tombol play jika ada
+                    const playSelectors = ['.jw-display-icon-container', '.vjs-big-play-button', '#player', 'video'];
+                    for (const sel of playSelectors) {
+                        try {
+                            const el = await page.$(sel);
+                            if (el) {
+                                console.log(`  🖱️ Mengklik selector: ${sel}`);
+                                await el.click();
+                                await delay(500);
+                            }
+                        } catch (e) {}
+                    }
+
+                    console.log(`⏳ Menunggu respons stream baru (12 detik)...`);
                     const startWait = Date.now();
                     while (!validM3u8Url && (Date.now() - startWait) < 12000) {
                         await delay(1000);
@@ -219,11 +305,12 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                 }
 
             } catch (err) {
-                console.error(`💥 Error Navigasi: ${err.message}`);
+                console.error(`💥 Error Navigasi Target: ${err.message}`);
             }
 
+            // HASIL AKHIR & REKAP
             if (validM3u8Url) {
-                console.log(`✅ [BERHASIL VITAL] Stream Aktif Terkonfirmasi: ${validM3u8Url}`);
+                console.log(`\n✅ [HASIL SUKSES] ID: ${item.id} -> ${validM3u8Url}`);
                 results.push({
                     id: item.id,
                     title: item.title,
@@ -238,7 +325,12 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
                 m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
                 m3uContent += `${validM3u8Url}\n\n`;
             } else {
-                console.log(`❌ [GAGAL] Tidak ada URL stream yang lolos validasi HTTP 200 + #EXTM3U.`);
+                console.log(`\n❌ [HASIL GAGAL] Tidak ditemukan URL M3U8 valid.`);
+                console.log(`📋 [REKAP REKAPITULASI JARINGAN 15 REQUEST TERAKHIR]:`);
+                const sampleReqs = allLoggedRequests.slice(-15);
+                sampleReqs.forEach((r, idx) => {
+                    console.log(`   [${idx + 1}] [${r.status}] [${r.type}] ${r.url}`);
+                });
             }
 
             await page.close();
@@ -248,7 +340,7 @@ async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
         fs.writeFileSync('output.json', JSON.stringify(results, null, 2));
         fs.writeFileSync('playlist.m3u', m3uContent);
         console.log(`\n==================================================`);
-        console.log(`🎉 Selesai! Hasil akhir ditulis ke output.json & playlist.m3u`);
+        console.log(`🎉 Proses Selesai! Cek file output.json & playlist.m3u`);
         console.log(`==================================================\n`);
 
     } catch (error) {
