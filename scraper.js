@@ -1,5 +1,9 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
+
+// Aktifkan Stealth Plugin untuk menyamarkan Puppeteer sebagai Browser Manusia biasa
+puppeteer.use(StealthPlugin());
 
 const TARGET_HOST = 'https://pulvexa.space';
 const FIXED_TOKEN = '5dfbc9b04e576fc6ad1dbe1daf7a';
@@ -44,7 +48,7 @@ function normalizeInputItem(item) {
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`🧪 [MODE DEBUG] Input Manual Diterima`);
+        console.log(`🧪 [STEALTH DEBUG MODE] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
@@ -69,14 +73,16 @@ function normalizeInputItem(item) {
     let m3uContent = '#EXTM3U\n\n';
 
     try {
-        console.log('🚀 Membuka Browser Puppeteer...');
+        console.log('🚀 Membuka Browser dengan Mode Stealth...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
-                '--disable-blink-features=AutomationControlled', // Sembunyikan tanda automation bot
+                '--disable-web-security',
+                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-blink-features=AutomationControlled',
                 '--window-size=1280,720'
             ]
         });
@@ -91,7 +97,29 @@ function normalizeInputItem(item) {
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // 1. Set Header Referer Utama
+            // 1. INJEKSI ANTI-ANTI-DEVTOOLS (Lakukan sebelum dokumen dimuat)
+            await page.evaluateOnNewDocument(() => {
+                // Sembunyikan flag webdriver
+                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+
+                // Netralkan jebakan `debugger` loop
+                const noop = () => {};
+                window.console.clear = noop;
+
+                // Hijack Function constructor untuk melumpuhkan evaluasi `debugger;`
+                const NativeFunction = window.Function;
+                window.Function = function (...args) {
+                    if (args.length > 0 && typeof args[args.length - 1] === 'string') {
+                        if (args[args.length - 1].includes('debugger')) {
+                            return noop;
+                        }
+                    }
+                    return NativeFunction(...args);
+                };
+                window.Function.prototype = NativeFunction.prototype;
+            });
+
+            // Set referer resmi
             await page.setExtraHTTPHeaders({
                 'Accept-Language': 'en-US,en;q=0.9,id;q=0.8',
                 'Referer': TARGET_HOST + '/'
@@ -99,64 +127,48 @@ function normalizeInputItem(item) {
 
             let extractedUrl = null;
 
-            // 2. LOG CONSOLE Halaman Web Target (Untuk cek error JS internal)
-            page.on('console', msg => {
-                const type = msg.type();
-                if (['error', 'warning'].includes(type)) {
-                    console.log(`  [PAGE CONSOLE ${type.toUpperCase()}]: ${msg.text()}`);
-                }
-            });
-
-            page.on('pageerror', err => {
-                console.log(`  [PAGE JS ERROR]: ${err.message}`);
-            });
-
-            // 3. LOG RESPONS NETWORK (Untuk mendeteksi HTTP Status & URL)
-            page.on('response', async (response) => {
+            // 2. PASSIVE RESPONSE LISTENING (Tanpa setRequestInterception agar tidak terdeteksi)
+            page.on('response', (response) => {
                 const url = response.url();
                 const status = response.status();
                 const resourceType = response.request().resourceType();
 
-                // Log request bertipe fetch, xhr, script, atau media
                 if (['xhr', 'fetch', 'script', 'media'].includes(resourceType)) {
-                    console.log(`  🌐 [${status}] [${resourceType.toUpperCase()}] ${url.substring(0, 90)}...`);
+                    console.log(`  🌐 [${status}] [${resourceType.toUpperCase()}] ${url.substring(0, 95)}`);
                 }
 
                 if (url.includes('.m3u8') || url.includes('/hls/')) {
-                    console.log(`\n  🎯 >>> [INTERCEPTED SUCCESS] M3U8 DITEMUKAN! <<<`);
+                    console.log(`\n  🎯 >>> [M3U8 TERDETEKSI] <<<`);
                     console.log(`  🔗 ${url}\n`);
                     extractedUrl = url;
                 }
             });
 
-            // Intercept Network untuk memodifikasi Referer jika dibutuhkan
-            await page.setRequestInterception(true);
-            page.on('request', (req) => {
-                req.continue();
-            });
-
             try {
-                // Navigasi ke halaman embed
                 console.log(`⏳ Memuat halaman embed...`);
-                const mainResponse = await page.goto(item.embedUrl, { 
-                    waitUntil: 'networkidle2', 
+                const response = await page.goto(item.embedUrl, { 
+                    waitUntil: 'domcontentloaded', 
                     timeout: 30000 
                 });
 
-                const mainStatus = mainResponse ? mainResponse.status() : 'N/A';
-                console.log(`📄 Main Page HTTP Status: ${mainStatus}`);
+                console.log(`📄 Main HTTP Status: ${response ? response.status() : 'N/A'}`);
+                
+                // Beri jeda sejenak untuk membiarkan skrip player memanggil M3U8
+                await delay(3000);
 
-                // Cek apakah judul halaman menunjukkan proteksi Cloudflare / Bot Block
-                const pageTitle = await page.title();
-                console.log(`📌 Judul Halaman: "${pageTitle}"`);
-
-                if (pageTitle.includes('Just a moment') || pageTitle.includes('Attention Required') || mainStatus === 403) {
-                    console.log(`❌ [BLOCKED] Halaman terdeteksi diblokir oleh Cloudflare/Bot Protection!`);
+                // Simulasi klik acak di tengah area player jika video butuh pemicu autoplay
+                if (!extractedUrl) {
+                    console.log(`🖱️ Mencoba trigger interaksi klik pada player...`);
+                    try {
+                        await page.mouse.click(640, 360);
+                        await delay(2000);
+                    } catch (e) {
+                        // Abaikan jika gagal klik
+                    }
                 }
 
-                // 4. Jika M3U8 Belum Ter-intercept, Cek Instance JWPlayer di Halaman Utama
+                // Cek variabel JWPlayer di DOM Utama jika belum ter-intercept
                 if (!extractedUrl) {
-                    console.log(`⚙️ Menguji pencarian variabel player di DOM Utama...`);
                     extractedUrl = await page.evaluate(() => {
                         if (window.jwplayer && typeof window.jwplayer === 'function') {
                             const p = window.jwplayer('player') || window.jwplayer();
@@ -167,45 +179,13 @@ function normalizeInputItem(item) {
                         }
                         return null;
                     });
-                    if (extractedUrl) console.log(`✅ Ditemukan dari window.jwplayer!`);
-                }
-
-                // 5. Jika Masih Belum Ditemukan, Cek Apakah Player Berada di Dalam iFrame
-                if (!extractedUrl) {
-                    console.log(`🖼️ Memeriksa seluruh iFrame yang ada di halaman...`);
-                    const frames = page.frames();
-                    console.log(`  Ditemukan ${frames.length} frame di halaman.`);
-
-                    for (let f = 0; f < frames.length; f++) {
-                        const frame = frames[f];
-                        console.log(`  🔎 Memeriksa Frame #${f}: ${frame.url()}`);
-                        try {
-                            const framePlaylist = await frame.evaluate(() => {
-                                if (window.jwplayer && typeof window.jwplayer === 'function') {
-                                    const p = window.jwplayer('player') || window.jwplayer();
-                                    if (p && p.getPlaylist) {
-                                        const pl = p.getPlaylist();
-                                        return (pl && pl[0]) ? pl[0].file : null;
-                                    }
-                                }
-                                return null;
-                            });
-                            if (framePlaylist) {
-                                extractedUrl = framePlaylist;
-                                console.log(`✅ Ditemukan M3U8 dari Frame #${f}!`);
-                                break;
-                            }
-                        } catch (e) {
-                            // Abaikan error cross-origin iframe
-                        }
-                    }
                 }
 
             } catch (err) {
                 console.error(`💥 Error Navigasi: ${err.message}`);
             }
 
-            // Output Hasil Per Item
+            // Output Hasil
             if (extractedUrl) {
                 console.log(`✅ [BERHASIL] ID: ${item.id} -> ${extractedUrl}`);
                 results.push({
@@ -222,18 +202,17 @@ function normalizeInputItem(item) {
                 m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
                 m3uContent += `${extractedUrl}\n\n`;
             } else {
-                console.log(`❌ [GAGAL] Tidak dapat mengekstrak M3U8 dari ${item.embedUrl}`);
+                console.log(`❌ [GAGAL] M3U8 tidak ditemukan di halaman ini.`);
             }
 
             await page.close();
             await delay(1000);
         }
 
-        // Simpan Hasil Akhir
         fs.writeFileSync('output.json', JSON.stringify(results, null, 2));
         fs.writeFileSync('playlist.m3u', m3uContent);
         console.log(`\n==================================================`);
-        console.log(`🎉 Proses Selesai. Hasil ditulis ke output.json & playlist.m3u`);
+        console.log(`🎉 Selesai! Hasil diperbarui di output.json & playlist.m3u`);
         console.log(`==================================================\n`);
 
     } catch (error) {
