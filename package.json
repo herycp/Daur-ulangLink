@@ -1,13 +1,15 @@
 {
   "name": "m3u8-puppeteer-crawler",
   "version": "1.0.0",
-  "description": "Automated M3U8 Stream Crawler with Puppeteer for Local and GitHub Actions",
+  "description": "Stealth M3U8 Stream Crawler with Puppeteer",
   "main": "scraper.js",
   "scripts": {
     "start": "node scraper.js",
     "test": "node scraper.js \"https://pulvexa.space/embed/ZReJmz7rUX?token=5dfbc9b04e576fc6ad1dbe1daf7a\""
   },
   "dependencies": {
-    "puppeteer": "^22.10.0"
+    "puppeteer": "^22.10.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
