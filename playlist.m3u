@@ -1,2 +1,17 @@
 #EXTM3U
 
+#EXTINF:-1 tvg-id="ZReJmz7rUX" tvg-name="Video_ZReJmz7rUX", Video_ZReJmz7rUX
+#EXTVLCOPT:http-referrer=https://pulvexa.space/embed/ZReJmz7rUX?token=5dfbc9b04e576fc6ad1dbe1daf7a
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+https://pulvexa.space/playlist/e14e1800bcdd9c9bd2d0b9495cdb4c083cfbb8fb6379942dac20b6f8425c92f7/playlist.m3u8
+
+#EXTINF:-1 tvg-id="p1EtHhgq9n" tvg-name="Video_p1EtHhgq9n", Video_p1EtHhgq9n
+#EXTVLCOPT:http-referrer=https://pulvexa.space/embed/p1EtHhgq9n?token=5dfbc9b04e576fc6ad1dbe1daf7a
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+https://pulvexa.space/playlist/f9d31eb431735b18a81ae5a5fef8e1dd053011cbabc860eb6f78248960153648/playlist.m3u8
+
+#EXTINF:-1 tvg-id="OiCiOp1J3k" tvg-name="Video_OiCiOp1J3k", Video_OiCiOp1J3k
+#EXTVLCOPT:http-referrer=https://pulvexa.space/embed/OiCiOp1J3k?token=5dfbc9b04e576fc6ad1dbe1daf7a
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+https://pulvexa.space/playlist/0ffbc2afd37533bcadd31c990865989ef7ea244e8bea373d4d255462ee4da9c5/playlist.m3u8
+
