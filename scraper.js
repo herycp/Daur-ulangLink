@@ -41,13 +41,44 @@ function normalizeInputItem(item) {
     }
 }
 
+// 🔍 FUNGSIONALITAS VALIDASI M3U8 ASLI VS PALSU
+async function checkValidM3u8Content(page, m3u8Url) {
+    if (!m3u8Url) return false;
+
+    // Filter awal: Abaikan URL yang jelas-jelas link iklan/preview/dummy
+    const lower = m3u8Url.toLowerCase();
+    if (lower.includes('preview') || lower.includes('dummy') || lower.includes('ad_') || lower.includes('1x1')) {
+        console.log(`  ⚠️ URL diabaikan karena terindikasi Iklan/Preview: ${m3u8Url}`);
+        return false;
+    }
+
+    // Pengecekan Mendalam: Fetch isi file di context browser untuk memastikan header #EXTM3U
+    try {
+        const isRealStream = await page.evaluate(async (url) => {
+            try {
+                const res = await fetch(url, { method: 'GET', headers: { 'Range': 'bytes=0-300' } });
+                const text = await res.text();
+                // Valid M3U8 harus memiliki tag #EXTM3U
+                return text.includes('#EXTM3U');
+            } catch (e) {
+                return false;
+            }
+        }, m3u8Url);
+
+        return isRealStream;
+    } catch (err) {
+        // Fallback jika terjadi CORS restriction
+        return m3u8Url.includes('.m3u8') || m3u8Url.includes('/hls/');
+    }
+}
+
 (async () => {
     let targetList = [];
     const manualInput = process.argv[2];
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`🧪 [ANTI-DEVTOOLS BYPASS] Input Manual Diterima`);
+        console.log(`🧪 [VALIDATED SCRAPER MODE] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
@@ -72,7 +103,7 @@ function normalizeInputItem(item) {
     let m3uContent = '#EXTM3U\n\n';
 
     try {
-        console.log('🚀 Membuka Browser Puppeteer (Stealth Mode)...');
+        console.log('🚀 Membuka Browser Puppeteer...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -89,57 +120,27 @@ function normalizeInputItem(item) {
         for (let i = 0; i < targetList.length; i++) {
             const item = targetList[i];
             console.log(`\n--------------------------------------------------`);
-            console.log(`🔍 [${i + 1}/${targetList.length}] MEMBUKA TARGET: ${item.embedUrl}`);
+            console.log(`🔍 [${i + 1}/${targetList.length}] TARGET: ${item.embedUrl}`);
             console.log(`--------------------------------------------------`);
 
             const page = await browser.newPage();
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // ⚡ 1. INJEKSI PENETRALISASI ANTI-DEVTOOLS BERDASARKAN GAMBAR
+            // Bypass Anti-DevTools & location.reload()
             await page.evaluateOnNewDocument(() => {
-                // A. Lumpuhkan location.reload() agar tidak bisa merefresh halaman secara berulang
                 try {
-                    const noopReload = () => console.log('🛡️ [BYPASS] location.reload() berhasil dicegat & diblokir!');
-                    Object.defineProperty(window.location, 'reload', {
-                        value: noopReload,
-                        writable: false,
-                        configurable: true
-                    });
+                    Object.defineProperty(window.location, 'reload', { value: () => {}, writable: false });
                 } catch (e) {
-                    window.location.reload = () => console.log('🛡️ [BYPASS] location.reload() berhasil dicegat!');
+                    window.location.reload = () => {};
                 }
-
-                // B. Buat mock object devtoolsDetector palsu
-                const fakeDetector = {
-                    launch: function() {
-                        console.log('🛡️ [BYPASS] devtoolsDetector.launch() dipanggil (Dummy)');
-                    },
-                    addListener: function(callback) {
-                        console.log('🛡️ [BYPASS] devtoolsDetector.addListener() dipanggil');
-                        // Kirimkan status isOpen = false agar tidak pernah memicu reload
-                        if (typeof callback === 'function') {
-                            try { callback(false); } catch(err) {}
-                        }
-                    },
-                    removeListener: function() {},
-                    stop: function() {},
-                    isUnlocked: true,
+                window.devtoolsDetector = {
+                    launch: () => {},
+                    addListener: (cb) => { if (typeof cb === 'function') cb(false); },
+                    removeListener: () => {},
+                    stop: () => {},
                     isOpen: false
                 };
-
-                // C. Kunci window.devtoolsDetector agar skrip halaman tidak bisa menimpa/memeriksanya
-                try {
-                    Object.defineProperty(window, 'devtoolsDetector', {
-                        get: () => fakeDetector,
-                        set: () => {
-                            console.log('🛡️ [BYPASS] Mencegah halaman menimpa devtoolsDetector');
-                        },
-                        configurable: false
-                    });
-                } catch (e) {
-                    window.devtoolsDetector = fakeDetector;
-                }
             });
 
             await page.setExtraHTTPHeaders({
@@ -147,62 +148,108 @@ function normalizeInputItem(item) {
                 'Referer': TARGET_HOST + '/'
             });
 
-            let extractedUrl = null;
+            let validM3u8Url = null;
+            const interceptedCandidates = [];
 
-            // 2. CEGAT URL STREAMING (.M3U8)
+            // Penangkap Respons Jaringan (Network Response Listener)
             page.on('response', (response) => {
                 const url = response.url();
-                const status = response.status();
-                const resourceType = response.request().resourceType();
-
-                if (['xhr', 'fetch', 'script', 'media'].includes(resourceType)) {
-                    console.log(`  🌐 [${status}] [${resourceType.toUpperCase()}] ${url.substring(0, 95)}`);
-                }
-
                 if (url.includes('.m3u8') || url.includes('/hls/')) {
-                    console.log(`\n  🎯 >>> [M3U8 TERDETEKSI SUKSES] <<<`);
-                    console.log(`  🔗 ${url}\n`);
-                    extractedUrl = url;
+                    console.log(`  🌐 [MENCERAT REQUEST M3U8] ${url}`);
+                    interceptedCandidates.push(url);
                 }
             });
 
             try {
-                console.log(`⏳ Memuat halaman embed...`);
-                const response = await page.goto(item.embedUrl, { 
-                    waitUntil: 'domcontentloaded', 
-                    timeout: 30000 
-                });
+                console.log(`⏳ Memuat halaman...`);
+                await page.goto(item.embedUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+                await delay(2000);
 
-                console.log(`📄 Main HTTP Status: ${response ? response.status() : 'N/A'}`);
-                
-                // Beri waktu bagi player untuk memanggil M3U8 setelah bypass
-                await delay(3000);
+                // 1. CEK KANDIDAT M3U8 AWAL (JIKA AUTOPLAY BERJALAN)
+                for (const url of interceptedCandidates) {
+                    if (await checkValidM3u8Content(page, url)) {
+                        validM3u8Url = url;
+                        console.log(`  ✅ [VERIFIKASI AWAL BERHASIL] M3U8 Asli Terkonfirmasi!`);
+                        break;
+                    }
+                }
 
-                // Cadangan: Ambil dari instance JWPlayer jika belum ter-intercept
-                if (!extractedUrl) {
-                    extractedUrl = await page.evaluate(() => {
-                        if (window.jwplayer && typeof window.jwplayer === 'function') {
-                            const p = window.jwplayer('player') || window.jwplayer();
-                            if (p && p.getPlaylist) {
-                                const pl = p.getPlaylist();
-                                return (pl && pl[0]) ? pl[0].file : null;
+                // 2. JIKA BELUM DAPAT, MICU PLAY DENGAN MULTI-TRIGGER
+                if (!validM3u8Url) {
+                    console.log(`⚡ M3U8 belum ditemukan/valid. Memicu aksi PLAY pada player...`);
+
+                    // Trigger A: Panggil API Player internal (JWPlayer / VideoJS)
+                    await page.evaluate(() => {
+                        try {
+                            if (window.jwplayer && typeof window.jwplayer === 'function') {
+                                const player = window.jwplayer('player') || window.jwplayer();
+                                player.play();
+                            }
+                        } catch (e) {}
+
+                        try {
+                            const video = document.querySelector('video');
+                            if (video) video.play();
+                        } catch (e) {}
+                    });
+
+                    // Trigger B: Klik Elemen Selector Player
+                    const playSelectors = [
+                        '.jw-display-icon-container',
+                        '.jw-icon-display',
+                        '.vjs-big-play-button',
+                        '#player',
+                        'video',
+                        '.play-button'
+                    ];
+
+                    for (const selector of playSelectors) {
+                        try {
+                            const element = await page.$(selector);
+                            if (element) {
+                                console.log(`  🖱️ Mengklik elemen selector: ${selector}`);
+                                await element.click();
+                                await delay(500);
+                            }
+                        } catch (e) {}
+                    }
+
+                    // Trigger C: Klik Koordinat Tengah Layar
+                    try {
+                        console.log(`  🖱️ Mengklik titik tengah layar (640, 360)...`);
+                        await page.mouse.click(640, 360);
+                    } catch (e) {}
+
+                    // 3. LOOP MENUNGGU HINGGA M3U8 VALID TERCEGAT (Maksimal 12 Detik)
+                    console.log(`⏳ Menunggu respons M3U8 asli pasca trigger play...`);
+                    const maxWaitTime = 12000;
+                    const startTime = Date.now();
+
+                    while (!validM3u8Url && (Date.now() - startTime) < maxWaitTime) {
+                        await delay(1000);
+
+                        for (const url of interceptedCandidates) {
+                            if (await checkValidM3u8Content(page, url)) {
+                                validM3u8Url = url;
+                                console.log(`  🎉 [SUKSES TERVERIFIKASI] M3U8 Asli Ditemukan Pasca Play!`);
+                                break;
                             }
                         }
-                        return null;
-                    });
+                    }
                 }
 
             } catch (err) {
                 console.error(`💥 Error Navigasi: ${err.message}`);
             }
 
-            if (extractedUrl) {
-                console.log(`✅ [BERHASIL] ID: ${item.id} -> ${extractedUrl}`);
+            // SIMPAN HASIL
+            if (validM3u8Url) {
+                console.log(`✅ [BERHASIL] ID: ${item.id} -> ${validM3u8Url}`);
                 results.push({
                     id: item.id,
                     title: item.title,
                     embed_url: item.embedUrl,
-                    stream_url: extractedUrl,
+                    stream_url: validM3u8Url,
                     status: 'active',
                     updated_at: new Date().toISOString()
                 });
@@ -210,9 +257,9 @@ function normalizeInputItem(item) {
                 m3uContent += `#EXTINF:-1 tvg-id="${item.id}" tvg-name="${item.title}", ${item.title}\n`;
                 m3uContent += `#EXTVLCOPT:http-referrer=${item.embedUrl}\n`;
                 m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
-                m3uContent += `${extractedUrl}\n\n`;
+                m3uContent += `${validM3u8Url}\n\n`;
             } else {
-                console.log(`❌ [GAGAL] M3U8 tidak ditemukan di halaman ini.`);
+                console.log(`❌ [GAGAL] Tidak dapat menemukan URL M3U8 yang valid untuk ${item.embedUrl}`);
             }
 
             await page.close();
@@ -222,7 +269,7 @@ function normalizeInputItem(item) {
         fs.writeFileSync('output.json', JSON.stringify(results, null, 2));
         fs.writeFileSync('playlist.m3u', m3uContent);
         console.log(`\n==================================================`);
-        console.log(`🎉 Selesai! Hasil diperbarui di output.json & playlist.m3u`);
+        console.log(`🎉 Selesai! Hasil akhir ditulis ke output.json & playlist.m3u`);
         console.log(`==================================================\n`);
 
     } catch (error) {
