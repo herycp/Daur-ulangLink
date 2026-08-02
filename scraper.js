@@ -41,39 +41,46 @@ function normalizeInputItem(item) {
     }
 }
 
-// 🔍 VALIDASI M3U8 DENGAN LOG DETAIL
-async function checkValidM3u8Content(page, m3u8Url) {
+// 🔍 VALIDASI KETAT DENGAN CEK HTTP STATUS 200 & HASIL EXTM3U ASLI
+async function checkValidM3u8Content(page, m3u8Url, refererUrl) {
     if (!m3u8Url) return false;
 
-    console.log(`    🔍 [VALIDASI] Memeriksa URL: ${m3u8Url}`);
-    const lower = m3u8Url.toLowerCase();
-    if (lower.includes('preview') || lower.includes('dummy') || lower.includes('ad_') || lower.includes('1x1') || lower.includes('poster')) {
-        console.log(`    ❌ [DITOLAK] Mengandung keyword terlarang (ads/preview/dummy).`);
-        return false;
-    }
+    console.log(`    🔍 [TEST STREAM] Memeriksa: ${m3u8Url}`);
 
     try {
-        const fetchResult = await page.evaluate(async (url) => {
+        const result = await page.evaluate(async (targetUrl, ref) => {
             try {
-                const res = await fetch(url, { method: 'GET', headers: { 'Range': 'bytes=0-400' } });
+                const res = await fetch(targetUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Referer': ref,
+                        'Accept': '*/*'
+                    }
+                });
                 const text = await res.text();
                 return {
                     status: res.status,
+                    ok: res.ok,
                     hasExtM3u: text.includes('#EXTM3U')
                 };
-            } catch (fetchErr) {
-                return { error: fetchErr.message };
+            } catch (err) {
+                return { status: 0, ok: false, error: err.message, hasExtM3u: false };
             }
-        }, m3u8Url);
+        }, m3u8Url, refererUrl);
 
-        if (fetchResult.hasExtM3u) {
-            console.log(`    ✅ [VALID] Terkonfirmasi header #EXTM3U!`);
+        console.log(`    📊 [HTTP STATUS]: ${result.status} | Has #EXTM3U: ${result.hasExtM3u}`);
+
+        // STRICT VALIDATION: Wajib HTTP 200 OK dan Mengandung #EXTM3U
+        if (result.status === 200 && result.hasExtM3u) {
+            console.log(`    ✅ [ASLI & VALID] Stream terverifikasi aktif!`);
             return true;
         } else {
-            return m3u8Url.includes('.m3u8');
+            console.log(`    ❌ [PALSU/EXPIRED] Server merespons HTTP ${result.status} (Bukan 200 OK / Tanpa #EXTM3U).`);
+            return false; // TIDAK ADA FALLBACK PALSU KELUAR DI SINI
         }
     } catch (err) {
-        return m3u8Url.includes('.m3u8');
+        console.log(`    ❌ [ERROR FETCH]: ${err.message}`);
+        return false;
     }
 }
 
@@ -83,7 +90,7 @@ async function checkValidM3u8Content(page, m3u8Url) {
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`🧪 [STRICT ANTI-RELOAD MODE] Input Manual Diterima`);
+        console.log(`🧪 [STRICT CHECKING] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
@@ -132,43 +139,19 @@ async function checkValidM3u8Content(page, m3u8Url) {
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // 🛡️ LAPIS 1: EKSPLISIT INJEKSI ANTI-DEVTOOL & TOTAL RELOAD BLOCKER (DOM)
+            // Bypass Anti-DevTools
             await page.evaluateOnNewDocument(() => {
                 const fakeDetector = {
-                    launch: () => console.log('🛡️ [BYPASS] devtoolsDetector.launch() dipanggil'),
-                    addListener: (cb) => {
-                        console.log('🛡️ [BYPASS] devtoolsDetector.addListener() dipanggil');
-                        if (typeof cb === 'function') {
-                            try { cb(false); } catch (e) {}
-                        }
-                    },
+                    launch: () => {},
+                    addListener: (cb) => { if (typeof cb === 'function') cb(false); },
                     removeListener: () => {},
                     stop: () => {},
-                    isUnlocked: true,
                     isOpen: false
                 };
-
-                // Pastikan typeof devtoolsDetector TIDAK PERNAH "undefined"
                 window.devtoolsDetector = fakeDetector;
                 try {
-                    Object.defineProperty(window, 'devtoolsDetector', {
-                        get: () => fakeDetector,
-                        set: () => {},
-                        configurable: false
-                    });
-                } catch (e) {}
-
-                // Block location.reload, location.replace, location.assign
-                const logBlock = (method) => console.log(`🛡️ [BYPASS DOM] Percobaan ${method} BERHASIL DIBLOKIR!`);
-                
-                try {
-                    window.location.reload = () => logBlock('location.reload()');
-                    window.location.replace = () => logBlock('location.replace()');
-                    window.location.assign = () => logBlock('location.assign()');
-                } catch (e) {}
-
-                try {
-                    window.history.go = () => logBlock('history.go()');
+                    window.location.reload = () => {};
+                    window.location.replace = () => {};
                 } catch (e) {}
             });
 
@@ -179,50 +162,30 @@ async function checkValidM3u8Content(page, m3u8Url) {
 
             let validM3u8Url = null;
             const interceptedCandidates = [];
-            let initialLoaded = false;
-
-            // 🛡️ LAPIS 2: PENCEGATAN JARINGAN (NETWORK REFRESH BLOCKER)
-            await page.setRequestInterception(true);
-            page.on('request', (request) => {
-                const reqUrl = request.url();
-                const isNav = request.isNavigationRequest() && request.frame() === page.mainFrame();
-
-                // Jika halaman mencoba navigasi ulang ke URL yang sama setelah load pertama -> ABORT!
-                if (initialLoaded && isNav && reqUrl.includes(item.id)) {
-                    console.log(`🛡️ [BYPASS NETWORK] Mencegah refresh otomatis ke: ${reqUrl}`);
-                    return request.abort();
-                }
-
-                request.continue();
-            });
 
             page.on('response', (response) => {
                 const url = response.url();
-                if (url.includes('.m3u8') || url.includes('/hls/')) {
-                    console.log(`  🌐 [POTENSI STREAM M3U8] -> ${url}`);
+                if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
                     interceptedCandidates.push(url);
                 }
             });
 
             try {
-                console.log(`⏳ Mengunjungi halaman ${item.embedUrl}...`);
+                console.log(`⏳ Mengunjungi ${item.embedUrl}...`);
                 await page.goto(item.embedUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-                initialLoaded = true; // Tandai bahwa navigasi awal sudah selesai
-
                 await delay(3000);
 
                 // Cek kandidat awal
                 for (const url of interceptedCandidates) {
-                    if (await checkValidM3u8Content(page, url)) {
+                    if (await checkValidM3u8Content(page, url, item.embedUrl)) {
                         validM3u8Url = url;
-                        console.log(`  🎉 M3U8 Valid Ditemukan pada Pemeriksaan Awal!`);
                         break;
                     }
                 }
 
-                // JIKA BELUM DAPAT, MICU PLAY VIA DOM & MOUSE CLICK
+                // Jika belum dapat, pemicu play
                 if (!validM3u8Url) {
-                    console.log(`⚡ M3U8 belum ditemukan. Memicu aksi PLAY pada player...`);
+                    console.log(`⚡ Memicu aksi PLAY pada player...`);
 
                     await page.evaluate(() => {
                         try {
@@ -238,19 +201,16 @@ async function checkValidM3u8Content(page, m3u8Url) {
                         } catch (e) {}
                     });
 
-                    // Klik area player
                     try {
-                        console.log(`  🖱️ Mengklik koordinat tengah player (640, 360)...`);
                         await page.mouse.click(640, 360);
                     } catch (e) {}
 
-                    // Tunggu M3U8 baru terdeteksi
-                    console.log(`⏳ Menunggu respons stream...`);
+                    console.log(`⏳ Menunggu dan memvalidasi respons stream baru...`);
                     const startWait = Date.now();
                     while (!validM3u8Url && (Date.now() - startWait) < 12000) {
                         await delay(1000);
                         for (const url of interceptedCandidates) {
-                            if (await checkValidM3u8Content(page, url)) {
+                            if (await checkValidM3u8Content(page, url, item.embedUrl)) {
                                 validM3u8Url = url;
                                 break;
                             }
@@ -259,11 +219,11 @@ async function checkValidM3u8Content(page, m3u8Url) {
                 }
 
             } catch (err) {
-                console.error(`💥 Error Navigasi Target: ${err.message}`);
+                console.error(`💥 Error Navigasi: ${err.message}`);
             }
 
             if (validM3u8Url) {
-                console.log(`✅ [BERHASIL] ID: ${item.id} -> ${validM3u8Url}`);
+                console.log(`✅ [BERHASIL VITAL] Stream Aktif Terkonfirmasi: ${validM3u8Url}`);
                 results.push({
                     id: item.id,
                     title: item.title,
@@ -278,7 +238,7 @@ async function checkValidM3u8Content(page, m3u8Url) {
                 m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
                 m3uContent += `${validM3u8Url}\n\n`;
             } else {
-                console.log(`❌ [GAGAL] M3U8 valid tidak ditemukan.`);
+                console.log(`❌ [GAGAL] Tidak ada URL stream yang lolos validasi HTTP 200 + #EXTM3U.`);
             }
 
             await page.close();
@@ -288,7 +248,7 @@ async function checkValidM3u8Content(page, m3u8Url) {
         fs.writeFileSync('output.json', JSON.stringify(results, null, 2));
         fs.writeFileSync('playlist.m3u', m3uContent);
         console.log(`\n==================================================`);
-        console.log(`🎉 Selesai! Cek file output.json & playlist.m3u`);
+        console.log(`🎉 Selesai! Hasil akhir ditulis ke output.json & playlist.m3u`);
         console.log(`==================================================\n`);
 
     } catch (error) {
