@@ -1,7 +1,7 @@
 {
   "name": "m3u8-puppeteer-crawler",
   "version": "1.0.0",
-  "description": "Stealth M3U8 Stream Crawler with Puppeteer",
+  "description": "Anti-DevTools Bypass M3U8 Stream Crawler",
   "main": "scraper.js",
   "scripts": {
     "start": "node scraper.js",
