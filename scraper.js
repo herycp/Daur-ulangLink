@@ -41,11 +41,11 @@ function normalizeInputItem(item) {
     }
 }
 
-// 🔍 VALIDASI DEEP-CHECK ISI M3U8 (Harus berisi varian stream atau segmen .ts)
+// 🔍 VALIDASI KETAT M3U8 REALTIME (Pastikan Berisi Varian/Segmen Aktif)
 async function validateStreamM3u8(page, m3u8Url, refererUrl) {
     if (!m3u8Url) return false;
 
-    console.log(`\n⚡ [CHECK M3U8] Verifikasi isi stream ke:\n   👉 ${m3u8Url}`);
+    console.log(`\n⚡ [REALTIME TEST] Menguji isi M3U8 ke:\n   👉 ${m3u8Url}`);
 
     try {
         const result = await page.evaluate(async (targetUrl, ref) => {
@@ -65,7 +65,7 @@ async function validateStreamM3u8(page, m3u8Url, refererUrl) {
                     isValid: isExtM3u && (hasMasterVariant || hasSegments),
                     hasMasterVariant,
                     hasSegments,
-                    preview: text.substring(0, 150).replace(/\r?\n|\r/g, ' ')
+                    preview: text.substring(0, 120).replace(/\r?\n|\r/g, ' ')
                 };
             } catch (err) {
                 return { status: 0, isValid: false, error: err.message, preview: '' };
@@ -76,28 +76,28 @@ async function validateStreamM3u8(page, m3u8Url, refererUrl) {
         console.log(`   📝 Snippet: "${result.preview}"`);
 
         if (result.isValid) {
-            console.log(`   ✅ [VALID STREAM] M3U8 ini berisi playlist video aktif!`);
+            console.log(`   ✅ [VALID] M3U8 ini berisi playlist video aktif!`);
             return true;
         } else {
-            console.log(`   ❌ [DITOLAK] M3U8 pancingan / tidak berisi segmen video.`);
+            console.log(`   ❌ [INVALID] M3U8 pancingan / tidak berisi segmen video.`);
             return false;
         }
     } catch (err) {
-        console.log(`   ❌ [ERROR CHECK]: ${err.message}`);
+        console.log(`   ❌ [ERROR TEST]: ${err.message}`);
         return false;
     }
 }
 
-// 🎬 SIMULASI PLAY VIDEO DI SELURUH FRAME & IFRAME
+// 🎬 TRIGGER PLAY DI SELURUH FRAME & IFRAME
 async function triggerPlayInAllFrames(page) {
     const frames = page.frames();
-    console.log(`\n🎬 [PLAYBACK SIMULATION] Mencoba memutar video di ${frames.length} frame(s)...`);
+    console.log(`\n🎬 [REALTIME PLAYBACK SIMULATION] Memicu Play di ${frames.length} frame(s)...`);
 
     for (let i = 0; i < frames.length; i++) {
         const frame = frames[i];
         try {
             await frame.evaluate(() => {
-                // 1. Mute semua elemen video agar lolos autoplay policy
+                // Mute & Play HTML5 Videos
                 const videos = document.querySelectorAll('video');
                 videos.forEach(v => {
                     v.muted = true;
@@ -105,7 +105,7 @@ async function triggerPlayInAllFrames(page) {
                     v.play().catch(() => {});
                 });
 
-                // 2. Play via JWPlayer API jika ada
+                // Play JWPlayer API
                 if (window.jwplayer && typeof window.jwplayer === 'function') {
                     try {
                         const player = window.jwplayer('player') || window.jwplayer();
@@ -113,7 +113,7 @@ async function triggerPlayInAllFrames(page) {
                     } catch (e) {}
                 }
 
-                // 3. Klik elemen-elemen tombol Play umum
+                // Klik Tombol Play
                 const selectors = [
                     'video',
                     '.jw-display-icon-container',
@@ -121,9 +121,7 @@ async function triggerPlayInAllFrames(page) {
                     '.vjs-big-play-button',
                     '.play-button',
                     '#player',
-                    '.plyr__control--overlaid',
-                    'div[class*="play"]',
-                    'div[id*="play"]'
+                    'div[class*="play"]'
                 ];
                 selectors.forEach(sel => {
                     document.querySelectorAll(sel).forEach(el => {
@@ -131,14 +129,11 @@ async function triggerPlayInAllFrames(page) {
                     });
                 });
             });
-        } catch (e) {
-            // Abaikan error jika cross-origin frame membatasi akses evaluasi langsung
-        }
+        } catch (e) {}
     }
 
-    // Klik fisik mouse di area tengah layar (pemutar video biasanya di tengah)
     try {
-        console.log(`  🖱️ Mengirimkan klik mouse fisik ke (640, 360)...`);
+        console.log(`  🖱️ Klik mouse fisik ke koordinat tengah (640, 360)...`);
         await page.mouse.click(640, 360);
     } catch (e) {}
 }
@@ -149,7 +144,7 @@ async function triggerPlayInAllFrames(page) {
 
     if (manualInput && manualInput.trim() !== '') {
         console.log(`\n==================================================`);
-        console.log(`⚡ [VIDEO CAPTURE MODE] Input Manual Diterima`);
+        console.log(`⚡ [FULL REALTIME STREAM CAPTURE] Input Manual Diterima`);
         console.log(`==================================================`);
         const rawItems = manualInput.split(',').map(s => s.trim()).filter(Boolean);
         targetList = rawItems.map(normalizeInputItem).filter(Boolean);
@@ -184,7 +179,7 @@ async function triggerPlayInAllFrames(page) {
                 '--disable-web-security',
                 '--disable-features=IsolateOrigins,site-per-process',
                 '--disable-blink-features=AutomationControlled',
-                '--autoplay-policy=no-user-gesture-required', // Izinkan autoplay video
+                '--autoplay-policy=no-user-gesture-required',
                 '--window-size=1280,720'
             ]
         });
@@ -192,7 +187,7 @@ async function triggerPlayInAllFrames(page) {
         for (let i = 0; i < targetList.length; i++) {
             const item = targetList[i];
             console.log(`\n==================================================`);
-            console.log(`🔍 [${i + 1}/${targetList.length}] MEMPROSES: ${item.embedUrl}`);
+            console.log(`🔍 [${i + 1}/${targetList.length}] MEMPROSES TARGET: ${item.embedUrl}`);
             console.log(`==================================================`);
 
             const page = await browser.newPage();
@@ -203,17 +198,75 @@ async function triggerPlayInAllFrames(page) {
             const capturedM3u8Candidates = [];
             let segmentDetected = false;
 
-            // 🛡️ 1. PENCEGATAN JARINGAN (TOLAK RELOAD OTOMATIS)
+            // 1. REALTIME LOG: OUTGOING REQUEST
             await page.setRequestInterception(true);
             page.on('request', req => {
+                const type = req.resourceType();
                 const isMainFrameNav = req.isNavigationRequest() && req.frame() === page.mainFrame();
+
                 if (initialNavCompleted && isMainFrameNav) {
+                    console.log(`  🛡️ [BYPASS JARINGAN] Memblokir reload otomatis ke: ${req.url()}`);
                     return req.abort();
                 }
+
+                if (['document', 'script', 'xhr', 'fetch', 'media'].includes(type)) {
+                    console.log(`  ➡️ [REQ] [${req.method()}] [${type}] ${req.url().substring(0, 110)}`);
+                }
+
                 req.continue();
             });
 
-            // 🛡️ 2. ANULIR ANTI-DEVTOOLS & RELOAD PROTOTYPE
+            // 2. REALTIME LOG: INCOMING RESPONSE & CANDIDATE CAPTURE
+            page.on('response', async res => {
+                const url = res.url();
+                const status = res.status();
+                const type = res.request().resourceType();
+
+                if (['document', 'script', 'xhr', 'fetch', 'media'].includes(type)) {
+                    console.log(`  ⬅️ [RES ${status}] [${type}] ${url.substring(0, 110)}`);
+                }
+
+                // DETEKSI SEGMEN VIDEO DIPUTAR REALTIME
+                if (url.includes('.ts') || url.includes('.m4s') || url.includes('/segment')) {
+                    if (!segmentDetected) {
+                        console.log(`\n  🔥 [STREAMING ACTIVE] Terdeteksi segmen .ts diputar secara realtime!`);
+                        segmentDetected = true;
+                    }
+                }
+
+                // DETEKSI KANDIDAT M3U8
+                if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
+                    console.log(`     🎯 [CANDIDATE M3U8 DETECTED]: ${url}`);
+                    if (!capturedM3u8Candidates.includes(url)) {
+                        capturedM3u8Candidates.push(url);
+                    }
+                }
+
+                // CETAK ISI PAYLOAD XHR/FETCH REALTIME
+                if ((type === 'xhr' || type === 'fetch') && !url.endsWith('.js') && !url.endsWith('.css')) {
+                    try {
+                        const text = await res.text();
+                        if (text && text.length > 0) {
+                            console.log(`     📦 [XHR PAYLOAD]: ${text.substring(0, 130).replace(/\r?\n|\r/g, ' ')}`);
+                        }
+                    } catch (e) {}
+                }
+            });
+
+            // 3. REALTIME LOG: BROWSER CONSOLE
+            page.on('console', msg => {
+                console.log(`  🖥️ [BROWSER ${msg.type().toUpperCase()}] ${msg.text()}`);
+            });
+
+            // 4. REALTIME LOG: FAILED REQUESTS
+            page.on('requestfailed', req => {
+                const type = req.resourceType();
+                if (['document', 'script', 'xhr', 'fetch', 'media'].includes(type)) {
+                    console.log(`  💥 [FAIL] [${req.failure() ? req.failure().errorText : 'UNKNOWN'}] ${req.url().substring(0, 110)}`);
+                }
+            });
+
+            // ANTI-DEVTOOLS & ANTI-RELOAD INJECTION
             await page.evaluateOnNewDocument(() => {
                 const nativeFunction = window.Function;
                 window.Function = function (...args) {
@@ -229,34 +282,6 @@ async function triggerPlayInAllFrames(page) {
                     Location.prototype.replace = function() {};
                     Location.prototype.assign = function() {};
                 } catch(e) {}
-            });
-
-            // 🎥 LISTEN REQUEST REALTIME (TANGKAP M3U8 & TS SEGMENTS)
-            page.on('response', async res => {
-                const url = res.url();
-                const status = res.status();
-                const type = res.request().resourceType();
-
-                // Log aktivitas XHR/Fetch/Media
-                if (['xhr', 'fetch', 'media'].includes(type)) {
-                    console.log(`  ⬅️ [RES ${status}] [${type}] ${url.substring(0, 110)}`);
-                }
-
-                // Tangkap jika ada segmen video berputar (.ts / .m4s)
-                if (url.includes('.ts') || url.includes('.m4s') || url.includes('/segment')) {
-                    if (!segmentDetected) {
-                        console.log(`\n  🔥 [STREAMING ACTIVE] Terdeteksi segmen video diputar secara realtime!`);
-                        segmentDetected = true;
-                    }
-                }
-
-                // Tangkap kandidat M3U8
-                if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
-                    console.log(`     🎯 [CANDIDATE M3U8 CAPTURED]: ${url}`);
-                    if (!capturedM3u8Candidates.includes(url)) {
-                        capturedM3u8Candidates.push(url);
-                    }
-                }
             });
 
             await page.setExtraHTTPHeaders({
@@ -279,15 +304,13 @@ async function triggerPlayInAllFrames(page) {
 
                 // SIMULASI PLAY TAHAP 2 (Jika belum berputar)
                 if (!segmentDetected) {
-                    console.log(`⚡ Mengulangi pemicu play tahap 2...`);
+                    console.log(`⚡ Mengulangi trigger play tahap 2...`);
                     await triggerPlayInAllFrames(page);
                     await delay(4000);
                 }
 
-                // VERIFIKASI SEMUA KANDIDAT M3U8 YANG DITANGKAP
-                console.log(`\n🔍 Memeriksa ${capturedM3u8Candidates.length} kandidat M3U8 yang tertangkap...`);
-                
-                // Urutkan dari yang terbaru tertangkap (reverse)
+                // VERIFIKASI SEMUA KANDIDAT M3U8 TERLATEST DULU
+                console.log(`\n🔍 Melakukan verifikasi realtime pada ${capturedM3u8Candidates.length} kandidat M3U8...`);
                 const candidatesToTest = [...capturedM3u8Candidates].reverse();
 
                 for (const candidateUrl of candidatesToTest) {
