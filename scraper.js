@@ -33,7 +33,6 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-// 🔍 EKSTRAKSI TANPA BATAS (Mengambil SELURUH link pulvexa di semua properti)
 function extractPulvexaTargets(data, parentContext = {}) {
     let results = [];
     if (!data) return results;
@@ -64,21 +63,28 @@ function extractPulvexaTargets(data, parentContext = {}) {
             image: data.image || data.poster || data.thumbnail || parentContext.image
         };
 
-        // Rekursi & ambil SELURUH properti string yang mengandung pulvexa
+        const objectUrls = [];
         for (const [key, val] of Object.entries(data)) {
-            if (typeof val === 'string') {
-                const trimmed = val.trim();
-                if ((trimmed.startsWith('http://') || trimmed.startsWith('https://')) && trimmed.toLowerCase().includes('pulvexa')) {
-                    results.push({
-                        ...data,
-                        title: context.title,
-                        season: context.season,
-                        episode: context.episode,
-                        image: context.image,
-                        embed_url: trimmed
-                    });
-                }
-            } else if (typeof val === 'object' && val !== null) {
+            if (typeof val === 'string' && (val.startsWith('http://') || val.startsWith('https://'))) {
+                objectUrls.push(val.trim());
+            }
+        }
+
+        const pulvexaUrl = objectUrls.find(u => u.toLowerCase().includes('pulvexa'));
+
+        if (pulvexaUrl) {
+            results.push({
+                ...data,
+                title: context.title,
+                season: context.season,
+                episode: context.episode,
+                image: context.image,
+                embed_url: pulvexaUrl
+            });
+        }
+
+        for (const [key, val] of Object.entries(data)) {
+            if (typeof val === 'object' && val !== null) {
                 results = results.concat(extractPulvexaTargets(val, context));
             }
         }
@@ -118,6 +124,8 @@ function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
 async function fetchAndProcessM3u8(page, m3u8Url) {
     if (!m3u8Url) return null;
 
+    console.log(`  ⚡ Testing M3U8 Candidate:\n     👉 ${m3u8Url}`);
+
     try {
         const result = await page.evaluate(async (targetUrl, ref, orig) => {
             try {
@@ -141,14 +149,19 @@ async function fetchAndProcessM3u8(page, m3u8Url) {
         }, m3u8Url, PARENT_REFERER, PARENT_ORIGIN);
 
         if (result.status === 200 && result.isExtM3u) {
+            console.log(`   ✅ [VALID M3U8] Berhasil mengunduh isi file.`);
             return convertM3u8ToAbsolute(result.rawText, m3u8Url);
+        } else {
+            console.log(`   ❌ [INVALID] Status: ${result.status} / Bukan Format EXTM3U`);
+            return null;
         }
-        return null;
     } catch (err) {
+        console.log(`   ❌ [FETCH ERROR]: ${err.message}`);
         return null;
     }
 }
 
+// 🎬 Pemicu Play Agresif
 async function triggerPlayInAllFrames(page) {
     const frames = page.frames();
     for (let i = 0; i < frames.length; i++) {
@@ -246,7 +259,7 @@ async function fetchRemoteDatabase() {
     const currentResults = [...existingResults];
 
     try {
-        console.log('\n🚀 Membuka Puppeteer Browser (Real-Time Intercept Mode)...');
+        console.log('\n🚀 Membuka Puppeteer Browser (Dengan Stealth & Anti-DevTool Bypass)...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -254,7 +267,7 @@ async function fetchRemoteDatabase() {
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-web-security',
-                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-features=IsolateOrigins,site-per-process,DisableThirdPartySessionStoragePartitioning',
                 '--disable-blink-features=AutomationControlled',
                 '--autoplay-policy=no-user-gesture-required',
                 '--window-size=1280,720'
@@ -276,8 +289,14 @@ async function fetchRemoteDatabase() {
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
+            // 🛡️ INJEKSI ANTI-DEVTOOL & ANTI-HEADLESS DARI SEBELUMNYA
             await page.evaluateOnNewDocument(() => {
+                // 1. Samarkan Navigator
                 Object.defineProperty(navigator, 'webdriver', { get: () => false });
+                Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en', 'id'] });
+                Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+
+                // 2. Bypass Anti-Debugging & Loop Debugger
                 const nativeFunction = Function;
                 window.Function = function (...args) {
                     if (args.some(arg => typeof arg === 'string' && arg.includes('debugger'))) {
@@ -286,8 +305,50 @@ async function fetchRemoteDatabase() {
                     return nativeFunction.apply(this, args);
                 };
                 window.Function.prototype = nativeFunction.prototype;
+
+                // 3. Netralkan Console Trap
+                const dummy = () => {};
+                ['log', 'debug', 'info', 'warn', 'error', 'table', 'clear'].forEach(m => {
+                    try { window.console[m] = dummy; } catch (e) {}
+                });
+
+                // 4. Cegah Sebelum Unload Trap
+                window.addEventListener('beforeunload', (e) => {
+                    e.stopImmediatePropagation();
+                }, true);
             });
 
+            const capturedM3u8Candidates = [];
+
+            // 📡 PENANGKAP M3U8 DARI RESPONSE NETWORK & XHR
+            page.on('response', async res => {
+                const url = res.url();
+                
+                if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
+                    console.log(`  🎯 [M3U8 DETECTED]: ${url}`);
+                    if (!capturedM3u8Candidates.includes(url)) {
+                        capturedM3u8Candidates.push(url);
+                    }
+                } else if (res.request().resourceType() === 'xhr' || res.request().resourceType() === 'fetch') {
+                    try {
+                        const contentType = res.headers()['content-type'] || '';
+                        if (contentType.includes('json') || contentType.includes('javascript') || contentType.includes('text')) {
+                            const text = await res.text();
+                            const matches = text.match(/https?:\/\/[^\s"',]+\.m3u8[^\s"',]*/g);
+                            if (matches) {
+                                matches.forEach(mUrl => {
+                                    console.log(`  🎯 [M3U8 IN PAYLOAD]: ${mUrl}`);
+                                    if (!capturedM3u8Candidates.includes(mUrl)) {
+                                        capturedM3u8Candidates.push(mUrl);
+                                    }
+                                });
+                            }
+                        }
+                    } catch (e) {}
+                }
+            });
+
+            // 🌐 SET REFERER KUNCI PERMANEN KE 9tsu.in
             await page.setExtraHTTPHeaders({
                 'Accept-Language': 'en-US,en;q=0.9,id;q=0.8',
                 'Referer': PARENT_REFERER,
@@ -295,67 +356,29 @@ async function fetchRemoteDatabase() {
             });
 
             let m3u8SuccessSaved = false;
-            let resolveSuccess;
-            const successPromise = new Promise((resolve) => { resolveSuccess = resolve; });
-            const testedCandidates = new Set();
 
-            // ⚡ REAL-TIME NETWORK INTERCEPTOR (Verifikasi Langsung Saat Request Terjadi)
-            page.on('response', async res => {
-                if (m3u8SuccessSaved) return;
+            try {
+                console.log(`⏳ Membuka halaman embed dengan Referer (${PARENT_REFERER})...`);
+                await page.goto(embedUrl, { waitUntil: 'domcontentloaded', timeout: 35000 });
 
-                const rawUrl = res.url();
-                let candidateUrls = [];
+                await delay(2000);
+                await triggerPlayInAllFrames(page);
+                await delay(3000);
+                await triggerPlayInAllFrames(page);
+                await delay(3000);
 
-                // A. Tangkap langsung M3U8 Asli (Abaikan domain telemetry jwpltx)
-                if ((rawUrl.includes('.m3u8') || rawUrl.includes('/playlist/') || rawUrl.includes('/hls/')) && !rawUrl.includes('jwpltx.com')) {
-                    candidateUrls.push(rawUrl);
-                }
+                const candidatesToTest = [...capturedM3u8Candidates].reverse();
 
-                // B. Jika Telemetry JWPlayer (ping.gif), ekstrak URL M3U8 asli dari query param 'mu='
-                if (rawUrl.includes('jwpltx.com') && rawUrl.includes('.m3u8')) {
-                    try {
-                        const parsed = new URL(rawUrl);
-                        const mu = parsed.searchParams.get('mu');
-                        if (mu && mu.includes('.m3u8')) {
-                            candidateUrls.push(decodeURIComponent(mu));
-                        }
-                    } catch (e) {}
-                }
-
-                // C. Tangkap dari XHR/Fetch Payload JSON
-                if (candidateUrls.length === 0 && (res.request().resourceType() === 'xhr' || res.request().resourceType() === 'fetch')) {
-                    try {
-                        const contentType = res.headers()['content-type'] || '';
-                        if (contentType.includes('json') || contentType.includes('javascript') || contentType.includes('text')) {
-                            const text = await res.text();
-                            const matches = text.match(/https?:\/\/[^\s"',]+\.m3u8[^\s"',]*/g);
-                            if (matches) {
-                                matches.forEach(mUrl => candidateUrls.push(mUrl));
-                            }
-                        }
-                    } catch (e) {}
-                }
-
-                // 🚀 TES KANDIDAT SECARA REALTME KETIKA DITEMUKAN
-                for (const candidateUrl of candidateUrls) {
-                    if (m3u8SuccessSaved || testedCandidates.has(candidateUrl)) continue;
-                    testedCandidates.add(candidateUrl);
-
-                    console.log(`  🎯 [M3U8 DETECTED]: ${candidateUrl}`);
-                    console.log(`  ⚡ Testing M3U8 Candidate langsung...`);
-
+                for (const candidateUrl of candidatesToTest) {
                     const downloadedText = await fetchAndProcessM3u8(page, candidateUrl);
 
-                    if (downloadedText && !m3u8SuccessSaved) {
-                        m3u8SuccessSaved = true;
-
+                    if (downloadedText) {
                         const fileName = `${itemId}_stream.m3u8`;
                         const filePath = path.join(STREAMS_DIR, fileName);
                         const relativePath = `streams/${fileName}`;
 
                         fs.writeFileSync(filePath, downloadedText);
-                        console.log(`   ✅ [VALID M3U8] Berhasil mengunduh isi file.`);
-                        console.log(`💾 [M3U8 SUKSES & LANGSUNG DISIMPAN] -> ${relativePath}`);
+                        console.log(`\n💾 [M3U8 SUKSES] Saved -> ${relativePath}`);
 
                         currentResults.push({
                             ...item,
@@ -370,36 +393,10 @@ async function fetchRemoteDatabase() {
                         fs.writeFileSync(PROGRESS_FILE, JSON.stringify(processedIds, null, 2));
                         fs.writeFileSync(OUTPUT_FILE, JSON.stringify(currentResults, null, 2));
 
-                        // Selesai! Lepas promise agar halaman langsung ditutup
-                        resolveSuccess(true);
+                        m3u8SuccessSaved = true;
                         break;
-                    } else {
-                        console.log(`   ❌ [INVALID] Bukan format M3U8 valid.`);
                     }
                 }
-            });
-
-            try {
-                console.log(`⏳ Membuka halaman embed dengan Referer (${PARENT_REFERER})...`);
-                
-                const navigateAndPlay = async () => {
-                    await page.goto(embedUrl, { waitUntil: 'domcontentloaded', timeout: 35000 });
-                    if (m3u8SuccessSaved) return;
-                    await delay(1500);
-                    if (m3u8SuccessSaved) return;
-                    await triggerPlayInAllFrames(page);
-                    await delay(2500);
-                    if (m3u8SuccessSaved) return;
-                    await triggerPlayInAllFrames(page);
-                    await delay(2500);
-                };
-
-                // Balapan: Mana yang lebih dulu antara M3U8 ditemukan ATAU Navigasi Selesai (Timeout 35s)
-                await Promise.race([
-                    navigateAndPlay(),
-                    successPromise,
-                    delay(35000)
-                ]);
 
             } catch (err) {
                 console.error(`💥 Navigation Error: ${err.message}`);
@@ -410,7 +407,7 @@ async function fetchRemoteDatabase() {
             }
 
             await page.close();
-            await delay(500);
+            await delay(1000);
         }
 
         // REGENERATE PLAYLIST.M3U
