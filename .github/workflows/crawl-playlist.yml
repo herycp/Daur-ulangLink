@@ -1,42 +1,57 @@
-name: Automated M3U8 Batch Crawler
+name: Auto Scrape M3U8 Streams
 
 on:
   schedule:
-    # Jalan otomatis setiap 4 jam sekali
-    - cron: '0 */4 * * *'
-  
+    # Dijalankan otomatis setiap 6 jam sekali (sesuaikan cron jika ingin)
+    - cron: '0 */6 * * *'
+  # Memungkinkan pemicuan manual langsung dari tombol di tab Actions GitHub
   workflow_dispatch:
-    inputs:
-      manual_ids:
-        description: 'Masukkan Full Embed URL / ID (pisahkan koma jika > 1, atau kosongkan untuk pakai database.json)'
-        required: false
-        default: ''
+
+# ⚠️ SANGAT PENTING: Memberikan izin akses WRITE agar bot bisa melakukan push commit file
+permissions:
+  contents: write
 
 jobs:
-  crawl:
+  scrape-and-save:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout repositori ke runner
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # 2. Setup environment Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
+          cache: 'npm'
 
-      # CARA 1: Hapus package-lock.json lalu jalankan npm install dari nol
+      # 3. Install NPM package (Puppeteer, Stealth, dll)
       - name: Install Dependencies
         run: |
-          rm -f package-lock.json
-          npm install
+          npm ci || npm install
 
-      - name: Run Crawler Engine
-        run: node scraper.js "${{ github.event.inputs.manual_ids }}"
+      # 4. Jalankan skrip scraper.js
+      - name: Run Scraper Script
+        run: |
+          node scraper.js
 
-      - name: Commit and Push Results
+      # 5. Commit dan Push folder streams/ beserta output.json & playlist.m3u
+      - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add output.json playlist.m3u package-lock.json || true
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update stream playlist database [skip ci]" && git push)
+          
+          # Menambahkan folder streams dan file output
+          git add streams/ output.json playlist.m3u
+          
+          # Hanya lakukan commit jika ada perubahan file
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: auto-update M3U8 streams and playlist [skip ci]"
+            git push
+          else
+            echo "Tdk ada perubahan file, melewati proses commit."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
