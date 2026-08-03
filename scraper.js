@@ -22,7 +22,7 @@ const PROGRESS_FILE = path.join(__dirname, 'progress.json');
 const OUTPUT_FILE = path.join(__dirname, 'output.json');
 const PLAYLIST_FILE = path.join(__dirname, 'playlist.m3u');
 
-// 🛡️ INISIALISASI FILE & FOLDER (Mencegah Error Git Add)
+// 🛡️ INISIALISASI FILE & FOLDER (Mencegah Error)
 if (!fs.existsSync(STREAMS_DIR)) fs.mkdirSync(STREAMS_DIR, { recursive: true });
 if (!fs.existsSync(PROGRESS_FILE)) fs.writeFileSync(PROGRESS_FILE, '[]');
 if (!fs.existsSync(OUTPUT_FILE)) fs.writeFileSync(OUTPUT_FILE, '[]');
@@ -31,32 +31,53 @@ if (!fs.existsSync(PLAYLIST_FILE)) fs.writeFileSync(PLAYLIST_FILE, '#EXTM3U\n\n'
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // ============================================================================
-// 🛠️ HELPER FUNCTIONS
+// 🛠️ HELPER FUNCTIONS (PENYEMPURNAAN EKSTRAKSI & DIAGNOSTIK)
 // ============================================================================
 
-// 🔍 PENCARIAN REKURSIF TARGET PULVEXA.SITE DALAM STRUKTUR JSON APAPUN
+// 🔍 PENCARIAN REKURSIF FLEXIBLE (Mendukung String, Array, & Object)
 function extractPulvexaTargets(data, parentContext = {}) {
     let results = [];
     if (!data) return results;
 
-    if (Array.isArray(data)) {
-        for (const item of data) {
-            results = results.concat(extractPulvexaTargets(item, parentContext));
+    // 1. Jika elemen adalah String URL langsung
+    if (typeof data === 'string') {
+        const trimmed = data.trim();
+        if ((trimmed.startsWith('http://') || trimmed.startsWith('https://')) && trimmed.toLowerCase().includes('pulvexa')) {
+            results.push({
+                title: parentContext.title || 'Video',
+                season: parentContext.season,
+                episode: parentContext.episode,
+                image: parentContext.image,
+                embed_url: trimmed
+            });
         }
-    } else if (typeof data === 'object') {
+        return results;
+    }
+
+    // 2. Jika elemen adalah Array
+    if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            results = results.concat(extractPulvexaTargets(data[i], parentContext));
+        }
+    } 
+    // 3. Jika elemen adalah Object
+    else if (typeof data === 'object') {
         const context = {
             title: data.title || data.name || parentContext.title || 'Video',
             season: data.season || parentContext.season,
             episode: data.episode || parentContext.episode,
-            image: data.image || data.poster || parentContext.image
+            image: data.image || data.poster || data.thumbnail || parentContext.image
         };
 
-        // Cek semua kemungkinan kunci nama property link
-        const possibleUrls = [
-            data.embed_url, data.url, data.link, data.embed, data.src, data.file, data.stream_url
-        ].filter(u => typeof u === 'string');
+        // Kumpulkan semua string yang merupakan URL di object ini
+        const objectUrls = [];
+        for (const [key, val] of Object.entries(data)) {
+            if (typeof val === 'string' && (val.startsWith('http://') || val.startsWith('https://'))) {
+                objectUrls.push(val.trim());
+            }
+        }
 
-        const pulvexaUrl = possibleUrls.find(u => u.includes('pulvexa.site'));
+        const pulvexaUrl = objectUrls.find(u => u.toLowerCase().includes('pulvexa'));
 
         if (pulvexaUrl) {
             results.push({
@@ -69,10 +90,10 @@ function extractPulvexaTargets(data, parentContext = {}) {
             });
         }
 
-        // Ekstraksi mendalam jika ada array/object anak (nesting)
-        for (const key of Object.keys(data)) {
-            if (typeof data[key] === 'object' && data[key] !== null) {
-                results = results.concat(extractPulvexaTargets(data[key], context));
+        // Cari lebih dalam di properti anak
+        for (const [key, val] of Object.entries(data)) {
+            if (typeof val === 'object' && val !== null) {
+                results = results.concat(extractPulvexaTargets(val, context));
             }
         }
     }
@@ -80,20 +101,56 @@ function extractPulvexaTargets(data, parentContext = {}) {
     return results;
 }
 
-// 🆔 Ekstraksi / Generate ID Unik
-function extractItemId(item) {
+// 🆔 GENERASI ID UNIK BEBAS BENTROK (Memakai Hash Base64 dari URL)
+function extractItemId(item, index = 0) {
     if (item.id) return String(item.id);
 
     if (item.embed_url) {
-        const parts = item.embed_url.split('/').filter(Boolean);
-        const lastPart = parts[parts.length - 1];
-        if (lastPart && /^[a-zA-Z0-9_-]+$/.test(lastPart)) {
-            return lastPart;
-        }
+        try {
+            const urlHash = Buffer.from(item.embed_url).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(-12);
+            const titleClean = (item.title || 'video').replace(/[^a-zA-Z0-9]/g, '_');
+            return `${titleClean}_${urlHash}`;
+        } catch (e) {}
     }
 
     const titleClean = (item.title || 'video').replace(/[^a-zA-Z0-9]/g, '_');
-    return `${titleClean}_s${item.season || 1}e${item.episode || 1}`;
+    return `${titleClean}_s${item.season || 1}e${item.episode || 1}_idx${index}`;
+}
+
+// 🕵️ FITUR DIAGNOSTIK JIKA DITEMUKAN 0 TARGET
+function analyzeAndLogDatabaseStructure(rawJsonData) {
+    console.log(`\n==================================================`);
+    console.log(`🔎 [DIAGNOSTIK FILE LINKS.JSON]`);
+    console.log(`==================================================`);
+
+    const jsonStr = JSON.stringify(rawJsonData);
+    const urlRegex = /https?:\/\/[^\s"',]+/g;
+    const allUrls = jsonStr.match(urlRegex) || [];
+
+    console.log(`📌 Tipe Data Utama  : ${Array.isArray(rawJsonData) ? 'Array' : typeof rawJsonData}`);
+    console.log(`📌 Total URL Dibaca : ${allUrls.length} link ditemukan di dalam file.`);
+
+    const domains = new Set();
+    allUrls.forEach(u => {
+        try {
+            const hostname = new URL(u).hostname;
+            domains.add(hostname);
+        } catch (e) {}
+    });
+
+    console.log(`\n🌐 Daftar Domain yang Terdeteksi di Dalam links.json:`);
+    if (domains.size === 0) {
+        console.log(`   ❌ Tidak ada URL berformat http/https ditemukan dalam file.`);
+    } else {
+        Array.from(domains).forEach(d => {
+            const count = allUrls.filter(u => u.includes(d)).length;
+            console.log(`   - ${d} (${count} link)`);
+        });
+    }
+
+    console.log(`\n📄 Sampel Struktur Isi File links.json (200 karakter pertama):`);
+    console.log(`   ${jsonStr.slice(0, 200)}...`);
+    console.log(`==================================================\n`);
 }
 
 // 🔄 Konversi M3U8 Relatif ke Absolut
@@ -216,15 +273,16 @@ async function fetchRemoteDatabase() {
         process.exit(1);
     }
 
-    // Ekstraksi target pulvexa.site secara rekursif dari struktur JSON
+    // Ekstraksi target pulvexa secara fleksibel
     const allPulvexaItems = extractPulvexaTargets(rawJsonData);
     
     // Filter item yang belum diproses & hilangkan duplikasi ID
     const uniqueTargets = [];
     const seenIds = new Set();
 
-    for (const item of allPulvexaItems) {
-        const itemId = extractItemId(item);
+    for (let i = 0; i < allPulvexaItems.length; i++) {
+        const item = allPulvexaItems[i];
+        const itemId = extractItemId(item, i);
         if (!seenIds.has(itemId) && !processedIds.includes(itemId)) {
             seenIds.add(itemId);
             uniqueTargets.push(item);
@@ -233,8 +291,13 @@ async function fetchRemoteDatabase() {
 
     console.log(`🔍 Total target pulvexa.site baru ditemukan: ${uniqueTargets.length}`);
 
+    // JIKA TIDAK DITEMUKAN TARGET, JALANKAN DIAGNOSTIK
     if (uniqueTargets.length === 0) {
-        console.log(`🎉 Tidak ada target pulvexa.site baru yang perlu diproses.`);
+        analyzeAndLogDatabaseStructure(rawJsonData);
+        if (processedIds.length > 0) {
+            console.log(`💡 Catatan: ${allPulvexaItems.length} target terdeteksi di JSON, tetapi semuanya sudah tercatat di progress.json.`);
+            console.log(`   Jika ingin memproses ulang dari awal, hapus/kosongkan isi file progress.json.`);
+        }
         process.exit(0);
     }
 
@@ -264,7 +327,7 @@ async function fetchRemoteDatabase() {
         for (let i = 0; i < batchList.length; i++) {
             const item = batchList[i];
             const embedUrl = item.embed_url;
-            const itemId = extractItemId(item);
+            const itemId = extractItemId(item, i);
             const titleSeasonEp = `${item.title || 'Video'}${item.season ? ' S' + item.season : ''}${item.episode ? 'E' + item.episode : ''}`;
 
             console.log(`\n==================================================`);
