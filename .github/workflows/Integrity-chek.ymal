@@ -1,0 +1,37 @@
+name: Database Integrity Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Berjalan otomatis setiap hari pada jam 00:00 UTC
+
+jobs:
+  check-and-update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Integrity Script
+        env:
+          INPUT_JSON_URL: 'https://github.com/herycp/Pengepul-link/raw/refs/heads/main/links.json'
+          REMOTE_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node check-integrity.js
+
+      - name: Commit and Push README Updates
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "Tidak ada perubahan pada README.md."
+          else
+            git commit -m "chore: update database integrity report in README [skip ci]"
+            git push
+          fi
