@@ -10,6 +10,10 @@ puppeteer.use(StealthPlugin());
 // ============================================================================
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
+// 🌐 REFERER UTAMA (WAJIB 9tsu.in agar server Pulvexa mau melepas M3U8)
+const PARENT_REFERER = process.env.PARENT_REFERER || 'https://9tsu.in/';
+const PARENT_ORIGIN = 'https://9tsu.in';
+
 const INPUT_JSON_URL = process.env.INPUT_JSON_URL || 'https://github.com/herycp/Pengepul-link/raw/refs/heads/main/links.json';
 const BATCH_LIMIT = parseInt(process.env.BATCH_LIMIT, 10) || 50;
 
@@ -117,17 +121,21 @@ function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
     }).join('\n');
 }
 
-async function fetchAndProcessM3u8(page, m3u8Url, refererUrl) {
+async function fetchAndProcessM3u8(page, m3u8Url) {
     if (!m3u8Url) return null;
 
     console.log(`  ⚡ Testing M3U8 Candidate:\n     👉 ${m3u8Url}`);
 
     try {
-        const result = await page.evaluate(async (targetUrl, ref) => {
+        const result = await page.evaluate(async (targetUrl, ref, orig) => {
             try {
                 const res = await fetch(targetUrl, {
                     method: 'GET',
-                    headers: { 'Referer': ref, 'Accept': '*/*' }
+                    headers: { 
+                        'Referer': ref, 
+                        'Origin': orig,
+                        'Accept': '*/*' 
+                    }
                 });
                 const text = await res.text();
                 return {
@@ -138,7 +146,7 @@ async function fetchAndProcessM3u8(page, m3u8Url, refererUrl) {
             } catch (err) {
                 return { status: 0, rawText: '', isExtM3u: false, error: err.message };
             }
-        }, m3u8Url, refererUrl);
+        }, m3u8Url, PARENT_REFERER, PARENT_ORIGIN);
 
         if (result.status === 200 && result.isExtM3u) {
             console.log(`   ✅ [VALID M3U8] Berhasil mengunduh isi file.`);
@@ -153,14 +161,13 @@ async function fetchAndProcessM3u8(page, m3u8Url, refererUrl) {
     }
 }
 
-// 🎬 Pemicu Play Lebih Agresif di Seluruh Frame & Canvas
+// 🎬 Pemicu Play Agresif
 async function triggerPlayInAllFrames(page) {
     const frames = page.frames();
     for (let i = 0; i < frames.length; i++) {
         const frame = frames[i];
         try {
             await frame.evaluate(() => {
-                // 1. Play video elements
                 const videos = document.querySelectorAll('video');
                 videos.forEach(v => {
                     v.muted = true;
@@ -168,7 +175,6 @@ async function triggerPlayInAllFrames(page) {
                     v.play().catch(() => {});
                 });
 
-                // 2. Play JWPlayer / VideoJS
                 if (window.jwplayer && typeof window.jwplayer === 'function') {
                     try {
                         const player = window.jwplayer('player') || window.jwplayer();
@@ -176,11 +182,10 @@ async function triggerPlayInAllFrames(page) {
                     } catch (e) {}
                 }
 
-                // 3. Simulasi Klik Tombol Play
                 const selectors = [
                     'video', '.jw-display-icon-container', '.vjs-big-play-button', 
                     '#player', 'div[class*="play"]', 'button[class*="play"]',
-                    '.play-button', '#play'
+                    '.play-button', '#play', '#play-btn', '.plyr__control--overlaid'
                 ];
                 selectors.forEach(sel => {
                     document.querySelectorAll(sel).forEach(el => {
@@ -191,9 +196,7 @@ async function triggerPlayInAllFrames(page) {
         } catch (e) {}
     }
 
-    // Klik Tengah Layar
     try {
-        await page.mouse.click(640, 360);
         await page.mouse.click(640, 360);
     } catch (e) {}
 }
@@ -256,7 +259,7 @@ async function fetchRemoteDatabase() {
     const currentResults = [...existingResults];
 
     try {
-        console.log('\n🚀 Membuka Puppeteer Browser...');
+        console.log('\n🚀 Membuka Puppeteer Browser (Dengan Stealth & Anti-DevTool Bypass)...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -264,7 +267,7 @@ async function fetchRemoteDatabase() {
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-web-security',
-                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-features=IsolateOrigins,site-per-process,DisableThirdPartySessionStoragePartitioning',
                 '--disable-blink-features=AutomationControlled',
                 '--autoplay-policy=no-user-gesture-required',
                 '--window-size=1280,720'
@@ -286,29 +289,55 @@ async function fetchRemoteDatabase() {
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
+            // 🛡️ INJEKSI ANTI-DEVTOOL & ANTI-HEADLESS DARI SEBELUMNYA
+            await page.evaluateOnNewDocument(() => {
+                // 1. Samarkan Navigator
+                Object.defineProperty(navigator, 'webdriver', { get: () => false });
+                Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en', 'id'] });
+                Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+
+                // 2. Bypass Anti-Debugging & Loop Debugger
+                const nativeFunction = Function;
+                window.Function = function (...args) {
+                    if (args.some(arg => typeof arg === 'string' && arg.includes('debugger'))) {
+                        return () => {};
+                    }
+                    return nativeFunction.apply(this, args);
+                };
+                window.Function.prototype = nativeFunction.prototype;
+
+                // 3. Netralkan Console Trap
+                const dummy = () => {};
+                ['log', 'debug', 'info', 'warn', 'error', 'table', 'clear'].forEach(m => {
+                    try { window.console[m] = dummy; } catch (e) {}
+                });
+
+                // 4. Cegah Sebelum Unload Trap
+                window.addEventListener('beforeunload', (e) => {
+                    e.stopImmediatePropagation();
+                }, true);
+            });
+
             const capturedM3u8Candidates = [];
 
-            // PENANGKAP M3U8 & RESPONSE JSON DENGAN LINK M3U8
+            // 📡 PENANGKAP M3U8 DARI RESPONSE NETWORK & XHR
             page.on('response', async res => {
                 const url = res.url();
                 
-                // 1. Tangkap langsung dari URL
                 if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
-                    console.log(`  🎯 [M3U8 URL DETECTED]: ${url}`);
+                    console.log(`  🎯 [M3U8 DETECTED]: ${url}`);
                     if (!capturedM3u8Candidates.includes(url)) {
                         capturedM3u8Candidates.push(url);
                     }
-                } 
-                // 2. Tangkap jika API mengembalikan payload JSON berisi M3U8
-                else if (res.request().resourceType() === 'xhr' || res.request().resourceType() === 'fetch') {
+                } else if (res.request().resourceType() === 'xhr' || res.request().resourceType() === 'fetch') {
                     try {
                         const contentType = res.headers()['content-type'] || '';
                         if (contentType.includes('json') || contentType.includes('javascript') || contentType.includes('text')) {
                             const text = await res.text();
-                            const m3u8Matches = text.match(/https?:\/\/[^\s"',]+\.m3u8[^\s"',]*/g);
-                            if (m3u8Matches) {
-                                m3u8Matches.forEach(mUrl => {
-                                    console.log(`  🎯 [M3U8 IN RESPONSE PAYLOAD]: ${mUrl}`);
+                            const matches = text.match(/https?:\/\/[^\s"',]+\.m3u8[^\s"',]*/g);
+                            if (matches) {
+                                matches.forEach(mUrl => {
+                                    console.log(`  🎯 [M3U8 IN PAYLOAD]: ${mUrl}`);
                                     if (!capturedM3u8Candidates.includes(mUrl)) {
                                         capturedM3u8Candidates.push(mUrl);
                                     }
@@ -319,23 +348,18 @@ async function fetchRemoteDatabase() {
                 }
             });
 
-            // 🌐 SET REFERER DINAMIS SESUAI DOMAIN EMBED
-            let embedOrigin = 'https://pulvexa.space/';
-            try {
-                embedOrigin = new URL(embedUrl).origin + '/';
-            } catch (e) {}
-
+            // 🌐 SET REFERER KUNCI PERMANEN KE 9tsu.in
             await page.setExtraHTTPHeaders({
                 'Accept-Language': 'en-US,en;q=0.9,id;q=0.8',
-                'Referer': embedOrigin,
-                'Origin': embedOrigin.replace(/\/$/, '')
+                'Referer': PARENT_REFERER,
+                'Origin': PARENT_ORIGIN
             });
 
             let m3u8SuccessSaved = false;
 
             try {
-                console.log(`⏳ Membuka halaman embed...`);
-                await page.goto(embedUrl, { waitUntil: 'networkidle2', timeout: 35000 });
+                console.log(`⏳ Membuka halaman embed dengan Referer (${PARENT_REFERER})...`);
+                await page.goto(embedUrl, { waitUntil: 'domcontentloaded', timeout: 35000 });
 
                 await delay(2000);
                 await triggerPlayInAllFrames(page);
@@ -346,7 +370,7 @@ async function fetchRemoteDatabase() {
                 const candidatesToTest = [...capturedM3u8Candidates].reverse();
 
                 for (const candidateUrl of candidatesToTest) {
-                    const downloadedText = await fetchAndProcessM3u8(page, candidateUrl, embedUrl);
+                    const downloadedText = await fetchAndProcessM3u8(page, candidateUrl);
 
                     if (downloadedText) {
                         const fileName = `${itemId}_stream.m3u8`;
@@ -393,7 +417,7 @@ async function fetchRemoteDatabase() {
             const logoAttr = resItem.image ? ` tvg-logo="${resItem.image}"` : '';
             
             m3uContent += `#EXTINF:-1 tvg-id="${resItem.stream_id}" tvg-name="${titleDisplay}"${logoAttr}, ${titleDisplay}\n`;
-            m3uContent += `#EXTVLCOPT:http-referrer=${resItem.embed_url || resItem.url}\n`;
+            m3uContent += `#EXTVLCOPT:http-referrer=${PARENT_REFERER}\n`;
             m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
             m3uContent += `${resItem.m3u8_file}\n\n`;
         }
