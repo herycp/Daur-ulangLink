@@ -11,7 +11,7 @@ puppeteer.use(StealthPlugin());
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
 // 🔗 Raw URL ke repository Pengepul-link
-const INPUT_JSON_URL = process.env.INPUT_JSON_URL || 'https://raw.githubusercontent.com/herycp/Pengepul-link/main/link.json';
+const INPUT_JSON_URL = process.env.INPUT_JSON_URL || 'https://github.com/herycp/Pengepul-link/raw/refs/heads/main/links.json';
 
 // ⚡ Jumlah maksimal URL yang diproses per 1 siklus/run
 const BATCH_LIMIT = parseInt(process.env.BATCH_LIMIT, 10) || 50;
