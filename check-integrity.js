@@ -50,19 +50,23 @@ async function main() {
     const allItems = extractAllLinks(rawData);
     const totalLinks = allItems.length;
 
-    // 📊 Hitung Kemunculan URL (Cari Duplikat)
-    const urlCounts = {};
+    // 📊 Grouping Item Berdasarkan embed_url untuk deteksi duplikat
+    const urlGroups = {};
     allItems.forEach(item => {
         const url = item.embed_url;
-        urlCounts[url] = (urlCounts[url] || 0) + 1;
+        if (!urlGroups[url]) {
+            urlGroups[url] = [];
+        }
+        urlGroups[url].push(item);
     });
 
-    const duplicatesList = Object.entries(urlCounts)
-        .filter(([url, count]) => count > 1)
-        .map(([url, count]) => ({ url, count }));
+    // Filter hanya kelompok yang memiliki item > 1 (Duplikat)
+    const duplicateGroups = Object.entries(urlGroups)
+        .filter(([url, items]) => items.length > 1)
+        .map(([url, items]) => ({ url, items }));
 
-    const totalDuplicates = duplicatesList.reduce((acc, curr) => acc + (curr.count - 1), 0);
-    const totalUniqueLinks = Object.keys(urlCounts).length;
+    const totalDuplicates = duplicateGroups.reduce((acc, curr) => acc + (curr.items.length - 1), 0);
+    const totalUniqueLinks = Object.keys(urlGroups).length;
 
     // 📖 Baca Progres dari progress.json
     let processedIds = [];
@@ -81,16 +85,38 @@ async function main() {
     // 🕒 Waktu Update (WIB / UTC+7)
     const now = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
 
-    // 📝 Format Output Tabel Markdown untuk README (Tabel Lebar Penuh)
-    let dupMarkdownTable = '';
-    if (duplicatesList.length > 0) {
-        dupMarkdownTable = `| No | URL Duplikat Lengkap | Jumlah |\n|---|---|---|\n`;
-        duplicatesList.forEach((dup, idx) => {
-            // Menggunakan <pre> atau backticks tanpa wrap agar URL utuh bisa dicopy-paste
-            dupMarkdownTable += `| ${idx + 1} | \`${dup.url}\` | ${dup.count}x |\n`;
+    // 📝 Generate Tabel Komparasi Variabel Duplikat
+    let dupMarkdownDetails = '';
+    if (duplicateGroups.length > 0) {
+        duplicateGroups.forEach((group, gIdx) => {
+            dupMarkdownDetails += `#### 🔗 Duplikat #${gIdx + 1}: \`${group.url}\` (${group.items.length} kemunculan)\n\n`;
+
+            // Kumpulkan semua variabel/keys yang ada secara dinamis
+            const allKeys = new Set();
+            group.items.forEach(item => {
+                Object.keys(item).forEach(k => allKeys.add(k));
+            });
+            const keysArray = Array.from(allKeys);
+
+            // Buat Header Tabel
+            dupMarkdownDetails += `| Entry | ` + keysArray.map(k => `**${k}**`).join(' | ') + ` |\n`;
+            dupMarkdownDetails += `|---|` + keysArray.map(() => `---`).join('|') + `|\n`;
+
+            // Isi Baris Tabel Komparasi
+            group.items.forEach((item, iIdx) => {
+                const rowValues = keysArray.map(k => {
+                    const val = item[k];
+                    if (val === undefined || val === null || val === '') return '`-`';
+                    if (typeof val === 'object') return `\`${JSON.stringify(val)}\``;
+                    return `\`${String(val)}\``;
+                });
+                dupMarkdownDetails += `| Item #${iIdx + 1} | ` + rowValues.join(' | ') + ` |\n`;
+            });
+
+            dupMarkdownDetails += `\n---\n\n`;
         });
     } else {
-        dupMarkdownTable = `*Tidak ditemukan link duplikat di database.*\n`;
+        dupMarkdownDetails = `*Tidak ditemukan link duplikat di database.*\n`;
     }
 
     const reportMarkdown = `<!-- INTEGRITY_REPORT_START -->
@@ -107,11 +133,11 @@ async function main() {
 | ⏳ **Jumlah Belum Diproses** | **${totalUnprocessed}** | ${(100 - parseFloat(progressPercent)).toFixed(2)}% |
 
 <details>
-<summary>🔍 <b>Klik di sini untuk melihat list link duplikat (${duplicatesList.length} URL unik)</b></summary>
+<summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (${duplicateGroups.length} Kelompok)</b></summary>
 
 <br>
 
-${dupMarkdownTable}
+${dupMarkdownDetails}
 
 </details>
 <!-- INTEGRITY_REPORT_END -->`;
@@ -134,7 +160,7 @@ ${dupMarkdownTable}
     }
 
     fs.writeFileSync(README_FILE, readmeContent);
-    console.log('✅ Laporan integritas (dengan URL duplikat utuh) berhasil di-generate dan ditulis ke README.md!');
+    console.log('✅ Tabel komparasi variabel duplikat berhasil disiapkan dan ditulis ke README.md!');
 }
 
 main();
