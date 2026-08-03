@@ -30,89 +30,36 @@ if (!fs.existsSync(PLAYLIST_FILE)) fs.writeFileSync(PLAYLIST_FILE, '#EXTM3U\n\n'
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // ============================================================================
-// 🛠️ HELPER FUNCTIONS & DIAGNOSTIK
+// 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-// Hitung total seluruh URL di JSON untuk transparansi
-function countTotalUrlsInJson(data) {
-    let count = 0;
-    if (typeof data === 'string' && (data.startsWith('http://') || data.startsWith('https://'))) {
-        return 1;
-    }
-    if (Array.isArray(data)) {
-        for (const item of data) count += countTotalUrlsInJson(item);
-    } else if (typeof data === 'object' && data !== null) {
-        for (const val of Object.values(data)) count += countTotalUrlsInJson(val);
-    }
-    return count;
-}
-
-// Ekstraksi seluruh target Pulvexa
-function extractPulvexaTargets(data, parentContext = {}) {
+// 🔍 EKSTRAKSI HANYA DARI PROPERTY embed_url
+function extractPulvexaTargets(dataArray) {
     let results = [];
-    if (!data) return results;
+    if (!Array.isArray(dataArray)) return results;
 
-    if (typeof data === 'string') {
-        const trimmed = data.trim();
-        if ((trimmed.startsWith('http://') || trimmed.startsWith('https://')) && trimmed.toLowerCase().includes('pulvexa')) {
-            results.push({
-                title: parentContext.title || 'Video',
-                season: parentContext.season,
-                episode: parentContext.episode,
-                image: parentContext.image,
-                embed_url: trimmed
-            });
-        }
-        return results;
-    }
-
-    if (Array.isArray(data)) {
-        for (let i = 0; i < data.length; i++) {
-            results = results.concat(extractPulvexaTargets(data[i], parentContext));
-        }
-    } else if (typeof data === 'object') {
-        const context = {
-            title: data.title || data.name || parentContext.title || 'Video',
-            season: data.season || parentContext.season,
-            episode: data.episode || parentContext.episode,
-            image: data.image || data.poster || data.thumbnail || parentContext.image
-        };
-
-        for (const [key, val] of Object.entries(data)) {
-            if (typeof val === 'string') {
-                const trimmed = val.trim();
-                if ((trimmed.startsWith('http://') || trimmed.startsWith('https://')) && trimmed.toLowerCase().includes('pulvexa')) {
-                    results.push({
-                        ...data,
-                        title: context.title,
-                        season: context.season,
-                        episode: context.episode,
-                        image: context.image,
-                        embed_url: trimmed
-                    });
-                }
-            } else if (typeof val === 'object' && val !== null) {
-                results = results.concat(extractPulvexaTargets(val, context));
+    for (let i = 0; i < dataArray.length; i++) {
+        const item = dataArray[i];
+        if (item && typeof item.embed_url === 'string') {
+            const embedUrl = item.embed_url.trim();
+            if (embedUrl.toLowerCase().includes('pulvexa')) {
+                results.push({
+                    ...item,
+                    embed_url: embedUrl
+                });
             }
         }
     }
-
     return results;
 }
 
-function extractItemId(item, index = 0) {
-    if (item.id) return String(item.id);
-
-    if (item.embed_url) {
-        try {
-            const urlHash = Buffer.from(item.embed_url).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(-12);
-            const titleClean = (item.title || 'video').replace(/[^a-zA-Z0-9]/g, '_');
-            return `${titleClean}_${urlHash}`;
-        } catch (e) {}
-    }
-
-    const titleClean = (item.title || 'video').replace(/[^a-zA-Z0-9]/g, '_');
-    return `${titleClean}_s${item.season || 1}e${item.episode || 1}_idx${index}`;
+// 🆔 GENERATE ID UNIK MURNI BERDASARKAN embed_url
+function extractItemId(embedUrl) {
+    if (!embedUrl) return `id_${Math.random()}`;
+    const cleanUrl = embedUrl.trim().toLowerCase();
+    // Mengubah URL menjadi hash unik berbasis Base64
+    const urlHash = Buffer.from(cleanUrl).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(-28);
+    return `px_${urlHash}`;
 }
 
 function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
@@ -128,7 +75,7 @@ function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
     }).join('\n');
 }
 
-// ⚡ UJI M3U8 LANGSUNG LEWAT NODE.JS (Cepat, Akurat, Bebas Error Context Browser)
+// ⚡ UJI M3U8 LANGSUNG LEWAT NODE.JS (Cepat & Tanpa Error Context Browser)
 async function testAndDownloadM3u8Directly(m3u8Url) {
     if (!m3u8Url) return null;
     try {
@@ -212,7 +159,7 @@ async function fetchRemoteDatabase() {
     let processedIds = JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf8'));
     let existingResults = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'));
 
-    console.log(`📊 Status Progres: ${processedIds.length} item telah selesai diproses sebelumnya.`);
+    console.log(`📊 Status Progres File: ${processedIds.length} item telah selesai diproses sebelumnya.`);
 
     let rawJsonData = null;
     try {
@@ -222,26 +169,30 @@ async function fetchRemoteDatabase() {
         process.exit(1);
     }
 
-    // DIAGNOSTIK LINK
-    const totalAllUrls = countTotalUrlsInJson(rawJsonData);
     const allPulvexaItems = extractPulvexaTargets(rawJsonData);
     
     const uniqueTargets = [];
-    const seenIds = new Set();
+    const seenEmbedUrls = new Set();
 
+    // DEDUPLIKASI MURNI BERDASARKAN embed_url
     for (let i = 0; i < allPulvexaItems.length; i++) {
         const item = allPulvexaItems[i];
-        const itemId = extractItemId(item, i);
-        if (!seenIds.has(itemId) && !processedIds.includes(itemId)) {
-            seenIds.add(itemId);
-            uniqueTargets.push(item);
+        const embedUrl = item.embed_url;
+        const itemId = extractItemId(embedUrl);
+
+        if (!seenEmbedUrls.has(embedUrl) && !processedIds.includes(itemId)) {
+            seenEmbedUrls.add(embedUrl);
+            uniqueTargets.push({
+                ...item,
+                stream_id: itemId
+            });
         }
     }
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
-    console.log(`🔗 Total seluruh URL di links.json     : ${totalAllUrls}`);
-    console.log(`🎯 Total URL berdomain Pulvexa        : ${allPulvexaItems.length}`);
-    console.log(`⚡ Total Pulvexa Siap Diproses (Unik) : ${uniqueTargets.length}`);
+    console.log(`🔗 Total seluruh item di links.json   : ${Array.isArray(rawJsonData) ? rawJsonData.length : 'Bukan Array'}`);
+    console.log(`🎯 Total embed_url berdomain Pulvexa   : ${allPulvexaItems.length}`);
+    console.log(`⚡ Pulvexa Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
 
     if (uniqueTargets.length === 0) {
@@ -256,7 +207,7 @@ async function fetchRemoteDatabase() {
     const currentResults = [...existingResults];
 
     try {
-        console.log('\n🚀 Membuka Puppeteer Browser (Dengan Full Anti-DevTool & Direct Fetch)...');
+        console.log('\n🚀 Membuka Puppeteer Browser...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: [
@@ -274,26 +225,25 @@ async function fetchRemoteDatabase() {
         for (let i = 0; i < batchList.length; i++) {
             const item = batchList[i];
             const embedUrl = item.embed_url;
-            const itemId = extractItemId(item, i);
-            const titleSeasonEp = `${item.title || 'Video'}${item.season ? ' S' + item.season : ''}${item.episode ? 'E' + item.episode : ''}`;
+            const itemId = item.stream_id;
+            const titleSeasonEp = `${item.title || 'Video'}${item.season ? ' S' + item.season : ''}${item.episode ? ' E' + item.episode : ''}`;
 
             console.log(`\n==================================================`);
             console.log(`🔍 [${i + 1}/${batchList.length}] Processing: ${titleSeasonEp}`);
             console.log(`🔗 EMBED URL: ${embedUrl}`);
+            console.log(`🆔 ID UNIK  : ${itemId}`);
             console.log(`==================================================`);
 
             const page = await browser.newPage();
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // 🛡️ FULL ANTI-DEVTOOL & ANTI-BOT BYPASS (LENGKAP)
+            // 🛡️ ANTI-DEVTOOL & ANTI-BOT BYPASS
             await page.evaluateOnNewDocument(() => {
-                // 1. Webdriver & Plugins Spoof
                 Object.defineProperty(navigator, 'webdriver', { get: () => false });
                 Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en', 'id'] });
                 Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
 
-                // 2. Bypass Anti-Debugging / Function Constructor Trap
                 const nativeFunction = Function;
                 window.Function = function (...args) {
                     if (args.some(arg => typeof arg === 'string' && arg.includes('debugger'))) {
@@ -303,13 +253,11 @@ async function fetchRemoteDatabase() {
                 };
                 window.Function.prototype = nativeFunction.prototype;
 
-                // 3. Netralkan Console Trap
                 const dummy = () => {};
                 ['log', 'debug', 'info', 'warn', 'error', 'table', 'clear'].forEach(m => {
                     try { window.console[m] = dummy; } catch (e) {}
                 });
 
-                // 4. Cegah Anti-DevTool Unload Trap
                 window.addEventListener('beforeunload', (e) => {
                     e.stopImmediatePropagation();
                 }, true);
@@ -326,19 +274,17 @@ async function fetchRemoteDatabase() {
             let pageDoneResolve;
             const pageDonePromise = new Promise(r => pageDoneResolve = r);
 
-            // 📡 PENANGKAP NETWORK & EXECUTE REALTME VIA NODE FETCH
+            // 📡 PENANGKAP NETWORK & UJI REALTME DENGAN NODE FETCH
             page.on('response', async res => {
                 if (m3u8SuccessSaved) return;
 
                 const rawUrl = res.url();
                 let candidateUrls = [];
 
-                // A. M3U8 Langsung (Kecuali Telemetry Ping JWPlayer)
                 if ((rawUrl.includes('.m3u8') || rawUrl.includes('/playlist/') || rawUrl.includes('/hls/')) && !rawUrl.includes('jwpltx.com')) {
                     candidateUrls.push(rawUrl);
                 }
 
-                // B. Ekstrak M3U8 Asli jika ada di Telemetry Query (`?mu=...`)
                 if (rawUrl.includes('jwpltx.com') && rawUrl.includes('.m3u8')) {
                     try {
                         const parsed = new URL(rawUrl);
@@ -347,7 +293,6 @@ async function fetchRemoteDatabase() {
                     } catch (e) {}
                 }
 
-                // C. Proses kandidat langsung di Node.js (Tanpa page.evaluate)
                 for (const candidateUrl of candidateUrls) {
                     if (m3u8SuccessSaved || testedCandidates.has(candidateUrl)) continue;
                     testedCandidates.add(candidateUrl);
@@ -381,7 +326,6 @@ async function fetchRemoteDatabase() {
                         fs.writeFileSync(PROGRESS_FILE, JSON.stringify(processedIds, null, 2));
                         fs.writeFileSync(OUTPUT_FILE, JSON.stringify(currentResults, null, 2));
 
-                        // Selesai! Langsung lepas promise agar halaman ditutup seketika
                         pageDoneResolve();
                         break;
                     } else {
@@ -405,7 +349,6 @@ async function fetchRemoteDatabase() {
                     await delay(2500);
                 };
 
-                // Balapan: Berhenti saat M3U8 Valid Ketemu ATAU Pemuatan Halaman Selesai
                 await Promise.race([
                     processPage(),
                     pageDonePromise,
@@ -427,7 +370,7 @@ async function fetchRemoteDatabase() {
         // REGENERATE PLAYLIST.M3U
         let m3uContent = '#EXTM3U\n\n';
         for (const resItem of currentResults) {
-            const titleDisplay = `${resItem.title || 'Video'}${resItem.season ? ' S' + resItem.season : ''}${resItem.episode ? 'E' + resItem.episode : ''}`;
+            const titleDisplay = `${resItem.title || 'Video'}${resItem.season ? ' S' + resItem.season : ''}${resItem.episode ? ' E' + resItem.episode : ''}`;
             const logoAttr = resItem.image ? ` tvg-logo="${resItem.image}"` : '';
             
             m3uContent += `#EXTINF:-1 tvg-id="${resItem.stream_id}" tvg-name="${titleDisplay}"${logoAttr}, ${titleDisplay}\n`;
