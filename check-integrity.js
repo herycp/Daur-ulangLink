@@ -81,11 +81,12 @@ async function main() {
     // 🕒 Waktu Update (WIB / UTC+7)
     const now = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
 
-    // 📝 Format Output Tabel Markdown untuk README
+    // 📝 Format Output Tabel Markdown untuk README (Tabel Lebar Penuh)
     let dupMarkdownTable = '';
     if (duplicatesList.length > 0) {
-        dupMarkdownTable = `| No | URL Duplikat | Jumlah Kemunculan |\n|---|---|---|\n`;
+        dupMarkdownTable = `| No | URL Duplikat Lengkap | Jumlah |\n|---|---|---|\n`;
         duplicatesList.forEach((dup, idx) => {
+            // Menggunakan <pre> atau backticks tanpa wrap agar URL utuh bisa dicopy-paste
             dupMarkdownTable += `| ${idx + 1} | \`${dup.url}\` | ${dup.count}x |\n`;
         });
     } else {
@@ -106,9 +107,12 @@ async function main() {
 | ⏳ **Jumlah Belum Diproses** | **${totalUnprocessed}** | ${(100 - parseFloat(progressPercent)).toFixed(2)}% |
 
 <details>
-<summary>🔍 <b>Klik di sini untuk melihat list link duplikat (${duplicatesList.length} URL)</b></summary>
+<summary>🔍 <b>Klik di sini untuk melihat list link duplikat (${duplicatesList.length} URL unik)</b></summary>
+
+<br>
 
 ${dupMarkdownTable}
+
 </details>
 <!-- INTEGRITY_REPORT_END -->`;
 
@@ -130,8 +134,7 @@ ${dupMarkdownTable}
     }
 
     fs.writeFileSync(README_FILE, readmeContent);
-    console.log('✅ Laporan integritas berhasil di-generate dan ditulis ke README.md!');
+    console.log('✅ Laporan integritas (dengan URL duplikat utuh) berhasil di-generate dan ditulis ke README.md!');
 }
 
 main();
-              
