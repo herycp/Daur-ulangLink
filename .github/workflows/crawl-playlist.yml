@@ -1,9 +1,9 @@
 name: Auto Scrape Pulvexa M3U8 Streams
 
 on:
-  schedule:
+  # schedule:
     # Berjalan otomatis setiap 6 jam sekali
-    - cron: '0 */6 * * *'
+    #- cron: '0 */6 * * *'
   # Memungkinkan pemicuan manual langsung dari tab Actions GitHub
   workflow_dispatch:
 
