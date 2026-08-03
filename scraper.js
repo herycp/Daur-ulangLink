@@ -30,34 +30,60 @@ if (!fs.existsSync(PLAYLIST_FILE)) fs.writeFileSync(PLAYLIST_FILE, '#EXTM3U\n\n'
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // ============================================================================
-// 🛠️ HELPER FUNCTIONS
+// 🛠️ HELPER FUNCTIONS (RECURSIVE TRAVERSAL)
 // ============================================================================
 
-// 🔍 EKSTRAKSI HANYA DARI PROPERTY embed_url
-function extractPulvexaTargets(dataArray) {
+// 🔍 EKSTRAKSI REKURSIF UNTUK SEMUA STRUKTUR JSON (ARRAY MAUPUN OBJEK BERSARANG)
+function extractPulvexaTargets(data) {
     let results = [];
-    if (!Array.isArray(dataArray)) return results;
+    if (!data) return results;
 
-    for (let i = 0; i < dataArray.length; i++) {
-        const item = dataArray[i];
-        if (item && typeof item.embed_url === 'string') {
-            const embedUrl = item.embed_url.trim();
+    if (Array.isArray(data)) {
+        for (const item of data) {
+            results = results.concat(extractPulvexaTargets(item));
+        }
+    } else if (typeof data === 'object') {
+        if (typeof data.embed_url === 'string') {
+            const embedUrl = data.embed_url.trim();
             if (embedUrl.toLowerCase().includes('pulvexa')) {
                 results.push({
-                    ...item,
+                    ...data,
                     embed_url: embedUrl
                 });
+            }
+        } else {
+            for (const key of Object.keys(data)) {
+                if (data[key] && typeof data[key] === 'object') {
+                    results = results.concat(extractPulvexaTargets(data[key]));
+                }
             }
         }
     }
     return results;
 }
 
+// 📊 MENGHITUNG TOTAL ELEMEN BERISI EMBED URL DI DALAM JSON
+function countTotalEmbedUrls(data) {
+    let count = 0;
+    if (!data) return 0;
+
+    if (Array.isArray(data)) {
+        for (const item of data) count += countTotalEmbedUrls(item);
+    } else if (typeof data === 'object') {
+        if (typeof data.embed_url === 'string') return 1;
+        for (const key of Object.keys(data)) {
+            if (data[key] && typeof data[key] === 'object') {
+                count += countTotalEmbedUrls(data[key]);
+            }
+        }
+    }
+    return count;
+}
+
 // 🆔 GENERATE ID UNIK MURNI BERDASARKAN embed_url
 function extractItemId(embedUrl) {
     if (!embedUrl) return `id_${Math.random()}`;
     const cleanUrl = embedUrl.trim().toLowerCase();
-    // Mengubah URL menjadi hash unik berbasis Base64
     const urlHash = Buffer.from(cleanUrl).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(-28);
     return `px_${urlHash}`;
 }
@@ -75,7 +101,7 @@ function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
     }).join('\n');
 }
 
-// ⚡ UJI M3U8 LANGSUNG LEWAT NODE.JS (Cepat & Tanpa Error Context Browser)
+// ⚡ UJI M3U8 LANGSUNG LEWAT NODE.JS
 async function testAndDownloadM3u8Directly(m3u8Url) {
     if (!m3u8Url) return null;
     try {
@@ -169,6 +195,7 @@ async function fetchRemoteDatabase() {
         process.exit(1);
     }
 
+    const totalEmbedUrls = countTotalEmbedUrls(rawJsonData);
     const allPulvexaItems = extractPulvexaTargets(rawJsonData);
     
     const uniqueTargets = [];
@@ -190,7 +217,7 @@ async function fetchRemoteDatabase() {
     }
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
-    console.log(`🔗 Total seluruh item di links.json   : ${Array.isArray(rawJsonData) ? rawJsonData.length : 'Bukan Array'}`);
+    console.log(`🔗 Total embed_url ditemukan di JSON : ${totalEmbedUrls}`);
     console.log(`🎯 Total embed_url berdomain Pulvexa   : ${allPulvexaItems.length}`);
     console.log(`⚡ Pulvexa Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
@@ -274,7 +301,7 @@ async function fetchRemoteDatabase() {
             let pageDoneResolve;
             const pageDonePromise = new Promise(r => pageDoneResolve = r);
 
-            // 📡 PENANGKAP NETWORK & UJI REALTME DENGAN NODE FETCH
+            // 📡 PENANGKAP NETWORK & UJI REALTIME VIA NODE FETCH
             page.on('response', async res => {
                 if (m3u8SuccessSaved) return;
 
