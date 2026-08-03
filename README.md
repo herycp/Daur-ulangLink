@@ -3,7 +3,7 @@
 <!-- INTEGRITY_REPORT_START -->
 ## 📊 Laporan Integritas Database
 
-> 🕒 **Terakhir Diperbarui:** `3/8/2026, 21.04.29 WIB`
+> 🕒 **Terakhir Diperbarui:** `3/8/2026, 21.14.50 WIB`
 
 | Parameter | Jumlah | Persentase |
 |---|---|---|
@@ -14,9 +14,11 @@
 | ⏳ **Jumlah Belum Diproses** | **23680** | 99.79% |
 
 <details>
-<summary>🔍 <b>Klik di sini untuk melihat list link duplikat (111 URL)</b></summary>
+<summary>🔍 <b>Klik di sini untuk melihat list link duplikat (111 URL unik)</b></summary>
 
-| No | URL Duplikat | Jumlah Kemunculan |
+<br>
+
+| No | URL Duplikat Lengkap | Jumlah |
 |---|---|---|
 | 1 | `https://ok.ru/videoembed/9720340089523` | 2x |
 | 2 | `https://www.dailymotion.com/dorama9tsu` | 12x |
@@ -129,6 +131,7 @@
 | 109 | `https://pulvexa.space/embed/GJSuh2KqLk?token=5dfbc9b04e576fc6ad1dbe1daf7a` | 2x |
 | 110 | `https://pulvexa.space/embed/4NpI6f3Tw5?token=5dfbc9b04e576fc6ad1dbe1daf7a` | 2x |
 | 111 | `https://ok.ru/videoembed/1535947377341` | 2x |
+
 
 </details>
 <!-- INTEGRITY_REPORT_END -->
