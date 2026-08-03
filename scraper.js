@@ -1,12 +1,20 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
+const path = require('path');
 
 puppeteer.use(StealthPlugin());
 
 const TARGET_HOST = 'https://pulvexa.space';
 const FIXED_TOKEN = '5dfbc9b04e576fc6ad1dbe1daf7a';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
+
+// 📁 KONFIGURASI FOLDER OUTPUT
+const STREAMS_DIR = path.join(__dirname, 'streams');
+if (!fs.existsSync(STREAMS_DIR)) {
+    fs.mkdirSync(STREAMS_DIR, { recursive: true });
+    console.log(`📁 Folder '${STREAMS_DIR}' berhasil dibuat.`);
+}
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -47,12 +55,10 @@ function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
     
     return m3u8Content.split('\n').map(line => {
         const trimmed = line.trim();
-        // Biarkan baris kosong dan tag metadata (#EXT...)
         if (!trimmed || trimmed.startsWith('#')) {
             return line;
         }
 
-        // Jika baris adalah URL segmen/playlist turunan
         try {
             return new URL(trimmed, baseUrl.href).href;
         } catch (e) {
@@ -87,9 +93,7 @@ async function fetchAndProcessM3u8(page, m3u8Url, refererUrl) {
 
         if (result.status === 200 && result.isExtM3u) {
             console.log(`   ✅ [DOWNLOAD SUKSES] Berhasil mengambil isi file M3U8.`);
-            // Ubah semua URL relatif segmen menjadi URL Absolut
-            const absoluteM3u8 = convertM3u8ToAbsolute(result.rawText, m3u8Url);
-            return absoluteM3u8;
+            return convertM3u8ToAbsolute(result.rawText, m3u8Url);
         } else {
             console.log(`   ❌ [DOWNLOAD GAGAL] HTTP Status: ${result.status}`);
             return null;
@@ -266,7 +270,6 @@ async function triggerPlayInAllFrames(page) {
                 await triggerPlayInAllFrames(page);
                 await delay(4000);
 
-                // Dapatkan kandidat M3U8 dan unduh isinya
                 const candidatesToTest = [...capturedM3u8Candidates].reverse();
 
                 for (const candidateUrl of candidatesToTest) {
@@ -283,15 +286,18 @@ async function triggerPlayInAllFrames(page) {
             }
 
             if (finalProcessedM3u8Text) {
-                const standaloneFileName = `${item.id}_stream.m3u8`;
-                fs.writeFileSync(standaloneFileName, finalProcessedM3u8Text);
-                console.log(`\n💾 [FILE DISIMPAN] Berhasil menyimpan teks M3U8 ke: ${standaloneFileName}`);
+                const fileName = `${item.id}_stream.m3u8`;
+                const filePath = path.join(STREAMS_DIR, fileName);
+                const relativePath = `streams/${fileName}`;
+
+                fs.writeFileSync(filePath, finalProcessedM3u8Text);
+                console.log(`\n💾 [FILE DISIMPAN] Tersimpan di: ${relativePath}`);
 
                 results.push({
                     id: item.id,
                     title: item.title,
                     embed_url: item.embedUrl,
-                    m3u8_file: standaloneFileName,
+                    m3u8_file: relativePath,
                     original_url: originalM3u8Url,
                     updated_at: new Date().toISOString()
                 });
@@ -299,7 +305,7 @@ async function triggerPlayInAllFrames(page) {
                 m3uContent += `#EXTINF:-1 tvg-id="${item.id}" tvg-name="${item.title}", ${item.title}\n`;
                 m3uContent += `#EXTVLCOPT:http-referrer=${item.embedUrl}\n`;
                 m3uContent += `#EXTVLCOPT:http-user-agent=${USER_AGENT}\n`;
-                m3uContent += `${standaloneFileName}\n\n`;
+                m3uContent += `${relativePath}\n\n`;
             } else {
                 console.log(`\n❌ [GAGAL] Tidak berhasil mengunduh teks M3U8 untuk ${item.id}`);
             }
@@ -311,7 +317,7 @@ async function triggerPlayInAllFrames(page) {
         fs.writeFileSync('output.json', JSON.stringify(results, null, 2));
         fs.writeFileSync('playlist.m3u', m3uContent);
         console.log(`\n==================================================`);
-        console.log(`🏁 Selesai! File .m3u8 terunduh disiapkan untuk diunggah ke GitHub.`);
+        console.log(`🏁 Selesai! File disiapkan di folder 'streams/'.`);
         console.log(`==================================================\n`);
 
     } catch (error) {
