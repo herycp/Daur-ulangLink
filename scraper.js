@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto'); // 💡 Menggunakan module crypto bawaan Node.js
 
 puppeteer.use(StealthPlugin());
 
@@ -30,10 +31,10 @@ if (!fs.existsSync(PLAYLIST_FILE)) fs.writeFileSync(PLAYLIST_FILE, '#EXTM3U\n\n'
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // ============================================================================
-// 🛠️ HELPER FUNCTIONS (RECURSIVE TRAVERSAL)
+// 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-// 🔍 EKSTRAKSI REKURSIF UNTUK SEMUA STRUKTUR JSON (ARRAY MAUPUN OBJEK BERSARANG)
+// 🔍 EKSTRAKSI REKURSIF UNTUK SEMUA STRUKTUR JSON
 function extractPulvexaTargets(data) {
     let results = [];
     if (!data) return results;
@@ -62,7 +63,6 @@ function extractPulvexaTargets(data) {
     return results;
 }
 
-// 📊 MENGHITUNG TOTAL ELEMEN BERISI EMBED URL DI DALAM JSON
 function countTotalEmbedUrls(data) {
     let count = 0;
     if (!data) return 0;
@@ -80,12 +80,12 @@ function countTotalEmbedUrls(data) {
     return count;
 }
 
-// 🆔 GENERATE ID UNIK MURNI BERDASARKAN embed_url
+// 🆔 GENERATE ID UNIK MURNI BERDASARKAN MD5 HASH FULL EMBED_URL (PERSISI 100%)
 function extractItemId(embedUrl) {
-    if (!embedUrl) return `id_${Math.random()}`;
+    if (!embedUrl) return `px_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const cleanUrl = embedUrl.trim().toLowerCase();
-    const urlHash = Buffer.from(cleanUrl).toString('base64').replace(/[^a-zA-Z0-9]/g, '').slice(-28);
-    return `px_${urlHash}`;
+    const md5Hash = crypto.createHash('md5').update(cleanUrl).digest('hex');
+    return `px_${md5Hash}`;
 }
 
 function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
@@ -200,15 +200,17 @@ async function fetchRemoteDatabase() {
     
     const uniqueTargets = [];
     const seenEmbedUrls = new Set();
+    const seenItemIds = new Set();
 
-    // DEDUPLIKASI MURNI BERDASARKAN embed_url
+    // DEDUPLIKASI UNIK BERDASARKAN EMBED_URL DAN ITEM_ID
     for (let i = 0; i < allPulvexaItems.length; i++) {
         const item = allPulvexaItems[i];
         const embedUrl = item.embed_url;
         const itemId = extractItemId(embedUrl);
 
-        if (!seenEmbedUrls.has(embedUrl) && !processedIds.includes(itemId)) {
+        if (!seenEmbedUrls.has(embedUrl) && !seenItemIds.has(itemId) && !processedIds.includes(itemId)) {
             seenEmbedUrls.add(embedUrl);
+            seenItemIds.add(itemId);
             uniqueTargets.push({
                 ...item,
                 stream_id: itemId
