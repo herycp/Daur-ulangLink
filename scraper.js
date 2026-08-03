@@ -10,21 +10,23 @@ puppeteer.use(StealthPlugin());
 // ============================================================================
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
-// 🔗 Raw URL ke repository Pengepul-link
+// 🔗 URL Persis ke file links.json
 const INPUT_JSON_URL = process.env.INPUT_JSON_URL || 'https://github.com/herycp/Pengepul-link/raw/refs/heads/main/links.json';
 
-// ⚡ Jumlah maksimal URL yang diproses per 1 siklus/run
+// ⚡ Jumlah maksimal URL yang diproses per 1 siklus run
 const BATCH_LIMIT = parseInt(process.env.BATCH_LIMIT, 10) || 50;
 
-// 📁 KONFIGURASI PATH FILE & FOLDER
+// 📁 PATH FILE & FOLDER
 const STREAMS_DIR = path.join(__dirname, 'streams');
 const PROGRESS_FILE = path.join(__dirname, 'progress.json');
 const OUTPUT_FILE = path.join(__dirname, 'output.json');
 const PLAYLIST_FILE = path.join(__dirname, 'playlist.m3u');
 
-if (!fs.existsSync(STREAMS_DIR)) {
-    fs.mkdirSync(STREAMS_DIR, { recursive: true });
-}
+// 🛡️ INISIALISASI FILE & FOLDER (Mencegah Error Git Add)
+if (!fs.existsSync(STREAMS_DIR)) fs.mkdirSync(STREAMS_DIR, { recursive: true });
+if (!fs.existsSync(PROGRESS_FILE)) fs.writeFileSync(PROGRESS_FILE, '[]');
+if (!fs.existsSync(OUTPUT_FILE)) fs.writeFileSync(OUTPUT_FILE, '[]');
+if (!fs.existsSync(PLAYLIST_FILE)) fs.writeFileSync(PLAYLIST_FILE, '#EXTM3U\n\n');
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -32,7 +34,53 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-// 🆔 Ekstraksi / Generate ID Unik dari Item
+// 🔍 PENCARIAN REKURSIF TARGET PULVEXA.SITE DALAM STRUKTUR JSON APAPUN
+function extractPulvexaTargets(data, parentContext = {}) {
+    let results = [];
+    if (!data) return results;
+
+    if (Array.isArray(data)) {
+        for (const item of data) {
+            results = results.concat(extractPulvexaTargets(item, parentContext));
+        }
+    } else if (typeof data === 'object') {
+        const context = {
+            title: data.title || data.name || parentContext.title || 'Video',
+            season: data.season || parentContext.season,
+            episode: data.episode || parentContext.episode,
+            image: data.image || data.poster || parentContext.image
+        };
+
+        // Cek semua kemungkinan kunci nama property link
+        const possibleUrls = [
+            data.embed_url, data.url, data.link, data.embed, data.src, data.file, data.stream_url
+        ].filter(u => typeof u === 'string');
+
+        const pulvexaUrl = possibleUrls.find(u => u.includes('pulvexa.site'));
+
+        if (pulvexaUrl) {
+            results.push({
+                ...data,
+                title: context.title,
+                season: context.season,
+                episode: context.episode,
+                image: context.image,
+                embed_url: pulvexaUrl
+            });
+        }
+
+        // Ekstraksi mendalam jika ada array/object anak (nesting)
+        for (const key of Object.keys(data)) {
+            if (typeof data[key] === 'object' && data[key] !== null) {
+                results = results.concat(extractPulvexaTargets(data[key], context));
+            }
+        }
+    }
+
+    return results;
+}
+
+// 🆔 Ekstraksi / Generate ID Unik
 function extractItemId(item) {
     if (item.id) return String(item.id);
 
@@ -48,7 +96,7 @@ function extractItemId(item) {
     return `${titleClean}_s${item.season || 1}e${item.episode || 1}`;
 }
 
-// 🔄 Konversi URL M3U8 Relatif Menjadi Absolut
+// 🔄 Konversi M3U8 Relatif ke Absolut
 function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
     const baseUrl = new URL(sourceM3u8Url);
     return m3u8Content.split('\n').map(line => {
@@ -99,7 +147,7 @@ async function fetchAndProcessM3u8(page, m3u8Url, refererUrl) {
     }
 }
 
-// 🎬 Trigger Play Video dalam iFrame/Player
+// 🎬 Trigger Play Video dalam Player
 async function triggerPlayInAllFrames(page) {
     const frames = page.frames();
     for (let i = 0; i < frames.length; i++) {
@@ -135,75 +183,63 @@ async function triggerPlayInAllFrames(page) {
     } catch (e) {}
 }
 
-// 📡 Ambil File link.json dari Remote Repository
+// 📡 Ambil Remote links.json
 async function fetchRemoteDatabase() {
-    console.log(`📡 Mengambil link.json dari URL:\n   👉 ${INPUT_JSON_URL}`);
+    console.log(`📡 Mengambil links.json dari:\n   👉 ${INPUT_JSON_URL}`);
     const headers = process.env.REMOTE_GH_TOKEN ? { 'Authorization': `token ${process.env.REMOTE_GH_TOKEN}` } : {};
-    
-    let res = await fetch(INPUT_JSON_URL, { headers });
-    
-    // Fallback jika branch default menggunakan 'master' bukan 'main'
-    if (!res.ok && INPUT_JSON_URL.includes('/main/')) {
-        const masterUrl = INPUT_JSON_URL.replace('/main/', '/master/');
-        console.log(`⚠️ Mencoba fallback ke branch master:\n   👉 ${masterUrl}`);
-        res = await fetch(masterUrl, { headers });
+
+    const res = await fetch(INPUT_JSON_URL, { headers });
+    if (!res.ok) {
+        throw new Error(`HTTP Error Status: ${res.status} saat mengakses URL.`);
     }
 
-    if (!res.ok) throw new Error(`Gagal mengambil link.json (HTTP ${res.status})`);
-    const data = await res.json();
-    return Array.isArray(data) ? data : [data];
+    console.log(`   ✅ BERHASIL terhubung dan mendownload file!`);
+    return await res.json();
 }
 
 // ============================================================================
 // 🚀 MAIN EXECUTION
 // ============================================================================
 (async () => {
-    // 1. Baca Progres Terakhir & Data Hasil Sebelumnya
-    let processedIds = [];
-    if (fs.existsSync(PROGRESS_FILE)) {
-        try {
-            processedIds = JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf8'));
-        } catch (e) {
-            processedIds = [];
-        }
-    }
+    // 1. Baca Progres & Output Terakhir
+    let processedIds = JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf8'));
+    let existingResults = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'));
 
-    let existingResults = [];
-    if (fs.existsSync(OUTPUT_FILE)) {
-        try {
-            existingResults = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'));
-        } catch (e) {
-            existingResults = [];
-        }
-    }
+    console.log(`📊 Status Progres: ${processedIds.length} item telah selesai diproses sebelumnya.`);
 
-    console.log(`📊 Status Progres: ${processedIds.length} item telah berhasil diproses sebelumnya.`);
-
-    // 2. Fetch Data Remote & Filter
-    let allItems = [];
+    // 2. Fetch Remote Data
+    let rawJsonData = null;
     try {
-        allItems = await fetchRemoteDatabase();
+        rawJsonData = await fetchRemoteDatabase();
     } catch (err) {
         console.error(`❌ Fetch Error: ${err.message}`);
         process.exit(1);
     }
 
-    // STRICT FILTER: Hanya pulvexa.site DAN Belum Pernah Diproses
-    const pendingItems = allItems.filter(item => {
-        const embedUrl = item.embed_url || item.url || '';
+    // Ekstraksi target pulvexa.site secara rekursif dari struktur JSON
+    const allPulvexaItems = extractPulvexaTargets(rawJsonData);
+    
+    // Filter item yang belum diproses & hilangkan duplikasi ID
+    const uniqueTargets = [];
+    const seenIds = new Set();
+
+    for (const item of allPulvexaItems) {
         const itemId = extractItemId(item);
-        return embedUrl.includes('pulvexa.site') && !processedIds.includes(itemId);
-    });
+        if (!seenIds.has(itemId) && !processedIds.includes(itemId)) {
+            seenIds.add(itemId);
+            uniqueTargets.push(item);
+        }
+    }
 
-    console.log(`🔍 Total target pulvexa.site yang belum diproses: ${pendingItems.length}`);
+    console.log(`🔍 Total target pulvexa.site baru ditemukan: ${uniqueTargets.length}`);
 
-    if (pendingItems.length === 0) {
+    if (uniqueTargets.length === 0) {
         console.log(`🎉 Tidak ada target pulvexa.site baru yang perlu diproses.`);
         process.exit(0);
     }
 
-    // 3. Ambil Item Sesuai Batch Limit
-    const batchList = pendingItems.slice(0, BATCH_LIMIT);
+    // 3. Batasi Sesuai Batch Limit
+    const batchList = uniqueTargets.slice(0, BATCH_LIMIT);
     console.log(`⚡ Memproses batch saat ini (${batchList.length} item, Limit: ${BATCH_LIMIT}).`);
 
     let browser = null;
@@ -227,7 +263,7 @@ async function fetchRemoteDatabase() {
 
         for (let i = 0; i < batchList.length; i++) {
             const item = batchList[i];
-            const embedUrl = item.embed_url || item.url || '';
+            const embedUrl = item.embed_url;
             const itemId = extractItemId(item);
             const titleSeasonEp = `${item.title || 'Video'}${item.season ? ' S' + item.season : ''}${item.episode ? 'E' + item.episode : ''}`;
 
@@ -243,7 +279,7 @@ async function fetchRemoteDatabase() {
             let initialNavCompleted = false;
             const capturedM3u8Candidates = [];
 
-            // INJEKSI LOCK PREVENT REDIRECT
+            // INJEKSI PREVENT REDIRECT
             await page.evaluateOnNewDocument(() => {
                 const dummyFn = () => {};
                 window.addEventListener('beforeunload', (e) => {
@@ -271,7 +307,7 @@ async function fetchRemoteDatabase() {
                 req.continue();
             });
 
-            // TANGKAP SEMUA M3U8 CANDIDATES
+            // TANGKAP M3U8 CANDIDATES
             page.on('response', async res => {
                 const url = res.url();
                 if (url.includes('.m3u8') || url.includes('/playlist/') || url.includes('/hls/')) {
@@ -308,11 +344,11 @@ async function fetchRemoteDatabase() {
                         const filePath = path.join(STREAMS_DIR, fileName);
                         const relativePath = `streams/${fileName}`;
 
-                        // 1. Simpan File Teks M3U8
+                        // 1. Simpan File Stream M3U8
                         fs.writeFileSync(filePath, downloadedText);
                         console.log(`\n💾 [M3U8 SUKSES] Saved -> ${relativePath}`);
 
-                        // 2. Tambahkan ke Metadata Results
+                        // 2. Simpan Metadata Hasil
                         currentResults.push({
                             ...item,
                             stream_id: itemId,
@@ -324,12 +360,12 @@ async function fetchRemoteDatabase() {
                         // 3. Masukkan ke ID yang selesai
                         processedIds.push(itemId);
 
-                        // 4. Simpan Progres & Output Real-time
+                        // 4. Save State Real-time
                         fs.writeFileSync(PROGRESS_FILE, JSON.stringify(processedIds, null, 2));
                         fs.writeFileSync(OUTPUT_FILE, JSON.stringify(currentResults, null, 2));
 
                         m3u8SuccessSaved = true;
-                        break; // Langsung berpindah ke URL berikutnya
+                        break;
                     }
                 }
 
@@ -345,7 +381,7 @@ async function fetchRemoteDatabase() {
             await delay(1000);
         }
 
-        // REGENERATE PLAYLIST.M3U SECARA KESELURUHAN
+        // REGENERATE PLAYLIST.M3U
         let m3uContent = '#EXTM3U\n\n';
         for (const resItem of currentResults) {
             const titleDisplay = `${resItem.title || 'Video'}${resItem.season ? ' S' + resItem.season : ''}${resItem.episode ? 'E' + resItem.episode : ''}`;
@@ -359,8 +395,8 @@ async function fetchRemoteDatabase() {
         fs.writeFileSync(PLAYLIST_FILE, m3uContent);
 
         console.log(`\n==================================================`);
-        console.log(`🏁 Batch Selesai! (${batchList.length} item diproses dalam siklus ini)`);
-        console.log(`📈 Sisa target pulvexa.site belum diproses: ${pendingItems.length - batchList.length}`);
+        console.log(`🏁 Batch Selesai! (${batchList.length} item diproses)`);
+        console.log(`📈 Sisa target pulvexa.site belum diproses: ${uniqueTargets.length - batchList.length}`);
         console.log(`==================================================\n`);
 
     } catch (error) {
