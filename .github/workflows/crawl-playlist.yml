@@ -1,13 +1,12 @@
-name: Auto Scrape M3U8 Streams
+name: Auto Scrape Pulvexa M3U8 Streams
 
 on:
   schedule:
-    # Dijalankan otomatis setiap 6 jam sekali (sesuaikan cron jika ingin)
+    # Berjalan otomatis setiap 6 jam sekali
     - cron: '0 */6 * * *'
-  # Memungkinkan pemicuan manual langsung dari tombol di tab Actions GitHub
+  # Memungkinkan pemicuan manual langsung dari tab Actions GitHub
   workflow_dispatch:
 
-# ⚠️ SANGAT PENTING: Memberikan izin akses WRITE agar bot bisa melakukan push commit file
 permissions:
   contents: write
 
@@ -16,42 +15,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repositori ke runner
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Setup environment Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      # 3. Install NPM package (Puppeteer, Stealth, dll)
       - name: Install Dependencies
         run: |
-          npm ci || npm install
+          npm ci || npm install puppeteer-extra puppeteer-extra-plugin-stealth puppeteer
 
-      # 4. Jalankan skrip scraper.js
       - name: Run Scraper Script
-        run: |
-          node scraper.js
+        run: node scraper.js
+        env:
+          BATCH_LIMIT: 50 # Anda bisa mengubah jumlah batch per run di sini
 
-      # 5. Commit dan Push folder streams/ beserta output.json & playlist.m3u
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Menambahkan folder streams dan file output
-          git add streams/ output.json playlist.m3u
+          # Pastikan progress.json juga di-track agar riwayat pengerjaan tersimpan
+          git add streams/ output.json playlist.m3u progress.json
           
-          # Hanya lakukan commit jika ada perubahan file
           if ! git diff --cached --quiet; then
-            git commit -m "chore: auto-update M3U8 streams and playlist [skip ci]"
+            git commit -m "chore: auto-update pulvexa streams and progress [skip ci]"
             git push
           else
-            echo "Tdk ada perubahan file, melewati proses commit."
+            echo "Tidak ada perubahan file baru."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
