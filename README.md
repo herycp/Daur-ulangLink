@@ -3,22 +3,31 @@
 <!-- INTEGRITY_REPORT_START -->
 ## 📊 Laporan Integritas Database
 
-> 🕒 **Terakhir Diperbarui:** `3/8/2026, 21.21.15 WIB`
+> 🕒 **Terakhir Diperbarui:** `4/8/2026, 10.26.20 WIB`
 
 | Parameter | Jumlah | Persentase |
 |---|---|---|
-| 🔗 **Total Seluruh Link** | **24187** | 100% |
-| 🎯 **Total Link Unik** | **23730** | - |
-| ⚠️ **Total Link Duplikat** | **457** | - |
-| ✅ **Jumlah Sudah Diproses** | **50** | 0.21% |
-| ⏳ **Jumlah Belum Diproses** | **23680** | 99.79% |
+| 🔗 **Total Seluruh Link** | **24197** | 100% |
+| 🎯 **Total Link Unik** | **23734** | - |
+| ⚠️ **Total Link Duplikat** | **463** | - |
+| ✅ **Jumlah Sudah Diproses** | **5450** | 22.96% |
+| ⏳ **Jumlah Belum Diproses** | **18284** | 77.04% |
 
 <details>
-<summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (111 Kelompok)</b></summary>
+<summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (117 Kelompok)</b></summary>
 
 <br>
 
-#### 🔗 Duplikat #1: `https://ok.ru/videoembed/9720340089523` (2 kemunculan)
+#### 🔗 Duplikat #1: `https://ok.ru/videoembed/7718037097121` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/62161.html` | `ドラマ 放送終了` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `ハンチョウ〜神南署安積班〜 #2 7年前に自殺したはずの美鈴（鶴田真由）が生きていた。そして柴崎（松尾政寿）の殺害現場から、彼女の指紋が検出された。安積（佐々木蔵之介）は美鈴が記憶を取り戻しているのではと考え、彼女が身を寄せている宮部医師（高橋長英）のもとを訪れる。宮部は美鈴の記憶が戻っていることに気づいていた。その上で素知らぬふりをしていたのだ。しかし、当の美鈴は権藤（上田耕一）への恨みと、警察への不信感を募らせていた。自殺の真相を安積に話すと、説得も聞かず家を飛び出していく。 #邦画` | `https://ok.ru/videoembed/7718037097121` | `ok.ru` | `2026-07-31 14:20:55` |
+| Item #2 | `https://9tsu.in/douga/62157.html` | `ドラマ 放送終了` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `税務調査官・窓際太郎の事件簿21 小林稔侍主演「窓際太郎の事件簿」シリーズ第21弾。表向きは東京国税局から世田谷南税務署に大左遷されたダメ税務署員。しかし、本当は政財界の癒着を暴く国税局の陰の査察官という“窓際太郎”こと窓辺太郎。今回はなんと太郎が国税局をクビになって派遣村に！？ もちろんいつものように税金の豆知識も紹介。「退職金にはどのくらい税金がかかるの？」という疑問を太郎がわかりやすく解説している。 【ストーリー】 世田谷区南税務署の窓辺太郎（小林稔侍）は「窓際」と呼ばれているが、国税局査察部長・森村（北村総一朗）の命を受けて悪を懲らす陰の税務調査官なのだ。 ある日、太郎は森村に呼び出され「国税局を辞めてくれ」と言われる。驚く太郎に森村は、天下りを繰り返し、… #邦画` | `https://ok.ru/videoembed/7718037097121` | `ok.ru` | `2026-08-01 03:55:11` |
+
+---
+
+#### 🔗 Duplikat #2: `https://ok.ru/videoembed/9720340089523` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -27,7 +36,7 @@
 
 ---
 
-#### 🔗 Duplikat #2: `https://www.dailymotion.com/dorama9tsu` (12 kemunculan)
+#### 🔗 Duplikat #3: `https://www.dailymotion.com/dorama9tsu` (12 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -46,7 +55,7 @@
 
 ---
 
-#### 🔗 Duplikat #3: `https://pulvexa.space/embed/t2L5YeEDht?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #4: `https://pulvexa.space/embed/t2L5YeEDht?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -55,7 +64,7 @@
 
 ---
 
-#### 🔗 Duplikat #4: `https://pulvexa.space/embed/yzNyIUhFbr?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #5: `https://pulvexa.space/embed/yzNyIUhFbr?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -64,7 +73,7 @@
 
 ---
 
-#### 🔗 Duplikat #5: `https://ok.ru/videoembed/8784620227076` (2 kemunculan)
+#### 🔗 Duplikat #6: `https://ok.ru/videoembed/8784620227076` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -73,7 +82,7 @@
 
 ---
 
-#### 🔗 Duplikat #6: `https://ok.ru/videoembed/8745073183236` (2 kemunculan)
+#### 🔗 Duplikat #7: `https://ok.ru/videoembed/8745073183236` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -82,7 +91,16 @@
 
 ---
 
-#### 🔗 Duplikat #7: `https://pulvexa.space/embed/l0wzmH7iYN?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #8: `https://ok.ru/videoembed/7564100635304` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/114429.html` | `金曜ロードショー` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2024/02/2024-02-16_22-21-19.png` | `金曜ロードショー 動画　2025年7月25日「ジュラシック・パーク」 シリーズ最新作公開記念★遺伝子技術で恐竜が現代によみがえる!★スピルバーグ監督、恐竜映画の金字塔番組公式サイトへ出演者<グラント博士>サム・ニール(富山敬)、<エリー・サトラー>ローラ・ダーン(弥永和子)、<イアン・マルコム>ジェフ・ゴールドブラム(大塚芳忠)、<ジョン・ハモンド>リチャード・アッテンボロー(永井一郎)、<ヘンリー・ウー博士>B・D・ウォン(中村大樹) #邦画` | `https://ok.ru/videoembed/7564100635304` | `ok.ru` | `2026-07-31 16:21:29` |
+| Item #2 | `https://9tsu.in/douga/61636.html` | `金曜ロードショー` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/09/2021-09-03_20-24-35.png` | `ジュラシック・パーク 動画　2021年9月3日　2100903 内容：監督・スティーヴン・スピルバーグ　映画の歴史を変えた恐竜映画の金字塔　遺伝子技術で恐竜が現代によみがえる!　あまりにもリアルな恐竜の動きと大迫力の映像は圧巻 出演：<グラント>サム・ニール、<サトラー>ローラ・ダーン、<マルコム>ジェフ・ゴールドブラム、<ハモンド>リチャード・アッテンボロー、<マルドゥーン>ボブ・ペック、<ジェナーロ>マーティン・フェレロ、<ウー>B・D・ウォン #邦画` | `https://ok.ru/videoembed/7564100635304` | `ok.ru` | `2026-08-01 03:55:11` |
+
+---
+
+#### 🔗 Duplikat #9: `https://pulvexa.space/embed/l0wzmH7iYN?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -91,7 +109,7 @@
 
 ---
 
-#### 🔗 Duplikat #8: `https://ok.ru/videoembed/9331209538209` (2 kemunculan)
+#### 🔗 Duplikat #10: `https://ok.ru/videoembed/9331209538209` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -100,7 +118,7 @@
 
 ---
 
-#### 🔗 Duplikat #9: `https://ok.ru/videoembed/9297010166433` (2 kemunculan)
+#### 🔗 Duplikat #11: `https://ok.ru/videoembed/9297010166433` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -109,7 +127,7 @@
 
 ---
 
-#### 🔗 Duplikat #10: `https://ok.ru/videoembed/7500878711425` (2 kemunculan)
+#### 🔗 Duplikat #12: `https://ok.ru/videoembed/7500878711425` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -118,7 +136,7 @@
 
 ---
 
-#### 🔗 Duplikat #11: `https://ok.ru/videoembed/6803960040131` (2 kemunculan)
+#### 🔗 Duplikat #13: `https://ok.ru/videoembed/6803960040131` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -127,7 +145,7 @@
 
 ---
 
-#### 🔗 Duplikat #12: `https://ok.ru/videoembed/8532980795947` (2 kemunculan)
+#### 🔗 Duplikat #14: `https://ok.ru/videoembed/8532980795947` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -136,7 +154,7 @@
 
 ---
 
-#### 🔗 Duplikat #13: `https://ok.ru/videoembed/` (329 kemunculan)
+#### 🔗 Duplikat #15: `https://ok.ru/videoembed/` (329 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -472,7 +490,7 @@
 
 ---
 
-#### 🔗 Duplikat #14: `https://pulvexa.space/embed/A8d2p8p0s0?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #16: `https://pulvexa.space/embed/A8d2p8p0s0?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -481,7 +499,7 @@
 
 ---
 
-#### 🔗 Duplikat #15: `https://pulvexa.space/embed/qJLqx9hvvf?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #17: `https://pulvexa.space/embed/qJLqx9hvvf?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -490,7 +508,7 @@
 
 ---
 
-#### 🔗 Duplikat #16: `https://ok.ru/videoembed/6660443081376` (3 kemunculan)
+#### 🔗 Duplikat #18: `https://ok.ru/videoembed/6660443081376` (3 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -500,7 +518,7 @@
 
 ---
 
-#### 🔗 Duplikat #17: `https://ok.ru/videoembed/8812365089284` (2 kemunculan)
+#### 🔗 Duplikat #19: `https://ok.ru/videoembed/8812365089284` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -509,7 +527,7 @@
 
 ---
 
-#### 🔗 Duplikat #18: `https://ok.ru/videoembed/8187765983947` (2 kemunculan)
+#### 🔗 Duplikat #20: `https://ok.ru/videoembed/8187765983947` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -518,7 +536,7 @@
 
 ---
 
-#### 🔗 Duplikat #19: `https://ok.ru/videoembed/9817850055354` (2 kemunculan)
+#### 🔗 Duplikat #21: `https://ok.ru/videoembed/9817850055354` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -527,7 +545,7 @@
 
 ---
 
-#### 🔗 Duplikat #20: `https://pulvexa.space/embed/mmsyKRe6s0?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #22: `https://pulvexa.space/embed/mmsyKRe6s0?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -536,7 +554,7 @@
 
 ---
 
-#### 🔗 Duplikat #21: `https://ok.ru/videoembed/8770697104040` (2 kemunculan)
+#### 🔗 Duplikat #23: `https://ok.ru/videoembed/8770697104040` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -545,7 +563,16 @@
 
 ---
 
-#### 🔗 Duplikat #22: `https://ok.ru/videoembed/8425524234881` (2 kemunculan)
+#### 🔗 Duplikat #24: `https://ok.ru/videoembed/10140309523180` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/105712.html` | `離婚弁護士スパイダー` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2024/10/離婚弁護士スパイダー.jpg` | `離婚弁護士スパイダー　第6話 第6話 「離婚弁護士 スパイダー」〜慰謝料争奪編〜朝倉唯(野村麻純)は、格式にこだわる厳格なしゅうとめ・美津子(丘みつ子)と息が詰まるような毎日を送っていた。心の支えは夫の渉(笠原秀幸)と5歳の息子・悟だったが、唯は渉が浮気相手と思われる篠原冬美(佐藤江梨子)と一緒にいるところを見てしまい、飛鳥(高橋メアリージュン)の元を訪れる。 #邦画` | `https://ok.ru/videoembed/10140309523180` | `ok.ru` | `2026-07-31 19:36:35` |
+| Item #2 | `https://9tsu.in/douga/86656.html` | `離婚弁護士` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2023/07/2023-07-18_13-39-59.png` | `離婚弁護士　第6話 内容：「愛と憎しみの遺産相続」 天海祐希 玉山鉄二 ミムラ 佐々木蔵之介 久我陽子 陣内孝則 津川雅彦 MEGUMI 平田満 鈴木砂羽ほか 出演：広瀬晃…山下美月、広瀬桂一…鈴木仁、牧嶋剛…伊藤あさひ、森珠希…加藤小夏、岡田敦子…高月彩良、柳沢智也…青木瞭、森恭一…姜暢雄、広瀬奈緒美…小沢真珠 #邦画` | `https://ok.ru/videoembed/10140309523180` | `ok.ru` | `2026-08-01 00:16:45` |
+
+---
+
+#### 🔗 Duplikat #25: `https://ok.ru/videoembed/8425524234881` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -554,7 +581,7 @@
 
 ---
 
-#### 🔗 Duplikat #23: `https://ok.ru/videoembed/8168092731951` (2 kemunculan)
+#### 🔗 Duplikat #26: `https://ok.ru/videoembed/8168092731951` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -563,7 +590,7 @@
 
 ---
 
-#### 🔗 Duplikat #24: `https://ok.ru/videoembed/9367181724175` (2 kemunculan)
+#### 🔗 Duplikat #27: `https://ok.ru/videoembed/9367181724175` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -572,7 +599,7 @@
 
 ---
 
-#### 🔗 Duplikat #25: `https://ok.ru/videoembed/8749916424872` (2 kemunculan)
+#### 🔗 Duplikat #28: `https://ok.ru/videoembed/8749916424872` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -581,7 +608,7 @@
 
 ---
 
-#### 🔗 Duplikat #26: `https://ok.ru/videoembed/10276191996560` (2 kemunculan)
+#### 🔗 Duplikat #29: `https://ok.ru/videoembed/10276191996560` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -590,7 +617,7 @@
 
 ---
 
-#### 🔗 Duplikat #27: `https://pulvexa.space/embed/zMm2uZbmqD?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #30: `https://pulvexa.space/embed/zMm2uZbmqD?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -599,7 +626,7 @@
 
 ---
 
-#### 🔗 Duplikat #28: `https://ok.ru/videoembed/9095335512777` (2 kemunculan)
+#### 🔗 Duplikat #31: `https://ok.ru/videoembed/9095335512777` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -608,7 +635,7 @@
 
 ---
 
-#### 🔗 Duplikat #29: `https://ok.ru/videoembed/9576100203054` (2 kemunculan)
+#### 🔗 Duplikat #32: `https://ok.ru/videoembed/9576100203054` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -617,7 +644,7 @@
 
 ---
 
-#### 🔗 Duplikat #30: `https://ok.ru/videoembed/9381098752527` (2 kemunculan)
+#### 🔗 Duplikat #33: `https://ok.ru/videoembed/9381098752527` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -626,7 +653,7 @@
 
 ---
 
-#### 🔗 Duplikat #31: `https://ok.ru/videoembed/9401960172079` (2 kemunculan)
+#### 🔗 Duplikat #34: `https://ok.ru/videoembed/9401960172079` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -635,7 +662,7 @@
 
 ---
 
-#### 🔗 Duplikat #32: `https://ok.ru/videoembed/8575729928958` (2 kemunculan)
+#### 🔗 Duplikat #35: `https://ok.ru/videoembed/8575729928958` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -644,7 +671,7 @@
 
 ---
 
-#### 🔗 Duplikat #33: `https://ok.ru/videoembed/8759682075264` (2 kemunculan)
+#### 🔗 Duplikat #36: `https://ok.ru/videoembed/8759682075264` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -653,7 +680,7 @@
 
 ---
 
-#### 🔗 Duplikat #34: `https://ok.ru/videoembed/8418383694466` (2 kemunculan)
+#### 🔗 Duplikat #37: `https://ok.ru/videoembed/8418383694466` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -662,7 +689,7 @@
 
 ---
 
-#### 🔗 Duplikat #35: `https://ok.ru/videoembed/9238497266355` (2 kemunculan)
+#### 🔗 Duplikat #38: `https://ok.ru/videoembed/9238497266355` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -671,7 +698,7 @@
 
 ---
 
-#### 🔗 Duplikat #36: `https://ok.ru/videoembed/7291094239993` (2 kemunculan)
+#### 🔗 Duplikat #39: `https://ok.ru/videoembed/7291094239993` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -680,7 +707,7 @@
 
 ---
 
-#### 🔗 Duplikat #37: `https://ok.ru/videoembed/7291094174457` (2 kemunculan)
+#### 🔗 Duplikat #40: `https://ok.ru/videoembed/7291094174457` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -689,7 +716,7 @@
 
 ---
 
-#### 🔗 Duplikat #38: `https://ok.ru/videoembed/7291094043385` (2 kemunculan)
+#### 🔗 Duplikat #41: `https://ok.ru/videoembed/7291094043385` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -698,7 +725,7 @@
 
 ---
 
-#### 🔗 Duplikat #39: `https://ok.ru/videoembed/9347031304782` (2 kemunculan)
+#### 🔗 Duplikat #42: `https://ok.ru/videoembed/9347031304782` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -707,7 +734,7 @@
 
 ---
 
-#### 🔗 Duplikat #40: `https://ok.ru/videoembed/9192615971417` (2 kemunculan)
+#### 🔗 Duplikat #43: `https://ok.ru/videoembed/9192615971417` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -716,7 +743,7 @@
 
 ---
 
-#### 🔗 Duplikat #41: `https://ok.ru/videoembed/8610999503459` (2 kemunculan)
+#### 🔗 Duplikat #44: `https://ok.ru/videoembed/8610999503459` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -725,7 +752,16 @@
 
 ---
 
-#### 🔗 Duplikat #42: `https://pulvexa.space/embed/BSX6uabiCk?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #45: `https://ok.ru/videoembed/7292865284672` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/97176.html` | `無料 映画` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png` | `戦慄怪奇ワールド コワすぎ 「ノロイ」「オカルト」「貞子vs伽椰子」などで知られるホラー界の鬼才・白石晃士監督がPOV形式で描くフェイクドキュメンタリー「戦慄怪奇ファイル　コワすぎ！」シリーズの8年ぶりの続編となる長編映画。 呪われた廃墟で撮影された投稿映像。そこには、不気味な祭壇と全身血まみれの赤い女、そして謎の赤ん坊の泣き声が収められていた。粗暴なプロデューサー・工藤とディレクターの市川、カメラマンの田代による「コワすぎ！」チームは、怪異を解き明かすべく取材に乗り出すが……。 これまでのシリーズに引き続き白石監督が田代カメラマン役で出演するほか自ら撮影も手がけ、工藤プロデューサーを大迫茂生、市川ディレクターを久保山智夏が演じる。 2023年製作／78分／日本 配給：アルバトロス・フィルム 劇場公開日：2023年9月8日 #邦画` | `https://ok.ru/videoembed/7292865284672` | `ok.ru` | `2026-07-31 22:15:18` |
+| Item #2 | `https://9tsu.in/douga/93789.html` | `無料 映画` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2024/01/movie-9tsu.jpg` | `悪魔がはらわたでいけにえで私 「異物」シリーズなど独自の世界観とユーモアでジャンルにとらわれない作品づくりを続ける宇賀那健一監督が、世界各地の映画祭で注目を集めた自身の短編映画「往訪」に新たな登場人物と展開を加えて長編映画として完成させたバイオレンスホラー。ハルカ、ナナ、タカノリは、突然連絡が取れなくなったバンドメンバーのソウタの家を訪ねる。ソウタの家は窓ガラス一面に新聞紙が貼られており、彼の様子もどこかおかしい。不思議な力に導かれたナナが部屋の奥に貼られている不気味なお札を剥がすと、別の世界への扉が開かれてしまう。数カ月後、音楽プロデューサーのコウスケが目を覚ますと、彼は見覚えのないバーの店内に縛られていた。近くには見知らぬ男レンが横たわっており、コウスケは必死に彼に呼びかけるが……。キャストには「啄む嘴」の詩歩、「テン・ストーリーズ」の野村啓介、「ある職場」の平井早紀のほか、「悪魔の毒々モンスター」などで知られるロイド・カウフマン監督も出演。2023年製作／60分／R15+／日本配給：エクストリーム劇場公開日：2024年2月23日 #邦画` | `https://ok.ru/videoembed/7292865284672` | `ok.ru` | `2026-07-31 22:56:12` |
+
+---
+
+#### 🔗 Duplikat #46: `https://pulvexa.space/embed/BSX6uabiCk?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -734,16 +770,34 @@
 
 ---
 
-#### 🔗 Duplikat #43: `https://blogspherenews.xyz/embed/66fbd3152ec7793cc2a87c0e` (2 kemunculan)
+#### 🔗 Duplikat #47: `https://ok.ru/videoembed/7347156093658` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/95134.html` | `蜜と毒` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2024/01/2024-01-10_22-44-26.png` | `蜜と毒　第6話 内容：亮平(白石隼也)のペンを手に入れた大塚(柾木玲弥)はマチコ(入来茉里)にゆさぶりをかけてくる。そして亮平を待ち伏せし話しかける。何も知らない亮平は大塚を飲みに誘い…優梨子(大谷凜香)の部屋で亮平(白石隼也)のペンを手に入れた大塚(柾木玲弥)はマチコ(入来茉里)にそのペンを見せびらかし、ゆさぶりをかけてくる。そして亮平を待ち伏せし、言葉巧みに話しかける。優梨子によって全身に歯形をつけられている亮平は、家に帰りづらいこともあって大塚を飲みに誘う。今日こそ大塚とのことを告白し、謝罪しようと亮平の帰りを待つマチコだったが、あろうことか亮平が大塚を家に連れてきて…。 出演：小坂マチコ…入来茉里、小坂亮平　マチコの夫…白石隼也、大塚圭介　マチコの同僚…柾木玲弥、小鳥遊優梨子　亮平の不倫相手…大谷凜香、中井奈緒　マチコの同僚…玉井らん、下川紗英　マチコの同僚…竹野留里、塚田　亮平の部下…田中洸希、上田部長　マチコの上司…梨本謙次郎 #邦画` | `https://blogspherenews.xyz/embed/66fbd3152ec7793cc2a87c0e` | `blogspherenews.xyz` | `2026-07-31 22:36:26` |
-| Item #2 | `https://9tsu.in/douga/94575.html` | `蜜と毒` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2024/01/2024-01-10_22-44-26.png` | `蜜と毒　第4話 内容：社内で見積のデータが消えるトラブルが発生しマチコ(入来茉里)は大塚(柾木玲弥)の仕業ではと問い詰める。マチコを抱き寄せる大塚。その様子を奈緒(玉井らん)が見ていて… 出演：小坂マチコ…入来茉里、小坂亮平　マチコの夫…白石隼也、大塚圭介　マチコの同僚…柾木玲弥、小鳥遊優梨子　亮平の不倫相手…大谷凜香、中井奈緒　マチコの同僚…玉井らん、下川紗英　マチコの同僚…竹野留里、塚田　亮平の部下…田中洸希、上田部長　マチコの上司…梨本謙次郎 #邦画` | `https://blogspherenews.xyz/embed/66fbd3152ec7793cc2a87c0e` | `blogspherenews.xyz` | `2026-07-31 22:36:26` |
+| Item #1 | `https://9tsu.in/douga/95900.html` | `救命病棟24時　第2シリーズ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/12/thum-9tsu.jpg` | `救命病棟24時　第2シリーズ　第2話 港北医大・救命救急センターに進藤（江口洋介）がやってきて数日が経過した。だが、進藤とたまき（松雪泰子）の対立はあいかわらずで、そんな雰囲気の中にいる馬場（宮迫博之）、城島（谷原章介）らも不満を漏らす。小田切（渡辺いっけい）も躊躇するほどにセンター内の不協和音は深く重く続いている。だが、そんな時にも待ったなしで患者は運ばれてくる。ストレッチャーに乗せられた中年男性の患者は全身ずぶ濡れで顔面を血に染め、意識不明の重体。しかし男の身元を明かすものは何も残されていなかった。すると進藤はスーツの胸を開き、そこに『田中』の名字を確認した。翌日、目を覚ました『田中』（井上順）がおかしなことを言い出した。自分のことが何ひとつわからないというのだ。「記憶喪失！？」困惑するゆき（須藤理彩）。頭部のレントゲン写真を見て、異常はないと思う進藤。 #邦画` | `https://ok.ru/videoembed/7347156093658` | `ok.ru` | `2026-07-31 22:15:18` |
+| Item #2 | `https://9tsu.in/douga/95201.html` | `救命病棟24時　第１シリーズ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/12/thum-9tsu.jpg` | `救命病棟24時　第１シリーズ　第2話 心肺停止状態の男性が運び込まれた。進藤（江口洋介）を中心としたスタッフは整然と動き始めるが、不慣れな楓（松嶋菜々子）は治療室から追い出されてしまう。 連絡を受けた患者の男性の弟は「死んだら連絡をくれ」と冷たい。進藤も早めに死亡を確認する。朝の会議で、楓の先輩研修医、辻（八嶋智人）は、進藤の処置を非難するが、進藤に軽くあしらわれる。 楓は指導医、進藤の人間性を疑問視するが、逆に辻は楓の未熟さを指摘する。そこへ、辻の発言を聞き込んだ患者の弟が現れ、進藤の不手際を問題化して金を脅し取ろうとする。しかし、逆に医局長の多田（清水章吾）に脅されてしまう。 楓は、彼らの会話から、進藤が訪れる患者の早紀（高田美佐） #邦画` | `https://ok.ru/videoembed/7347156093658` | `ok.ru` | `2026-07-31 22:36:26` |
 
 ---
 
-#### 🔗 Duplikat #44: `https://pulvexa.space/embed/618Hz3M1oK?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #48: `https://ok.ru/videoembed/8380041464471` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/95902.html` | `救命病棟24時　第2シリーズ` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/12/thum-9tsu.jpg` | `救命病棟24時　第2シリーズ　第3話 「やめる方に一万円」「僕も」「じゃ僕も」「みんな同じだったら賭けになりませんよ」。その日、医局に集まっていた馬場（宮迫博之）、城島（谷原章介）らは賭けで盛り上がっていた。それは研修医・矢部（伊藤英明）が続くか辞めるかというもの。しかし、指導医が進藤（江口洋介）とあっては矢部が続くはずもないと皆が思っていた。神林（小日向文世）だけは、大穴狙いで”矢部辞めない”に賭けるのだった。当然そんな医師たちの中には加わることもなく、たまき（松雪泰子）は転んで怪我をしたという女性の診断にあたっていた。しかし、激しく乱れた服装の様子から見てレイプされたのは一目瞭然。、とその時、手当てを受けていた女性の表情がみるみる変わった。視線の先には頭をタオルで押さえ治療を求めやってきたアフロヘアーの男。たまきは、その男がレイプ犯と確信。小田切（渡辺いっけい）のもとへ直行。小田切は担当の神林に連絡を入れ事情を伝えると、警察がくるまで男をそれと気付かせずつなぎ止めておくよう指示を出した。その後進藤、たまきらの臨機応変な対応で見事レイプ犯を警察に引き渡すことに成功。 #邦画` | `https://ok.ru/videoembed/8380041464471` | `ok.ru` | `2026-07-31 22:15:18` |
+| Item #2 | `https://9tsu.in/douga/95349.html` | `救命病棟24時　第１シリーズ` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png` | `救命病棟24時　第１シリーズ　第3話 ピストルで撃たれた中野（阿藤海）が送られてきたが、続いて食中毒にかかった草野球チームのメンバーが運び込まれて救命救急センターは目の回るような忙しさだ。そんなところへ、治療ミスを冒して故郷へ帰ろうとした辻（八嶋智人）と、辻の忘れ物を届けた楓（松嶋菜々子）とが、腹痛で倒れた道子（角田よしこ）を羽田から運び込んだ。道子は46歳。高齢妊娠に加え、高血圧と糖尿病の持ち主。進藤（江口洋介）は道子の夫、佐竹（斎藤暁）に帝王切開をすすめている。仕事が一段落したころ、楓は医局長の多田（清水章吾）に、病院をやめようとした辻のことを弁護するが、それがかえって辻にいたたまれない思いをさせる。さらに、妊娠と分かった女子高生に早期堕胎をすすめて怒らせる。おまけに、学会に発表する論文を打ち込んでいた堺（杉本哲太）のパソコンのコードを蹴飛ばし、データを消してしまう。落ち込む楓は、自分を尊敬してくれるゆき #邦画` | `https://ok.ru/videoembed/8380041464471` | `ok.ru` | `2026-07-31 22:36:26` |
+
+---
+
+#### 🔗 Duplikat #49: `https://ok.ru/videoembed/7468378950183` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/95134.html` | `蜜と毒` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2024/01/2024-01-10_22-44-26.png` | `蜜と毒　第6話 内容：亮平(白石隼也)のペンを手に入れた大塚(柾木玲弥)はマチコ(入来茉里)にゆさぶりをかけてくる。そして亮平を待ち伏せし話しかける。何も知らない亮平は大塚を飲みに誘い…優梨子(大谷凜香)の部屋で亮平(白石隼也)のペンを手に入れた大塚(柾木玲弥)はマチコ(入来茉里)にそのペンを見せびらかし、ゆさぶりをかけてくる。そして亮平を待ち伏せし、言葉巧みに話しかける。優梨子によって全身に歯形をつけられている亮平は、家に帰りづらいこともあって大塚を飲みに誘う。今日こそ大塚とのことを告白し、謝罪しようと亮平の帰りを待つマチコだったが、あろうことか亮平が大塚を家に連れてきて…。 出演：小坂マチコ…入来茉里、小坂亮平　マチコの夫…白石隼也、大塚圭介　マチコの同僚…柾木玲弥、小鳥遊優梨子　亮平の不倫相手…大谷凜香、中井奈緒　マチコの同僚…玉井らん、下川紗英　マチコの同僚…竹野留里、塚田　亮平の部下…田中洸希、上田部長　マチコの上司…梨本謙次郎 #邦画` | `https://ok.ru/videoembed/7468378950183` | `ok.ru` | `2026-07-31 22:36:26` |
+| Item #2 | `https://9tsu.in/douga/94575.html` | `蜜と毒` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2024/01/2024-01-10_22-44-26.png` | `蜜と毒　第4話 内容：社内で見積のデータが消えるトラブルが発生しマチコ(入来茉里)は大塚(柾木玲弥)の仕業ではと問い詰める。マチコを抱き寄せる大塚。その様子を奈緒(玉井らん)が見ていて… 出演：小坂マチコ…入来茉里、小坂亮平　マチコの夫…白石隼也、大塚圭介　マチコの同僚…柾木玲弥、小鳥遊優梨子　亮平の不倫相手…大谷凜香、中井奈緒　マチコの同僚…玉井らん、下川紗英　マチコの同僚…竹野留里、塚田　亮平の部下…田中洸希、上田部長　マチコの上司…梨本謙次郎 #邦画` | `https://ok.ru/videoembed/7468378950183` | `ok.ru` | `2026-07-31 22:36:26` |
+
+---
+
+#### 🔗 Duplikat #50: `https://pulvexa.space/embed/618Hz3M1oK?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -752,7 +806,7 @@
 
 ---
 
-#### 🔗 Duplikat #45: `https://ok.ru/videoembed/2507337042653` (2 kemunculan)
+#### 🔗 Duplikat #51: `https://ok.ru/videoembed/2507337042653` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -761,16 +815,16 @@
 
 ---
 
-#### 🔗 Duplikat #46: `https://blogspherenews.xyz/embed/67012cdf172b884e34da5a2e` (2 kemunculan)
+#### 🔗 Duplikat #52: `https://ok.ru/videoembed/7199292656322` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/68074.html` | `相棒 season 20` | `20` | `17` | `https://9tsu.in/wp-content/uploads/2021/10/2021-10-13_15-48-48.png` | `相棒 season 20　第17話 動画　2021年3月2日　220302 内容：第17話「米沢守再びの事件」 米沢守が4年ぶりに登場! 鉄道をめぐり殺人事件が発生!? 特命係&米沢がタッグを組む!! 出演：水谷豊、反町隆史、川原和久、山中崇史、篠原ゆき子、田中隆三 ほか、高橋和也 ほか #邦画` | `https://blogspherenews.xyz/embed/67012cdf172b884e34da5a2e` | `blogspherenews.xyz` | `2026-07-31 22:56:12` |
-| Item #2 | `https://9tsu.in/douga/68634.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `相棒17 第18集 品田（鶴田忍）という古道具店の主・通称“シナトラ”が、孫の直人（長谷川ティティ）と共に不法投棄現場で死体を発見。あらぬ疑いが掛けられるのを避けるため、“親切な第三者”を巻き込んで、改めて死体の発見者になろうと一計を案じる。親切心から、その浅はかな計画に巻き込まれてしまった幸子（鈴木杏樹）だったが、なぜか現場から死体が消えてしまう。そんな中、幸子から「身元不明の遺体が見つかっていないか」という問い合わせを受けた右京（水谷豊）と亘（反町隆史）は、事情も分からないまま所轄に問い合わせを。するとその日、小さなリフォーム店の店主が、自殺と見られる状況で発見されたことが判明。右京はその現場に不審を覚え、所轄の担当刑事に司法解剖を促す。すると、店主は自殺ではなく他殺で、闇金まがいの会社に借金があったことも分かる。いっぽう、奇妙なかたちでシナトラと顔見知りになった幸子は、シナトラの自宅でもう一人の孫で高校生の彬（浦上晟周）を紹介される。幸子は、思い詰めたような彬の様子から、何か困ったことに巻き込まれているのではないかと心配するが…!?不運な人生を乗り越えた幸子に忍び寄る複雑な難事件…鍵を握るのは幸子に救いを求めてきた青年!? #相棒 season17,相棒 17, Aibou Season17, Aibou17 #邦画` | `https://blogspherenews.xyz/embed/67012cdf172b884e34da5a2e` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/68074.html` | `相棒 season 20` | `20` | `17` | `https://9tsu.in/wp-content/uploads/2021/10/2021-10-13_15-48-48.png` | `相棒 season 20　第17話 動画　2021年3月2日　220302 内容：第17話「米沢守再びの事件」 米沢守が4年ぶりに登場! 鉄道をめぐり殺人事件が発生!? 特命係&米沢がタッグを組む!! 出演：水谷豊、反町隆史、川原和久、山中崇史、篠原ゆき子、田中隆三 ほか、高橋和也 ほか #邦画` | `https://ok.ru/videoembed/7199292656322` | `ok.ru` | `2026-07-31 22:56:12` |
+| Item #2 | `https://9tsu.in/douga/68634.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `相棒17 第18集 品田（鶴田忍）という古道具店の主・通称“シナトラ”が、孫の直人（長谷川ティティ）と共に不法投棄現場で死体を発見。あらぬ疑いが掛けられるのを避けるため、“親切な第三者”を巻き込んで、改めて死体の発見者になろうと一計を案じる。親切心から、その浅はかな計画に巻き込まれてしまった幸子（鈴木杏樹）だったが、なぜか現場から死体が消えてしまう。そんな中、幸子から「身元不明の遺体が見つかっていないか」という問い合わせを受けた右京（水谷豊）と亘（反町隆史）は、事情も分からないまま所轄に問い合わせを。するとその日、小さなリフォーム店の店主が、自殺と見られる状況で発見されたことが判明。右京はその現場に不審を覚え、所轄の担当刑事に司法解剖を促す。すると、店主は自殺ではなく他殺で、闇金まがいの会社に借金があったことも分かる。いっぽう、奇妙なかたちでシナトラと顔見知りになった幸子は、シナトラの自宅でもう一人の孫で高校生の彬（浦上晟周）を紹介される。幸子は、思い詰めたような彬の様子から、何か困ったことに巻き込まれているのではないかと心配するが…!?不運な人生を乗り越えた幸子に忍び寄る複雑な難事件…鍵を握るのは幸子に救いを求めてきた青年!? #相棒 season17,相棒 17, Aibou Season17, Aibou17 #邦画` | `https://ok.ru/videoembed/7199292656322` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #47: `https://pulvexa.space/embed/yCnibc0pNV?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #53: `https://pulvexa.space/embed/yCnibc0pNV?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -779,34 +833,34 @@
 
 ---
 
-#### 🔗 Duplikat #48: `https://blogspherenews.xyz/embed/66fbd31c2ec7793cc2a87c35` (2 kemunculan)
+#### 🔗 Duplikat #54: `https://ok.ru/videoembed/8569014848114` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/92255.html` | `帰ってきたらいっぱいして` | `1` | `7` | `https://9tsu.in/wp-content/uploads/2023/11/2023-11-09_18-55-16.png` | `帰ってきたらいっぱいして　第7話 内容：【まさかの三角関係？】地上波ギリギリ！？妄想と現実が交錯する同棲ラブストーリー！直哉とデートで訪れたレストランで朱音は直哉の会社の先輩・桐原歩と偶然遭遇し…！？ 出演：高城直哉…小島健、福永朱音…浅川梨奈、桐原歩…宮崎秋人 #邦画` | `https://blogspherenews.xyz/embed/66fbd31c2ec7793cc2a87c35` | `blogspherenews.xyz` | `2026-07-31 23:15:38` |
-| Item #2 | `https://9tsu.in/douga/91920.html` | `帰ってきたらいっぱいして` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2023/11/2023-11-09_18-55-16.png` | `帰ってきたらいっぱいして　第6話 内容：直哉の従妹の芽依から直哉を知らなすぎると言われた朱音は、漫画に生かすためにも直哉の過去を探る決意をし、尾行を決行する。すると直哉は仕事終わりにバッティングセンターを訪れ、オーナーの正和と親しそうに話したり何かを振り払うかのようにバッティングに打ち込む直哉を目撃する。初めて見る直哉の真剣で時にどこか寂し気な表情に驚く朱音。帰っていく直哉を引き続き尾行しようとしたところ、正和に呼び止められ、直哉について話をすることに。直哉の幼なじみの父親だという正和は、昔のことを尋ねる朱音に本人に聞いた方がいいと直哉を呼び戻す。参考資料としてだけでなく、直哉のことを理解したいと言う朱音に、「明後日、ちょっと付き合って」と頼む直哉。直哉は自身の過去を打ち明けるため、朱音をとある場所へ連れていき…！？。 出演：高城直哉…小島健、福永朱音…浅川梨奈、桐原歩…宮崎秋人 #邦画` | `https://blogspherenews.xyz/embed/66fbd31c2ec7793cc2a87c35` | `blogspherenews.xyz` | `2026-07-31 23:15:38` |
+| Item #1 | `https://9tsu.in/douga/92255.html` | `帰ってきたらいっぱいして` | `1` | `7` | `https://9tsu.in/wp-content/uploads/2023/11/2023-11-09_18-55-16.png` | `帰ってきたらいっぱいして　第7話 内容：【まさかの三角関係？】地上波ギリギリ！？妄想と現実が交錯する同棲ラブストーリー！直哉とデートで訪れたレストランで朱音は直哉の会社の先輩・桐原歩と偶然遭遇し…！？ 出演：高城直哉…小島健、福永朱音…浅川梨奈、桐原歩…宮崎秋人 #邦画` | `https://ok.ru/videoembed/8569014848114` | `ok.ru` | `2026-07-31 23:15:38` |
+| Item #2 | `https://9tsu.in/douga/91920.html` | `帰ってきたらいっぱいして` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2023/11/2023-11-09_18-55-16.png` | `帰ってきたらいっぱいして　第6話 内容：直哉の従妹の芽依から直哉を知らなすぎると言われた朱音は、漫画に生かすためにも直哉の過去を探る決意をし、尾行を決行する。すると直哉は仕事終わりにバッティングセンターを訪れ、オーナーの正和と親しそうに話したり何かを振り払うかのようにバッティングに打ち込む直哉を目撃する。初めて見る直哉の真剣で時にどこか寂し気な表情に驚く朱音。帰っていく直哉を引き続き尾行しようとしたところ、正和に呼び止められ、直哉について話をすることに。直哉の幼なじみの父親だという正和は、昔のことを尋ねる朱音に本人に聞いた方がいいと直哉を呼び戻す。参考資料としてだけでなく、直哉のことを理解したいと言う朱音に、「明後日、ちょっと付き合って」と頼む直哉。直哉は自身の過去を打ち明けるため、朱音をとある場所へ連れていき…！？。 出演：高城直哉…小島健、福永朱音…浅川梨奈、桐原歩…宮崎秋人 #邦画` | `https://ok.ru/videoembed/8569014848114` | `ok.ru` | `2026-07-31 23:15:38` |
 
 ---
 
-#### 🔗 Duplikat #49: `https://blogspherenews.xyz/embed/67012ae4172b884e34da4d2a` (2 kemunculan)
+#### 🔗 Duplikat #55: `https://ok.ru/videoembed/7187777522370` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/69472.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎サスペンス 探偵左文字進9「16年目の訪問者」 水谷豊主演「探偵左文字進」シリーズ第9弾。左文字の親友・矢部警部がついに結婚式を迎えるが、そこで事件が発生！ 結婚式場で倒れた男が左文字に託した「マリア」というメッセージの意味は？ 左文字が矢部警部のために調べ上げた事件は意外な展開を見せていく…。また今回から秘書・麻生史子役で戸田恵子が、矢部警部役で布施博が新キャストとして出演。 【ストーリー】 左文字進（水谷豊）の友人・矢部警部（布施博）は幸せに満ちあふれた顔で教会にいた。お見合い17回の末、念願叶いやっと結婚にこぎつけ、今まさに挙式の真っ最中だったのだ。ところが、その目の前で事件は起きた。新婦・香織（藤田佳子）の前に、場違いな風体の男が近づき手を伸ばす。とっさに彼女をかばおうと前に立った左文字に託すように、男は手に握りしめた紙を渡す。そして、かすかな声で「僕のマリア…」とつぶやいて倒れ、息絶えた。神奈川県警の調べにより、男は飯田尚（板倉臣郎）という名前であることが判明する。 #邦画` | `https://blogspherenews.xyz/embed/67012ae4172b884e34da4d2a` | `blogspherenews.xyz` | `2026-07-31 23:15:38` |
-| Item #2 | `https://9tsu.in/douga/69449.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎サスペンス 探偵左文字進8「鶴富姫伝説の殺意」 水谷豊主演「探偵左文字進」シリーズ第8弾。今回の舞台は宮崎。「仇討ち伝説」が絡む難事件に巻き込まれた記憶喪失の男の正体を、左文字が突き止める。ゲスト女優は羽田美智子。彼女の存在がドラマの展開をさらにミステリアスなものにしている。記憶喪失の男にベンガル、左文字の親友である医師に丹波義隆など豪華キャストでストーリーは展開していく。【ストーリー】左文字（水谷豊）の友人の医師・川中義昭（丹波義隆）から、記憶喪失の男（ベンガル）の身元調査を依頼される。男が持っていた宮崎のホテルのマッチと「モリシマミヅキ」という言葉から、左文字は元医師で宮崎の代議士・高村の秘書・森島みづき #邦画` | `https://blogspherenews.xyz/embed/67012ae4172b884e34da4d2a` | `blogspherenews.xyz` | `2026-07-31 23:15:38` |
+| Item #1 | `https://9tsu.in/douga/69472.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎サスペンス 探偵左文字進9「16年目の訪問者」 水谷豊主演「探偵左文字進」シリーズ第9弾。左文字の親友・矢部警部がついに結婚式を迎えるが、そこで事件が発生！ 結婚式場で倒れた男が左文字に託した「マリア」というメッセージの意味は？ 左文字が矢部警部のために調べ上げた事件は意外な展開を見せていく…。また今回から秘書・麻生史子役で戸田恵子が、矢部警部役で布施博が新キャストとして出演。 【ストーリー】 左文字進（水谷豊）の友人・矢部警部（布施博）は幸せに満ちあふれた顔で教会にいた。お見合い17回の末、念願叶いやっと結婚にこぎつけ、今まさに挙式の真っ最中だったのだ。ところが、その目の前で事件は起きた。新婦・香織（藤田佳子）の前に、場違いな風体の男が近づき手を伸ばす。とっさに彼女をかばおうと前に立った左文字に託すように、男は手に握りしめた紙を渡す。そして、かすかな声で「僕のマリア…」とつぶやいて倒れ、息絶えた。神奈川県警の調べにより、男は飯田尚（板倉臣郎）という名前であることが判明する。 #邦画` | `https://ok.ru/videoembed/7187777522370` | `ok.ru` | `2026-07-31 23:15:38` |
+| Item #2 | `https://9tsu.in/douga/69449.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎サスペンス 探偵左文字進8「鶴富姫伝説の殺意」 水谷豊主演「探偵左文字進」シリーズ第8弾。今回の舞台は宮崎。「仇討ち伝説」が絡む難事件に巻き込まれた記憶喪失の男の正体を、左文字が突き止める。ゲスト女優は羽田美智子。彼女の存在がドラマの展開をさらにミステリアスなものにしている。記憶喪失の男にベンガル、左文字の親友である医師に丹波義隆など豪華キャストでストーリーは展開していく。【ストーリー】左文字（水谷豊）の友人の医師・川中義昭（丹波義隆）から、記憶喪失の男（ベンガル）の身元調査を依頼される。男が持っていた宮崎のホテルのマッチと「モリシマミヅキ」という言葉から、左文字は元医師で宮崎の代議士・高村の秘書・森島みづき #邦画` | `https://ok.ru/videoembed/7187777522370` | `ok.ru` | `2026-07-31 23:15:38` |
 
 ---
 
-#### 🔗 Duplikat #50: `https://blogspherenews.xyz/embed/66fbd4592ec7793cc2a882c1` (2 kemunculan)
+#### 🔗 Duplikat #56: `https://ok.ru/videoembed/7913584855699` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/90464.html` | `Maybe 恋が聴こえる` | `1` | `7` | `https://9tsu.in/wp-content/uploads/2023/10/2023-10-16_22-13-34.png` | `Maybe 恋が聴こえる　第7話 内容：企画・原案　秋元康▽声優学校を舞台に、謎の声に恋する“声キュン”ラブストーリー！▽超豪華声優がドラマ出演！朝の公園で奏汰（醍醐虎汰朗）から衝撃的な提案をされた蕾未(大和奈央)。そんな２人のやり取りを偶然目撃してしまった陸（橋本涼）は動揺を隠せず…。そんな中、奏汰は練習のためにと蕾未をカラオケに誘う。 出演：大和奈央、橋本涼、醍醐虎汰朗 #邦画` | `https://blogspherenews.xyz/embed/66fbd4592ec7793cc2a882c1` | `blogspherenews.xyz` | `2026-07-31 23:36:28` |
-| Item #2 | `https://9tsu.in/douga/90409.html` | `Maybe 恋が聴こえる` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2023/10/2023-10-24_20-52-04.png` | `Maybe 恋が聴こえる　第6話 内容：企画・原案　秋元康▽声優学校を舞台に、謎の声に恋する“声キュン”ラブストーリー！▽超豪華声優がドラマ出演！蕾未(大和奈央)の思いもよらぬ言葉によって、蕾未のことを意識し始めてしまった陸（橋本涼）。そんな中、ラブシーンのアフレコ練習にやる気満々の蕾未は、その相手として陸に声をかけるが…。 出演：大和奈央、橋本涼、醍醐虎汰朗 #邦画` | `https://blogspherenews.xyz/embed/66fbd4592ec7793cc2a882c1` | `blogspherenews.xyz` | `2026-07-31 23:36:28` |
+| Item #1 | `https://9tsu.in/douga/90464.html` | `Maybe 恋が聴こえる` | `1` | `7` | `https://9tsu.in/wp-content/uploads/2023/10/2023-10-16_22-13-34.png` | `Maybe 恋が聴こえる　第7話 内容：企画・原案　秋元康▽声優学校を舞台に、謎の声に恋する“声キュン”ラブストーリー！▽超豪華声優がドラマ出演！朝の公園で奏汰（醍醐虎汰朗）から衝撃的な提案をされた蕾未(大和奈央)。そんな２人のやり取りを偶然目撃してしまった陸（橋本涼）は動揺を隠せず…。そんな中、奏汰は練習のためにと蕾未をカラオケに誘う。 出演：大和奈央、橋本涼、醍醐虎汰朗 #邦画` | `https://ok.ru/videoembed/7913584855699` | `ok.ru` | `2026-07-31 23:36:28` |
+| Item #2 | `https://9tsu.in/douga/90409.html` | `Maybe 恋が聴こえる` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2023/10/2023-10-24_20-52-04.png` | `Maybe 恋が聴こえる　第6話 内容：企画・原案　秋元康▽声優学校を舞台に、謎の声に恋する“声キュン”ラブストーリー！▽超豪華声優がドラマ出演！蕾未(大和奈央)の思いもよらぬ言葉によって、蕾未のことを意識し始めてしまった陸（橋本涼）。そんな中、ラブシーンのアフレコ練習にやる気満々の蕾未は、その相手として陸に声をかけるが…。 出演：大和奈央、橋本涼、醍醐虎汰朗 #邦画` | `https://ok.ru/videoembed/7913584855699` | `ok.ru` | `2026-07-31 23:36:28` |
 
 ---
 
-#### 🔗 Duplikat #51: `https://pulvexa.space/embed/tSKwldXmFV?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #57: `https://pulvexa.space/embed/tSKwldXmFV?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -815,7 +869,7 @@
 
 ---
 
-#### 🔗 Duplikat #52: `https://pulvexa.space/embed/U0W3WOOfcd?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #58: `https://pulvexa.space/embed/U0W3WOOfcd?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -824,34 +878,34 @@
 
 ---
 
-#### 🔗 Duplikat #53: `https://blogspherenews.xyz/embed/66fbd3952ec7793cc2a87ed1` (2 kemunculan)
+#### 🔗 Duplikat #59: `https://ok.ru/videoembed/7469682330151` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/88649.html` | `日曜ミステリー` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2020/06/theater9.jpg` | `日曜ミステリー【主演・田中圭】ブラックポストマン　初回拡大スペシャル 内容：かつて子供のために生まれた郵便ポストがあった。投函すれば“ネバーランドの悪魔”が悪い大人に制裁を与えてくれるという特別なポスト。だが“悪魔”はある事件をきっかけに突然消えてしまった。それから10年経ったある日、ホスピスで働く元郵便配達人の副島力也(田中圭)は、再びポストに手紙が投函され始めたことを知り、郵便局に帰ってくる。やがて町では“ネバーランドの悪魔”を名乗る連続殺人事件が発生し始めて…。 出演：副島力也…田中圭、草薙桃…志田未来、祖父江ひなた…高橋メアリージュン、加納直樹…平山浩行、風間翔子…金澤美穂、原田遥香…近藤春菜（ハリセンボン）、江口道夫…正名僕蔵、三倉文雄…甲本雅裕、佐伯敏治…杉本哲太、水野真…小泉孝太郎 #邦画` | `https://blogspherenews.xyz/embed/66fbd3952ec7793cc2a87ed1` | `blogspherenews.xyz` | `2026-07-31 23:57:16` |
-| Item #2 | `https://9tsu.in/douga/86937.html` | `日曜ミステリー` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2020/06/theater9.jpg` | `日曜ミステリー「激突！アラフィフ熟女刑事の事件簿」 内容：人情派刑事・桃山美以子（渡辺えり）とキャリア刑事・櫻井啓子（キムラ緑子）の熟女刑事コンビが誕生！２人が衝突しながら難事件に挑む！▽ある高校の同窓会で、参加者の西田伸介（森岡豊）が薬物により殺される事件が発生。西田に金をゆすられていた同級生の内科医・斎藤悟志（西村和彦）が容疑者として浮上するが斎藤は黙秘を貫く。事件解決の鍵となる黙秘の裏に隠された“秘密”とは!?同窓会連続殺人事件の驚くべき真相とは!? 出演：桃山美以子…渡辺えり、櫻井啓子…キムラ緑子、梅谷正樹…相島一之、安藤久則…佐戸井けん太、鶴田辰巳…大谷亮介、橋本賢太…伊嵜充則、牧村まど香…三浦理恵子、斎藤悟志…西村和彦、賀上正三…東根作寿英、西田伸介…森岡豊 #邦画` | `https://blogspherenews.xyz/embed/66fbd3952ec7793cc2a87ed1` | `blogspherenews.xyz` | `2026-07-31 23:57:16` |
+| Item #1 | `https://9tsu.in/douga/88649.html` | `日曜ミステリー` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2020/06/theater9.jpg` | `日曜ミステリー【主演・田中圭】ブラックポストマン　初回拡大スペシャル 内容：かつて子供のために生まれた郵便ポストがあった。投函すれば“ネバーランドの悪魔”が悪い大人に制裁を与えてくれるという特別なポスト。だが“悪魔”はある事件をきっかけに突然消えてしまった。それから10年経ったある日、ホスピスで働く元郵便配達人の副島力也(田中圭)は、再びポストに手紙が投函され始めたことを知り、郵便局に帰ってくる。やがて町では“ネバーランドの悪魔”を名乗る連続殺人事件が発生し始めて…。 出演：副島力也…田中圭、草薙桃…志田未来、祖父江ひなた…高橋メアリージュン、加納直樹…平山浩行、風間翔子…金澤美穂、原田遥香…近藤春菜（ハリセンボン）、江口道夫…正名僕蔵、三倉文雄…甲本雅裕、佐伯敏治…杉本哲太、水野真…小泉孝太郎 #邦画` | `https://ok.ru/videoembed/7469682330151` | `ok.ru` | `2026-07-31 23:57:16` |
+| Item #2 | `https://9tsu.in/douga/86937.html` | `日曜ミステリー` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2020/06/theater9.jpg` | `日曜ミステリー「激突！アラフィフ熟女刑事の事件簿」 内容：人情派刑事・桃山美以子（渡辺えり）とキャリア刑事・櫻井啓子（キムラ緑子）の熟女刑事コンビが誕生！２人が衝突しながら難事件に挑む！▽ある高校の同窓会で、参加者の西田伸介（森岡豊）が薬物により殺される事件が発生。西田に金をゆすられていた同級生の内科医・斎藤悟志（西村和彦）が容疑者として浮上するが斎藤は黙秘を貫く。事件解決の鍵となる黙秘の裏に隠された“秘密”とは!?同窓会連続殺人事件の驚くべき真相とは!? 出演：桃山美以子…渡辺えり、櫻井啓子…キムラ緑子、梅谷正樹…相島一之、安藤久則…佐戸井けん太、鶴田辰巳…大谷亮介、橋本賢太…伊嵜充則、牧村まど香…三浦理恵子、斎藤悟志…西村和彦、賀上正三…東根作寿英、西田伸介…森岡豊 #邦画` | `https://ok.ru/videoembed/7469682330151` | `ok.ru` | `2026-07-31 23:57:16` |
 
 ---
 
-#### 🔗 Duplikat #54: `https://blogspherenews.xyz/embed/66fbd6502ec7793cc2a88cfa` (2 kemunculan)
+#### 🔗 Duplikat #60: `https://ok.ru/videoembed/7167209507522` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/88290.html` | `わたしの一番最悪なともだち` | `1` | `11` | `https://9tsu.in/wp-content/uploads/2023/08/2023-08-23_22-55-17.png` | `わたしの一番最悪なともだち　第11話 内容：就活で出会った和佳奈（久保田琳加）に「かっこいい」と人生で初めて褒められ戸惑うほたる（蒔田彩珠）。同級生の慎吾（倉悠貴）に打ち明けるも、「友達できてよかったね」と言われ、「ともだちって何？」と悩みを深めるほたる。クリーニング店で聡美（市川実日子）から「親友の基準となる３つの涙の話」を聞いたその夜、ほたるは美晴（髙石あかり）の予期せぬ涙に遭遇するが…。 出演：蒔田彩珠，髙石あかり，市川実日子，兵藤るり，吹野剛史，ｔｏｆｕｂｅａｔｓ #邦画` | `https://blogspherenews.xyz/embed/66fbd6502ec7793cc2a88cfa` | `blogspherenews.xyz` | `2026-07-31 23:57:16` |
-| Item #2 | `https://9tsu.in/douga/88239.html` | `わたしの一番最悪なともだち` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/08/2023-08-23_22-55-17.png` | `わたしの一番最悪なともだち　第10話 内容：グループディスカッションに参加するために、東京にやってきたほたる（蒔田彩珠）。そこで自分と同じように就活に苦戦している学生・和佳奈（久保田琳加）と悠太（大八木凱斗）に出会う。いよいよグループディスカッションが始まる中、ほたるは率先して参加メンバーに意見を求めていくが、思ったより意見がまとまらず、暗雲が立ち込めていく…。 出演：蒔田彩珠，髙石あかり，市川実日子，兵藤るり，吹野剛史，ｔｏｆｕｂｅａｔｓ #邦画` | `https://blogspherenews.xyz/embed/66fbd6502ec7793cc2a88cfa` | `blogspherenews.xyz` | `2026-07-31 23:57:16` |
+| Item #1 | `https://9tsu.in/douga/88290.html` | `わたしの一番最悪なともだち` | `1` | `11` | `https://9tsu.in/wp-content/uploads/2023/08/2023-08-23_22-55-17.png` | `わたしの一番最悪なともだち　第11話 内容：就活で出会った和佳奈（久保田琳加）に「かっこいい」と人生で初めて褒められ戸惑うほたる（蒔田彩珠）。同級生の慎吾（倉悠貴）に打ち明けるも、「友達できてよかったね」と言われ、「ともだちって何？」と悩みを深めるほたる。クリーニング店で聡美（市川実日子）から「親友の基準となる３つの涙の話」を聞いたその夜、ほたるは美晴（髙石あかり）の予期せぬ涙に遭遇するが…。 出演：蒔田彩珠，髙石あかり，市川実日子，兵藤るり，吹野剛史，ｔｏｆｕｂｅａｔｓ #邦画` | `https://ok.ru/videoembed/7167209507522` | `ok.ru` | `2026-07-31 23:57:16` |
+| Item #2 | `https://9tsu.in/douga/88239.html` | `わたしの一番最悪なともだち` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/08/2023-08-23_22-55-17.png` | `わたしの一番最悪なともだち　第10話 内容：グループディスカッションに参加するために、東京にやってきたほたる（蒔田彩珠）。そこで自分と同じように就活に苦戦している学生・和佳奈（久保田琳加）と悠太（大八木凱斗）に出会う。いよいよグループディスカッションが始まる中、ほたるは率先して参加メンバーに意見を求めていくが、思ったより意見がまとまらず、暗雲が立ち込めていく…。 出演：蒔田彩珠，髙石あかり，市川実日子，兵藤るり，吹野剛史，ｔｏｆｕｂｅａｔｓ #邦画` | `https://ok.ru/videoembed/7167209507522` | `ok.ru` | `2026-07-31 23:57:16` |
 
 ---
 
-#### 🔗 Duplikat #55: `https://blogspherenews.xyz/embed/66fbd2322ec7793cc2a87806` (2 kemunculan)
+#### 🔗 Duplikat #61: `https://ok.ru/videoembed/7905810582163` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/83987.html` | `永遠の昨日 完全版` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2023/04/a.png` | `永遠の昨日 完全版 　第5話 内容：事故発生から二日目の朝。浩一（小宮璃央）は学校の屋上から飛び降りようとする小河先生（中村優一）を説得するため自ら秘密を打ち明けるーー。▼未公開映像を含めた完全版 出演：山田浩一役…小宮璃央、青海満役…井上想良 #邦画` | `https://blogspherenews.xyz/embed/66fbd2322ec7793cc2a87806` | `blogspherenews.xyz` | `2026-08-01 00:36:08` |
-| Item #2 | `https://9tsu.in/douga/83978.html` | `全ラ飯` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2023/04/2023-04-13_21-07-22.png` | `全ラ飯　第5話 内容：職場でトラブルが発生。上司の銀婚式のお祝いに急きょ、一条（近藤頌利）は、真尋（ゆうたろう）に料理を作ってほしいと頼む。やがて一条は、夜通し準備をする真尋を、ふと愛しく感じている自分に戸惑い……？ 出演：一条颯太（26）… 近藤頌利、三木真尋（26）…ゆうたろう、清水小町（24）…片山友希、春日大翔（26）…岡 宏明、勅使河原室長（43）…山中 聡、劉昊山リュウ ・ ハオシャン（38）… フィガロ・ツェン、一条みづ知（享年80）…ジュディ・オング #邦画` | `https://blogspherenews.xyz/embed/66fbd2322ec7793cc2a87806` | `blogspherenews.xyz` | `2026-08-01 00:36:08` |
+| Item #1 | `https://9tsu.in/douga/83987.html` | `永遠の昨日 完全版` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2023/04/a.png` | `永遠の昨日 完全版 　第5話 内容：事故発生から二日目の朝。浩一（小宮璃央）は学校の屋上から飛び降りようとする小河先生（中村優一）を説得するため自ら秘密を打ち明けるーー。▼未公開映像を含めた完全版 出演：山田浩一役…小宮璃央、青海満役…井上想良 #邦画` | `https://ok.ru/videoembed/7905810582163` | `ok.ru` | `2026-08-01 00:36:08` |
+| Item #2 | `https://9tsu.in/douga/83978.html` | `全ラ飯` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2023/04/2023-04-13_21-07-22.png` | `全ラ飯　第5話 内容：職場でトラブルが発生。上司の銀婚式のお祝いに急きょ、一条（近藤頌利）は、真尋（ゆうたろう）に料理を作ってほしいと頼む。やがて一条は、夜通し準備をする真尋を、ふと愛しく感じている自分に戸惑い……？ 出演：一条颯太（26）… 近藤頌利、三木真尋（26）…ゆうたろう、清水小町（24）…片山友希、春日大翔（26）…岡 宏明、勅使河原室長（43）…山中 聡、劉昊山リュウ ・ ハオシャン（38）… フィガロ・ツェン、一条みづ知（享年80）…ジュディ・オング #邦画` | `https://ok.ru/videoembed/7905810582163` | `ok.ru` | `2026-08-01 00:36:08` |
 
 ---
 
-#### 🔗 Duplikat #56: `https://pulvexa.space/embed/8WRzMo175X?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #62: `https://pulvexa.space/embed/8WRzMo175X?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -860,7 +914,7 @@
 
 ---
 
-#### 🔗 Duplikat #57: `https://pulvexa.space/embed/knchkSasvN?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #63: `https://pulvexa.space/embed/knchkSasvN?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -869,79 +923,79 @@
 
 ---
 
-#### 🔗 Duplikat #58: `https://blogspherenews.xyz/embed/66fbd3382ec7793cc2a87cc1` (2 kemunculan)
+#### 🔗 Duplikat #64: `https://ok.ru/videoembed/7468735859239` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/81889.html` | `夕暮れに、手をつなぐ` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/01/2023-01-17_22-28-15.png` | `夕暮れに、手をつなぐ　第10話 内容：義知の罠により社長解任を迫られる大海。兄を救うべく大陽は公共事業の入札に応募し三ツ星重工と勝負をしようとする！ 出演：浅葱空豆…広瀬すず、海野音…永瀬廉（King & Prince）、矢野翔太…櫻井海音、丹沢千春…伊原六花、雪平爽介…川上洋平、アリエル…内田理央、磯部真紀子…松本若菜、浅葱たまえ…茅島成美、丹沢博…酒向、芳、雪平響子…夏木マリ、他 #邦画` | `https://blogspherenews.xyz/embed/66fbd3382ec7793cc2a87cc1` | `blogspherenews.xyz` | `2026-08-01 00:56:27` |
-| Item #2 | `https://9tsu.in/douga/81860.html` | `夕暮れに、手をつなぐ` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/01/2023-01-17_22-28-15.png` | `夕暮れに、手をつなぐ　第10話 内容：広瀬すず×永瀬廉▽ふたりの青春ラブストーリーの行方は！？ 出演：浅葱空豆…広瀬すず、海野音…永瀬廉（King & Prince）、矢野翔太…櫻井海音、丹沢千春…伊原六花、雪平爽介…川上洋平、アリエル…内田理央、磯部真紀子…松本若菜、浅葱たまえ…茅島成美、丹沢博…酒向、芳、雪平響子…夏木マリ、他 #邦画` | `https://blogspherenews.xyz/embed/66fbd3382ec7793cc2a87cc1` | `blogspherenews.xyz` | `2026-08-01 00:56:27` |
+| Item #1 | `https://9tsu.in/douga/81889.html` | `夕暮れに、手をつなぐ` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/01/2023-01-17_22-28-15.png` | `夕暮れに、手をつなぐ　第10話 内容：義知の罠により社長解任を迫られる大海。兄を救うべく大陽は公共事業の入札に応募し三ツ星重工と勝負をしようとする！ 出演：浅葱空豆…広瀬すず、海野音…永瀬廉（King & Prince）、矢野翔太…櫻井海音、丹沢千春…伊原六花、雪平爽介…川上洋平、アリエル…内田理央、磯部真紀子…松本若菜、浅葱たまえ…茅島成美、丹沢博…酒向、芳、雪平響子…夏木マリ、他 #邦画` | `https://ok.ru/videoembed/7468735859239` | `ok.ru` | `2026-08-01 00:56:27` |
+| Item #2 | `https://9tsu.in/douga/81860.html` | `夕暮れに、手をつなぐ` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/01/2023-01-17_22-28-15.png` | `夕暮れに、手をつなぐ　第10話 内容：広瀬すず×永瀬廉▽ふたりの青春ラブストーリーの行方は！？ 出演：浅葱空豆…広瀬すず、海野音…永瀬廉（King & Prince）、矢野翔太…櫻井海音、丹沢千春…伊原六花、雪平爽介…川上洋平、アリエル…内田理央、磯部真紀子…松本若菜、浅葱たまえ…茅島成美、丹沢博…酒向、芳、雪平響子…夏木マリ、他 #邦画` | `https://ok.ru/videoembed/7468735859239` | `ok.ru` | `2026-08-01 00:56:27` |
 
 ---
 
-#### 🔗 Duplikat #59: `https://blogspherenews.xyz/embed/66fbd1da2ec7793cc2a87675` (2 kemunculan)
+#### 🔗 Duplikat #65: `https://ok.ru/videoembed/7488624200357` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/80687.html` | `銭の戦争` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2022/12/thum-9tsu.jpg` | `銭の戦争　第10話 拡大SP　強奪20億…倍に稼いで父の会社を取り戻せ！復讐終結へ 赤松（渡部篤郎）から奪った20億にもかかわらず、その金を増やそうと考えた富生（草なぎ剛）は、かつての上司・黒田（飯田基祐）を訪ね、利益の一部を渡すことを条件にインサイダー取引をもちかける。一方、怒りに震える赤松は、桜田（高田翔）たちを紺野家やホワイト化学に向かわせ、血眼になって金の在りかを探していた。そんななか、ふと富生の経歴を思い出した赤松は黒田に接触。富生が金を増やそうとしていることを知り、不敵な笑みを浮かべて…。 その頃、早和子（ジュディ・オング）の自首により脱税が明らかになった青池ファイナンスでは、弁護士から追徴課税が50億円に上ると聞いた梢（木村文乃）が頭をかかえていた。今すぐ現金が必要な梢は、富生に40億円でホワイト化学を売ってほしいと提案され、その提案を受け入れる。 数日後、喫茶店に呼び出された富生は、黒田から株価が確実に上がる会社の情報を教えてもらうが、少し離れたところでその話を赤松が聞いていた。そうとは知らず、紺野家に戻り、黒田から聞いた情報を元に株を買おうとする富生。しかし、話を聞いた未央（大島優子）は、今まさに犯罪行為に手を出そうとしている富生を見ていられず、思わず頬をたたいてしまう。 #邦画` | `https://blogspherenews.xyz/embed/66fbd1da2ec7793cc2a87675` | `blogspherenews.xyz` | `2026-08-01 00:56:27` |
-| Item #2 | `https://9tsu.in/douga/80482.html` | `銭の戦争` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/02/2023-02-02_22-34-37.png` | `銭の戦争　第10話 内容：「宿敵から奪った20億…倍に稼いで父の会社を取り戻せ！復讐終結へ」草彅剛 大島優子 木村文乃 ジュディ・オング 大杉漣 渡部篤郎 出演：草彅剛、大島優子、木村文乃、高田翔（ジャニーズJr.）、新川優愛、丸山智己、立石涼子、ジュディ・オング、大杉漣、渡部篤郎、他 #邦画` | `https://blogspherenews.xyz/embed/66fbd1da2ec7793cc2a87675` | `blogspherenews.xyz` | `2026-08-01 00:56:27` |
+| Item #1 | `https://9tsu.in/douga/80687.html` | `銭の戦争` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2022/12/thum-9tsu.jpg` | `銭の戦争　第10話 拡大SP　強奪20億…倍に稼いで父の会社を取り戻せ！復讐終結へ 赤松（渡部篤郎）から奪った20億にもかかわらず、その金を増やそうと考えた富生（草なぎ剛）は、かつての上司・黒田（飯田基祐）を訪ね、利益の一部を渡すことを条件にインサイダー取引をもちかける。一方、怒りに震える赤松は、桜田（高田翔）たちを紺野家やホワイト化学に向かわせ、血眼になって金の在りかを探していた。そんななか、ふと富生の経歴を思い出した赤松は黒田に接触。富生が金を増やそうとしていることを知り、不敵な笑みを浮かべて…。 その頃、早和子（ジュディ・オング）の自首により脱税が明らかになった青池ファイナンスでは、弁護士から追徴課税が50億円に上ると聞いた梢（木村文乃）が頭をかかえていた。今すぐ現金が必要な梢は、富生に40億円でホワイト化学を売ってほしいと提案され、その提案を受け入れる。 数日後、喫茶店に呼び出された富生は、黒田から株価が確実に上がる会社の情報を教えてもらうが、少し離れたところでその話を赤松が聞いていた。そうとは知らず、紺野家に戻り、黒田から聞いた情報を元に株を買おうとする富生。しかし、話を聞いた未央（大島優子）は、今まさに犯罪行為に手を出そうとしている富生を見ていられず、思わず頬をたたいてしまう。 #邦画` | `https://ok.ru/videoembed/7488624200357` | `ok.ru` | `2026-08-01 00:56:27` |
+| Item #2 | `https://9tsu.in/douga/80482.html` | `銭の戦争` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2023/02/2023-02-02_22-34-37.png` | `銭の戦争　第10話 内容：「宿敵から奪った20億…倍に稼いで父の会社を取り戻せ！復讐終結へ」草彅剛 大島優子 木村文乃 ジュディ・オング 大杉漣 渡部篤郎 出演：草彅剛、大島優子、木村文乃、高田翔（ジャニーズJr.）、新川優愛、丸山智己、立石涼子、ジュディ・オング、大杉漣、渡部篤郎、他 #邦画` | `https://ok.ru/videoembed/7488624200357` | `ok.ru` | `2026-08-01 00:56:27` |
 
 ---
 
-#### 🔗 Duplikat #60: `https://blogspherenews.xyz/embed/66fbd5332ec7793cc2a88712` (2 kemunculan)
+#### 🔗 Duplikat #66: `https://ok.ru/videoembed/7493107190300` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/78846.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/12/2022-12-30_6-56-48.png` | `「リバース」一挙放送ＳＰ 内容：湊かなえ原作・藤原竜也主演のヒューマンミステリードラマを一挙放送。最悪の復讐劇・・・告発犯の正体が明らかに！その真の目的とは・・・ 出演：佐藤健　黒木華　桐谷健太　柄本佑　高岡早紀　佐藤蛾次郎　芦名星　森岡龍　石橋杏奈、坪倉由幸（我が家）　浅野和之　木場勝己　天野慶久　林泰文　森田哲矢　東口宜隆、鈴木亮平、武田鉄矢、和久井映見、麻生祐未　加藤雅也　日野陽仁　大島さと子　美保　純　杉本哲太、小林薫 #邦画` | `https://blogspherenews.xyz/embed/66fbd5332ec7793cc2a88712` | `blogspherenews.xyz` | `2026-08-01 01:17:31` |
-| Item #2 | `https://9tsu.in/douga/78816.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/12/2022-12-30_6-56-48.png` | `「リバース」一挙放送ＳＰ 内容：湊かなえ原作・藤原竜也主演のヒューマンミステリードラマを一挙放送。次に狙われるのは誰だ！姿の見えない犯人に日常を脅かされる—。親友の死に隠された10年前の罪。 出演：桑原亮子、福原遥、高橋克典、永作博美、浅田芭路、 海老塚幸穏、齋藤絢永、大野さき、くわばたりえ、古舘寛治、葵揚、さだまさし #邦画` | `https://blogspherenews.xyz/embed/66fbd5332ec7793cc2a88712` | `blogspherenews.xyz` | `2026-08-01 01:17:31` |
+| Item #1 | `https://9tsu.in/douga/78846.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/12/2022-12-30_6-56-48.png` | `「リバース」一挙放送ＳＰ 内容：湊かなえ原作・藤原竜也主演のヒューマンミステリードラマを一挙放送。最悪の復讐劇・・・告発犯の正体が明らかに！その真の目的とは・・・ 出演：佐藤健　黒木華　桐谷健太　柄本佑　高岡早紀　佐藤蛾次郎　芦名星　森岡龍　石橋杏奈、坪倉由幸（我が家）　浅野和之　木場勝己　天野慶久　林泰文　森田哲矢　東口宜隆、鈴木亮平、武田鉄矢、和久井映見、麻生祐未　加藤雅也　日野陽仁　大島さと子　美保　純　杉本哲太、小林薫 #邦画` | `https://ok.ru/videoembed/7493107190300` | `ok.ru` | `2026-08-01 01:17:31` |
+| Item #2 | `https://9tsu.in/douga/78816.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/12/2022-12-30_6-56-48.png` | `「リバース」一挙放送ＳＰ 内容：湊かなえ原作・藤原竜也主演のヒューマンミステリードラマを一挙放送。次に狙われるのは誰だ！姿の見えない犯人に日常を脅かされる—。親友の死に隠された10年前の罪。 出演：桑原亮子、福原遥、高橋克典、永作博美、浅田芭路、 海老塚幸穏、齋藤絢永、大野さき、くわばたりえ、古舘寛治、葵揚、さだまさし #邦画` | `https://ok.ru/videoembed/7493107190300` | `ok.ru` | `2026-08-01 01:17:31` |
 
 ---
 
-#### 🔗 Duplikat #61: `https://blogspherenews.xyz/embed/670129a7172b884e34da44d5` (2 kemunculan)
+#### 🔗 Duplikat #67: `https://ok.ru/videoembed/7627359652442` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/78536.html` | `ドラマ 放送終了` | `1` | `21` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `Ｄｒ．コトー診療所２００６ ＃０６ 息子への誓い剛洋（富岡涼）は、父・剛利（時任三郎）の経済的な負担を思って、学校を辞めることを考えているとコトー（吉岡秀隆）に打ち明けた。ところが茉莉子（大塚寧々）、重雄（泉谷しげる）らの心配をよそに、剛利は島に剛洋を置いて仕事場へ戻ってしまった。正一（小林薫）は、進学する子供たちのための新しい制度を作ることができないかと奔走する。重雄もめずらしく何かを考え込んでいて…。一方、剛洋の親友・邦夫（春山幹介）は、漁師の仕事に憧れているが、両親から船に乗ることを許されず、なにかと剛洋と比べられてくさっていた。そんなとき、邦夫は船からとってきた煙草を吸っていたことを両親に知られてしまう。問い詰められた邦夫は煙草は剛洋が東京から持ってきたと嘘をつく。自己嫌悪で落ち込む邦夫を励ます茉莉子。すると突然邦夫が腹痛を訴えて倒れてしまった。診療所に運び込まれた邦夫を診察し腸閉塞と診断したコトーは、オペが必要だと判断。ミナ（蒼井優）と和田（筧利夫）とともに緊急手術に。順調に進んでいく手術…ところが邦夫が突然けいれんを起こし、容態が急変して…？！ #邦画` | `https://blogspherenews.xyz/embed/670129a7172b884e34da44d5` | `blogspherenews.xyz` | `2026-08-01 01:17:31` |
-| Item #2 | `https://9tsu.in/douga/78492.html` | `ドラマ 放送終了` | `1` | `21` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `Ｄｒ．コトー診療所２００６ ＃０５ 荒海に漂う命剛洋（富岡涼）が中学に入ってから初めての夏休みで島に帰ってきた。皆大喜びで迎え、邦夫（春山幹介）は早速、剛洋を誘い、真人（細田よしひこ）の船に乗って海に出た。しかし、一緒に島へ帰るはずだった剛利（時任三郎）がいない。心配した茉莉子（大塚寧々）と重雄（泉谷しげる）は、剛利の仕事場に電話をかけて、事故のことを知る。コトー（吉岡秀隆）は久しぶりに剛洋を連れて往診に出かけ、道すがら、剛洋から勉強について行くのが大変なこと、でも父が自分のために苦労して働いているからがんばらなければいけないと思っていることを聞く。事故のことを重雄から聞いた正一（小林薫）は、剛利に、力になると申し出るが、剛利は重雄のもとへ乗りこんで、余計なことをするなと言い放ち、取っ組み合いになってしまう。そして、コトーへ東京の彩佳（柴咲コウ）の主治医・鳴海（堺雅人）から電話が入った。治療の成果が出ないという話にコトーは…？そんなとき、真人の船が戻ってこないという騒ぎが起こる。島に台風が近づいていて海がしけている。船には邦夫と剛洋も乗っている。剛利や重雄らが漁協に集まっているとそこへ、船上の剛洋からの無線が一瞬通じた。真人が怪我をして、沖で船が流されているという。飛び出していく重雄と剛利だったが…？！ #邦画` | `https://blogspherenews.xyz/embed/670129a7172b884e34da44d5` | `blogspherenews.xyz` | `2026-08-01 01:17:31` |
+| Item #1 | `https://9tsu.in/douga/78536.html` | `ドラマ 放送終了` | `1` | `21` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `Ｄｒ．コトー診療所２００６ ＃０６ 息子への誓い剛洋（富岡涼）は、父・剛利（時任三郎）の経済的な負担を思って、学校を辞めることを考えているとコトー（吉岡秀隆）に打ち明けた。ところが茉莉子（大塚寧々）、重雄（泉谷しげる）らの心配をよそに、剛利は島に剛洋を置いて仕事場へ戻ってしまった。正一（小林薫）は、進学する子供たちのための新しい制度を作ることができないかと奔走する。重雄もめずらしく何かを考え込んでいて…。一方、剛洋の親友・邦夫（春山幹介）は、漁師の仕事に憧れているが、両親から船に乗ることを許されず、なにかと剛洋と比べられてくさっていた。そんなとき、邦夫は船からとってきた煙草を吸っていたことを両親に知られてしまう。問い詰められた邦夫は煙草は剛洋が東京から持ってきたと嘘をつく。自己嫌悪で落ち込む邦夫を励ます茉莉子。すると突然邦夫が腹痛を訴えて倒れてしまった。診療所に運び込まれた邦夫を診察し腸閉塞と診断したコトーは、オペが必要だと判断。ミナ（蒼井優）と和田（筧利夫）とともに緊急手術に。順調に進んでいく手術…ところが邦夫が突然けいれんを起こし、容態が急変して…？！ #邦画` | `https://ok.ru/videoembed/7627359652442` | `ok.ru` | `2026-08-01 01:17:31` |
+| Item #2 | `https://9tsu.in/douga/78492.html` | `ドラマ 放送終了` | `1` | `21` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `Ｄｒ．コトー診療所２００６ ＃０５ 荒海に漂う命剛洋（富岡涼）が中学に入ってから初めての夏休みで島に帰ってきた。皆大喜びで迎え、邦夫（春山幹介）は早速、剛洋を誘い、真人（細田よしひこ）の船に乗って海に出た。しかし、一緒に島へ帰るはずだった剛利（時任三郎）がいない。心配した茉莉子（大塚寧々）と重雄（泉谷しげる）は、剛利の仕事場に電話をかけて、事故のことを知る。コトー（吉岡秀隆）は久しぶりに剛洋を連れて往診に出かけ、道すがら、剛洋から勉強について行くのが大変なこと、でも父が自分のために苦労して働いているからがんばらなければいけないと思っていることを聞く。事故のことを重雄から聞いた正一（小林薫）は、剛利に、力になると申し出るが、剛利は重雄のもとへ乗りこんで、余計なことをするなと言い放ち、取っ組み合いになってしまう。そして、コトーへ東京の彩佳（柴咲コウ）の主治医・鳴海（堺雅人）から電話が入った。治療の成果が出ないという話にコトーは…？そんなとき、真人の船が戻ってこないという騒ぎが起こる。島に台風が近づいていて海がしけている。船には邦夫と剛洋も乗っている。剛利や重雄らが漁協に集まっているとそこへ、船上の剛洋からの無線が一瞬通じた。真人が怪我をして、沖で船が流されているという。飛び出していく重雄と剛利だったが…？！ #邦画` | `https://ok.ru/videoembed/7627359652442` | `ok.ru` | `2026-08-01 01:17:31` |
 
 ---
 
-#### 🔗 Duplikat #62: `https://blogspherenews.xyz/embed/6701269b172b884e34da30ba` (2 kemunculan)
+#### 🔗 Duplikat #68: `https://ok.ru/videoembed/7817279441625` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/77864.html` | `木曜 ドラマ` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-27_23-01-00.png` | `恋と弾丸　第6話 内容：累計４７０万部突破！各電子書店で圧倒的１位！少女漫画界を席巻する超人気作　ヤクザの若頭×女子大生の、史上最高にキケンな“烈愛”ラブストーリー 出演：桜夜才臣…古川雄大、ユリ…馬場ふみか、蝶子…中村静香、ジン…木村慧人（FANTASTICS from EXILE TRIBE、ギンジ…山中柔太朗、省吾…七瀬公、マイ…新井舞良、エリナ…中尾有伽、ママ…橋本マナミ、桜夜秀一朗…大澄賢也、セミリオ…黒羽麻璃央 #邦画` | `https://blogspherenews.xyz/embed/6701269b172b884e34da30ba` | `blogspherenews.xyz` | `2026-08-01 01:17:31` |
-| Item #2 | `https://9tsu.in/douga/77615.html` | `木曜 ドラマ` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-27_23-01-00.png` | `恋と弾丸　第5話 内容：第伍話「蝶と毒薬」　蝶子（中村静香）に桜夜才臣（古川雄大）は二度と会わないと宣言。一方、桜夜組から幼馴染ユリ（馬場ふみか）出てくるを見た刑事ジン（木村慧人）は… 出演：桜夜才臣…古川雄大、ユリ…馬場ふみか、蝶子…中村静香、ジン…木村慧人（FANTASTICS from EXILE TRIBE、ギンジ…山中柔太朗、省吾…七瀬公、マイ…新井舞良、エリナ…中尾有伽、ママ…橋本マナミ、桜夜秀一朗…大澄賢也、セミリオ…黒羽麻璃央 #邦画` | `https://blogspherenews.xyz/embed/6701269b172b884e34da30ba` | `blogspherenews.xyz` | `2026-08-01 01:17:31` |
+| Item #1 | `https://9tsu.in/douga/77864.html` | `木曜 ドラマ` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-27_23-01-00.png` | `恋と弾丸　第6話 内容：累計４７０万部突破！各電子書店で圧倒的１位！少女漫画界を席巻する超人気作　ヤクザの若頭×女子大生の、史上最高にキケンな“烈愛”ラブストーリー 出演：桜夜才臣…古川雄大、ユリ…馬場ふみか、蝶子…中村静香、ジン…木村慧人（FANTASTICS from EXILE TRIBE、ギンジ…山中柔太朗、省吾…七瀬公、マイ…新井舞良、エリナ…中尾有伽、ママ…橋本マナミ、桜夜秀一朗…大澄賢也、セミリオ…黒羽麻璃央 #邦画` | `https://ok.ru/videoembed/7817279441625` | `ok.ru` | `2026-08-01 01:17:31` |
+| Item #2 | `https://9tsu.in/douga/77615.html` | `木曜 ドラマ` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-27_23-01-00.png` | `恋と弾丸　第5話 内容：第伍話「蝶と毒薬」　蝶子（中村静香）に桜夜才臣（古川雄大）は二度と会わないと宣言。一方、桜夜組から幼馴染ユリ（馬場ふみか）出てくるを見た刑事ジン（木村慧人）は… 出演：桜夜才臣…古川雄大、ユリ…馬場ふみか、蝶子…中村静香、ジン…木村慧人（FANTASTICS from EXILE TRIBE、ギンジ…山中柔太朗、省吾…七瀬公、マイ…新井舞良、エリナ…中尾有伽、ママ…橋本マナミ、桜夜秀一朗…大澄賢也、セミリオ…黒羽麻璃央 #邦画` | `https://ok.ru/videoembed/7817279441625` | `ok.ru` | `2026-08-01 01:17:31` |
 
 ---
 
-#### 🔗 Duplikat #63: `https://blogspherenews.xyz/embed/67012683172b884e34da3024` (2 kemunculan)
+#### 🔗 Duplikat #69: `https://ok.ru/videoembed/7367482280666` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/77213.html` | `朝ドラ - 毎日` | `1` | `18` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか？　第18話 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://blogspherenews.xyz/embed/67012683172b884e34da3024` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/77018.html` | `朝ドラ - 毎日` | `1` | `18` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか　第18話 動画　2021年11月8日　221108 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://blogspherenews.xyz/embed/67012683172b884e34da3024` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
+| Item #1 | `https://9tsu.in/douga/77213.html` | `朝ドラ - 毎日` | `1` | `18` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか？　第18話 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://ok.ru/videoembed/7367482280666` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/77018.html` | `朝ドラ - 毎日` | `1` | `18` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか　第18話 動画　2021年11月8日　221108 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://ok.ru/videoembed/7367482280666` | `ok.ru` | `2026-08-01 01:36:27` |
 
 ---
 
-#### 🔗 Duplikat #64: `https://blogspherenews.xyz/embed/67012e80172b884e34da6494` (2 kemunculan)
+#### 🔗 Duplikat #70: `https://ok.ru/videoembed/7947765615344` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/77060.html` | `朝ドラ - 毎日` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか　第5話 動画　2021年11月9日　221109 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://blogspherenews.xyz/embed/67012e80172b884e34da6494` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/76058.html` | `月曜 ドラマ` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか？　第5話 動画　2021年10月17日　221017 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://blogspherenews.xyz/embed/67012e80172b884e34da6494` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
+| Item #1 | `https://9tsu.in/douga/77060.html` | `朝ドラ - 毎日` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか　第5話 動画　2021年11月9日　221109 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://ok.ru/videoembed/7947765615344` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/76058.html` | `月曜 ドラマ` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか？　第5話 動画　2021年10月17日　221017 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://ok.ru/videoembed/7947765615344` | `ok.ru` | `2026-08-01 01:36:27` |
 
 ---
 
-#### 🔗 Duplikat #65: `https://blogspherenews.xyz/embed/6701295c172b884e34da42cb` (2 kemunculan)
+#### 🔗 Duplikat #71: `https://ok.ru/videoembed/7297450248831` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/77094.html` | `朝ドラ - 毎日` | `1` | `20` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか　第20話 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://blogspherenews.xyz/embed/6701295c172b884e34da42cb` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/76970.html` | `朝ドラ - 毎日` | `1` | `17` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか？　第17話 動画　2021年11月7日　221107 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://blogspherenews.xyz/embed/6701295c172b884e34da42cb` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
+| Item #1 | `https://9tsu.in/douga/77094.html` | `朝ドラ - 毎日` | `1` | `20` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか　第20話 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://ok.ru/videoembed/7297450248831` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/76970.html` | `朝ドラ - 毎日` | `1` | `17` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-52-26.png` | `差出人は、誰ですか？　第17話 動画　2021年11月7日　221107 内容：企画・原案：秋元康による青春ヒューマンミステリー！突然始まった“手紙ゲーム”によって暴かれていく生徒たちの秘密…差出人は誰？5500名から選ばれた幸澤沙良主演！ 出演：幸澤沙良、櫻井海音、藤原大祐、駒木根葵汰、窪塚愛流、大嵩愛花、馬越友梨、大平くるみ、三浦りょう太、野村康太、那須ほほみ、薄幸（納言）、金子昇、島田珠代（吉本新喜劇）、柄本時生 #邦画` | `https://ok.ru/videoembed/7297450248831` | `ok.ru` | `2026-08-01 01:36:27` |
 
 ---
 
-#### 🔗 Duplikat #66: `https://pulvexa.space/embed/jey0HPkjTe?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #72: `https://pulvexa.space/embed/jey0HPkjTe?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -950,98 +1004,98 @@
 
 ---
 
-#### 🔗 Duplikat #67: `https://blogspherenews.xyz/embed/67012a53172b884e34da4977` (2 kemunculan)
+#### 🔗 Duplikat #73: `https://ok.ru/videoembed/8090512525839` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/76186.html` | `ドラマ 放送終了` | `2` | `8` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `警視庁・捜査一課長 Season2#8 警視庁・捜査一課長 season2 第8話 販売終了未定 鉄パイプで後頭部を殴られた男性の遺体が、浅草の廃工場で見つかった。発見したのは、交番勤務の巡査部長・本淵(西田健)。出前を届けに来た秋葉原のラーメン店・店員(草野イニ)が、指定された場所が立ち入り禁止になっていたため、パトロールで通りかかった本淵に相談。念のため中に入ってみたところ、死体を発見したという。 #邦画` | `https://blogspherenews.xyz/embed/67012a53172b884e34da4977` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/69256.html` | `ドラマ 放送終了` | `1` | `8` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `警視庁・捜査一課長２ ＃８ 第8話鉄パイプで後頭部を殴られた男性の遺体が、浅草の廃工場で見つかった。発見したのは、交番勤務の巡査部長・本淵（西田健）。出前を届けに来た秋葉原のラーメン店・店員（草野イニ）が、指定された場所が立ち入り禁止になっていたため、パトロールで通りかかった本淵に相 #邦画` | `https://blogspherenews.xyz/embed/67012a53172b884e34da4977` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/76186.html` | `ドラマ 放送終了` | `2` | `8` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `警視庁・捜査一課長 Season2#8 警視庁・捜査一課長 season2 第8話 販売終了未定 鉄パイプで後頭部を殴られた男性の遺体が、浅草の廃工場で見つかった。発見したのは、交番勤務の巡査部長・本淵(西田健)。出前を届けに来た秋葉原のラーメン店・店員(草野イニ)が、指定された場所が立ち入り禁止になっていたため、パトロールで通りかかった本淵に相談。念のため中に入ってみたところ、死体を発見したという。 #邦画` | `https://ok.ru/videoembed/8090512525839` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/69256.html` | `ドラマ 放送終了` | `1` | `8` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `警視庁・捜査一課長２ ＃８ 第8話鉄パイプで後頭部を殴られた男性の遺体が、浅草の廃工場で見つかった。発見したのは、交番勤務の巡査部長・本淵（西田健）。出前を届けに来た秋葉原のラーメン店・店員（草野イニ）が、指定された場所が立ち入り禁止になっていたため、パトロールで通りかかった本淵に相 #邦画` | `https://ok.ru/videoembed/8090512525839` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #68: `https://blogspherenews.xyz/embed/67012765172b884e34da35ce` (2 kemunculan)
+#### 🔗 Duplikat #74: `https://ok.ru/videoembed/8590465895026` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/75789.html` | `月曜 ドラマ` | `1` | `1` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-04-25.png` | `つまらない住宅地のすべての家　第1話 動画　2021年10月10日　221010 内容：埼玉県にあるどこにでもありそうな住宅地。そこにさまざまな事情を抱えた人たちが住んでいた。ある日女子刑務所から一人の女囚が逃げ出し住宅地に向かっていることがわかる 出演：津村記久子、池田奈津子、サキタハヂメ、井ノ原快彦、夏川結衣、尾美としのり、中田喜子、吉行和子 #邦画` | `https://blogspherenews.xyz/embed/67012765172b884e34da35ce` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/75819.html` | `朝ドラ - 毎日` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-04-25.png` | `つまらない住宅地のすべての家　第2話 動画　2021年10月11日　221011 内容：明（井ノ原快彦）がいいだした近所迷惑な見張りプロジェクトは近所の住人にさまざまな反応を呼び起こす。それぞれの家にそれぞれの事情があり皆意外な姿に気づいていく。 出演：津村記久子、池田奈津子、サキタハヂメ、井ノ原快彦、夏川結衣、尾美としのり、中田喜子、吉行和子 #邦画` | `https://blogspherenews.xyz/embed/67012765172b884e34da35ce` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
+| Item #1 | `https://9tsu.in/douga/75789.html` | `月曜 ドラマ` | `1` | `1` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-04-25.png` | `つまらない住宅地のすべての家　第1話 動画　2021年10月10日　221010 内容：埼玉県にあるどこにでもありそうな住宅地。そこにさまざまな事情を抱えた人たちが住んでいた。ある日女子刑務所から一人の女囚が逃げ出し住宅地に向かっていることがわかる 出演：津村記久子、池田奈津子、サキタハヂメ、井ノ原快彦、夏川結衣、尾美としのり、中田喜子、吉行和子 #邦画` | `https://ok.ru/videoembed/8590465895026` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/75819.html` | `朝ドラ - 毎日` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/10/2022-10-10_22-04-25.png` | `つまらない住宅地のすべての家　第2話 動画　2021年10月11日　221011 内容：明（井ノ原快彦）がいいだした近所迷惑な見張りプロジェクトは近所の住人にさまざまな反応を呼び起こす。それぞれの家にそれぞれの事情があり皆意外な姿に気づいていく。 出演：津村記久子、池田奈津子、サキタハヂメ、井ノ原快彦、夏川結衣、尾美としのり、中田喜子、吉行和子 #邦画` | `https://ok.ru/videoembed/8590465895026` | `ok.ru` | `2026-08-01 01:36:27` |
 
 ---
 
-#### 🔗 Duplikat #69: `https://blogspherenews.xyz/embed/6701267a172b884e34da2fee` (2 kemunculan)
+#### 🔗 Duplikat #75: `https://ok.ru/videoembed/7241403402910` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/75518.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `ドラマ・地獄の沙汰もヨメ次第▼法事と二股疑惑 第6話 嫁業は年中無休 真琴（江角マキコ）は、毎年欠かさずに行っている沖縄への一人旅がしたいと家族に宣言。千代子（野際陽子）は家族を置いて妻が家を空けることに反対する。だが、真琴は一人の時間があるから家族の時間を大切にできると押し切り、沖縄へ出発。真琴が旅行へ行った矢先、三四郎（沢村一樹）が倒れるというトラブルが起こってしまう。 #邦画` | `https://blogspherenews.xyz/embed/6701267a172b884e34da2fee` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/75512.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `ドラマ・地獄の沙汰もヨメ次第▼法事と二股疑惑 第3話 婚姻届忘れてた 孫の顔が見たい千代子（野際陽子）は、真琴（江角マキコ）に子宝の縁起物を送るが、子育て方法や近所付き合いをめぐって対立してしまう。その数日後、吐き気をもよおした真琴は、妊娠検査のため病院へ。妊娠したと思い込んだ千代子は、真琴の会社を訪ね、秘書・紗江（白石美帆）に仕事の予定をすべてキャンセルさせる。 #邦画` | `https://blogspherenews.xyz/embed/6701267a172b884e34da2fee` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
+| Item #1 | `https://9tsu.in/douga/75518.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `ドラマ・地獄の沙汰もヨメ次第▼法事と二股疑惑 第6話 嫁業は年中無休 真琴（江角マキコ）は、毎年欠かさずに行っている沖縄への一人旅がしたいと家族に宣言。千代子（野際陽子）は家族を置いて妻が家を空けることに反対する。だが、真琴は一人の時間があるから家族の時間を大切にできると押し切り、沖縄へ出発。真琴が旅行へ行った矢先、三四郎（沢村一樹）が倒れるというトラブルが起こってしまう。 #邦画` | `https://ok.ru/videoembed/7241403402910` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/75512.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `ドラマ・地獄の沙汰もヨメ次第▼法事と二股疑惑 第3話 婚姻届忘れてた 孫の顔が見たい千代子（野際陽子）は、真琴（江角マキコ）に子宝の縁起物を送るが、子育て方法や近所付き合いをめぐって対立してしまう。その数日後、吐き気をもよおした真琴は、妊娠検査のため病院へ。妊娠したと思い込んだ千代子は、真琴の会社を訪ね、秘書・紗江（白石美帆）に仕事の予定をすべてキャンセルさせる。 #邦画` | `https://ok.ru/videoembed/7241403402910` | `ok.ru` | `2026-08-01 01:36:27` |
 
 ---
 
-#### 🔗 Duplikat #70: `https://blogspherenews.xyz/embed/67012b82172b884e34da5115` (2 kemunculan)
+#### 🔗 Duplikat #76: `https://ok.ru/videoembed/7321520769600` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/75316.html` | `金曜 ドラマ` | `1` | `11` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-08_23-18-44.png` | `雪女と蟹を食う　第11話 動画　2021年9月23日　220923 内容：ジャニーズWEST重岡大毅主演！人生に絶望した男と謎のセレブ妻の不思議な二人旅が遂にクライマックスへ！意識が戻らない彩女。彼女の本当の想いを知り北がとった行動は…。 出演：北…重岡大毅（ジャニーズWEST）、雪枝彩女…入山法子、雪枝一騎…勝村政信 #邦画` | `https://blogspherenews.xyz/embed/67012b82172b884e34da5115` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
-| Item #2 | `https://9tsu.in/douga/75128.html` | `金曜 ドラマ` | `1` | `11` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-08_23-18-44.png` | `雪女と蟹を食う　第11話 動画　2021年9月16日　220916 内容：ジャニーズWEST重岡大毅主演！人生に絶望した男と謎のセレブ妻の不思議な二人旅。蟹のフルコースを予約し店に向かう北と彩女。2人にとって“蟹を食べる”ことの意味とは… 出演：北…重岡大毅（ジャニーズWEST）、雪枝彩女…入山法子、雪枝一騎…勝村政信 #邦画` | `https://blogspherenews.xyz/embed/67012b82172b884e34da5115` | `blogspherenews.xyz` | `2026-08-01 01:36:27` |
+| Item #1 | `https://9tsu.in/douga/75316.html` | `金曜 ドラマ` | `1` | `11` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-08_23-18-44.png` | `雪女と蟹を食う　第11話 動画　2021年9月23日　220923 内容：ジャニーズWEST重岡大毅主演！人生に絶望した男と謎のセレブ妻の不思議な二人旅が遂にクライマックスへ！意識が戻らない彩女。彼女の本当の想いを知り北がとった行動は…。 出演：北…重岡大毅（ジャニーズWEST）、雪枝彩女…入山法子、雪枝一騎…勝村政信 #邦画` | `https://ok.ru/videoembed/7321520769600` | `ok.ru` | `2026-08-01 01:36:27` |
+| Item #2 | `https://9tsu.in/douga/75128.html` | `金曜 ドラマ` | `1` | `11` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-08_23-18-44.png` | `雪女と蟹を食う　第11話 動画　2021年9月16日　220916 内容：ジャニーズWEST重岡大毅主演！人生に絶望した男と謎のセレブ妻の不思議な二人旅。蟹のフルコースを予約し店に向かう北と彩女。2人にとって“蟹を食べる”ことの意味とは… 出演：北…重岡大毅（ジャニーズWEST）、雪枝彩女…入山法子、雪枝一騎…勝村政信 #邦画` | `https://ok.ru/videoembed/7321520769600` | `ok.ru` | `2026-08-01 01:36:27` |
 
 ---
 
-#### 🔗 Duplikat #71: `https://blogspherenews.xyz/embed/6701295f172b884e34da42e4` (2 kemunculan)
+#### 🔗 Duplikat #77: `https://ok.ru/videoembed/8012230232628` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/75082.html` | `木曜 ドラマ` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-14_23-00-07.png` | `遺留捜査 7　第10話 動画　2021年9月15日　220915 内容：木曜ミステリー、完結! 刑事刺殺に始まった事件は、新たな悲劇を生む…。止まらない復讐の連鎖…背後には巨悪の存在が!?折り鶴が導く、糸村の【最後のメッセージ】とは!? 出演：上川隆也、栗山千明、永井大、戸塚純貴、宮崎香蓮・甲本雅裕、戸田恵子、高橋英樹、津田寛治、崎山つばさ、森日菜美、大石吾朗、浜田学、渋谷謙人、水沢エレナ ほか #邦画` | `https://blogspherenews.xyz/embed/6701295f172b884e34da42e4` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
-| Item #2 | `https://9tsu.in/douga/75054.html` | `水曜ドラマ` | `8` | `10` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-13_21-07-14.png` | `刑事7人 Season8　第10話 動画　2021年9月14日　220914 内容：警官が殺害される事件が発生。遺体から検出された銃弾は警視庁のもので、12年前の警官殺し未解決事件に使用されたものと一致。そんな中、路敏は再び定時で帰るようになり… 出演：羽原大介、黒島結菜、仲間由紀恵、川口春奈、上白石萌歌、片岡鶴太郎、山路和弘、岡部啓一、高田龍一、帆足圭吾 #邦画` | `https://blogspherenews.xyz/embed/6701295f172b884e34da42e4` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
+| Item #1 | `https://9tsu.in/douga/75082.html` | `木曜 ドラマ` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-14_23-00-07.png` | `遺留捜査 7　第10話 動画　2021年9月15日　220915 内容：木曜ミステリー、完結! 刑事刺殺に始まった事件は、新たな悲劇を生む…。止まらない復讐の連鎖…背後には巨悪の存在が!?折り鶴が導く、糸村の【最後のメッセージ】とは!? 出演：上川隆也、栗山千明、永井大、戸塚純貴、宮崎香蓮・甲本雅裕、戸田恵子、高橋英樹、津田寛治、崎山つばさ、森日菜美、大石吾朗、浜田学、渋谷謙人、水沢エレナ ほか #邦画` | `https://ok.ru/videoembed/8012230232628` | `ok.ru` | `2026-08-01 01:55:56` |
+| Item #2 | `https://9tsu.in/douga/75054.html` | `水曜ドラマ` | `8` | `10` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-13_21-07-14.png` | `刑事7人 Season8　第10話 動画　2021年9月14日　220914 内容：警官が殺害される事件が発生。遺体から検出された銃弾は警視庁のもので、12年前の警官殺し未解決事件に使用されたものと一致。そんな中、路敏は再び定時で帰るようになり… 出演：羽原大介、黒島結菜、仲間由紀恵、川口春奈、上白石萌歌、片岡鶴太郎、山路和弘、岡部啓一、高田龍一、帆足圭吾 #邦画` | `https://ok.ru/videoembed/8012230232628` | `ok.ru` | `2026-08-01 01:55:56` |
 
 ---
 
-#### 🔗 Duplikat #72: `https://blogspherenews.xyz/embed/67012692172b884e34da3083` (2 kemunculan)
+#### 🔗 Duplikat #78: `https://ok.ru/videoembed/8430608583197` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/74521.html` | `水曜ドラマ` | `8` | `8` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-13_22-48-32.png` | `量産型リコ　第9話 動画　2021年8月31日　220831 内容：普通女子のプラモデルを通じた小さな成長記を描くホビー・ヒューマンドラマ　３部存続のために浅井が奮闘！そして大石が会社を辞める…!?　ショックを受ける璃子は… 出演：小向璃子…与田祐希（乃木坂46）、中野京子…藤井夏恋、高木真司…望月歩、大石亮太…中島歩、浅井祐樹…前田旺志郎、郁田ちえみ…石川恵里加、猿渡敦…与座よしあき、雉村仁…森下能幸、犬塚輝…マギー、矢島一…田中要次 #邦画` | `https://blogspherenews.xyz/embed/67012692172b884e34da3083` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
-| Item #2 | `https://9tsu.in/douga/74276.html` | `ALL バラエティ動画倉庫` | `1` | `9` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-13_22-48-32.png` | `量産型リコ　第9話 動画　2021年8月25日　220825 内容：普通女子のプラモデルを通じた小さな成長記を描くホビー・ヒューマンドラマ　３部存続のために浅井が奮闘！そして大石が会社を辞める…!?　ショックを受ける璃子は… 出演：小向璃子…与田祐希（乃木坂46）、中野京子…藤井夏恋、高木真司…望月歩、大石亮太…中島歩、浅井祐樹…前田旺志郎、郁田ちえみ…石川恵里加、猿渡敦…与座よしあき、雉村仁…森下能幸、犬塚輝…マギー、矢島一…田中要次 #邦画` | `https://blogspherenews.xyz/embed/67012692172b884e34da3083` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
+| Item #1 | `https://9tsu.in/douga/74521.html` | `水曜ドラマ` | `8` | `8` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-13_22-48-32.png` | `量産型リコ　第9話 動画　2021年8月31日　220831 内容：普通女子のプラモデルを通じた小さな成長記を描くホビー・ヒューマンドラマ　３部存続のために浅井が奮闘！そして大石が会社を辞める…!?　ショックを受ける璃子は… 出演：小向璃子…与田祐希（乃木坂46）、中野京子…藤井夏恋、高木真司…望月歩、大石亮太…中島歩、浅井祐樹…前田旺志郎、郁田ちえみ…石川恵里加、猿渡敦…与座よしあき、雉村仁…森下能幸、犬塚輝…マギー、矢島一…田中要次 #邦画` | `https://ok.ru/videoembed/8430608583197` | `ok.ru` | `2026-08-01 01:55:56` |
+| Item #2 | `https://9tsu.in/douga/74276.html` | `ALL バラエティ動画倉庫` | `1` | `9` | `https://9tsu.in/wp-content/uploads/2022/07/2022-07-13_22-48-32.png` | `量産型リコ　第9話 動画　2021年8月25日　220825 内容：普通女子のプラモデルを通じた小さな成長記を描くホビー・ヒューマンドラマ　３部存続のために浅井が奮闘！そして大石が会社を辞める…!?　ショックを受ける璃子は… 出演：小向璃子…与田祐希（乃木坂46）、中野京子…藤井夏恋、高木真司…望月歩、大石亮太…中島歩、浅井祐樹…前田旺志郎、郁田ちえみ…石川恵里加、猿渡敦…与座よしあき、雉村仁…森下能幸、犬塚輝…マギー、矢島一…田中要次 #邦画` | `https://ok.ru/videoembed/8430608583197` | `ok.ru` | `2026-08-01 01:55:56` |
 
 ---
 
-#### 🔗 Duplikat #73: `https://blogspherenews.xyz/embed/67012ba7172b884e34da5205` (2 kemunculan)
+#### 🔗 Duplikat #79: `https://ok.ru/videoembed/8449572211229` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/73589.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４ ＃６ 杉浦は円谷遊軍長から、仲間とボランティアで民間パトロール隊を作っているというタクシー会社に勤める運転手・岡本正敏を取材してほしいと頼まれる。岡本に会った杉浦は、パトロール隊の隊長を紹介され、話を聞いた。だが、隊長の物言いに何か胡散臭いものを感じた杉浦は、隊長と口論になり、結局はケンカ別れをしてしまう。数日後、大捕物があったので取材にきてほしいと岡本から連絡をもらうが、この件に関わりたくない杉浦は… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://blogspherenews.xyz/embed/67012ba7172b884e34da5205` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
-| Item #2 | `https://9tsu.in/douga/73591.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４ ＃７ 早朝に目覚めてしまい散歩に出かけた杉浦は、道の端にしゃがみ込んでいる中津隆志という青年と出会う。京都日報の記者と名乗り、中津に何をしているのか訊ねると、彼は“つまずいたりしては危ないから石畳の石と石の間にできた割れ目に小石を詰めている”と答えた。その日の午後、中津から“取材してほしい”と杉浦のもとに連絡が入る。指定された公園に出かけると、中津が鋸で植え込みの枝を切っていた。そこには自治会長もいて… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://blogspherenews.xyz/embed/67012ba7172b884e34da5205` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
+| Item #1 | `https://9tsu.in/douga/73589.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４ ＃６ 杉浦は円谷遊軍長から、仲間とボランティアで民間パトロール隊を作っているというタクシー会社に勤める運転手・岡本正敏を取材してほしいと頼まれる。岡本に会った杉浦は、パトロール隊の隊長を紹介され、話を聞いた。だが、隊長の物言いに何か胡散臭いものを感じた杉浦は、隊長と口論になり、結局はケンカ別れをしてしまう。数日後、大捕物があったので取材にきてほしいと岡本から連絡をもらうが、この件に関わりたくない杉浦は… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://ok.ru/videoembed/8449572211229` | `ok.ru` | `2026-08-01 01:55:56` |
+| Item #2 | `https://9tsu.in/douga/73591.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４ ＃７ 早朝に目覚めてしまい散歩に出かけた杉浦は、道の端にしゃがみ込んでいる中津隆志という青年と出会う。京都日報の記者と名乗り、中津に何をしているのか訊ねると、彼は“つまずいたりしては危ないから石畳の石と石の間にできた割れ目に小石を詰めている”と答えた。その日の午後、中津から“取材してほしい”と杉浦のもとに連絡が入る。指定された公園に出かけると、中津が鋸で植え込みの枝を切っていた。そこには自治会長もいて… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://ok.ru/videoembed/8449572211229` | `ok.ru` | `2026-08-01 01:55:56` |
 
 ---
 
-#### 🔗 Duplikat #74: `https://blogspherenews.xyz/embed/67012f2c172b884e34da68ed` (2 kemunculan)
+#### 🔗 Duplikat #80: `https://ok.ru/videoembed/7363382544960` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/73466.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４#5 高校生がキャンプ場のテントで事故死したという記事に目を留めた杉浦。本当は自殺では…と感じ、渚に記事を書いた人から話を聞いてほしいと頼む。だが、渚の子供が通っていた保育園で不審火が続き“父兄OBが交代で見回りをするから”と断られる。そこで杉浦は、府警総務部長に調査を依頼。すると、確かに高校生は自殺だったが父親が表沙汰にしたくないと泣きついた事が判明する。奇しくもその父親は渚と同じ保育園の父兄OBで… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://blogspherenews.xyz/embed/67012f2c172b884e34da68ed` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
-| Item #2 | `https://9tsu.in/douga/73429.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４#4 珍しく2日間の休暇を取っていた社会部デスク・橘つた子が戻ってきた日、杉浦は円谷遊軍長から体罰教師の取材を頼まれる。それは、高校教師・細川勇一が体罰を行なっているとの投書が数通、京都日報に送られてきたというもの。嫌がる杉浦が渚に押し付けようとすると、“自分が行く”とつた子が名乗りをあげた。当該校に出かけたつた子は生徒に話を聞くが、誰もそんな事実はないと言い、当の細川も体罰を明確に否定する。ところが… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://blogspherenews.xyz/embed/67012f2c172b884e34da68ed` | `blogspherenews.xyz` | `2026-08-01 01:55:56` |
+| Item #1 | `https://9tsu.in/douga/73466.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４#5 高校生がキャンプ場のテントで事故死したという記事に目を留めた杉浦。本当は自殺では…と感じ、渚に記事を書いた人から話を聞いてほしいと頼む。だが、渚の子供が通っていた保育園で不審火が続き“父兄OBが交代で見回りをするから”と断られる。そこで杉浦は、府警総務部長に調査を依頼。すると、確かに高校生は自殺だったが父親が表沙汰にしたくないと泣きついた事が判明する。奇しくもその父親は渚と同じ保育園の父兄OBで… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://ok.ru/videoembed/7363382544960` | `ok.ru` | `2026-08-01 01:55:56` |
+| Item #2 | `https://9tsu.in/douga/73429.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `新・京都迷宮案内４#4 珍しく2日間の休暇を取っていた社会部デスク・橘つた子が戻ってきた日、杉浦は円谷遊軍長から体罰教師の取材を頼まれる。それは、高校教師・細川勇一が体罰を行なっているとの投書が数通、京都日報に送られてきたというもの。嫌がる杉浦が渚に押し付けようとすると、“自分が行く”とつた子が名乗りをあげた。当該校に出かけたつた子は生徒に話を聞くが、誰もそんな事実はないと言い、当の細川も体罰を明確に否定する。ところが… ◇出演者 橋爪功、国生さゆり、小木茂光、市田ひろみ、西田健、北村総一朗、野際陽子　ほか #邦画` | `https://ok.ru/videoembed/7363382544960` | `ok.ru` | `2026-08-01 01:55:56` |
 
 ---
 
-#### 🔗 Duplikat #75: `https://blogspherenews.xyz/embed/67012c08172b884e34da54b3` (3 kemunculan)
+#### 🔗 Duplikat #81: `https://ok.ru/videoembed/7262019390110` (3 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/72147.html` | `月曜 ドラマ` | `1` | `12` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-09_6-43-49.png` | `吉祥寺ルーザーズ　第12話 動画　2021年6月27日　2206027 内容：人生負け組６人がシェアハウスで共同生活を送る様子を描くコメディ。ついにオーナーの謎が明らかとなり、さらにある事情によって退去命令が！住人たちの行く末はいかに…？ 出演：増田貴久、田中みな実、 片桐仁、田島芽瑠、岩本蓮加、 濱田マリ、國村隼、小久保寿人 #邦画` | `https://blogspherenews.xyz/embed/67012c08172b884e34da54b3` | `blogspherenews.xyz` | `2026-08-01 02:17:32` |
-| Item #2 | `https://9tsu.in/douga/70432.html` | `月曜 ドラマ` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-09_6-43-49.png` | `吉祥寺ルーザーズ　第5話 動画　2021年5月9日　220509 内容：人生負け組６人がシェアハウスで共同生活する珍騒動を描くコメディ。聡の元教え子だと名乗る女子高生が来訪。幡多はトラウマを抱える聡を気遣って留守だと嘘をつくが…。 出演：ジェイク…アンセル・エルゴート、片桐…渡辺謙、サマンサ…レイチェル・ケラー、宮本…伊藤英明、佐藤…笠松将、詠美…菊地凛子 #邦画` | `https://blogspherenews.xyz/embed/67012c08172b884e34da54b3` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
-| Item #3 | `https://9tsu.in/douga/70409.html` | `ドラマ` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-09_6-43-49.png` | `吉祥寺ルーザーズ 　第4話 動画　2021年5月2日　220502 内容：人生負け組６人が共同生活するシェアハウスでの騒動を描くコメディ。失踪した舞から「同窓会に出席中」と連絡が入ったが、それは嘘だった。真相を追うと…意外な展開に！ 出演：ジェイク…アンセル・エルゴート、片桐…渡辺謙、サマンサ…レイチェル・ケラー、宮本…伊藤英明、佐藤…笠松将、詠美…菊地凛子 #邦画` | `https://blogspherenews.xyz/embed/67012c08172b884e34da54b3` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/72147.html` | `月曜 ドラマ` | `1` | `12` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-09_6-43-49.png` | `吉祥寺ルーザーズ　第12話 動画　2021年6月27日　2206027 内容：人生負け組６人がシェアハウスで共同生活を送る様子を描くコメディ。ついにオーナーの謎が明らかとなり、さらにある事情によって退去命令が！住人たちの行く末はいかに…？ 出演：増田貴久、田中みな実、 片桐仁、田島芽瑠、岩本蓮加、 濱田マリ、國村隼、小久保寿人 #邦画` | `https://ok.ru/videoembed/7262019390110` | `ok.ru` | `2026-08-01 02:17:32` |
+| Item #2 | `https://9tsu.in/douga/70432.html` | `月曜 ドラマ` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-09_6-43-49.png` | `吉祥寺ルーザーズ　第5話 動画　2021年5月9日　220509 内容：人生負け組６人がシェアハウスで共同生活する珍騒動を描くコメディ。聡の元教え子だと名乗る女子高生が来訪。幡多はトラウマを抱える聡を気遣って留守だと嘘をつくが…。 出演：ジェイク…アンセル・エルゴート、片桐…渡辺謙、サマンサ…レイチェル・ケラー、宮本…伊藤英明、佐藤…笠松将、詠美…菊地凛子 #邦画` | `https://ok.ru/videoembed/7262019390110` | `ok.ru` | `2026-08-01 02:35:23` |
+| Item #3 | `https://9tsu.in/douga/70409.html` | `ドラマ` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-09_6-43-49.png` | `吉祥寺ルーザーズ 　第4話 動画　2021年5月2日　220502 内容：人生負け組６人が共同生活するシェアハウスでの騒動を描くコメディ。失踪した舞から「同窓会に出席中」と連絡が入ったが、それは嘘だった。真相を追うと…意外な展開に！ 出演：ジェイク…アンセル・エルゴート、片桐…渡辺謙、サマンサ…レイチェル・ケラー、宮本…伊藤英明、佐藤…笠松将、詠美…菊地凛子 #邦画` | `https://ok.ru/videoembed/7262019390110` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #76: `https://blogspherenews.xyz/embed/67012ca7172b884e34da58cd` (2 kemunculan)
+#### 🔗 Duplikat #82: `https://ok.ru/videoembed/7587528837697` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/70819.html` | `金曜 ドラマ` | `2` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-15_14-24-11.png` | `インビジブル　第6話 動画　2021年5月20日　220520 内容：捜査一課から左遷された刑事とあらゆる凶悪犯罪者たちの取引を仲介する犯罪コーディネーター“インビジブル”が異色のバディを組む、前代未聞の犯罪エンタテイメント！ 出演：高橋一生、柴咲コウ/有岡大貴（Hey! Say! JUMP)、堀田茜、谷恭輔、大野いと、平埜生成、板垣李光人、西村元貴、結城モエ、田中真琴、村井良大、後藤剛範/要潤、DAIGO/酒向芳/原田泰造、桐谷健太　他 #邦画` | `https://blogspherenews.xyz/embed/67012ca7172b884e34da58cd` | `blogspherenews.xyz` | `2026-08-01 02:17:32` |
-| Item #2 | `https://9tsu.in/douga/70823.html` | `金曜 ドラマ` | `2` | `5` | `https://9tsu.in/wp-content/uploads/2022/03/2022-03-04_22-11-48.png` | `ヒル Season2　第5話 動画　2021年5月20日　220520 内容：他人に寄生して生きる者たちの運命と格差社会の闇を描く社会派復讐サスペンス。Season1主演を赤楚衛二、Season2主演を坂口健太郎で人気漫画を連続ドラマ化！ 出演：赤楚衛二、柳俊太郎、田中幸太朗、利重剛、坂口健太郎、吉川愛、板垣瑞生、松澤匠、板尾創路、飯豊まりえ、佐久間由衣、三浦誠己、小西真奈美 #邦画` | `https://blogspherenews.xyz/embed/67012ca7172b884e34da58cd` | `blogspherenews.xyz` | `2026-08-01 02:17:32` |
+| Item #1 | `https://9tsu.in/douga/70819.html` | `金曜 ドラマ` | `2` | `5` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-15_14-24-11.png` | `インビジブル　第6話 動画　2021年5月20日　220520 内容：捜査一課から左遷された刑事とあらゆる凶悪犯罪者たちの取引を仲介する犯罪コーディネーター“インビジブル”が異色のバディを組む、前代未聞の犯罪エンタテイメント！ 出演：高橋一生、柴咲コウ/有岡大貴（Hey! Say! JUMP)、堀田茜、谷恭輔、大野いと、平埜生成、板垣李光人、西村元貴、結城モエ、田中真琴、村井良大、後藤剛範/要潤、DAIGO/酒向芳/原田泰造、桐谷健太　他 #邦画` | `https://ok.ru/videoembed/7587528837697` | `ok.ru` | `2026-08-01 02:17:32` |
+| Item #2 | `https://9tsu.in/douga/70823.html` | `金曜 ドラマ` | `2` | `5` | `https://9tsu.in/wp-content/uploads/2022/03/2022-03-04_22-11-48.png` | `ヒル Season2　第5話 動画　2021年5月20日　220520 内容：他人に寄生して生きる者たちの運命と格差社会の闇を描く社会派復讐サスペンス。Season1主演を赤楚衛二、Season2主演を坂口健太郎で人気漫画を連続ドラマ化！ 出演：赤楚衛二、柳俊太郎、田中幸太朗、利重剛、坂口健太郎、吉川愛、板垣瑞生、松澤匠、板尾創路、飯豊まりえ、佐久間由衣、三浦誠己、小西真奈美 #邦画` | `https://ok.ru/videoembed/7587528837697` | `ok.ru` | `2026-08-01 02:17:32` |
 
 ---
 
-#### 🔗 Duplikat #77: `https://pulvexa.space/embed/94dzEcqJNC?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #83: `https://pulvexa.space/embed/94dzEcqJNC?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1050,106 +1104,106 @@
 
 ---
 
-#### 🔗 Duplikat #78: `https://blogspherenews.xyz/embed/67012d69172b884e34da5dad` (2 kemunculan)
+#### 🔗 Duplikat #84: `https://ok.ru/videoembed/7277801638558` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/70704.html` | `月曜 ドラマ` | `1` | `15` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-24_22-32-04.png` | `君のハートを捕まえろ！～Catch the Ghost～　第15話 動画　2021年5月16日　220516 内容：熱血新人警察官×冷静エリート警察官の恋の行方は…？始発から終電まで！ソウルの地下鉄を守る2人の警察官が繰り広げる、相克ラブ・コメディ！ 出演：ムン・グニョン、キム・ソノ、チョン・ユジン、キ・ドフン #邦画` | `https://blogspherenews.xyz/embed/67012d69172b884e34da5dad` | `blogspherenews.xyz` | `2026-08-01 02:17:32` |
-| Item #2 | `https://9tsu.in/douga/70439.html` | `月曜 ドラマ` | `1` | `14` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-24_22-32-04.png` | `君のハートを捕まえろ！～Catch the Ghost～　第14話 動画　2021年5月9日　220509 内容：熱血新人警察官×冷静エリート警察官の恋の行方は…？始発から終電まで！ソウルの地下鉄を守る2人の警察官が繰り広げる、相克ラブ・コメディ！ 出演：ムン・グニョン、キム・ソノ、チョン・ユジン、キ・ドフン #邦画` | `https://blogspherenews.xyz/embed/67012d69172b884e34da5dad` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/70704.html` | `月曜 ドラマ` | `1` | `15` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-24_22-32-04.png` | `君のハートを捕まえろ！～Catch the Ghost～　第15話 動画　2021年5月16日　220516 内容：熱血新人警察官×冷静エリート警察官の恋の行方は…？始発から終電まで！ソウルの地下鉄を守る2人の警察官が繰り広げる、相克ラブ・コメディ！ 出演：ムン・グニョン、キム・ソノ、チョン・ユジン、キ・ドフン #邦画` | `https://ok.ru/videoembed/7277801638558` | `ok.ru` | `2026-08-01 02:17:32` |
+| Item #2 | `https://9tsu.in/douga/70439.html` | `月曜 ドラマ` | `1` | `14` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-24_22-32-04.png` | `君のハートを捕まえろ！～Catch the Ghost～　第14話 動画　2021年5月9日　220509 内容：熱血新人警察官×冷静エリート警察官の恋の行方は…？始発から終電まで！ソウルの地下鉄を守る2人の警察官が繰り広げる、相克ラブ・コメディ！ 出演：ムン・グニョン、キム・ソノ、チョン・ユジン、キ・ドフン #邦画` | `https://ok.ru/videoembed/7277801638558` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #79: `https://blogspherenews.xyz/embed/67012b30172b884e34da4f01` (2 kemunculan)
+#### 🔗 Duplikat #85: `https://ok.ru/videoembed/8121309006415` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/70698.html` | `月曜 ドラマ` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-16_22-13-26.png` | `休暇今井　第6話 動画　2021年5月16日　220516 内容：あなたは突然お休みができたら何をしますか？これは、“休日”を通して見えてくる今井翼のライフヒストリー。 出演：今井翼、松永大司 #邦画` | `https://blogspherenews.xyz/embed/67012b30172b884e34da4f01` | `blogspherenews.xyz` | `2026-08-01 02:17:32` |
-| Item #2 | `https://9tsu.in/douga/70454.html` | `ALL バラエティ動画倉庫` | `2` | `7` | `https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png` | `休暇今井 #5 ある日､今井翼は､次の夏にお休みができたことを告げられる｡それを聞きつけたあるﾃﾞｨﾚｸﾀｰが､ひとつの提案をする｡｢自由に時間を使う､ありのままの今井さんを撮らせてもらえませんか?｣ここまでの設定はﾌｨｸｼｮﾝ｡その先の筋書きはなし｡｢今の自分が本当にやりたいことは何だろう?｣今井が選ぶ｢最高の時間の過ごし方｣とは何なのか｡そして､そんな時間を過ごした先に今井は何を見つけるのか｡■第5回:ｷｬﾝﾌﾟする休暇(焚火編)今回の休暇は､ｷｬﾝﾌﾟ(夜)｡焚火を見つめながら､本作の監督である松永氏と､これまでの休暇を振り返ります｡その中で話題となる､今井が主演した舞台｢ｺﾞﾔ―GOYA―｣名古屋公演での出来事…｡最高の休暇を目指す中で見えてきた今井の､人間として､役者としての生き方･考え方｡そしてこれから…｡いよいよ最高の休暇もﾗｽﾄです! #邦画` | `https://blogspherenews.xyz/embed/67012b30172b884e34da4f01` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/70698.html` | `月曜 ドラマ` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-16_22-13-26.png` | `休暇今井　第6話 動画　2021年5月16日　220516 内容：あなたは突然お休みができたら何をしますか？これは、“休日”を通して見えてくる今井翼のライフヒストリー。 出演：今井翼、松永大司 #邦画` | `https://ok.ru/videoembed/8121309006415` | `ok.ru` | `2026-08-01 02:17:32` |
+| Item #2 | `https://9tsu.in/douga/70454.html` | `ALL バラエティ動画倉庫` | `2` | `7` | `https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png` | `休暇今井 #5 ある日､今井翼は､次の夏にお休みができたことを告げられる｡それを聞きつけたあるﾃﾞｨﾚｸﾀｰが､ひとつの提案をする｡｢自由に時間を使う､ありのままの今井さんを撮らせてもらえませんか?｣ここまでの設定はﾌｨｸｼｮﾝ｡その先の筋書きはなし｡｢今の自分が本当にやりたいことは何だろう?｣今井が選ぶ｢最高の時間の過ごし方｣とは何なのか｡そして､そんな時間を過ごした先に今井は何を見つけるのか｡■第5回:ｷｬﾝﾌﾟする休暇(焚火編)今回の休暇は､ｷｬﾝﾌﾟ(夜)｡焚火を見つめながら､本作の監督である松永氏と､これまでの休暇を振り返ります｡その中で話題となる､今井が主演した舞台｢ｺﾞﾔ―GOYA―｣名古屋公演での出来事…｡最高の休暇を目指す中で見えてきた今井の､人間として､役者としての生き方･考え方｡そしてこれから…｡いよいよ最高の休暇もﾗｽﾄです! #邦画` | `https://ok.ru/videoembed/8121309006415` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #80: `https://blogspherenews.xyz/embed/6701271a172b884e34da33e0` (2 kemunculan)
+#### 🔗 Duplikat #86: `https://ok.ru/videoembed/7482517424762` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/70463.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-10_21-42-35.png` | `記憶捜査２　最終回　北大路欣也×風間俊介×上白石萌音 動画　2021年5月10日　220510 内容：北大路欣也主演の本格推理ドラマ◇乗客11名が死亡した令和最悪のバス事故は、殺人事件だった!?伝説刑事の“記憶と勘”が、消えた「12人目の客」を解き明かす衝撃の最終回！ 出演：鬼塚一路…北大路欣也、神啓太郎…風間俊介、遠山咲…上白石萌音、山崎清…内田朝陽、本多太一…松本大志、東奏多…平岡祐太、栗田史郎…石黒賢、木地本淳子…余貴美子、石場光子…釈由美子、志田茂…佐戸井けん太、水之江洋一…宮川一朗太、志田聖子…藤田朋子、竹実孝典…東根作寿英、ワイドショーMC…登坂淳一 #邦画` | `https://blogspherenews.xyz/embed/6701271a172b884e34da33e0` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
-| Item #2 | `https://9tsu.in/douga/70420.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `記憶捜査２[再] 第３話 北大路欣也×風間俊介×上白石萌音 新宿二丁目で警視庁サイバー犯罪対策課の佐山正警部補（マギー）が毒殺される。一方で、新宿東署内で停電が発生。非常電源が一向に作動しないことから鬼塚(北大路欣也)は異変を感じ、捜査を進めると、停電の原因は新宿東署も参加するスマートシティ化計画「新宿Ｉシティ」のシステム障害だったことがわかる。殺された佐山は、計画の参加企業からサイバー攻撃を受けたという通報をもとに、単独で捜査をしていたことがわかり…。 #邦画` | `https://blogspherenews.xyz/embed/6701271a172b884e34da33e0` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/70463.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/05/2022-05-10_21-42-35.png` | `記憶捜査２　最終回　北大路欣也×風間俊介×上白石萌音 動画　2021年5月10日　220510 内容：北大路欣也主演の本格推理ドラマ◇乗客11名が死亡した令和最悪のバス事故は、殺人事件だった!?伝説刑事の“記憶と勘”が、消えた「12人目の客」を解き明かす衝撃の最終回！ 出演：鬼塚一路…北大路欣也、神啓太郎…風間俊介、遠山咲…上白石萌音、山崎清…内田朝陽、本多太一…松本大志、東奏多…平岡祐太、栗田史郎…石黒賢、木地本淳子…余貴美子、石場光子…釈由美子、志田茂…佐戸井けん太、水之江洋一…宮川一朗太、志田聖子…藤田朋子、竹実孝典…東根作寿英、ワイドショーMC…登坂淳一 #邦画` | `https://ok.ru/videoembed/7482517424762` | `ok.ru` | `2026-08-01 02:35:23` |
+| Item #2 | `https://9tsu.in/douga/70420.html` | `ドラマ 放送終了` | `1` | `3` | `https://9tsu.in/wp-content/uploads/2022/04/9tsu.info_.jpg` | `記憶捜査２[再] 第３話 北大路欣也×風間俊介×上白石萌音 新宿二丁目で警視庁サイバー犯罪対策課の佐山正警部補（マギー）が毒殺される。一方で、新宿東署内で停電が発生。非常電源が一向に作動しないことから鬼塚(北大路欣也)は異変を感じ、捜査を進めると、停電の原因は新宿東署も参加するスマートシティ化計画「新宿Ｉシティ」のシステム障害だったことがわかる。殺された佐山は、計画の参加企業からサイバー攻撃を受けたという通報をもとに、単独で捜査をしていたことがわかり…。 #邦画` | `https://ok.ru/videoembed/7482517424762` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #81: `https://blogspherenews.xyz/embed/67012850172b884e34da3bed` (2 kemunculan)
+#### 🔗 Duplikat #87: `https://ok.ru/videoembed/8007386073652` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/69903.html` | `土曜 ドラマ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-15_14-57-49.png` | `俺の可愛いはもうすぐ消費期限!?　第2話 動画　2021年4月23日　220423 内容：大得意先の担当を後輩に奪われた康介。和泉と共に山奥にポツンと佇む営業先に出向くが、エンジントラブルに見舞われ山奥で一晩二人きりに。寝床を探し二人が見つけたのは… 出演：山田涼介(Hey! Say! JUMP)、芳根京子、大橋和也(なにわ男子)、迫田孝也、鞘師里保、西田尚美、古田新太 #邦画` | `https://blogspherenews.xyz/embed/67012850172b884e34da3bed` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
-| Item #2 | `https://9tsu.in/douga/69636.html` | `土曜 ドラマ` | `1` | `1` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-15_14-57-49.png` | `俺の可愛いはもうすぐ消費期限!?　第1話 動画　2021年4月16日　220416 内容：30歳を目前に“可愛い”の期限を宣告された「あざかわ男子」丸谷康介(山田涼介)と恋愛経験ゼロの「ロボット女」真田和泉(芳根京子)。キュンに不慣れな二人の恋を描く。 出演：山田涼介(Hey! Say! JUMP)、芳根京子、大橋和也(なにわ男子)、迫田孝也、鞘師里保、西田尚美、古田新太 #邦画` | `https://blogspherenews.xyz/embed/67012850172b884e34da3bed` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/69903.html` | `土曜 ドラマ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-15_14-57-49.png` | `俺の可愛いはもうすぐ消費期限!?　第2話 動画　2021年4月23日　220423 内容：大得意先の担当を後輩に奪われた康介。和泉と共に山奥にポツンと佇む営業先に出向くが、エンジントラブルに見舞われ山奥で一晩二人きりに。寝床を探し二人が見つけたのは… 出演：山田涼介(Hey! Say! JUMP)、芳根京子、大橋和也(なにわ男子)、迫田孝也、鞘師里保、西田尚美、古田新太 #邦画` | `https://ok.ru/videoembed/8007386073652` | `ok.ru` | `2026-08-01 02:35:23` |
+| Item #2 | `https://9tsu.in/douga/69636.html` | `土曜 ドラマ` | `1` | `1` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-15_14-57-49.png` | `俺の可愛いはもうすぐ消費期限!?　第1話 動画　2021年4月16日　220416 内容：30歳を目前に“可愛い”の期限を宣告された「あざかわ男子」丸谷康介(山田涼介)と恋愛経験ゼロの「ロボット女」真田和泉(芳根京子)。キュンに不慣れな二人の恋を描く。 出演：山田涼介(Hey! Say! JUMP)、芳根京子、大橋和也(なにわ男子)、迫田孝也、鞘師里保、西田尚美、古田新太 #邦画` | `https://ok.ru/videoembed/8007386073652` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #82: `https://blogspherenews.xyz/embed/67012eab172b884e34da65b3` (2 kemunculan)
+#### 🔗 Duplikat #88: `https://ok.ru/videoembed/7767974414886` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/69492.html` | `火曜 ドラマ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-05_20-44-35.png` | `星新一の不思議な不思議な短編ドラマ　第2話 動画　2021年4月12日　220412 内容：ショートショートの神様・星新一の作品群を豪華キャストで映像化！「生活維持省」と呼ばれる役所勤めの男二人。今日も車に乗って職務遂行にあたっていた。その職務とは？ 出演：水原希子、岡山天音、杉本哲太、古館寛治、篠原篤、中村祐志、片桐はいり #邦画` | `https://blogspherenews.xyz/embed/67012eab172b884e34da65b3` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
-| Item #2 | `https://9tsu.in/douga/69494.html` | `火曜 ドラマ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-05_22-08-54.png` | `渋谷先生がだいたい教えてくれる　第2話 動画　2021年4月11日　220411 内容：専門学校での多忙な毎日を送る新任講師・流果。今回のお悩み「家族について」にどう答えたらいいか困った流果の足は、今日も行きつけのバーに向く。憧れの喜多見マスターのカクテルをたしなみ、バイトの志村のロック談義に耳を傾けていると、ハンチング帽姿の渋谷先生が！　今回からゲスト・ミュージシャンも登場。渋谷先生がだいたい教えてくれる！ 出演：谷中敦、徳井義実、里々佳、みなみかわ、ナヲ(マキシマム ザ ホルモン)、財津優太郎 #邦画` | `https://blogspherenews.xyz/embed/67012eab172b884e34da65b3` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/69492.html` | `火曜 ドラマ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-05_20-44-35.png` | `星新一の不思議な不思議な短編ドラマ　第2話 動画　2021年4月12日　220412 内容：ショートショートの神様・星新一の作品群を豪華キャストで映像化！「生活維持省」と呼ばれる役所勤めの男二人。今日も車に乗って職務遂行にあたっていた。その職務とは？ 出演：水原希子、岡山天音、杉本哲太、古館寛治、篠原篤、中村祐志、片桐はいり #邦画` | `https://ok.ru/videoembed/7767974414886` | `ok.ru` | `2026-08-01 02:35:23` |
+| Item #2 | `https://9tsu.in/douga/69494.html` | `火曜 ドラマ` | `1` | `2` | `https://9tsu.in/wp-content/uploads/2022/04/2022-04-05_22-08-54.png` | `渋谷先生がだいたい教えてくれる　第2話 動画　2021年4月11日　220411 内容：専門学校での多忙な毎日を送る新任講師・流果。今回のお悩み「家族について」にどう答えたらいいか困った流果の足は、今日も行きつけのバーに向く。憧れの喜多見マスターのカクテルをたしなみ、バイトの志村のロック談義に耳を傾けていると、ハンチング帽姿の渋谷先生が！　今回からゲスト・ミュージシャンも登場。渋谷先生がだいたい教えてくれる！ 出演：谷中敦、徳井義実、里々佳、みなみかわ、ナヲ(マキシマム ザ ホルモン)、財津優太郎 #邦画` | `https://ok.ru/videoembed/7767974414886` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #83: `https://blogspherenews.xyz/embed/67012e7b172b884e34da6474` (2 kemunculan)
+#### 🔗 Duplikat #89: `https://ok.ru/videoembed/7627133487844` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/69029.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/03/2022-03-29_23-04-30.png` | `地上波初放送！菅田将暉×小松菜奈 W主演 映画 動画　2021年3月29日　220329 内容：中島みゆきの珠玉の名曲「糸」が織りなす壮大な愛と絆の物語を、日本最高峰の豪華キャストとスタッフで贈る。初めて愛したあなたは、今、どこで生きていますか—？ 出演：菅田将暉、小松菜奈、山本美月、高杉真宙、馬場ふみか、倍賞美津子、永島敏行、竹原ピストル、二階堂ふみ（友情出演）、松重豊、田中美佐子、山口紗弥加、成田凌、斎藤工、榮倉奈々 #邦画` | `https://blogspherenews.xyz/embed/67012e7b172b884e34da6474` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
-| Item #2 | `https://9tsu.in/douga/68977.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/03/2022-03-28_7-29-22.png` | `ちょっぴり大人な夜の恋物語！スペシャルドラマ今夜、わたしはカラダで恋をする。 動画　2021年3月27日　220327 内容：石田ニコル、寺本莉緒、美山加恋がカラダで恋するヒロインをエモく切なく演じるオムニバスドラマ。3人を“沼らせる”ミステリアス（!？）な恋の相手…沼男子役は猪塚健太 出演：小夏・・・石田ニコル、あかり・・寺本莉緒、莉子・・・美山加恋、田中・・・桜木那智、森山・・・水野勝（BOYS AND MEN）、大沼・・・猪塚健太 #邦画` | `https://blogspherenews.xyz/embed/67012e7b172b884e34da6474` | `blogspherenews.xyz` | `2026-08-01 02:35:23` |
+| Item #1 | `https://9tsu.in/douga/69029.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/03/2022-03-29_23-04-30.png` | `地上波初放送！菅田将暉×小松菜奈 W主演 映画 動画　2021年3月29日　220329 内容：中島みゆきの珠玉の名曲「糸」が織りなす壮大な愛と絆の物語を、日本最高峰の豪華キャストとスタッフで贈る。初めて愛したあなたは、今、どこで生きていますか—？ 出演：菅田将暉、小松菜奈、山本美月、高杉真宙、馬場ふみか、倍賞美津子、永島敏行、竹原ピストル、二階堂ふみ（友情出演）、松重豊、田中美佐子、山口紗弥加、成田凌、斎藤工、榮倉奈々 #邦画` | `https://ok.ru/videoembed/7627133487844` | `ok.ru` | `2026-08-01 02:35:23` |
+| Item #2 | `https://9tsu.in/douga/68977.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2022/03/2022-03-28_7-29-22.png` | `ちょっぴり大人な夜の恋物語！スペシャルドラマ今夜、わたしはカラダで恋をする。 動画　2021年3月27日　220327 内容：石田ニコル、寺本莉緒、美山加恋がカラダで恋するヒロインをエモく切なく演じるオムニバスドラマ。3人を“沼らせる”ミステリアス（!？）な恋の相手…沼男子役は猪塚健太 出演：小夏・・・石田ニコル、あかり・・寺本莉緒、莉子・・・美山加恋、田中・・・桜木那智、森山・・・水野勝（BOYS AND MEN）、大沼・・・猪塚健太 #邦画` | `https://ok.ru/videoembed/7627133487844` | `ok.ru` | `2026-08-01 02:35:23` |
 
 ---
 
-#### 🔗 Duplikat #84: `https://blogspherenews.xyz/embed/67012888172b884e34da3d64` (2 kemunculan)
+#### 🔗 Duplikat #90: `https://ok.ru/videoembed/7648117852833` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/68065.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎&山村美紗夢の合作サスペンス「海を渡った愛と殺意」 西村京太郎＆山村美紗 夢の合作サスペンス　海を渡った愛と殺意（新聞ラテ欄表記…西村京太郎＆山村美紗夢の合作サスペンス　海を渡った愛と殺意　宝石強盗が連続殺人へ　黒コゲの死体は兄？人間消失トリックを探る妹！東京－仙台－台湾　真犯人の秘密はヒスイの村に…十津川VS.キャサリン夢の競演実現）（十津川警部シリーズ(14)） #邦画` | `https://blogspherenews.xyz/embed/67012888172b884e34da3d64` | `blogspherenews.xyz` | `2026-08-01 02:55:28` |
-| Item #2 | `https://9tsu.in/douga/67788.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎&山村美紗夢の合作サスペンス「海を渡った愛と殺意」 西村京太郎作品の十津川警部と山村美紗作品の名探偵キャサリンが夢の競演！ 本作は人気キャラクター同士の競演を実現するために、西村京太郎が番組のために書き下ろした大変貴重なもの。また、両シリーズ初となる海外ロケ（台湾）を行ったことも話題となった。台北市内や、花の精たちが住む街といわれる花蓮では、民俗衣装も艶やかなアミ族の踊りや、壮麗な大理石の峡谷、タロコ峡谷は圧巻だ。もちろん、十津川警部には欠かせない列車「自強号」も登場。鉄道ファンへのサービスも忘れていない。 宝石強盗と密売組織、台湾マフィアに中国・人民解放軍の拳銃に殺人、そして、日本の不正融資がからみ、事件は複雑に展開していく。二人の力を合わせ、殺人事件の謎に挑む大スケールの合作サスペンス！ 【ストーリー】 台湾マフィア取材のため台北を訪れていたカメラマンの希麻倫子（通称・キャサリン／かたせ梨乃）は、ヒスイの闇取引に関与する女性を追う途中、銃のバイヤーが殺されるという事件に遭遇する。1カ月後、殺されたバイヤーの銃を使った宝石強盗事件が東京・銀座で発生。事件を担当する十津川警部（渡瀬恒彦）の捜査線上に倉田雄介（石橋保）の名前が浮上する。 #邦画` | `https://blogspherenews.xyz/embed/67012888172b884e34da3d64` | `blogspherenews.xyz` | `2026-08-01 02:55:28` |
+| Item #1 | `https://9tsu.in/douga/68065.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎&山村美紗夢の合作サスペンス「海を渡った愛と殺意」 西村京太郎＆山村美紗 夢の合作サスペンス　海を渡った愛と殺意（新聞ラテ欄表記…西村京太郎＆山村美紗夢の合作サスペンス　海を渡った愛と殺意　宝石強盗が連続殺人へ　黒コゲの死体は兄？人間消失トリックを探る妹！東京－仙台－台湾　真犯人の秘密はヒスイの村に…十津川VS.キャサリン夢の競演実現）（十津川警部シリーズ(14)） #邦画` | `https://ok.ru/videoembed/7648117852833` | `ok.ru` | `2026-08-01 02:55:28` |
+| Item #2 | `https://9tsu.in/douga/67788.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `西村京太郎&山村美紗夢の合作サスペンス「海を渡った愛と殺意」 西村京太郎作品の十津川警部と山村美紗作品の名探偵キャサリンが夢の競演！ 本作は人気キャラクター同士の競演を実現するために、西村京太郎が番組のために書き下ろした大変貴重なもの。また、両シリーズ初となる海外ロケ（台湾）を行ったことも話題となった。台北市内や、花の精たちが住む街といわれる花蓮では、民俗衣装も艶やかなアミ族の踊りや、壮麗な大理石の峡谷、タロコ峡谷は圧巻だ。もちろん、十津川警部には欠かせない列車「自強号」も登場。鉄道ファンへのサービスも忘れていない。 宝石強盗と密売組織、台湾マフィアに中国・人民解放軍の拳銃に殺人、そして、日本の不正融資がからみ、事件は複雑に展開していく。二人の力を合わせ、殺人事件の謎に挑む大スケールの合作サスペンス！ 【ストーリー】 台湾マフィア取材のため台北を訪れていたカメラマンの希麻倫子（通称・キャサリン／かたせ梨乃）は、ヒスイの闇取引に関与する女性を追う途中、銃のバイヤーが殺されるという事件に遭遇する。1カ月後、殺されたバイヤーの銃を使った宝石強盗事件が東京・銀座で発生。事件を担当する十津川警部（渡瀬恒彦）の捜査線上に倉田雄介（石橋保）の名前が浮上する。 #邦画` | `https://ok.ru/videoembed/7648117852833` | `ok.ru` | `2026-08-01 02:55:28` |
 
 ---
 
-#### 🔗 Duplikat #85: `https://blogspherenews.xyz/embed/67012a80172b884e34da4aa3` (2 kemunculan)
+#### 🔗 Duplikat #91: `https://ok.ru/videoembed/7500098505255` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/66470.html` | `木曜 ドラマ` | `21` | `10` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-20_18-14-58.png` | `鑑識特捜班・九条礼子　第3話 動画　2021年1月20日　220120 内容：鑑識と捜査の両方を手掛ける鑑識特捜班が事件の真相を追う！鑑識特捜班の礼子とまどかは白骨遺体の残る河川敷で捜査を行っていたが、時を同じくして、金融機関を狙った強盗事件が発生。しかし、犯人は逃げようと外へ出ようとした瞬間に体に巻きつけられた爆弾を爆発させ死亡する。やがて捜査を進めるうちに白骨遺体は工場経営者の笹川実と判明し…。 出演：渡辺えり、安達祐実、石原良純 #邦画` | `https://blogspherenews.xyz/embed/67012a80172b884e34da4aa3` | `blogspherenews.xyz` | `2026-08-01 02:55:28` |
-| Item #2 | `https://9tsu.in/douga/66468.html` | `木曜 ドラマ` | `21` | `10` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-20_18-14-58.png` | `鑑識特捜班・九条礼子　第2話 動画　2021年1月20日　220120 内容：鑑識と捜査の両方を手掛ける鑑識特捜班が事件の真相を追う！フリーライターの大岩が何者かに殺害された。やがて大岩の爪に残っていた皮膚片が、4年前に起こった看護師の殺害事件に残されていた皮膚片と同一人物のものであることが発覚する。 出演：渡辺えり、安達祐実、石原良純 #邦画` | `https://blogspherenews.xyz/embed/67012a80172b884e34da4aa3` | `blogspherenews.xyz` | `2026-08-01 02:55:28` |
+| Item #1 | `https://9tsu.in/douga/66470.html` | `木曜 ドラマ` | `21` | `10` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-20_18-14-58.png` | `鑑識特捜班・九条礼子　第3話 動画　2021年1月20日　220120 内容：鑑識と捜査の両方を手掛ける鑑識特捜班が事件の真相を追う！鑑識特捜班の礼子とまどかは白骨遺体の残る河川敷で捜査を行っていたが、時を同じくして、金融機関を狙った強盗事件が発生。しかし、犯人は逃げようと外へ出ようとした瞬間に体に巻きつけられた爆弾を爆発させ死亡する。やがて捜査を進めるうちに白骨遺体は工場経営者の笹川実と判明し…。 出演：渡辺えり、安達祐実、石原良純 #邦画` | `https://ok.ru/videoembed/7500098505255` | `ok.ru` | `2026-08-01 02:55:28` |
+| Item #2 | `https://9tsu.in/douga/66468.html` | `木曜 ドラマ` | `21` | `10` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-20_18-14-58.png` | `鑑識特捜班・九条礼子　第2話 動画　2021年1月20日　220120 内容：鑑識と捜査の両方を手掛ける鑑識特捜班が事件の真相を追う！フリーライターの大岩が何者かに殺害された。やがて大岩の爪に残っていた皮膚片が、4年前に起こった看護師の殺害事件に残されていた皮膚片と同一人物のものであることが発覚する。 出演：渡辺えり、安達祐実、石原良純 #邦画` | `https://ok.ru/videoembed/7500098505255` | `ok.ru` | `2026-08-01 02:55:28` |
 
 ---
 
-#### 🔗 Duplikat #86: `https://blogspherenews.xyz/embed/670dddf2172b884e34db83ea` (2 kemunculan)
+#### 🔗 Duplikat #92: `https://ok.ru/videoembed/7986027629145` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/65084.html` | `木曜 ドラマ` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `往復書簡～十五年後の補習 動画　2021年12月9日　211209 内容：湊かなえの原作を松下奈緒、市原隼人ら出演でドラマ化。15年前の放火事件から生き残り、記憶を失った主人公に、衝撃の事実が明かされる。ある日、材木倉庫で女性の焼死体が発見される。15年前にも同じ倉庫で放火殺人があり、今回の被害者は当時放火犯の疑いをかけられた少年の母親だった。15年前の放火で生き残った万里子は、ショックで当時の記憶を失っていた。しかし、海外に突如旅立っていた恋人の手紙を読んだ万里子は、事件当時の記憶が断片的に蘇るようになる。 出演：松下奈緒、市原隼人、朝倉あき、森永悠希、鈴之助、大沢逸美、山崎銀之丞、梨本謙次郎、鹿賀丈史、ほか #邦画` | `https://blogspherenews.xyz/embed/670dddf2172b884e34db83ea` | `blogspherenews.xyz` | `2026-08-01 03:16:33` |
-| Item #2 | `https://9tsu.in/douga/65037.html` | `水曜ドラマ` | `2` | `2` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `軽井沢駐在犬日誌 動画　2021年12月8日　211208 内容：軽井沢を舞台に、刑事と警察犬が身代金1億円の誘拐事件に立ち向かうサスペンス。元刑事の耕作は、飼い犬であり嘱託警察犬のピースと共に軽井沢の駐在所に勤務していた。ある日耕作の妻がピースと散歩していると、ピースが刺殺体を発見する。被害者は、会社の進めるリストラ事業の先頭に立った人事部長・設楽と判明。警察は恨みによる犯行として捜査を進める。 出演：小林稔侍、永島敏行、原久美子、中田喜子 #邦画` | `https://blogspherenews.xyz/embed/670dddf2172b884e34db83ea` | `blogspherenews.xyz` | `2026-08-01 03:16:33` |
+| Item #1 | `https://9tsu.in/douga/65084.html` | `木曜 ドラマ` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `往復書簡～十五年後の補習 動画　2021年12月9日　211209 内容：湊かなえの原作を松下奈緒、市原隼人ら出演でドラマ化。15年前の放火事件から生き残り、記憶を失った主人公に、衝撃の事実が明かされる。ある日、材木倉庫で女性の焼死体が発見される。15年前にも同じ倉庫で放火殺人があり、今回の被害者は当時放火犯の疑いをかけられた少年の母親だった。15年前の放火で生き残った万里子は、ショックで当時の記憶を失っていた。しかし、海外に突如旅立っていた恋人の手紙を読んだ万里子は、事件当時の記憶が断片的に蘇るようになる。 出演：松下奈緒、市原隼人、朝倉あき、森永悠希、鈴之助、大沢逸美、山崎銀之丞、梨本謙次郎、鹿賀丈史、ほか #邦画` | `https://ok.ru/videoembed/7986027629145` | `ok.ru` | `2026-08-01 03:16:33` |
+| Item #2 | `https://9tsu.in/douga/65037.html` | `水曜ドラマ` | `2` | `2` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `軽井沢駐在犬日誌 動画　2021年12月8日　211208 内容：軽井沢を舞台に、刑事と警察犬が身代金1億円の誘拐事件に立ち向かうサスペンス。元刑事の耕作は、飼い犬であり嘱託警察犬のピースと共に軽井沢の駐在所に勤務していた。ある日耕作の妻がピースと散歩していると、ピースが刺殺体を発見する。被害者は、会社の進めるリストラ事業の先頭に立った人事部長・設楽と判明。警察は恨みによる犯行として捜査を進める。 出演：小林稔侍、永島敏行、原久美子、中田喜子 #邦画` | `https://ok.ru/videoembed/7986027629145` | `ok.ru` | `2026-08-01 03:16:33` |
 
 ---
 
-#### 🔗 Duplikat #87: `https://blogspherenews.xyz/embed/670de407172b884e34dbb766` (2 kemunculan)
+#### 🔗 Duplikat #93: `https://ok.ru/videoembed/8175697725967` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/63765.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `SPEC〜警視庁公安部公安第五課 未詳事件特別対策係事件簿〜 #7 人気ドラマ「ケイゾク」の演出家・堤幸彦やスタッフが再集結。戸田恵梨香と加瀬亮をW主演に迎え、凡人にはない特殊能力“SPEC”を持つ犯罪者に立ち向かう若き刑事たちを描く。戸田は、驚異の記憶力を持つが外見は気にしない当麻役で新境地を開拓。加瀬も頑固で几帳面、軍人マニアという瀬文役を演じきり、二人の掛け合いは熱狂的なSPECファンを生み出した。また、毎回違うアレンジを見せてくれた「THE RICECOOKERS」の主題歌も話題となった。 放送終了後もファンの熱は冷めることなく、DVD＆ブルーレイもヒットを記録。続編を望む声も多数寄せられ、2012年4月にスペシャルドラマ『SPEC〜翔〜』が放送。同月に『劇場版SPEC〜天〜』も公開された。 #邦画` | `https://blogspherenews.xyz/embed/670de407172b884e34dbb766` | `blogspherenews.xyz` | `2026-08-01 03:35:23` |
-| Item #2 | `https://9tsu.in/douga/63774.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `SPEC〜警視庁公安部公安第五課 未詳事件特別対策係事件簿〜 #8 #邦画` | `https://blogspherenews.xyz/embed/670de407172b884e34dbb766` | `blogspherenews.xyz` | `2026-08-01 03:35:23` |
+| Item #1 | `https://9tsu.in/douga/63765.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `SPEC〜警視庁公安部公安第五課 未詳事件特別対策係事件簿〜 #7 人気ドラマ「ケイゾク」の演出家・堤幸彦やスタッフが再集結。戸田恵梨香と加瀬亮をW主演に迎え、凡人にはない特殊能力“SPEC”を持つ犯罪者に立ち向かう若き刑事たちを描く。戸田は、驚異の記憶力を持つが外見は気にしない当麻役で新境地を開拓。加瀬も頑固で几帳面、軍人マニアという瀬文役を演じきり、二人の掛け合いは熱狂的なSPECファンを生み出した。また、毎回違うアレンジを見せてくれた「THE RICECOOKERS」の主題歌も話題となった。 放送終了後もファンの熱は冷めることなく、DVD＆ブルーレイもヒットを記録。続編を望む声も多数寄せられ、2012年4月にスペシャルドラマ『SPEC〜翔〜』が放送。同月に『劇場版SPEC〜天〜』も公開された。 #邦画` | `https://ok.ru/videoembed/8175697725967` | `ok.ru` | `2026-08-01 03:35:23` |
+| Item #2 | `https://9tsu.in/douga/63774.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `SPEC〜警視庁公安部公安第五課 未詳事件特別対策係事件簿〜 #8 #邦画` | `https://ok.ru/videoembed/8175697725967` | `ok.ru` | `2026-08-01 03:35:23` |
 
 ---
 
-#### 🔗 Duplikat #88: `https://blogspherenews.xyz/embed/670ddd26172b884e34db7d3a` (2 kemunculan)
+#### 🔗 Duplikat #94: `https://ok.ru/videoembed/7624087767621` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/63681.html` | `土曜 ドラマ` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2021/10/2021-10-16_23-10-38.png` | `顔だけ先生　4貫 動画　2021年10月30日　211030 内容：カルテットルック家族からの珍要求に亀高（貫地谷しほり）絶叫！！中村（和田聰宏）とカニベースの意外過ぎる関係性とは！？一回でも失敗したら、人生おしまいですか？ 出演：神尾楓珠、貫地谷しほり、三浦涼介、笠原秀幸、阿部華也子、和田聰宏、八嶋智人、長谷川慎、矢吹奈子、櫻井海音、綱啓永、小宮璃央、景井ひな、三浦獠太、石井礼美、前川佑、あかせあかり #邦画` | `https://blogspherenews.xyz/embed/670ddd26172b884e34db7d3a` | `blogspherenews.xyz` | `2026-08-01 03:35:23` |
-| Item #2 | `https://9tsu.in/douga/63481.html` | `土曜 ドラマ` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2021/10/2021-10-16_23-10-38.png` | `顔だけ先生　3貫 動画　2021年10月23日　211023 内容：遠藤（神尾楓珠）と亀高（貫地谷しほり）結婚！！相手の呼び方問題で口論に！？10年経って変わり果てた大輔（櫻井海音）の姿にずっ友唖然！！お金が無いと、人生、詰みですか？ 出演：神尾楓珠、貫地谷しほり、三浦涼介、笠原秀幸、阿部華也子、和田聰宏、八嶋智人、長谷川慎、矢吹奈子、櫻井海音、綱啓永、小宮璃央、景井ひな、三浦獠太、石井礼美、前川佑、あかせあかり #邦画` | `https://blogspherenews.xyz/embed/670ddd26172b884e34db7d3a` | `blogspherenews.xyz` | `2026-08-01 03:35:23` |
+| Item #1 | `https://9tsu.in/douga/63681.html` | `土曜 ドラマ` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2021/10/2021-10-16_23-10-38.png` | `顔だけ先生　4貫 動画　2021年10月30日　211030 内容：カルテットルック家族からの珍要求に亀高（貫地谷しほり）絶叫！！中村（和田聰宏）とカニベースの意外過ぎる関係性とは！？一回でも失敗したら、人生おしまいですか？ 出演：神尾楓珠、貫地谷しほり、三浦涼介、笠原秀幸、阿部華也子、和田聰宏、八嶋智人、長谷川慎、矢吹奈子、櫻井海音、綱啓永、小宮璃央、景井ひな、三浦獠太、石井礼美、前川佑、あかせあかり #邦画` | `https://ok.ru/videoembed/7624087767621` | `ok.ru` | `2026-08-01 03:35:23` |
+| Item #2 | `https://9tsu.in/douga/63481.html` | `土曜 ドラマ` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2021/10/2021-10-16_23-10-38.png` | `顔だけ先生　3貫 動画　2021年10月23日　211023 内容：遠藤（神尾楓珠）と亀高（貫地谷しほり）結婚！！相手の呼び方問題で口論に！？10年経って変わり果てた大輔（櫻井海音）の姿にずっ友唖然！！お金が無いと、人生、詰みですか？ 出演：神尾楓珠、貫地谷しほり、三浦涼介、笠原秀幸、阿部華也子、和田聰宏、八嶋智人、長谷川慎、矢吹奈子、櫻井海音、綱啓永、小宮璃央、景井ひな、三浦獠太、石井礼美、前川佑、あかせあかり #邦画` | `https://ok.ru/videoembed/7624087767621` | `ok.ru` | `2026-08-01 03:35:23` |
 
 ---
 
-#### 🔗 Duplikat #89: `https://pulvexa.space/embed/wccnnUdEwK?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #95: `https://pulvexa.space/embed/wccnnUdEwK?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1158,7 +1212,7 @@
 
 ---
 
-#### 🔗 Duplikat #90: `https://pulvexa.space/embed/VdcAN8u90X?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #96: `https://pulvexa.space/embed/VdcAN8u90X?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1167,7 +1221,7 @@
 
 ---
 
-#### 🔗 Duplikat #91: `https://pulvexa.space/embed/fK71fJcD55?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #97: `https://pulvexa.space/embed/fK71fJcD55?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1176,25 +1230,25 @@
 
 ---
 
-#### 🔗 Duplikat #92: `https://blogspherenews.xyz/embed/670de1c6172b884e34dba472` (2 kemunculan)
+#### 🔗 Duplikat #98: `https://ok.ru/videoembed/9594661767819` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/60473.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `ノーサイド・ゲーム #2 #邦画` | `https://blogspherenews.xyz/embed/670de1c6172b884e34dba472` | `blogspherenews.xyz` | `2026-08-01 04:16:33` |
-| Item #2 | `https://9tsu.in/douga/60247.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `メゾン・ド・ポリス #2 #邦画` | `https://blogspherenews.xyz/embed/670de1c6172b884e34dba472` | `blogspherenews.xyz` | `2026-08-01 04:16:33` |
+| Item #1 | `https://9tsu.in/douga/60473.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `ノーサイド・ゲーム #2 #邦画` | `https://ok.ru/videoembed/9594661767819` | `ok.ru` | `2026-08-01 04:16:33` |
+| Item #2 | `https://9tsu.in/douga/60247.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `メゾン・ド・ポリス #2 #邦画` | `https://ok.ru/videoembed/9594661767819` | `ok.ru` | `2026-08-01 04:16:33` |
 
 ---
 
-#### 🔗 Duplikat #93: `https://blogspherenews.xyz/embed/670de109172b884e34db9e2f` (2 kemunculan)
+#### 🔗 Duplikat #99: `https://ok.ru/videoembed/7407308573310` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/60469.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `ノーサイド・ゲーム #1 #邦画` | `https://blogspherenews.xyz/embed/670de109172b884e34db9e2f` | `blogspherenews.xyz` | `2026-08-01 04:16:33` |
-| Item #2 | `https://9tsu.in/douga/60249.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `メゾン・ド・ポリス #2 #邦画` | `https://blogspherenews.xyz/embed/670de109172b884e34db9e2f` | `blogspherenews.xyz` | `2026-08-01 04:16:33` |
+| Item #1 | `https://9tsu.in/douga/60469.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `ノーサイド・ゲーム #1 #邦画` | `https://ok.ru/videoembed/7407308573310` | `ok.ru` | `2026-08-01 04:16:33` |
+| Item #2 | `https://9tsu.in/douga/60249.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/07/thuṃtsu.org_.jpg` | `メゾン・ド・ポリス #2 #邦画` | `https://ok.ru/videoembed/7407308573310` | `ok.ru` | `2026-08-01 04:16:33` |
 
 ---
 
-#### 🔗 Duplikat #94: `https://pulvexa.space/embed/bSePk1Jwp1?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #100: `https://pulvexa.space/embed/bSePk1Jwp1?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1203,7 +1257,7 @@
 
 ---
 
-#### 🔗 Duplikat #95: `https://pulvexa.space/embed/vDDdCzGxW9?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #101: `https://pulvexa.space/embed/vDDdCzGxW9?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1212,16 +1266,16 @@
 
 ---
 
-#### 🔗 Duplikat #96: `https://blogspherenews.xyz/embed/670ddfe3172b884e34db9476` (2 kemunculan)
+#### 🔗 Duplikat #102: `https://ok.ru/videoembed/8740277258797` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
-| Item #1 | `https://9tsu.in/douga/58735.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/06/おんな城主-直虎.jpeg` | `内容：今川義元（春風亭昇太）に従い、尾張の織田攻めへと向かった井伊家当主の直盛（杉本哲太）。父の無事を祈る次郎法師（柴咲コウ）と妻・千賀（財前直見）の元に思わぬ悲報がとびこむ。桶狭間で今川軍が大敗し、直盛の首も討ち取られたというのだ。井伊谷に逃げ帰った負傷兵たちの手当てに次郎法師が奮闘する中、供をしていた奥山孫一郎（平山祐介）から直盛の最期の様子が語られる。そして孫一郎に託された直盛の遺言は、井伊家の面々にとって意外なものだった。一方、難を逃れた松平元康（阿部サダヲ）は今川の家臣が逃げ出し空になった古巣の岡崎城に入城し、ついに今川家からの独立を果たす。 出演：第九回『桶狭間に死す』／第十回『走れ竜宮小僧』／第十一回『さらば愛しき人よ』／第十二回『おんな城主直虎』 #邦画` | `https://blogspherenews.xyz/embed/670ddfe3172b884e34db9476` | `blogspherenews.xyz` | `2026-08-01 04:16:33` |
-| Item #2 | `https://9tsu.in/douga/58727.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/06/おんな城主-直虎.jpeg` | `内容：のちに井伊直虎（柴咲コウ）と名乗って戦国の世を生き抜くことになる少女・おとわ（新井美羽）は、井伊家当主の父・直盛（杉本哲太）と母・千賀（財前直見）のもと幸せな日々を過ごしていた。ある日、おとわに亀之丞（藤本哉汰）との縁談話が舞い込む。当主の座を継ぐつもりだったおとわは最初戸惑うが、やがて当主の妻として井伊家を支えていこうと心に決める。そんな折、亀之丞の父・直満（宇梶剛士）に謀反の疑いがかけられる。 出演：柴咲コウ 、杉本哲太 、新井美羽 、藤本哉汰 、宇梶剛士 作 森下佳子 #邦画` | `https://blogspherenews.xyz/embed/670ddfe3172b884e34db9476` | `blogspherenews.xyz` | `2026-08-01 04:16:33` |
+| Item #1 | `https://9tsu.in/douga/58735.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/06/おんな城主-直虎.jpeg` | `内容：今川義元（春風亭昇太）に従い、尾張の織田攻めへと向かった井伊家当主の直盛（杉本哲太）。父の無事を祈る次郎法師（柴咲コウ）と妻・千賀（財前直見）の元に思わぬ悲報がとびこむ。桶狭間で今川軍が大敗し、直盛の首も討ち取られたというのだ。井伊谷に逃げ帰った負傷兵たちの手当てに次郎法師が奮闘する中、供をしていた奥山孫一郎（平山祐介）から直盛の最期の様子が語られる。そして孫一郎に託された直盛の遺言は、井伊家の面々にとって意外なものだった。一方、難を逃れた松平元康（阿部サダヲ）は今川の家臣が逃げ出し空になった古巣の岡崎城に入城し、ついに今川家からの独立を果たす。 出演：第九回『桶狭間に死す』／第十回『走れ竜宮小僧』／第十一回『さらば愛しき人よ』／第十二回『おんな城主直虎』 #邦画` | `https://ok.ru/videoembed/8740277258797` | `ok.ru` | `2026-08-01 04:16:33` |
+| Item #2 | `https://9tsu.in/douga/58727.html` | `ドラマ 放送終了` | `1` | `5` | `https://9tsu.in/wp-content/uploads/2021/06/おんな城主-直虎.jpeg` | `内容：のちに井伊直虎（柴咲コウ）と名乗って戦国の世を生き抜くことになる少女・おとわ（新井美羽）は、井伊家当主の父・直盛（杉本哲太）と母・千賀（財前直見）のもと幸せな日々を過ごしていた。ある日、おとわに亀之丞（藤本哉汰）との縁談話が舞い込む。当主の座を継ぐつもりだったおとわは最初戸惑うが、やがて当主の妻として井伊家を支えていこうと心に決める。そんな折、亀之丞の父・直満（宇梶剛士）に謀反の疑いがかけられる。 出演：柴咲コウ 、杉本哲太 、新井美羽 、藤本哉汰 、宇梶剛士 作 森下佳子 #邦画` | `https://ok.ru/videoembed/8740277258797` | `ok.ru` | `2026-08-01 04:16:33` |
 
 ---
 
-#### 🔗 Duplikat #97: `https://pulvexa.space/embed/UcY2YJjEYw?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #103: `https://pulvexa.space/embed/UcY2YJjEYw?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1230,7 +1284,7 @@
 
 ---
 
-#### 🔗 Duplikat #98: `https://9tsu.in/youtube-baraeti` (9 kemunculan)
+#### 🔗 Duplikat #104: `https://9tsu.in/youtube-baraeti` (9 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1246,7 +1300,7 @@
 
 ---
 
-#### 🔗 Duplikat #99: `https://pulvexa.space/embed/9HtwUfWOS8?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #105: `https://pulvexa.space/embed/9HtwUfWOS8?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1255,7 +1309,7 @@
 
 ---
 
-#### 🔗 Duplikat #100: `https://pulvexa.space/embed/xKXJK45J9j?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #106: `https://pulvexa.space/embed/xKXJK45J9j?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1264,7 +1318,7 @@
 
 ---
 
-#### 🔗 Duplikat #101: `https://ok.ru/videoembed/2683595066009` (2 kemunculan)
+#### 🔗 Duplikat #107: `https://ok.ru/videoembed/2683595066009` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1273,7 +1327,7 @@
 
 ---
 
-#### 🔗 Duplikat #102: `https://pulvexa.space/embed/iwyIB0KDVJ?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #108: `https://pulvexa.space/embed/iwyIB0KDVJ?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1282,7 +1336,7 @@
 
 ---
 
-#### 🔗 Duplikat #103: `https://pulvexa.space/embed/zg65JnUamA?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #109: `https://pulvexa.space/embed/zg65JnUamA?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1291,7 +1345,7 @@
 
 ---
 
-#### 🔗 Duplikat #104: `https://ok.ru/videoembed/2513415441149` (2 kemunculan)
+#### 🔗 Duplikat #110: `https://ok.ru/videoembed/2513415441149` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1300,7 +1354,7 @@
 
 ---
 
-#### 🔗 Duplikat #105: `https://ok.ru/videoembed/3212219517650` (2 kemunculan)
+#### 🔗 Duplikat #111: `https://ok.ru/videoembed/3212219517650` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1309,7 +1363,7 @@
 
 ---
 
-#### 🔗 Duplikat #106: `https://pulvexa.space/embed/NaKGumhM5R?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #112: `https://pulvexa.space/embed/NaKGumhM5R?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1318,7 +1372,7 @@
 
 ---
 
-#### 🔗 Duplikat #107: `https://pulvexa.space/embed/lsVo4txyW8?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #113: `https://pulvexa.space/embed/lsVo4txyW8?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1327,7 +1381,7 @@
 
 ---
 
-#### 🔗 Duplikat #108: `https://pulvexa.space/embed/o3BYCkPWuB?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #114: `https://pulvexa.space/embed/o3BYCkPWuB?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1336,7 +1390,7 @@
 
 ---
 
-#### 🔗 Duplikat #109: `https://pulvexa.space/embed/GJSuh2KqLk?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #115: `https://pulvexa.space/embed/GJSuh2KqLk?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1345,7 +1399,7 @@
 
 ---
 
-#### 🔗 Duplikat #110: `https://pulvexa.space/embed/4NpI6f3Tw5?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
+#### 🔗 Duplikat #116: `https://pulvexa.space/embed/4NpI6f3Tw5?token=5dfbc9b04e576fc6ad1dbe1daf7a` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1354,7 +1408,7 @@
 
 ---
 
-#### 🔗 Duplikat #111: `https://ok.ru/videoembed/1535947377341` (2 kemunculan)
+#### 🔗 Duplikat #117: `https://ok.ru/videoembed/1535947377341` (2 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|
