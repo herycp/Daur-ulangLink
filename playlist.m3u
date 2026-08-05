@@ -44865,3 +44865,13 @@ streams/px_4c1fdabb02b9cbb58abacf256e035c40_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_b09abe5d9e8a00c5a7a134e5f1c7d58d_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_104d8c3feb697a2cda523560cdcadce5" tvg-name="スピナーベイト S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/スピナーベイト.jpg", スピナーベイト S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_104d8c3feb697a2cda523560cdcadce5_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_dd21047c194b86186c87632286582fd6" tvg-name="コントラスト S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/06/コントラスト.jpg", コントラスト S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_dd21047c194b86186c87632286582fd6_stream.m3u8
+
