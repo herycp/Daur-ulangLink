@@ -44875,3 +44875,23 @@ streams/px_104d8c3feb697a2cda523560cdcadce5_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_dd21047c194b86186c87632286582fd6_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_873725a2466c266b56380b3ea4cb2166" tvg-name="今夜もシリアルキラーと待ち合わせ S2 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/今夜もシリアルキラーと待ち合わせ.jpg", 今夜もシリアルキラーと待ち合わせ S2 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_873725a2466c266b56380b3ea4cb2166_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_8d28064653975d53e255ef024c4f6e9d" tvg-name="ファーストクライ 母子救命救急班 S2 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ファーストクライ-母子救命救急班.jpg", ファーストクライ 母子救命救急班 S2 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_8d28064653975d53e255ef024c4f6e9d_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_8a370abbcd7dfe488bbff432ed3f4cb5" tvg-name="Tokyo middle 30 S2 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/Tokyo-middle-30.jpg", Tokyo middle 30 S2 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_8a370abbcd7dfe488bbff432ed3f4cb5_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_480b05afe41786cab7586a68a76425eb" tvg-name="大追跡〜警視庁SSBC強行犯係〜 Season2 S2 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/大追跡〜警視庁SSBC強行犯係〜-Season2.jpg", 大追跡〜警視庁SSBC強行犯係〜 Season2 S2 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_480b05afe41786cab7586a68a76425eb_stream.m3u8
+
