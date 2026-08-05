@@ -44895,3 +44895,13 @@ streams/px_8a370abbcd7dfe488bbff432ed3f4cb5_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_480b05afe41786cab7586a68a76425eb_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_75d784e5e1a57793c0e1f33c0aed765d" tvg-name="おちたらおわり S2 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/おちたらおわり.jpg", おちたらおわり S2 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_75d784e5e1a57793c0e1f33c0aed765d_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_e13766bab73123f2c8050effcbd8a56b" tvg-name="ヤンキー激戦区の四天王がアイドルグループに転生したら？ S2 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ヤンキー激戦区の四天王がアイドルグループに転生したら？.jpg", ヤンキー激戦区の四天王がアイドルグループに転生したら？ S2 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_e13766bab73123f2c8050effcbd8a56b_stream.m3u8
+
