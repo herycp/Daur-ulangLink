@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       old_domain:
-        description: 'Domain lama yang ingin diganti (contoh: pulvexa.space)'
+        description: 'Domain lama yang ingin diganti (contoh: norqeli.space)'
         required: true
-        default: 'pulvexa.space'
+        default: 'norqeli.space'
       new_domain:
-        description: 'Domain baru pengganti (contoh: pulvexa.online)'
+        description: 'Domain baru pengganti (contoh: norqeli.space)'
         required: true
 
 jobs:
