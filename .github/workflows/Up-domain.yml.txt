@@ -1,0 +1,48 @@
+name: Bulk Update M3U8 Domain
+
+on:
+  workflow_dispatch:
+    inputs:
+      old_domain:
+        description: 'Domain lama yang ingin diganti (contoh: pulvexa.space)'
+        required: true
+        default: 'pulvexa.space'
+      new_domain:
+        description: 'Domain baru pengganti (contoh: pulvexa.online)'
+        required: true
+
+jobs:
+  replace-domain:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Bulk Replace Domain in Files
+        run: |
+          OLD_DOM="${{ github.event.inputs.old_domain }}"
+          NEW_DOM="${{ github.event.inputs.new_domain }}"
+
+          echo "Mengganti '$OLD_DOM' menjadi '$NEW_DOM' pada seluruh file proyek..."
+
+          # Mencari dan mengganti string domain di file .m3u, .m3u8, .js, .json, dan .env
+          find . -type f \( -name "*.m3u" -o -name "*.m3u8" -o -name "*.js" -o -name "*.json" -o -name "*.env" \) \
+            -not -path '*/.*' -not -path '*/node_modules/*' \
+            -exec sed -i "s|${OLD_DOM}|${NEW_DOM}|g" {} +
+
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "chore: bulk update domain from '${{ github.event.inputs.old_domain }}' to '${{ github.event.inputs.new_domain }}'"
+            git push
+            echo "✅ Domain berhasil diperbarui secara massal!"
+          else
+            echo "ℹ️ Tidak ada file yang berubah."
+          fi
