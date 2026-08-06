@@ -11,7 +11,7 @@ puppeteer.use(StealthPlugin());
 // ============================================================================
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
-// 🌐 REFERER UTAMA (WAJIB 9tsu.in agar server Pulvexa mau melepas M3U8)
+// 🌐 REFERER UTAMA (WAJIB 9tsu.in agar server Norqeli mau melepas M3U8)
 const PARENT_REFERER = process.env.PARENT_REFERER || 'https://9tsu.in/';
 const PARENT_ORIGIN = 'https://9tsu.in';
 
@@ -35,18 +35,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // ============================================================================
 
 // 🔍 EKSTRAKSI REKURSIF UNTUK SEMUA STRUKTUR JSON
-function extractPulvexaTargets(data) {
+function extractNorqeliTargets(data) {
     let results = [];
     if (!data) return results;
 
     if (Array.isArray(data)) {
         for (const item of data) {
-            results = results.concat(extractPulvexaTargets(item));
+            results = results.concat(extractNorqeliTargets(item));
         }
     } else if (typeof data === 'object') {
         if (typeof data.embed_url === 'string') {
             const embedUrl = data.embed_url.trim();
-            if (embedUrl.toLowerCase().includes('pulvexa')) {
+            if (embedUrl.toLowerCase().includes('norqeli')) {
                 results.push({
                     ...data,
                     embed_url: embedUrl
@@ -55,7 +55,7 @@ function extractPulvexaTargets(data) {
         } else {
             for (const key of Object.keys(data)) {
                 if (data[key] && typeof data[key] === 'object') {
-                    results = results.concat(extractPulvexaTargets(data[key]));
+                    results = results.concat(extractNorqeliTargets(data[key]));
                 }
             }
         }
@@ -196,15 +196,15 @@ async function fetchRemoteDatabase() {
     }
 
     const totalEmbedUrls = countTotalEmbedUrls(rawJsonData);
-    const allPulvexaItems = extractPulvexaTargets(rawJsonData);
+    const allNorqeliItems = extractNorqeliTargets(rawJsonData);
     
     const uniqueTargets = [];
     const seenEmbedUrls = new Set();
     const seenItemIds = new Set();
 
     // DEDUPLIKASI UNIK BERDASARKAN EMBED_URL DAN ITEM_ID
-    for (let i = 0; i < allPulvexaItems.length; i++) {
-        const item = allPulvexaItems[i];
+    for (let i = 0; i < allNorqeliItems.length; i++) {
+        const item = allNorqeliItems[i];
         const embedUrl = item.embed_url;
         const itemId = extractItemId(embedUrl);
 
@@ -220,8 +220,8 @@ async function fetchRemoteDatabase() {
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
     console.log(`🔗 Total embed_url ditemukan di JSON : ${totalEmbedUrls}`);
-    console.log(`🎯 Total embed_url berdomain Pulvexa   : ${allPulvexaItems.length}`);
-    console.log(`⚡ Pulvexa Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
+    console.log(`🎯 Total embed_url berdomain Norqeli   : ${allNorqeliItems.length}`);
+    console.log(`⚡ Norqeli Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
 
     if (uniqueTargets.length === 0) {
