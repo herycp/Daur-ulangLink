@@ -44905,3 +44905,18 @@ streams/px_75d784e5e1a57793c0e1f33c0aed765d_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_e13766bab73123f2c8050effcbd8a56b_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_5b9f576bbde73e5bad13f494dd603768" tvg-name="親愛なる夫へ〜完璧な妻の嘘〜 S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/親愛なる夫へ〜完璧な妻の嘘〜.jpg", 親愛なる夫へ〜完璧な妻の嘘〜 S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_5b9f576bbde73e5bad13f494dd603768_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_149ad5ce40af214b596156360acfb5e7" tvg-name="ラストノート S1 E5" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ラストノート.jpg", ラストノート S1 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_149ad5ce40af214b596156360acfb5e7_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_b041d1f3204f8a5aee64defd7e1991ee" tvg-name="大空港〜GATE24〜 S1 E3" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/大空港〜GATE24〜.jpg", 大空港〜GATE24〜 S1 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_b041d1f3204f8a5aee64defd7e1991ee_stream.m3u8
+
