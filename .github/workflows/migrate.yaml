@@ -1,0 +1,47 @@
+name: Run Progress Migration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run Migration Script
+        run: node migrate.js
+        env:
+          PARENT_REFERER: ${{ secrets.PARENT_REFERER || 'https://9tsu.in/' }}
+
+      - name: Commit & Push Migrated Data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain) ]]; then
+            git add progress.json output.json playlist.m3u streams/
+            git commit -m "chore: migrate progress IDs and stream file names to /embed/* MD5 format"
+            git push
+            echo "✅ Data migrasi berhasil disimpan ke repositori!"
+          else
+            echo "ℹ️ Tidak ada perubahan data yang perlu di-commit."
+          fi
