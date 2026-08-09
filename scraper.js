@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto'); // 💡 Menggunakan module crypto bawaan Node.js
+const crypto = require('crypto');
 
 puppeteer.use(StealthPlugin());
 
@@ -11,7 +11,6 @@ puppeteer.use(StealthPlugin());
 // ============================================================================
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
-// 🌐 REFERER UTAMA (WAJIB 9tsu.in agar server Norqeli mau melepas M3U8)
 const PARENT_REFERER = process.env.PARENT_REFERER || 'https://9tsu.in/';
 const PARENT_ORIGIN = 'https://9tsu.in';
 
@@ -34,7 +33,6 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-// 🔍 EKSTRAKSI REKURSIF UNTUK SEMUA STRUKTUR JSON
 function extractNorqeliTargets(data) {
     let results = [];
     if (!data) return results;
@@ -80,11 +78,16 @@ function countTotalEmbedUrls(data) {
     return count;
 }
 
-// 🆔 GENERATE ID UNIK MURNI BERDASARKAN MD5 HASH FULL EMBED_URL (PERSISI 100%)
+// 🆔 GENERATE ID UNIK BERDASARKAN MD5 PATH EMBED (/embed/*) SAJA
 function extractItemId(embedUrl) {
     if (!embedUrl) return `px_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const cleanUrl = embedUrl.trim().toLowerCase();
-    const md5Hash = crypto.createHash('md5').update(cleanUrl).digest('hex');
+
+    // Mengabaikan domain, hanya mengambil string mulai dari /embed/
+    const embedIdx = cleanUrl.indexOf('/embed/');
+    const embedPath = embedIdx !== -1 ? cleanUrl.substring(embedIdx) : cleanUrl;
+
+    const md5Hash = crypto.createHash('md5').update(embedPath).digest('hex');
     return `px_${md5Hash}`;
 }
 
@@ -101,7 +104,6 @@ function convertM3u8ToAbsolute(m3u8Content, sourceM3u8Url) {
     }).join('\n');
 }
 
-// ⚡ UJI M3U8 LANGSUNG LEWAT NODE.JS
 async function testAndDownloadM3u8Directly(m3u8Url) {
     if (!m3u8Url) return null;
     try {
@@ -125,7 +127,6 @@ async function testAndDownloadM3u8Directly(m3u8Url) {
     return null;
 }
 
-// 🎬 PEMICU PLAY PLAYER
 async function triggerPlayInAllFrames(page) {
     const frames = page.frames();
     for (let i = 0; i < frames.length; i++) {
@@ -202,7 +203,6 @@ async function fetchRemoteDatabase() {
     const seenEmbedUrls = new Set();
     const seenItemIds = new Set();
 
-    // DEDUPLIKASI UNIK BERDASARKAN EMBED_URL DAN ITEM_ID
     for (let i = 0; i < allNorqeliItems.length; i++) {
         const item = allNorqeliItems[i];
         const embedUrl = item.embed_url;
@@ -267,7 +267,6 @@ async function fetchRemoteDatabase() {
             await page.setViewport({ width: 1280, height: 720 });
             await page.setUserAgent(USER_AGENT);
 
-            // 🛡️ ANTI-DEVTOOL & ANTI-BOT BYPASS
             await page.evaluateOnNewDocument(() => {
                 Object.defineProperty(navigator, 'webdriver', { get: () => false });
                 Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en', 'id'] });
@@ -303,7 +302,6 @@ async function fetchRemoteDatabase() {
             let pageDoneResolve;
             const pageDonePromise = new Promise(r => pageDoneResolve = r);
 
-            // 📡 PENANGKAP NETWORK & UJI REALTIME VIA NODE FETCH
             page.on('response', async res => {
                 if (m3u8SuccessSaved) return;
 
@@ -396,7 +394,6 @@ async function fetchRemoteDatabase() {
             await delay(500);
         }
 
-        // REGENERATE PLAYLIST.M3U
         let m3uContent = '#EXTM3U\n\n';
         for (const resItem of currentResults) {
             const titleDisplay = `${resItem.title || 'Video'}${resItem.season ? ' S' + resItem.season : ''}${resItem.episode ? ' E' + resItem.episode : ''}`;
