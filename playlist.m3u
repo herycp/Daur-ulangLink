@@ -45005,3 +45005,13 @@ streams/px_35893ff95ee61ce8736df91a6dd6ed91_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_92532ef68ac4fc79bfd751d5c3f989c9_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_e6862a5820a33c0de22de377b1f8aa32" tvg-name="コントラスト S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/06/コントラスト.jpg", コントラスト S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_e6862a5820a33c0de22de377b1f8aa32_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_91cba9dd8b44e2d63b0fdb1690b9a33a" tvg-name="君の好きは無敵 S1 E5" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/君の好きは無敵.jpg", 君の好きは無敵 S1 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_91cba9dd8b44e2d63b0fdb1690b9a33a_stream.m3u8
+
