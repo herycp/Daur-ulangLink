@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       old_domain:
-        description: 'Domain lama yang ingin diganti (contoh: qevrinto.guru)'
+        description: 'Domain lama yang ingin diganti (contoh: muxalor.guru)'
         required: true
-        default: 'qevrinto.guru'
+        default: 'muxalor.guru'
       new_domain:
-        description: 'Domain baru pengganti (contoh: qevrinto.guru)'
+        description: 'Domain baru pengganti (contoh: muxalor.guru)'
         required: true
 
 jobs:
