@@ -45130,3 +45130,8 @@ streams/px_6e3469459a57f78a83a3216f2eb63a75_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_4af1a8ba59dafbe44c0c565ffe65e237_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_6634cb26a628c72c854e0d241102d955" tvg-name="日曜劇場「VIVANT」 S1 E14" tvg-logo="https://9tsu.in/wp-content/uploads/2023/07/2023-07-16_18-13-28.png", 日曜劇場「VIVANT」 S1 E14
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_6634cb26a628c72c854e0d241102d955_stream.m3u8
+
