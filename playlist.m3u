@@ -45195,3 +45195,33 @@ streams/px_1cdacd5ee1770cf0547f4b189e2d4a03_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_ccce9a97864b378329a9a65a417e1317_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_1ef86a9f3a6c9d24643888bc3721f02e" tvg-name="ファーストクライ 母子救命救急班 S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ファーストクライ-母子救命救急班.jpg", ファーストクライ 母子救命救急班 S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_1ef86a9f3a6c9d24643888bc3721f02e_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_f39ae7beb195ebcfc5872c4d74de9b17" tvg-name="大追跡〜警視庁SSBC強行犯係〜 S2 E5" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/大追跡〜警視庁SSBC強行犯係〜-Season2.jpg", 大追跡〜警視庁SSBC強行犯係〜 S2 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_f39ae7beb195ebcfc5872c4d74de9b17_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_b940cf13d752d667b84c709d9185360d" tvg-name="Tokyo middle 30 S1 E5" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/Tokyo-middle-30.jpg", Tokyo middle 30 S1 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_b940cf13d752d667b84c709d9185360d_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_bda49087bf9e9ddc1c7c6bbc3b9cd297" tvg-name="ドライな同期の溺愛癖 S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ドライな同期の溺愛癖.jpg", ドライな同期の溺愛癖 S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_bda49087bf9e9ddc1c7c6bbc3b9cd297_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_40b0d756555603f6c873f576f5ab4313" tvg-name="今夜もシリアルキラーと待ち合わせ S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/今夜もシリアルキラーと待ち合わせ.jpg", 今夜もシリアルキラーと待ち合わせ S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_40b0d756555603f6c873f576f5ab4313_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_a927864d5c289a48ce29d142c9e5c7a3" tvg-name="おちたらおわり S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/おちたらおわり.jpg", おちたらおわり S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_a927864d5c289a48ce29d142c9e5c7a3_stream.m3u8
+
