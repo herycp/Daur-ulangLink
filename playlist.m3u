@@ -45235,3 +45235,13 @@ streams/px_b8d05621131e5027e82edb9047e449a0_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_431cd000d020b919a5d8175a3a03de76_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_1922e0ec78097849d67aa24ed450feeb" tvg-name="夫婦と16歳〜狂気の隣人〜 S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/夫婦と16歳〜狂気の隣人〜.jpg", 夫婦と16歳〜狂気の隣人〜 S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_1922e0ec78097849d67aa24ed450feeb_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_249313498db2d865e06737c984a1595e" tvg-name="親愛なる夫へ〜完璧な妻の嘘〜 S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/親愛なる夫へ〜完璧な妻の嘘〜.jpg", 親愛なる夫へ〜完璧な妻の嘘〜 S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_249313498db2d865e06737c984a1595e_stream.m3u8
+
