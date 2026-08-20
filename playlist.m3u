@@ -45225,3 +45225,13 @@ streams/px_40b0d756555603f6c873f576f5ab4313_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_a927864d5c289a48ce29d142c9e5c7a3_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_b8d05621131e5027e82edb9047e449a0" tvg-name="ラストノート S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ラストノート.jpg", ラストノート S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_b8d05621131e5027e82edb9047e449a0_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_431cd000d020b919a5d8175a3a03de76" tvg-name="大空港〜GATE24〜 S1 E5" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/大空港〜GATE24〜.jpg", 大空港〜GATE24〜 S1 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_431cd000d020b919a5d8175a3a03de76_stream.m3u8
+
