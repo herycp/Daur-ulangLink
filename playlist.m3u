@@ -45245,3 +45245,8 @@ streams/px_1922e0ec78097849d67aa24ed450feeb_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_249313498db2d865e06737c984a1595e_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_8f4831edcea7b10264ee88db8ba5bc02" tvg-name="リーガルビート ー逆転の法廷ー S1 E5" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/リーガルビート-ー逆転の法廷ー.jpg", リーガルビート ー逆転の法廷ー S1 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_8f4831edcea7b10264ee88db8ba5bc02_stream.m3u8
+
