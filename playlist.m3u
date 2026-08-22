@@ -45255,3 +45255,8 @@ streams/px_8f4831edcea7b10264ee88db8ba5bc02_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_bffbaf42b9b5688efc5d36daf61147e3_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_e21729cd1aef88193f9eec1b520bee4c" tvg-name="告白ー25年目の秘密ー S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/告白ー25年目の秘密ー.jpg", 告白ー25年目の秘密ー S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_e21729cd1aef88193f9eec1b520bee4c_stream.m3u8
+
