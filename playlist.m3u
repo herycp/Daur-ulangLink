@@ -45260,3 +45260,23 @@ streams/px_bffbaf42b9b5688efc5d36daf61147e3_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_e21729cd1aef88193f9eec1b520bee4c_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_5cb66ecd4e26e0ba6455be5ffeef107e" tvg-name="タイムトラベルダディ S1 E4" tvg-logo="https://9tsu.in/wp-content/uploads/2026/08/タイムトラベルダディ.jpg", タイムトラベルダディ S1 E4
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_5cb66ecd4e26e0ba6455be5ffeef107e_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_14c55fa059b412f233cae2fc7b011d65" tvg-name="夏色の雲が恋と嵐をまきおこす S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/夏色の雲が恋と嵐をまきおこす.png", 夏色の雲が恋と嵐をまきおこす S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_14c55fa059b412f233cae2fc7b011d65_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_17b79cecc05347f0022b75c491ad6a68" tvg-name="リラの花咲くけものみち2 S1 E1" tvg-logo="https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png", リラの花咲くけものみち2 S1 E1
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_17b79cecc05347f0022b75c491ad6a68_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_0bb9df13c7e9abeac4179605970f6b84" tvg-name="ミッドナイト屋台2〜ル・モンドゥ〜 S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ミッドナイト屋台2〜ル・モンドゥ〜.jpg", ミッドナイト屋台2〜ル・モンドゥ〜 S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_0bb9df13c7e9abeac4179605970f6b84_stream.m3u8
+
