@@ -45280,3 +45280,18 @@ streams/px_17b79cecc05347f0022b75c491ad6a68_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_0bb9df13c7e9abeac4179605970f6b84_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_db90179ccc20e2ecac6d53b6d2d3bb78" tvg-name="マイ・フィクション S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/マイ・フィクション.jpg", マイ・フィクション S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_db90179ccc20e2ecac6d53b6d2d3bb78_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_c3f89f0e0eecf345f261f14fe8dd21dd" tvg-name="ALIUS -特定事象捜査ファイル S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ALIUS-特定事象捜査ファイル-.jpg", ALIUS -特定事象捜査ファイル S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_c3f89f0e0eecf345f261f14fe8dd21dd_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_83ca3c10d55c913f606836db3ffb2295" tvg-name="一次元の挿し木 S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/一次元の挿し木-.jpg", 一次元の挿し木 S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_83ca3c10d55c913f606836db3ffb2295_stream.m3u8
+
