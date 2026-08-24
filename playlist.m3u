@@ -45300,3 +45300,23 @@ streams/px_83ca3c10d55c913f606836db3ffb2295_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_f0ca860530873f795ea953851364d2bb_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_b75bd0e6cb5d9b942f3bc97756a2ee3d" tvg-name="もう1度夫婦になりますか？〜カモフラージュ夫婦〜 S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/もう1度夫婦になりますか？〜カモフラージュ夫婦〜.jpg", もう1度夫婦になりますか？〜カモフラージュ夫婦〜 S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_b75bd0e6cb5d9b942f3bc97756a2ee3d_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_5b72dcd8daf0fa9b29ec2c721c943d1c" tvg-name="GTO(2026年版) S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/GTO2026年版.jpg", GTO(2026年版) S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_5b72dcd8daf0fa9b29ec2c721c943d1c_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_965dd63d02cf772ada347c451971a6d6" tvg-name="夫を殺したはずなのに S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/夫を殺したはずなのに.jpg", 夫を殺したはずなのに S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_965dd63d02cf772ada347c451971a6d6_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_7d837094671736265642951c7385765a" tvg-name="税金で買った本 S1 E1" tvg-logo="https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png", 税金で買った本 S1 E1
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_7d837094671736265642951c7385765a_stream.m3u8
+
