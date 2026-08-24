@@ -45295,3 +45295,8 @@ streams/px_c3f89f0e0eecf345f261f14fe8dd21dd_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_83ca3c10d55c913f606836db3ffb2295_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_f0ca860530873f795ea953851364d2bb" tvg-name="ブラックトリック〜裁きを操る弁護人〜 S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ブラックトリック〜裁きを操る弁護人〜.jpg", ブラックトリック〜裁きを操る弁護人〜 S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_f0ca860530873f795ea953851364d2bb_stream.m3u8
+
