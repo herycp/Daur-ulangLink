@@ -45530,3 +45530,13 @@ streams/px_6af61dd0ad81529375330150911fd670_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_37e2700ecf25b776eb5be017a20794d0_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_af8eff0c9c032cd28e0f892974ead8de" tvg-name="人事の人見 S1 E5" tvg-logo="https://9tsu.vip/wp-content/uploads/2025/04/人事の人見.jpg", 人事の人見 S1 E5
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_af8eff0c9c032cd28e0f892974ead8de_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_c4e86c7380f49d0ddaac069aff79108e" tvg-name="霧尾ファンクラブ S1 E3" tvg-logo="https://9tsu.vip/wp-content/uploads/2025/04/霧尾ファンクラブ　.jpg", 霧尾ファンクラブ S1 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_c4e86c7380f49d0ddaac069aff79108e_stream.m3u8
+
