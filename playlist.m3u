@@ -45565,3 +45565,8 @@ streams/px_c21726c0ab89dc7a9067b553fb67a120_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_258b762fdbd53dea112d97bda161221d_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_fdaf059f1b6a6fc70af67a79968c43f7" tvg-name="コウラン伝 始皇帝の母 動画 2021年5月23日 S1 E32" tvg-logo="https://9tsu.vip/wp-content/uploads/2020/09/2020-09-27_19-32-44.jpg", コウラン伝 始皇帝の母 動画 2021年5月23日 S1 E32
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_fdaf059f1b6a6fc70af67a79968c43f7_stream.m3u8
+
