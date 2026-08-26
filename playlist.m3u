@@ -45540,3 +45540,28 @@ streams/px_af8eff0c9c032cd28e0f892974ead8de_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_c4e86c7380f49d0ddaac069aff79108e_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_b56a06458795c5f804033a517f65d2e5" tvg-name="119 エマージェンシーコール S1 E10" tvg-logo="https://9tsu.vip/wp-content/uploads/2025/01/119-エマージェンシーコール.jpg", 119 エマージェンシーコール S1 E10
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_b56a06458795c5f804033a517f65d2e5_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_d5ecc7270ebe8abb80fad341a2ec4b75" tvg-name="119 エマージェンシーコール S1 E9" tvg-logo="https://9tsu.vip/wp-content/uploads/2025/01/119-エマージェンシーコール.jpg", 119 エマージェンシーコール S1 E9
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_d5ecc7270ebe8abb80fad341a2ec4b75_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_cdca909bff95de5545453a869bc4f787" tvg-name="119 エマージェンシーコール S1 E8" tvg-logo="https://9tsu.vip/wp-content/uploads/2025/01/119-エマージェンシーコール.jpg", 119 エマージェンシーコール S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_cdca909bff95de5545453a869bc4f787_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_c21726c0ab89dc7a9067b553fb67a120" tvg-name="バニラな毎日 S1 E26" tvg-logo="https://9tsu.vip/wp-content/uploads/2025/01/バニラな毎日.jpg", バニラな毎日 S1 E26
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_c21726c0ab89dc7a9067b553fb67a120_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_258b762fdbd53dea112d97bda161221d" tvg-name="わたしの宝物 S1 E7" tvg-logo="https://9tsu.vip/wp-content/uploads/2024/10/わたしの宝物　.jpg", わたしの宝物 S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_258b762fdbd53dea112d97bda161221d_stream.m3u8
+
