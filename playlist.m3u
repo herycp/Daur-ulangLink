@@ -45570,3 +45570,13 @@ streams/px_258b762fdbd53dea112d97bda161221d_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_fdaf059f1b6a6fc70af67a79968c43f7_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_660d0bac17b36d5a70df25ed61521a45" tvg-name="バントマン S1 E3" tvg-logo="https://9tsu.vip/wp-content/uploads/2024/10/バントマン.jpg", バントマン S1 E3
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_660d0bac17b36d5a70df25ed61521a45_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_65da5d4b93659ea374a5b5892fe0660d" tvg-name="全領域異常解決室 S1 E2" tvg-logo="https://9tsu.vip/wp-content/uploads/2024/10/全領域異常解決室.jpg", 全領域異常解決室 S1 E2
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_65da5d4b93659ea374a5b5892fe0660d_stream.m3u8
+
