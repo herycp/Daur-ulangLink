@@ -45685,3 +45685,18 @@ streams/px_717dfa24d6877aeb9c74ae8826b7f4ee_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_f83234a88f4a745bd070ad83e4ae763e_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_14d5230783f985db96879cd17d8f1372" tvg-name="ストレンジ-伊藤潤二の夜も眠れぬ奇妙な話 S1 E9" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ストレンジ-伊藤潤二の夜も眠れぬ奇妙な話-.jpg", ストレンジ-伊藤潤二の夜も眠れぬ奇妙な話 S1 E9
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_14d5230783f985db96879cd17d8f1372_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_4b8d5006d79c70069816edf9c7e6daff" tvg-name="名探偵のままでいて S1 E7" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/名探偵のままでいて.jpg", 名探偵のままでいて S1 E7
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_4b8d5006d79c70069816edf9c7e6daff_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_843a898f284a48aa864535c144992771" tvg-name="Tシャツが乾くまで S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/Tシャツが乾くまで.jpg", Tシャツが乾くまで S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_843a898f284a48aa864535c144992771_stream.m3u8
+
