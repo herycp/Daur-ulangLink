@@ -45700,3 +45700,18 @@ streams/px_4b8d5006d79c70069816edf9c7e6daff_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_843a898f284a48aa864535c144992771_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_b9b03d7a54451a34eb8ed3e751a9a9c0" tvg-name="ミッドナイト屋台2〜ル・モンドゥ〜 S1 E9" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/ミッドナイト屋台2〜ル・モンドゥ〜.jpg", ミッドナイト屋台2〜ル・モンドゥ〜 S1 E9
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_b9b03d7a54451a34eb8ed3e751a9a9c0_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_df7186ead99c914ac12025ae5724ae13" tvg-name="夏色の雲が恋と嵐をまきおこす S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/夏色の雲が恋と嵐をまきおこす.png", 夏色の雲が恋と嵐をまきおこす S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_df7186ead99c914ac12025ae5724ae13_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_6713e1f5d78866eba02e09804ea9fba8" tvg-name="リラの花咲くけものみち2 S1 E2" tvg-logo="https://9tsu.in/wp-content/uploads/2026/08/リラの花咲くけものみち2.jpg", リラの花咲くけものみち2 S1 E2
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_6713e1f5d78866eba02e09804ea9fba8_stream.m3u8
+
