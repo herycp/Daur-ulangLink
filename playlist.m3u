@@ -45720,3 +45720,8 @@ streams/px_6713e1f5d78866eba02e09804ea9fba8_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_e5340645f29f796a9cc0ce6380dc43b8_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_4fc0c661576b9f55f1e883c06d6b2820" tvg-name="一次元の挿し木 S1 E9" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/一次元の挿し木-.jpg", 一次元の挿し木 S1 E9
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_4fc0c661576b9f55f1e883c06d6b2820_stream.m3u8
+
