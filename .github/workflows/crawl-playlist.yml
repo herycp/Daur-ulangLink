@@ -1,4 +1,4 @@
-name: Auto Scrape zafliron M3U8 Streams
+name: Auto Scrape korxime M3U8 Streams
 
 on:
   # schedule:
@@ -42,7 +42,7 @@ jobs:
           git add streams/ output.json playlist.m3u progress.json
           
           if ! git diff --cached --quiet; then
-            git commit -m "chore: auto-update zafliron streams and progress [skip ci]"
+            git commit -m "chore: auto-update korxime streams and progress [skip ci]"
             git push
           else
             echo "Tidak ada perubahan file baru."
