@@ -45755,3 +45755,23 @@ streams/px_b12b258e521fa686a1ab5dfe97349bd0_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_22ada37c6e242f32d2930923c1a06381_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_8efa10b7ba799054699637440763e276" tvg-name="さよならノワール S1 E9" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/さよならノワール-.jpg", さよならノワール S1 E9
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_8efa10b7ba799054699637440763e276_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_2883c94e2e52a0ccf53441120024603b" tvg-name="クロスロード 〜救命救急の約束〜 S1 E9" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/クロスロード-〜救命救急の約束〜.jpg", クロスロード 〜救命救急の約束〜 S1 E9
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_2883c94e2e52a0ccf53441120024603b_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_a30c75b1a6f050434a26440e8904ff00" tvg-name="税金で買った本 S1 E6" tvg-logo="https://9tsu.in/wp-content/uploads/2026/08/税金で買った本.jpg", 税金で買った本 S1 E6
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_a30c75b1a6f050434a26440e8904ff00_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_dad9c4a29640ab97e48894a5a8415feb" tvg-name="君の好きは無敵 S1 E8" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/君の好きは無敵.jpg", 君の好きは無敵 S1 E8
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_dad9c4a29640ab97e48894a5a8415feb_stream.m3u8
+
