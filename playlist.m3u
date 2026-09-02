@@ -45775,3 +45775,13 @@ streams/px_a30c75b1a6f050434a26440e8904ff00_stream.m3u8
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 streams/px_dad9c4a29640ab97e48894a5a8415feb_stream.m3u8
 
+#EXTINF:-1 tvg-id="px_4293430f309df7e6f980694608a4912e" tvg-name="恋をするなら二度目が上等 S2 E1" tvg-logo="https://9tsu.in/wp-content/uploads/2019/08/thum-default-9tsu-in.png", 恋をするなら二度目が上等 S2 E1
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_4293430f309df7e6f980694608a4912e_stream.m3u8
+
+#EXTINF:-1 tvg-id="px_c6cc730dc3442a8286a56f2832411953" tvg-name="スピナーベイト S1 E10" tvg-logo="https://9tsu.in/wp-content/uploads/2026/07/スピナーベイト.jpg", スピナーベイト S1 E10
+#EXTVLCOPT:http-referrer=https://9tsu.in/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+streams/px_c6cc730dc3442a8286a56f2832411953_stream.m3u8
+
