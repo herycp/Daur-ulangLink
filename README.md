@@ -3,18 +3,18 @@
 <!-- INTEGRITY_REPORT_START -->
 ## 📊 Laporan Integritas Database
 
-> 🕒 **Terakhir Diperbarui:** `10/9/2026, 11.19.20 WIB`
+> 🕒 **Terakhir Diperbarui:** `11/9/2026, 11.18.49 WIB`
 
 | Parameter | Jumlah | Persentase |
 |---|---|---|
-| 🔗 **Total Seluruh Link** | **32691** | 100% |
-| 🎯 **Total Link Unik** | **26856** | - |
-| ⚠️ **Total Link Duplikat** | **5835** | - |
-| ✅ **Jumlah Sudah Diproses** | **9157** | 34.10% |
-| ⏳ **Jumlah Belum Diproses** | **17699** | 65.90% |
+| 🔗 **Total Seluruh Link** | **32698** | 100% |
+| 🎯 **Total Link Unik** | **26862** | - |
+| ⚠️ **Total Link Duplikat** | **5836** | - |
+| ✅ **Jumlah Sudah Diproses** | **9157** | 34.09% |
+| ⏳ **Jumlah Belum Diproses** | **17705** | 65.91% |
 
 <details>
-<summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (5412 Kelompok)</b></summary>
+<summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (5413 Kelompok)</b></summary>
 
 <br>
 
@@ -49146,6 +49146,15 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | Item #1 | `https://9tsu.vip/30656.html` | `四夜連続2007年放送 ハケンの品格 動画 2020年3月30日 傑作選!` | `1` | `1` | `https://9tsu.vip/wp-content/uploads/2020/03/2020-03-30_16-03-47-1-1.jpg` | `ハケンの品格 1話 動画 – 2020年3月30日　200330 内容：2007年1月期放送「ハケンの品格」の傑作選を4夜連続でお届け。第1夜  スーパー派遣登場!(第1話) 出演：篠原涼子、加藤あい、小泉孝太郎、大泉洋、勝地涼、板谷由夏、安田顕、上地雄輔、城田優、小松政夫、白川由美、松方弘樹 #邦画` | `<iframe src=` | `-` | `2020-04-07T13:58:18+00:00` | `2026-08-28 07:53:46` |
 | Item #2 | `https://9tsu.vip/30848.html` | `四夜連続2007年放送 ハケンの品格 動画 2020年4月1日 傑作選!` | `1` | `3` | `https://9tsu.vip/wp-content/uploads/2020/03/2020-03-30_16-03-47-1-1.jpg` | `ハケンの品格 3話 動画 – 2020年4月1日　200401 内容：2007年1月期放送「ハケンの品格」の傑作選を4夜連続でお届け。  第3夜  涙の残業バレンタイン(第6話) 出演：篠原涼子、加藤あい、小泉孝太郎、大泉洋、勝地涼、板谷由夏、安田顕、上地雄輔、城田優、小松政夫、白川由美、松方弘樹 #邦画` | `<iframe src=` | `-` | `2020-04-07T13:57:50+00:00` | `2026-08-28 07:53:46` |
+
+---
+
+#### 🔗 Duplikat #5413: `https://yundevo.guru/embed/4sdZxMEC3q?token=b8e7277e57d09b21cc66ab3e2977` (2 kemunculan)
+
+| Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **lastmod** | **created_at** |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Item #1 | `https://9tsu.in/douga/126947.html` | `大空港〜GATE24〜` | `1` | `8` | `https://9tsu.in/wp-content/uploads/2026/07/大空港〜GATE24〜.jpg` | `大空港〜GATE24〜　第8話 概要趣里が、鋭い観察眼で“モノから真実を見抜く”税関職員に扮する、空港を舞台にした痛快エンターテインメント。国際犯罪を水際で防ぐ“国の最終防衛ライン”となる空港の入管と税関で、万智(趣里)をはじめ、各省庁から寄せ集められたメンバーから成る“新設チーム”が日本の平和と安全を守るために奮闘する姿が描かれる。 #邦画` | `https://yundevo.guru/embed/4sdZxMEC3q?token=b8e7277e57d09b21cc66ab3e2977` | `yundevo.guru` | `2026-09-09T13:21:42+00:00` | `2026-09-09 14:02:42` |
+| Item #2 | `https://9tsu.in/douga/126970.html` | `大追跡〜警視庁SSBC強行犯係〜` | `2` | `7` | `https://9tsu.in/wp-content/uploads/2026/07/大追跡〜警視庁SSBC強行犯係〜-Season2.jpg` | `大追跡〜警視庁SSBC強行犯係〜 Season2　第7話 あらすじ・解説女性の絞殺体が発見される。防犯カメラを確認した伊垣(大森南朋)と名波(相葉雅紀)は、映っていた怪しげな男を容疑者と断定。一方、現場で見つかったスマホから、被害者を含む女性５人の隠し撮り映像が発見され、その中にはさやか(足立梨花)の姿もあった。そんな中、動画に映っていた別の女性が遺体で見つかる。 #邦画` | `https://yundevo.guru/embed/4sdZxMEC3q?token=b8e7277e57d09b21cc66ab3e2977` | `yundevo.guru` | `2026-09-10T14:34:06+00:00` | `2026-09-10 17:02:24` |
 
 ---
 
