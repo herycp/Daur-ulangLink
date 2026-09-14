@@ -33,18 +33,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-function extractpelzaroTargets(data) {
+function extractvixmoranTargets(data) {
     let results = [];
     if (!data) return results;
 
     if (Array.isArray(data)) {
         for (const item of data) {
-            results = results.concat(extractpelzaroTargets(item));
+            results = results.concat(extractvixmoranTargets(item));
         }
     } else if (typeof data === 'object') {
         if (typeof data.embed_url === 'string') {
             const embedUrl = data.embed_url.trim();
-            if (embedUrl.toLowerCase().includes('pelzaro')) {
+            if (embedUrl.toLowerCase().includes('vixmoran')) {
                 results.push({
                     ...data,
                     embed_url: embedUrl
@@ -53,7 +53,7 @@ function extractpelzaroTargets(data) {
         } else {
             for (const key of Object.keys(data)) {
                 if (data[key] && typeof data[key] === 'object') {
-                    results = results.concat(extractpelzaroTargets(data[key]));
+                    results = results.concat(extractvixmoranTargets(data[key]));
                 }
             }
         }
@@ -197,14 +197,14 @@ async function fetchRemoteDatabase() {
     }
 
     const totalEmbedUrls = countTotalEmbedUrls(rawJsonData);
-    const allpelzaroItems = extractpelzaroTargets(rawJsonData);
+    const allvixmoranItems = extractvixmoranTargets(rawJsonData);
     
     const uniqueTargets = [];
     const seenEmbedUrls = new Set();
     const seenItemIds = new Set();
 
-    for (let i = 0; i < allpelzaroItems.length; i++) {
-        const item = allpelzaroItems[i];
+    for (let i = 0; i < allvixmoranItems.length; i++) {
+        const item = allvixmoranItems[i];
         const embedUrl = item.embed_url;
         const itemId = extractItemId(embedUrl);
 
@@ -220,8 +220,8 @@ async function fetchRemoteDatabase() {
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
     console.log(`🔗 Total embed_url ditemukan di JSON : ${totalEmbedUrls}`);
-    console.log(`🎯 Total embed_url berdomain pelzaro   : ${allpelzaroItems.length}`);
-    console.log(`⚡ pelzaro Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
+    console.log(`🎯 Total embed_url berdomain vixmoran   : ${allvixmoranItems.length}`);
+    console.log(`⚡ vixmoran Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
 
     if (uniqueTargets.length === 0) {
