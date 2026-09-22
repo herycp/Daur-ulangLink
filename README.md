@@ -3,15 +3,15 @@
 <!-- INTEGRITY_REPORT_START -->
 ## 📊 Laporan Integritas Database
 
-> 🕒 **Terakhir Diperbarui:** `21/9/2026, 11.39.10 WIB`
+> 🕒 **Terakhir Diperbarui:** `22/9/2026, 11.35.25 WIB`
 
 | Parameter | Jumlah | Persentase |
 |---|---|---|
-| 🔗 **Total Seluruh Link** | **32758** | 100% |
-| 🎯 **Total Link Unik** | **26922** | - |
-| ⚠️ **Total Link Duplikat** | **5836** | - |
+| 🔗 **Total Seluruh Link** | **32765** | 100% |
+| 🎯 **Total Link Unik** | **26928** | - |
+| ⚠️ **Total Link Duplikat** | **5837** | - |
 | ✅ **Jumlah Sudah Diproses** | **9157** | 34.01% |
-| ⏳ **Jumlah Belum Diproses** | **17765** | 65.99% |
+| ⏳ **Jumlah Belum Diproses** | **17771** | 65.99% |
 
 <details>
 <summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (5413 Kelompok)</b></summary>
@@ -24057,7 +24057,7 @@
 
 ---
 
-#### 🔗 Duplikat #2671: `https://www.dailymotion.com/dorama9tsu` (6 kemunculan)
+#### 🔗 Duplikat #2671: `https://www.dailymotion.com/dorama9tsu` (7 kemunculan)
 
 | Entry | **url** | **title** | **season** | **episode** | **image** | **description** | **embed_url** | **embed_platform** | **lastmod** | **created_at** |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -24067,6 +24067,7 @@
 | Item #4 | `https://9tsu.in/douga/65930.html` | `真犯人フラグ 動画 2022年1月3日` | `-` | `-` | `https://9tsu.in/wp-content/uploads/2022/01/2022-01-02_20-00-45.png` | `真犯人フラグ 動画　2021年1月3日　220103 内容：るい（深津絵里）がジャズ喫茶で出会ったのは、クリーニング店を時々訪れていた「宇宙人（オダギリジョー）」でした。 出演：藤本有紀、深津絵里、オダギリジョー、市川実日子、早乙女太一、村田雄浩、濱田マリ、近藤芳正、金子隆博 #邦画` | `https://www.dailymotion.com/dorama9tsu` | `www.dailymotion.com` | `2022-01-04T02:07:13+00:00` | `2026-08-01 03:16:33` |
 | Item #5 | `https://9tsu.in/douga/63062.html` | `トーキョー製麺所 動画 2021年10月12日` | `1` | `6` | `https://9tsu.in/wp-content/uploads/2021/09/2021-09-07_22-30-07.png` | `トーキョー製麺所　6貫 動画　2021年10月12日　211012 内容：最終話「幕下ろしうどん」　あと数日で閉店し、跡地にホテルが建つことが決まったトーキョー製麺所。そして迎えた営業最終日。白越会長（尾美としのり）が来店することに… 出演：赤松幸太郎（店長）…吉野北人、青井春翔（バイトリーダー）…柳俊太郎、緑川義雄（バイト）…奥野壮、桃田凛（バイト）…秋田汐梨、黄本節子（パート）…江上敬子、筧和人（常連客）…山中崇、小久保真由…岡本夏美、黒石佐江…高月彩良 #邦画` | `https://www.dailymotion.com/dorama9tsu` | `www.dailymotion.com` | `2021-10-12T16:51:57+00:00` | `2026-08-01 03:35:23` |
 | Item #6 | `https://9tsu.in/douga/45486.html` | `CODE1515 動画` | `1` | `4` | `https://9tsu.in/wp-content/uploads/2020/08/code1515-tb.jpg` | `CODE1515 4話 動画 内容：星奈希望（ほしなのぞみ）はネットテレビ・チャンネル88に所属するカメラマン。ディレクターの昴巧（すばるたくみ）、音声の蜂須賀煌（はちすかこう）と日夜スクープを狙い、都内を奔走していた。予定していた取材先に断られ、次のネタの当てもなく3人が途方にくれていたその時…行く手に巨大なバッグが“落ちてきた”。恐る恐る開けると、中に入っていたのは…人間そっくりの人形。腕部分には5つのUSBポートがついている。番組のネタになるかも、と三人は撮影準備に入る。ディレクターの巧はポートにUSBを差し込み、希望はカメラのスタンバイを完了して撮影開始…しようとして驚愕した。カメラには何も映らない。USBからダウンロードしたデータには数字の羅列が…「1515　35.564129　139.594417」。そしてバッグは忽然と消えてしまった。あのバッグの中の人形は何だったのか？そして謎の数字は何を意味するのか #邦画` | `https://www.dailymotion.com/dorama9tsu` | `www.dailymotion.com` | `2020-09-16T18:06:12+00:00` | `2026-08-01 05:58:30` |
+| Item #7 | `https://9tsu.in/douga/127238.html` | `GTO(2026年版)` | `1` | `10` | `https://9tsu.in/wp-content/uploads/2026/07/GTO2026年版.jpg` | `GTO(2026年版)　第10話 第10話 ブラックトリック〜裁きを操る弁護人〜「全てが嘘でつながるあなたは既に騙されていた…」 あらすじ・解説浦真鷲(GACKT)の弁護士としての業務停止が明けた直後、古瀬(北村一輝)に名誉毀損で訴えられてしまう。古瀬側は、浦真鷲がRGCリゾーツ代表に、裏金受取や殺人事件への関与などのデマを流したと主張する。縁(志田未来)たちは、浦真鷲の情報がデマではないことを証明するために今後の作戦を練る。 #邦画` | `https://www.dailymotion.com/dorama9tsu` | `www.dailymotion.com` | `2026-09-21T14:19:29+00:00` | `2026-09-21 17:05:29` |
 
 ---
 
