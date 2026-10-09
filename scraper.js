@@ -33,18 +33,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-function extractzerfikoTargets(data) {
+function extractmovraliTargets(data) {
     let results = [];
     if (!data) return results;
 
     if (Array.isArray(data)) {
         for (const item of data) {
-            results = results.concat(extractzerfikoTargets(item));
+            results = results.concat(extractmovraliTargets(item));
         }
     } else if (typeof data === 'object') {
         if (typeof data.embed_url === 'string') {
             const embedUrl = data.embed_url.trim();
-            if (embedUrl.toLowerCase().includes('zerfiko')) {
+            if (embedUrl.toLowerCase().includes('movrali')) {
                 results.push({
                     ...data,
                     embed_url: embedUrl
@@ -53,7 +53,7 @@ function extractzerfikoTargets(data) {
         } else {
             for (const key of Object.keys(data)) {
                 if (data[key] && typeof data[key] === 'object') {
-                    results = results.concat(extractzerfikoTargets(data[key]));
+                    results = results.concat(extractmovraliTargets(data[key]));
                 }
             }
         }
@@ -197,14 +197,14 @@ async function fetchRemoteDatabase() {
     }
 
     const totalEmbedUrls = countTotalEmbedUrls(rawJsonData);
-    const allzerfikoItems = extractzerfikoTargets(rawJsonData);
+    const allmovraliItems = extractmovraliTargets(rawJsonData);
     
     const uniqueTargets = [];
     const seenEmbedUrls = new Set();
     const seenItemIds = new Set();
 
-    for (let i = 0; i < allzerfikoItems.length; i++) {
-        const item = allzerfikoItems[i];
+    for (let i = 0; i < allmovraliItems.length; i++) {
+        const item = allmovraliItems[i];
         const embedUrl = item.embed_url;
         const itemId = extractItemId(embedUrl);
 
@@ -220,8 +220,8 @@ async function fetchRemoteDatabase() {
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
     console.log(`🔗 Total embed_url ditemukan di JSON : ${totalEmbedUrls}`);
-    console.log(`🎯 Total embed_url berdomain zerfiko   : ${allzerfikoItems.length}`);
-    console.log(`⚡ zerfiko Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
+    console.log(`🎯 Total embed_url berdomain movrali   : ${allmovraliItems.length}`);
+    console.log(`⚡ movrali Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
 
     if (uniqueTargets.length === 0) {
