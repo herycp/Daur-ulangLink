@@ -3,15 +3,15 @@
 <!-- INTEGRITY_REPORT_START -->
 ## 📊 Laporan Integritas Database
 
-> 🕒 **Terakhir Diperbarui:** `12/10/2026, 12.38.32 WIB`
+> 🕒 **Terakhir Diperbarui:** `13/10/2026, 13.34.44 WIB`
 
 | Parameter | Jumlah | Persentase |
 |---|---|---|
-| 🔗 **Total Seluruh Link** | **32874** | 100% |
-| 🎯 **Total Link Unik** | **27037** | - |
+| 🔗 **Total Seluruh Link** | **32882** | 100% |
+| 🎯 **Total Link Unik** | **27045** | - |
 | ⚠️ **Total Link Duplikat** | **5837** | - |
-| ✅ **Jumlah Sudah Diproses** | **9157** | 33.87% |
-| ⏳ **Jumlah Belum Diproses** | **17880** | 66.13% |
+| ✅ **Jumlah Sudah Diproses** | **9157** | 33.86% |
+| ⏳ **Jumlah Belum Diproses** | **17888** | 66.14% |
 
 <details>
 <summary>🔍 <b>Klik di sini untuk melihat Tabel Komparasi Detail Link Duplikat (5413 Kelompok)</b></summary>
