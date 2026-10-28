@@ -33,18 +33,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-function extractbravenuTargets(data) {
+function extracttolvixaTargets(data) {
     let results = [];
     if (!data) return results;
 
     if (Array.isArray(data)) {
         for (const item of data) {
-            results = results.concat(extractbravenuTargets(item));
+            results = results.concat(extracttolvixaTargets(item));
         }
     } else if (typeof data === 'object') {
         if (typeof data.embed_url === 'string') {
             const embedUrl = data.embed_url.trim();
-            if (embedUrl.toLowerCase().includes('bravenu')) {
+            if (embedUrl.toLowerCase().includes('tolvixa')) {
                 results.push({
                     ...data,
                     embed_url: embedUrl
@@ -53,7 +53,7 @@ function extractbravenuTargets(data) {
         } else {
             for (const key of Object.keys(data)) {
                 if (data[key] && typeof data[key] === 'object') {
-                    results = results.concat(extractbravenuTargets(data[key]));
+                    results = results.concat(extracttolvixaTargets(data[key]));
                 }
             }
         }
@@ -197,14 +197,14 @@ async function fetchRemoteDatabase() {
     }
 
     const totalEmbedUrls = countTotalEmbedUrls(rawJsonData);
-    const allbravenuItems = extractbravenuTargets(rawJsonData);
+    const alltolvixaItems = extracttolvixaTargets(rawJsonData);
     
     const uniqueTargets = [];
     const seenEmbedUrls = new Set();
     const seenItemIds = new Set();
 
-    for (let i = 0; i < allbravenuItems.length; i++) {
-        const item = allbravenuItems[i];
+    for (let i = 0; i < alltolvixaItems.length; i++) {
+        const item = alltolvixaItems[i];
         const embedUrl = item.embed_url;
         const itemId = extractItemId(embedUrl);
 
@@ -220,8 +220,8 @@ async function fetchRemoteDatabase() {
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
     console.log(`🔗 Total embed_url ditemukan di JSON : ${totalEmbedUrls}`);
-    console.log(`🎯 Total embed_url berdomain bravenu   : ${allbravenuItems.length}`);
-    console.log(`⚡ bravenu Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
+    console.log(`🎯 Total embed_url berdomain tolvixa   : ${alltolvixaItems.length}`);
+    console.log(`⚡ tolvixa Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
 
     if (uniqueTargets.length === 0) {
