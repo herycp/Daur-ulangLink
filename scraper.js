@@ -33,18 +33,18 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // 🛠️ HELPER FUNCTIONS
 // ============================================================================
 
-function extractyorqemiTargets(data) {
+function extractcavdoroTargets(data) {
     let results = [];
     if (!data) return results;
 
     if (Array.isArray(data)) {
         for (const item of data) {
-            results = results.concat(extractyorqemiTargets(item));
+            results = results.concat(extractcavdoroTargets(item));
         }
     } else if (typeof data === 'object') {
         if (typeof data.embed_url === 'string') {
             const embedUrl = data.embed_url.trim();
-            if (embedUrl.toLowerCase().includes('yorqemi')) {
+            if (embedUrl.toLowerCase().includes('cavdoro')) {
                 results.push({
                     ...data,
                     embed_url: embedUrl
@@ -53,7 +53,7 @@ function extractyorqemiTargets(data) {
         } else {
             for (const key of Object.keys(data)) {
                 if (data[key] && typeof data[key] === 'object') {
-                    results = results.concat(extractyorqemiTargets(data[key]));
+                    results = results.concat(extractcavdoroTargets(data[key]));
                 }
             }
         }
@@ -197,14 +197,14 @@ async function fetchRemoteDatabase() {
     }
 
     const totalEmbedUrls = countTotalEmbedUrls(rawJsonData);
-    const allyorqemiItems = extractyorqemiTargets(rawJsonData);
+    const allcavdoroItems = extractcavdoroTargets(rawJsonData);
     
     const uniqueTargets = [];
     const seenEmbedUrls = new Set();
     const seenItemIds = new Set();
 
-    for (let i = 0; i < allyorqemiItems.length; i++) {
-        const item = allyorqemiItems[i];
+    for (let i = 0; i < allcavdoroItems.length; i++) {
+        const item = allcavdoroItems[i];
         const embedUrl = item.embed_url;
         const itemId = extractItemId(embedUrl);
 
@@ -220,8 +220,8 @@ async function fetchRemoteDatabase() {
 
     console.log(`\n=================== 📊 DIAGNOSTIK DATABASE ===================`);
     console.log(`🔗 Total embed_url ditemukan di JSON : ${totalEmbedUrls}`);
-    console.log(`🎯 Total embed_url berdomain yorqemi   : ${allyorqemiItems.length}`);
-    console.log(`⚡ yorqemi Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
+    console.log(`🎯 Total embed_url berdomain cavdoro   : ${allcavdoroItems.length}`);
+    console.log(`⚡ cavdoro Baru Siap Diproses (Unik)  : ${uniqueTargets.length}`);
     console.log(`===============================================================\n`);
 
     if (uniqueTargets.length === 0) {
